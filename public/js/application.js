@@ -12,14 +12,14 @@ var platform;
 var carArrayPositionX = []
 var logArrayPositionX = []
 var l = 0;
-var x = 0;
+var c = 0;
 
-for (var xj = 0; xj < 200; xj ++){
-  x += 350;
-  carArrayPositionX.push(x);
+for (var xCarPosition = 0; xCarPosition < 200; xCarPosition ++){
+  c += 350;
+  carArrayPositionX.push(c);
 }
 
-for(var lg = 0; lg <200; lg ++){
+for(var xLogPosition = 0; xLogPosition <200; xLogPosition ++){
   l -= 350;
   logArrayPositionX.push(l);
 }
