@@ -1,7 +1,15 @@
-$(document).ready(function() {
-  // This is called after the document has loaded in its entirety
-  // This guarantees that any elements we bind to will exist on the page
-  // when we try to bind to them
+var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
-  // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
-});
+function preload() {
+  game.load.image('frog', '../assets/frog.png');
+  // game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
+}
+
+var platform;
+function create() {
+  game.add.sprite(0, 0,'frog', 32, 48);
+}
+
+function update() {
+}
+
