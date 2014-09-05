@@ -27,7 +27,6 @@ function create() {
   log.scale.x = logScale;
   log.scale.y = logScale;
   water.style.height="50px"
-
 }
 
 function update() {
