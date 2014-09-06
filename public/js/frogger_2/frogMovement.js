@@ -7,7 +7,7 @@ var frogXStart=400;
 var frogYStart=565;
 
 var frog = new createjs.Shape();
-frog.graphics.beginFill("red").drawCircle(0, 0, frogRadius);
+frog.graphics.beginFill("black").drawCircle(0, 0, frogRadius);
 frog.x = frogXStart;
 frog.y = frogYStart;
 
