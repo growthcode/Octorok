@@ -1,2 +1,2 @@
-var stage = new createjs.Stage('game-canvas')
+var stage = new createjs.Stage('game-canvas');
 
