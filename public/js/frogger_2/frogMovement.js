@@ -1,10 +1,10 @@
-var move_distance = 50
-var borderWidth=800;
-var borderHeight=600;
-var frogRadius=20;
+var borderWidth=stage.canvas.width;
+var borderHeight=stage.canvas.height;
+var frogRadius= borderHeight / 26;
+var move_distance = borderHeight / 13
 
-var frogXStart=400;
-var frogYStart=565;
+var frogXStart=borderWidth/2;
+var frogYStart=borderHeight - frogRadius;
 
 var frog = new createjs.Shape();
 frog.graphics.beginFill("black").drawCircle(0, 0, frogRadius);

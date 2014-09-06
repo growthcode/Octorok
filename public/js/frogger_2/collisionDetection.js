@@ -20,9 +20,9 @@ longLog2['height'] = longLogHeight
 
 
 var resetFrogPosition = function() {
-  frog.x = 400
-  frog.y = 565
-  stage.update()
+  frog.x = frogXStart
+  frog.y = frogYStart
+  stage.update
 }
 
 var keepFrogInBounds = function() {
