@@ -45,6 +45,5 @@ function movefrog(event){
       }
       stage.update()
     }
-  console.log("keycode pressed: " + event['keyCode']);
 }
 
