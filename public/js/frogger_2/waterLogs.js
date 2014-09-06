@@ -1,16 +1,18 @@
+var rowHeight = stage.canvas.height/13
+
 var logWidth=50;
-var logHeight=25;
+var logHeight=rowHeight;
 var longLogWidth=75;
-var longLogHeight=25;
+var longLogHeight=rowHeight;
 
 var log1StartXPos=100;
-var log1StartYPos=100;
+var log1StartYPos=rowHeight;
 var log2StartXPos=100;
-var log2StartYPos=200;
+var log2StartYPos=rowHeight * 2;
 var longLog1StartXPos=400;
-var longLog1StartYPos=100;
+var longLog1StartYPos=rowHeight;
 var longLog2StartXPos=400;
-var longLog2StartYPos=200;
+var longLog2StartYPos=rowHeight * 2;
 
 var logArray1 = [];
 var logArray2 = [];
