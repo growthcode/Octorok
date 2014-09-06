@@ -1,3 +1,5 @@
+var waterYLine = (stage.canvas.height*6/13).toFixed(2)
+
 frog['radius'] = frogRadius
 
 car1['width'] = carWidth
@@ -68,14 +70,50 @@ var checkLogCollision = function(log) {
 
 var checkAllLogCollisions = function() {
   if(checkLogCollision(log1) || checkLogCollision(longLog1)) {
-    frog.x += logLane1Vel
+    frog.x += logLane1Vel;
   }
   if(checkLogCollision(log2) || checkLogCollision(longLog2)) {
-    frog.x -= logLane2Vel
+    frog.x -= logLane2Vel;
+  }
+  stage.update();
+}
+
+var checkWaterLogCollision = function(log) {
+  var distX = Math.abs(frog.x - (log.x+log.width/2));
+  var distY = Math.abs(frog.y - (log.y+log.height/2));
+
+  if (distX > (log.width/2.5 + frog.radius)) { return false; }
+  if (distY > (log.height/3 + frog.radius)) { return false; }
+
+  if (distX <= (log.width) && distY <= log.height) {
+    return true;
+  }
+}
+
+var checkAllWaterLogCollisions = function() {
+  if(checkWaterLogCollision(log1) || checkWaterLogCollision(longLog1)) {
+    return true;
+  }
+  if(checkWaterLogCollision(log2) || checkWaterLogCollision(longLog2)) {
+    return true;
+  }
+}
+
+var checkJumpInWater = function(){
+  if ((frog.y < waterYLine) && !(checkAllWaterLogCollisions())){
+      return true
+ }
+}
+
+var checkWaterCollisions = function(){
+  if(checkJumpInWater()){
+    console.log("water line crossed")
+    // resetFrogPosition()
   }
   stage.update();
 }
 
 createjs.Ticker.addEventListener('tick', checkAllVehicleCollisions)
+createjs.Ticker.addEventListener('tick', checkWaterCollisions)
 createjs.Ticker.addEventListener('tick', checkAllLogCollisions)
 createjs.Ticker.addEventListener('tick', keepFrogInBounds)
