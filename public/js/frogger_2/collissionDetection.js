@@ -25,6 +25,12 @@ var resetFrogPosition = function() {
   stage.update()
 }
 
+var keepFrogInBounds = function() {
+  if((frog.x-frog.radius) < 0 || (frog.x+frog.radius) > borderWidth) {
+    resetFrogPosition()
+  }
+}
+
 var checkVehicleCollision = function(vehicle) {
   var distX = Math.abs(frog.x - (vehicle.x+vehicle.width/2));
   var distY = Math.abs(frog.y - (vehicle.y+vehicle.height/2));
@@ -71,3 +77,4 @@ var checkAllLogCollisions = function() {
 
 createjs.Ticker.addEventListener('tick', checkAllVehicleCollisions)
 createjs.Ticker.addEventListener('tick', checkAllLogCollisions)
+createjs.Ticker.addEventListener('tick', keepFrogInBounds)
