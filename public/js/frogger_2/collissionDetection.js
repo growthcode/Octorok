@@ -1,3 +1,5 @@
+WIDTH = $('#game-canvas').width()
+HEIGHT = $('#game-canvas').height()
 frog['radius'] = frogRadius
 
 car1['width'] = carWidth
