@@ -12,6 +12,10 @@ truck1StartYPos=borderHeight - rowHeight * 2 + 5;
 truck2StartXPos=400;
 truck2StartYPos=borderHeight - rowHeight * 4 + 5;
 
+var lane1Vel=10;
+var lane2Vel=10;
+var logLane1Vel=10;
+var logLane2Vel=10;
 
 var lane1 = [];
 var lane2 = [];
@@ -46,19 +50,19 @@ stage.update();
 function tick(event) {
   for (var i in lane1) {
     if (lane1[i].x > stage.canvas.width + 100) { lane1[i].x = 0 }
-    lane1[i].x += 10
+    lane1[i].x += lane1Vel
   }
   for (var i in lane2) {
     if (lane2[i].x < 0 - 100) { lane2[i].x = 800 }
-    lane2[i].x -= 10
+    lane2[i].x -= lane2Vel
   }
   for (var i in logArray1) {
     if (logArray1[i].x > stage.canvas.width + 100) { logArray1[i].x = 0 }
-    logArray1[i].x += 10
+    logArray1[i].x += logLane1Vel
   }
   for (var i in logArray2) {
     if (logArray2[i].x < 0 - 100) { logArray2[i].x = 800 }
-    logArray2[i].x -= 10
+    logArray2[i].x -= logLane2Vel
   }
   stage.update();
 }
