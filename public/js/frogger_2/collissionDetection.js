@@ -42,4 +42,15 @@ var checkAllVehicleCollisions = function() {
   }
 }
 
+var checkAllLogCollisions = function() {
+  if(checkVehicleCollision(log1) || checkVehicleCollision(longLog1)) {
+    frog.x += 10
+  }
+  if(checkVehicleCollision(log2) || checkVehicleCollision(longLog2)) {
+    frog.x -= 10
+  }
+  stage.update();
+}
+
 createjs.Ticker.addEventListener('tick', checkAllVehicleCollisions)
+createjs.Ticker.addEventListener('tick', checkAllLogCollisions)
