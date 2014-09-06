@@ -3,8 +3,8 @@ var borderWidth=800;
 var borderHeight=600;
 var frogRadius=20;
 
-var frogXStart=100;
-var frogYStart=100;
+var frogXStart=400;
+var frogYStart=565;
 
 var frog = new createjs.Shape();
 frog.graphics.beginFill("red").drawCircle(0, 0, frogRadius);
@@ -45,6 +45,5 @@ function movefrog(event){
       }
       stage.update()
     }
-  console.log("keycode pressed: " + event['keyCode']);
 }
 
