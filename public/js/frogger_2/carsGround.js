@@ -11,10 +11,10 @@ truck1StartXPos=400;
 truck1StartYPos=400;
 truck2StartXPos=400;
 truck2StartYPos=500;
-lane1Vel=10
-lane2Vel=10
-logLane1Vel=10
-logLane2Vel=10
+lane1Vel=0
+lane2Vel=0
+logLane1Vel=0
+logLane2Vel=0
 
 
 var lane1 = [];

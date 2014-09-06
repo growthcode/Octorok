@@ -1,3 +1,5 @@
+var waterYLine = (stage.canvas.height*6/13).toFixed(2)
+
 frog['radius'] = frogRadius
 
 car1['width'] = carWidth
@@ -80,10 +82,10 @@ var checkWaterLogCollision = function(log) {
   var distX = Math.abs(frog.x - (log.x+log.width/2));
   var distY = Math.abs(frog.y - (log.y+log.height/2));
 
-  if (distX > (log.width/4 + frog.radius)) { return false; }
-  if (distY > (log.height/4 + frog.radius)) { return false; }
+  if (distX > (log.width/2.5 + frog.radius)) { return false; }
+  if (distY > (log.height/3 + frog.radius)) { return false; }
 
-  if (distX <= (log.width) && distY <= (log.height)) {
+  if (distX <= (log.width) && distY <= log.height) {
     return true;
   }
 }
@@ -98,7 +100,6 @@ var checkAllWaterLogCollisions = function() {
 }
 
 var checkJumpInWater = function(){
-  var waterYLine = (stage.canvas.height*5/13).toFixed(2)
   if ((frog.y < waterYLine) && !(checkAllWaterLogCollisions())){
       return true
  }
