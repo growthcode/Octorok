@@ -27,7 +27,8 @@ var resetFrogPosition = function() {
 
 var keepFrogInBounds = function() {
   if((frog.x-frog.radius) < 0 || (frog.x+frog.radius) > borderWidth) {
-    resetFrogPosition()
+    resetFrogPosition();
+    numOfFrogLives -= 1;
   }
 }
 
