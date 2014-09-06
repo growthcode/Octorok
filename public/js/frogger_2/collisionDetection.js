@@ -21,14 +21,15 @@ longLog2['width'] = longLogWidth
 longLog2['height'] = longLogHeight
 
 var resetFrogPosition = function() {
-  frog.x = 400
-  frog.y = 565
-  stage.update()
+  frog.x = frogXStart
+  frog.y = frogYStart
+  stage.update
 }
 
 var keepFrogInBounds = function() {
   if((frog.x-frog.radius) < 0 || (frog.x+frog.radius) > borderWidth) {
-    resetFrogPosition()
+    resetFrogPosition();
+    numOfFrogLives -= 1;
   }
 }
 

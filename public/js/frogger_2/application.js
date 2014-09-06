@@ -1,4 +1,14 @@
+var canvas = document.createElement('canvas');
+    canvas.id = "game-canvas"
+    canvas.width = 690;
+    canvas.height = 598;
+    canvas.style.border = "1px solid black";
+    document.body.appendChild(canvas);
 var stage = new createjs.Stage('game-canvas');
+
+var borderWidth=stage.canvas.width;
+var borderHeight=stage.canvas.height;
+var rowHeight = stage.canvas.height/13
 
 var numOfFrogLives = 3;
 
