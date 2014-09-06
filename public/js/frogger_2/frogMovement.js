@@ -1,7 +1,7 @@
 var move_distance = 45;
 var borderWidth=800;
 var borderHeight=600;
-var frogRadius=2;
+var frogRadius=10;
 
 var frogXStart=400;
 var frogYStart=565;
