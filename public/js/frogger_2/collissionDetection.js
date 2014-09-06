@@ -27,6 +27,8 @@ function checkVehicleCollision(vehicle){
 
 var checkAllVehicleCollisions = function() {
   if(checkVehicleCollision(car1) || checkVehicleCollision(car2) || checkVehicleCollision(truck1) || checkVehicleCollision(truck2)) {
+    frog.x = 400
+    frog.y = 565
     console.log('FROG WAS HIT!')
   }
 }
