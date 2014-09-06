@@ -49,7 +49,8 @@ var checkVehicleCollision = function(vehicle) {
 
 var checkAllVehicleCollisions = function() {
   if(checkVehicleCollision(car1) || checkVehicleCollision(car2) || checkVehicleCollision(truck1) || checkVehicleCollision(truck2)) {
-    resetFrogPosition()
+    resetFrogPosition();
+    numOfFrogLives -= 1;
   }
 }
 
@@ -75,6 +76,6 @@ var checkAllLogCollisions = function() {
   stage.update();
 }
 
-createjs.Ticker.addEventListener('tick', checkAllVehicleCollisions)
-createjs.Ticker.addEventListener('tick', checkAllLogCollisions)
-createjs.Ticker.addEventListener('tick', keepFrogInBounds)
+createjs.Ticker.addEventListener('tick', checkAllVehicleCollisions);
+createjs.Ticker.addEventListener('tick', checkAllLogCollisions);
+createjs.Ticker.addEventListener('tick', keepFrogInBounds);
