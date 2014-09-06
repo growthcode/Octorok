@@ -10,15 +10,14 @@ var checkCollissionWithVehicle = function(vehicle) {
   var yDist = frog.y - vehicle.y
   var distance = Math.sqrt(xDist*xDist + yDist*yDist);
   if (distance < frog.radius + vehicle.radius) {
-    console.log('FROG WAS HIT BY VEHICLE ' + vehicle.id)
+    return true
   }
 }
 
 var checkAllCollissions = function() {
-  checkCollissionWithVehicle(car1)
-  checkCollissionWithVehicle(car2)
-  checkCollissionWithVehicle(truck1)
-  checkCollissionWithVehicle(truck2)
+  if(checkCollissionWithVehicle(car1) || checkCollissionWithVehicle(car2) || checkCollissionWithVehicle(truck1) || checkCollissionWithVehicle(truck2)) {
+    console.log('FROG WAS HIT!')
+  }
 }
 
 createjs.Ticker.addEventListener('tick', checkAllCollissions)
