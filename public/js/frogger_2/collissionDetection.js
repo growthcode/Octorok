@@ -19,6 +19,7 @@ longLog2['width'] = longLogWidth
 longLog2['height'] = longLogHeight
 
 
+
 var resetFrogPosition = function() {
   frog.x = 400
   frog.y = 565
@@ -67,10 +68,10 @@ var checkLogCollision = function(log) {
 
 var checkAllLogCollisions = function() {
   if(checkLogCollision(log1) || checkLogCollision(longLog1)) {
-    frog.x += 10
+    frog.x += logLane1Vel
   }
   if(checkLogCollision(log2) || checkLogCollision(longLog2)) {
-    frog.x -= 10
+    frog.x -= logLane2Vel
   }
   stage.update();
 }
