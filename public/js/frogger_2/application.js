@@ -6,6 +6,8 @@ var canvas = document.createElement('canvas');
     document.body.appendChild(canvas);
 var stage = new createjs.Stage('game-canvas');
 
+var rowHeight = stage.canvas.height/13
+
 var numOfFrogLives = 3;
 
 var checkIfGameLost = function() {

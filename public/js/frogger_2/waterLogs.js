@@ -1,5 +1,3 @@
-var rowHeight = stage.canvas.height/13
-
 var logWidth=50;
 var logHeight=rowHeight;
 var longLogWidth=75;
