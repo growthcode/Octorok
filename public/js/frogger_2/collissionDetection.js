@@ -21,6 +21,12 @@ longLog2['width'] = longLogWidth
 longLog2['height'] = longLogHeight
 
 
+var resetFrogPosition = function() {
+  frog.x = 400
+  frog.y = 565
+  stage.update()
+}
+
 function checkVehicleCollision(vehicle){
   var distX = Math.abs(frog.x - (vehicle.x+vehicle.width/2));
   var distY = Math.abs(frog.y - (vehicle.y+vehicle.height/2));
@@ -39,8 +45,7 @@ function checkVehicleCollision(vehicle){
 
 var checkAllVehicleCollisions = function() {
   if(checkVehicleCollision(car1) || checkVehicleCollision(car2) || checkVehicleCollision(truck1) || checkVehicleCollision(truck2)) {
-    frog.x = 400
-    frog.y = 565
+    resetFrogPosition()
   }
 }
 
