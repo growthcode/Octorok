@@ -42,11 +42,23 @@ var checkAllVehicleCollisions = function() {
   }
 }
 
+var checkLogCollision = function(log) {
+  var distX = Math.abs(frog.x - (log.x+log.width/2));
+  var distY = Math.abs(frog.y - (log.y+log.height/2));
+
+  if (distX > (log.width/4 + frog.radius)) { return false; }
+  if (distY > (log.height/4 + frog.radius)) { return false; }
+
+  if (distX <= (log.width/4) && distY <= (log.height/4)) {
+    return true;
+  }
+}
+
 var checkAllLogCollisions = function() {
-  if(checkVehicleCollision(log1) || checkVehicleCollision(longLog1)) {
+  if(checkLogCollision(log1) || checkLogCollision(longLog1)) {
     frog.x += 10
   }
-  if(checkVehicleCollision(log2) || checkVehicleCollision(longLog2)) {
+  if(checkLogCollision(log2) || checkLogCollision(longLog2)) {
     frog.x -= 10
   }
   stage.update();
