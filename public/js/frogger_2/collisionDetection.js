@@ -20,17 +20,16 @@ longLog1['height'] = longLogHeight
 longLog2['width'] = longLogWidth
 longLog2['height'] = longLogHeight
 
-
-
 var resetFrogPosition = function() {
-  frog.x = 400
-  frog.y = 565
-  stage.update()
+  frog.x = frogXStart
+  frog.y = frogYStart
+  stage.update
 }
 
 var keepFrogInBounds = function() {
   if((frog.x-frog.radius) < 0 || (frog.x+frog.radius) > borderWidth) {
-    resetFrogPosition()
+    resetFrogPosition();
+    numOfFrogLives -= 1;
   }
 }
 
@@ -49,10 +48,10 @@ var checkVehicleCollision = function(vehicle) {
   return (dx*dx+dy*dy<=(frog.radius*frog.radius));
 }
 
-
 var checkAllVehicleCollisions = function() {
   if(checkVehicleCollision(car1) || checkVehicleCollision(car2) || checkVehicleCollision(truck1) || checkVehicleCollision(truck2)) {
-    resetFrogPosition()
+    resetFrogPosition();
+    numOfFrogLives -= 1;
   }
 }
 
@@ -113,7 +112,7 @@ var checkWaterCollisions = function(){
   stage.update();
 }
 
-createjs.Ticker.addEventListener('tick', checkAllVehicleCollisions)
-createjs.Ticker.addEventListener('tick', checkWaterCollisions)
-createjs.Ticker.addEventListener('tick', checkAllLogCollisions)
-createjs.Ticker.addEventListener('tick', keepFrogInBounds)
+createjs.Ticker.addEventListener('tick', checkAllVehicleCollisions);
+createjs.Ticker.addEventListener('tick', checkAllLogCollisions);
+createjs.Ticker.addEventListener('tick', keepFrogInBounds);
+createjs.Ticker.addEventListener('tick', checkWaterCollisions);
