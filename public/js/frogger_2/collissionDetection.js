@@ -68,14 +68,32 @@ var checkLogCollision = function(log) {
 
 var checkAllLogCollisions = function() {
   if(checkLogCollision(log1) || checkLogCollision(longLog1)) {
-    frog.x += logLane1Vel
+    frog.x += logLane1Vel;
+    return true;
   }
   if(checkLogCollision(log2) || checkLogCollision(longLog2)) {
-    frog.x -= logLane2Vel
+    frog.x -= logLane2Vel;
+    return true;
+  }
+  stage.update();
+}
+
+var checkJumpInWater = function(){
+  var waterYLine = (stage.canvas.height*6/13).toFixed(2)
+  if ((frog.y < waterYLine) && !(checkAllLogCollisions())){
+      return true
+ }
+}
+
+var checkWaterCollisions = function(){
+  if(checkJumpInWater()){
+    console.log("water line crossed")
+    // resetFrogPosition()
   }
   stage.update();
 }
 
 createjs.Ticker.addEventListener('tick', checkAllVehicleCollisions)
 createjs.Ticker.addEventListener('tick', checkAllLogCollisions)
+createjs.Ticker.addEventListener('tick', checkWaterCollisions)
 createjs.Ticker.addEventListener('tick', keepFrogInBounds)
