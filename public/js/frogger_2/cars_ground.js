@@ -1,5 +1,3 @@
-$('canvas').css('border', '1px solid black');
-
 var lane1 = [];
 var lane2 = [];
 
