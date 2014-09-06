@@ -35,5 +35,30 @@ describe("Frogger Game: ", function () {
       expect(frog.y).toEqual(565);
     });
   });
+
+  describe("Collision with", function() {
+    xit("car resets the frog's position to starting point", function() {
+    });
+    xit("log moves the frog along with the log", function() {
+    });
+  });
+
+  describe("Ticker", function() {
+    xit("checks for car collisions", function() {
+    });
+    xit("checks for log collisions", function() {
+    });
+    xit("checks that frog is within canvas boundaries", function() {
+    });
+    xit("is listening for key presses", function() {
+    });
+  });
+
+  describe("Keypress: ", function() {
+    xit("left, moves frog to the left", function() {
+    });
+    xit("up, moves frog up", function() {
+    });
+  });
 });
 
