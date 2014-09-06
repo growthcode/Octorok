@@ -1,23 +1,26 @@
+var carWidth=50;
+var carHeight=25;
+var truckWidth=75;
+var truckHeight=25;
 var lane1 = [];
 var lane2 = [];
-
-var car1 = new createjs.Shape(0, 0, 100);
-car1.graphics.beginFill("red").drawCircle(0, 0, 40);
+var car1 = new createjs.Shape();
+car1.graphics.beginFill("red").drawRect(0, 0, carWidth, carHeight);
 car1.x = 100;
 car1.y = 100;
 
-var car2 = new createjs.Shape(0, 0, 100);
-car2.graphics.beginFill("red").drawCircle(0, 0, 40);
+var car2 = new createjs.Shape();
+car2.graphics.beginFill("red").drawRect(0, 0, carWidth, carHeight);
 car2.x = 100;
 car2.y = 200;
 
-var truck1 = new createjs.Shape(0, 0, 100);
-truck1.graphics.beginFill("green").drawCircle(0, 0, 40);
+var truck1 = new createjs.Shape();
+truck1.graphics.beginFill("green").drawRect(0, 0, truckWidth, truckHeight);
 truck1.x = 400;
 truck1.y = 100;
 
-var truck2 = new createjs.Shape(0, 0, 100);
-truck2.graphics.beginFill("green").drawCircle(0, 0, 40);
+var truck2 = new createjs.Shape();
+truck2.graphics.beginFill("green").drawRect(0, 0, truckWidth, truckHeight);
 truck2.x = 400;
 truck2.y = 200;
 
