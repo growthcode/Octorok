@@ -1,16 +1,16 @@
 var carWidth=50;
-var carHeight=25;
+var carHeight=rowHeight - 10;
 var truckWidth=75;
-var truckHeight=25;
+var truckHeight=rowHeight - 10;
 
 car1StartXPos=100;
-car1StartYPos=400;
+car1StartYPos=borderHeight - rowHeight * 2 + 5;
 car2StartXPos=100;
-car2StartYPos=500;
+car2StartYPos=borderHeight - rowHeight * 4 + 5;
 truck1StartXPos=400;
-truck1StartYPos=400;
+truck1StartYPos=borderHeight - rowHeight * 2 + 5;
 truck2StartXPos=400;
-truck2StartYPos=500;
+truck2StartYPos=borderHeight - rowHeight * 4 + 5;
 
 
 var lane1 = [];
