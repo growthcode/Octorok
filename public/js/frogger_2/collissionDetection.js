@@ -27,7 +27,7 @@ var resetFrogPosition = function() {
   stage.update()
 }
 
-function checkVehicleCollision(vehicle){
+var checkVehicleCollision = function(vehicle) {
   var distX = Math.abs(frog.x - (vehicle.x+vehicle.width/2));
   var distY = Math.abs(frog.y - (vehicle.y+vehicle.height/2));
 
