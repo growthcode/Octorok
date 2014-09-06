@@ -5,12 +5,12 @@ var truckHeight=25;
 var lane1 = [];
 var lane2 = [];
 var car1 = new createjs.Shape();
-car1.graphics.beginFill("red").drawRect(0, 0, carWidth, carHeight=25);
+car1.graphics.beginFill("red").drawRect(0, 0, carWidth, carHeight);
 car1.x = 100;
 car1.y = 100;
 
 var car2 = new createjs.Shape();
-car2.graphics.beginFill("red").drawRect(0, 0, carWidth, carHeight=25);
+car2.graphics.beginFill("red").drawRect(0, 0, carWidth, carHeight);
 car2.x = 100;
 car2.y = 200;
 
