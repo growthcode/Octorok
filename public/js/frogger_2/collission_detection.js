@@ -1,8 +1,17 @@
 frog['radius'] = 25
-car1['radius'] = 40
-car2['radius'] = 40
-truck1['radius'] = 40
-truck2['radius'] = 40
+car1['width'] = carWidth
+car1['height'] = carHeight
+car2['width'] = carWidth
+car2['height'] = carHeight
+truck1['width'] = truckWidth
+truck1['height'] = truckHeight
+truck2['width'] = truckWidth
+truck2['height'] = truckHeight
+
+var vehicleCenter = function(vehicle) {
+  xCenter = vehicle.x + (vehicle.width / 2)
+  yCenter = vehicle.y + (vehicle.height / 2)
+}
 
 
 var checkVehicleCollission = function(vehicle) {
