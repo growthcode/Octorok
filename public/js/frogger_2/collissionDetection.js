@@ -1,4 +1,5 @@
 frog['radius'] = frogRadius
+
 car1['width'] = carWidth
 car1['height'] = carHeight
 car2['width'] = carWidth
@@ -7,6 +8,15 @@ truck1['width'] = truckWidth
 truck1['height'] = truckHeight
 truck2['width'] = truckWidth
 truck2['height'] = truckHeight
+
+log1['width'] = logWidth
+log1['height'] = logHeight
+log2['width'] = logWidth
+log2['height'] = logHeight
+longLog1['width'] = longLogWidth
+longLog1['height'] = longLogHeight
+longLog2['width'] = longLogWidth
+longLog2['height'] = longLogHeight
 
 
 function checkVehicleCollision(vehicle){
