@@ -3,9 +3,9 @@ get '/' do
 end
 
 get '/frogger_1' do
-	erb :frogger_1, layout: false
+  erb :frogger_1, layout: false
 end
 
 get '/frogger_2' do
-	erb :frogger_2
+  erb :frogger_2
 end
