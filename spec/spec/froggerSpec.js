@@ -4,15 +4,20 @@ describe("Frogger Game", function () {
       expect(carWidth).toEqual(50);
     });
   });
-  describe("frog", function() {
+  describe("Frog", function() {
     it("cannot starts game within the horizontal boundaries", function() {
       expect(frog.x).toBeGreaterThan(frogRadius)
       expect(frog.x).toBeLessThan(borderWidth-frogRadius)
-    })
+    });
     it("cannot starts game within the vertical boundaries", function() {
       expect(frog.y).toBeGreaterThan(frogRadius)
       expect(frog.y).toBeLessThan(borderHeight-frogRadius)
-    })
-  })
+    });
+    it("is reset to the correct starting point", function() {
+      resetFrogPosition();
+      expect(frog.x).toEqual(400);
+      expect(frog.y).toEqual(565);
+    });
+  });
 });
 
