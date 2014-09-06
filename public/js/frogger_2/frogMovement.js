@@ -1,11 +1,15 @@
 var move_distance = 50
 var borderWidth=800;
 var borderHeight=600;
-var frogRadius=40;
+var frogRadius=20;
+
+var frogXStart=100;
+var frogYStart=100;
+
 var frog = new createjs.Shape();
 frog.graphics.beginFill("red").drawCircle(0, 0, frogRadius);
-frog.x = 100;
-frog.y = 100;
+frog.x = frogXStart;
+frog.y = frogYStart;
 
 stage.addChild(frog);
 stage.update();
