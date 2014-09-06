@@ -1,5 +1,3 @@
-var borderWidth=stage.canvas.width;
-var borderHeight=stage.canvas.height;
 var frogRadius= borderHeight / 26;
 var move_distance = borderHeight / 13
 
