@@ -1,4 +1,5 @@
 WIDTH = canvas.width;
+var bulletArray = [];
 
 var Ian = function() {
   var that = this
@@ -16,11 +17,37 @@ var Ian = function() {
     that.shape.x += that.dx;
     stage.update();
   }
+  var fireBullet = function(){
+    var bullet = new Bullet(that.shape.x, that.shape.y, Math.random() * 10, Math.random() * -10);
+      bulletArray.push(bullet);
+    stage.addChild(bullet.shape);
+    setInterval(bullet.move,30);
+    stage.update();
+    var i = 0;
+    console.log("count of Bullets")
+  }
+  this.shoot = function() {
+    setInterval(fireBullet, 1000)
+  }
 }
-
 
 var bossIan = new Ian();
 stage.addChild(bossIan.shape);
 stage.update();
 
+// function destroyBullets() {
+//   $(bulletArray).each(function(index, value){
+//     if (!(bulletArray[value].shape.visible)){
+//       delete value
+//     }
+//   })
+//       // debugger
+//     }
+//   }
+// }
+
 createjs.Ticker.addEventListener('tick', bossIan.move)
+createjs.Ticker.addEventListener('tick', destroyBullets)
+
+ bossIan.shoot()
+

@@ -14,6 +14,6 @@ get '/battles' do
   erb :battles
 end
 
-get '/dodgingIan' do
+get '/dodge_ian' do
   erb :dodgeIan
 end

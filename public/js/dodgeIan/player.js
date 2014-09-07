@@ -4,7 +4,7 @@ var Player = function(name, posX, posY, gravatar){
   this.name = name;
   this.shape.x = posX;
   this.shape.y = posY;
-  this.stepSize = 10; //pixels
+  this.stepSize = 10; // pixels
   this.hp = 100;
   var that = this;
   this.step = function(direction) {
@@ -23,24 +23,21 @@ stage.addChild(antonio.shape);
 stage.addChild(xang.shape);
 stage.update();
 
-var movePlayer = function(direction) {
-  if (direction == "right") {
+var movePlayer = function(event) {
+  if (event['keyCode'] === 39 ) {
     antonio.step("right");
     xang.step("right");
     console.log("right");
     stage.update();
-    // stage.update();
-    // if(frog.x >= (borderWidth-frogRadius)){
-    //   frog.x = borderWidth-frogRadius;
-    // }
-  } else {
+  }
+  if (event['keyCode'] === 37 ) {
     antonio.step("left");
     xang.step("left");
     console.log("left");
     stage.update();
-    // stage.update();
-    // if(frog.x <= frogRadius){
-    //   frog.x = frogRadius;
-    // }
   }
 }
+
+$(document).on('keyup', movePlayer);
+
+createjs.Ticker.addEventListener('tick', movePlayer);
