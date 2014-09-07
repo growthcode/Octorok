@@ -20,7 +20,10 @@ var Player = function(name, posX, posY, radius, gravatar){
 
 
 var antonio = new Player("Antonio", 400, 30, 30);
-playerArray.push(antonio);
+var antonio2 = new Player("Antonio2", 400, 30, 30);
+var antonio3 = new Player("Antonio2", 400, 30, 30);
+
+playerArray.push(antonio,antonio2, antonio3);//should show 3 players
 
 stage.addChild(antonio.shape);
 stage.update();
