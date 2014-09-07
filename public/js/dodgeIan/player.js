@@ -6,17 +6,60 @@ var Player = function(name, posX, posY, radius, gravatar){
   this.name = name;
   this.shape.x = posX;
   this.shape.y = posY;
-  this.stepSize = 10;
+  this.stepSize = 60;
   this.hp = 100;
   this.alive = true;
   var that = this;
-  this.step = function(direction) {
-    if (direction == "left") {
-      that.shape.x -= this.stepSize;
-    } else {
-      that.shape.x += this.stepSize;
+  this.stepLeft = function() {
+    if((this.shape.x - this.radius) > 0) {
+      this.shape.x -= this.stepSize
+    }
+    if(this.shape.x <= this.radius){
+      this.shape.x = this.radius;
     }
   }
+  this.stepRight = function() {
+    if((this.shape.x + this.radius) < canvas.width) {
+      this.shape.x += this.stepSize
+    }
+    if(this.shape.x >= canvas.width - this.radius){
+      this.shape.x = canvas.width - this.radius;
+    }
+  }
+  this.stepUp = function() {
+    if((this.shape.y - this.radius) > 0) {
+      this.shape.y -= this.stepSize
+    }
+    if(this.shape.y <= this.radius){
+      this.shape.y = this.radius;
+    }
+  }
+  this.stepDown = function() {
+    if((this.shape.y + this.radius) < canvas.height) {
+      this.shape.y += this.stepSize
+    }
+    if(this.shape.y >= canvas.height - this.radius){
+      this.shape.y = canvas.height - this.radius;
+    }
+  }
+  this.movePlayer = function(event) {
+    if (event['keyCode'] === 37) {
+      this.stepLeft()
+      stage.update();
+    }
+    if (event['keyCode'] === 39) {
+      this.stepRight()
+      stage.update();
+    }
+    if (event['keyCode'] === 38) {
+      this.stepUp()
+      stage.update();
+    }
+    if (event['keyCode'] === 40) {
+      this.stepDown()
+      stage.update();
+    }
+  }.bind(this)
 }
 
 //Currently showing 1 player, multiple player collision works as well
@@ -27,17 +70,4 @@ playerArray.push(player1);
 stage.addChild(player1.shape);
 stage.update();
 
-var movePlayer = function(event) {
-  if (event['keyCode'] === 39 ) {
-    player1.step("right");
-    stage.update();
-  }
-  if (event['keyCode'] === 37 ) {
-    player1.step("left");
-    stage.update();
-  }
-}
-
-$(document).on('keydown', movePlayer);
-
-createjs.Ticker.addEventListener('tick', movePlayer);
+$(document).on('keydown', player1.movePlayer);
