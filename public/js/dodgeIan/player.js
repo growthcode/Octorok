@@ -23,8 +23,8 @@ stage.addChild(antonio.shape);
 stage.addChild(xang.shape);
 stage.update();
 
-var movePlayer = function(event) {
-  if (event['keyCode'] === 39 ) {
+var movePlayer = function(direction) {
+  if (direction == "right") {
     antonio.step("right");
     xang.step("right");
     console.log("right");
@@ -33,8 +33,7 @@ var movePlayer = function(event) {
     // if(frog.x >= (borderWidth-frogRadius)){
     //   frog.x = borderWidth-frogRadius;
     // }
-  }
-  if (event['keyCode'] === 37 ) {
+  } else {
     antonio.step("left");
     xang.step("left");
     console.log("left");
@@ -45,7 +44,3 @@ var movePlayer = function(event) {
     // }
   }
 }
-
-$(document).on('keyup', movePlayer);
-
-createjs.Ticker.addEventListener('tick', movePlayer);
