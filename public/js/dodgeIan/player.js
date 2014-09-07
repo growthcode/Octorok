@@ -40,6 +40,24 @@ var Player = function(name, posX, posY, radius, gravatar){
       this.shape.y = canvas.height - this.radius;
     }
   }
+  this.movePlayer = function(event) {
+    if (event['keyCode'] === 37) {
+      this.stepLeft()
+      stage.update();
+    }
+    if (event['keyCode'] === 39) {
+      this.stepRight()
+      stage.update();
+    }
+    if (event['keyCode'] === 38) {
+      this.stepUp()
+      stage.update();
+    }
+    if (event['keyCode'] === 40) {
+      this.stepDown()
+      stage.update();
+    }
+  }.bind(this)
 }
 
 var antonio = new Player("Antonio", 400, 200, 30);
@@ -49,23 +67,6 @@ stage.addChild(antonio.shape);
 stage.addChild(xang.shape);
 stage.update();
 
-var movePlayer = function(event) {
-  if (event['keyCode'] === 37) {
-    xang.stepLeft()
-    stage.update();
-  }
-  if (event['keyCode'] === 39) {
-    xang.stepRight()
-    stage.update();
-  }
-  if (event['keyCode'] === 38) {
-    xang.stepUp()
-    stage.update();
-  }
-  if (event['keyCode'] === 40) {
-    xang.stepDown()
-    stage.update();
-  }
-}
 
-$(document).on('keydown', movePlayer);
+
+$(document).on('keydown', xang.movePlayer);
