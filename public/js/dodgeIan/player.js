@@ -17,28 +17,24 @@ var Player = function(name, posX, posY, radius, gravatar){
   }
 }
 
-var antonio = new Player("Antonio", 400, 200, 30);
-var xang = new Player("Xang", 500, 200, 30);
+var antonio = new Player("Antonio", 400, 30, 30);
 
 stage.addChild(antonio.shape);
-stage.addChild(xang.shape);
 stage.update();
 
 var movePlayer = function(event) {
   if (event['keyCode'] === 39 ) {
     antonio.step("right");
-    xang.step("right");
     console.log("right");
     stage.update();
   }
   if (event['keyCode'] === 37 ) {
     antonio.step("left");
-    xang.step("left");
     console.log("left");
     stage.update();
   }
 }
 
-$(document).on('keyup', movePlayer);
+$(document).on('keydown', movePlayer);
 
 createjs.Ticker.addEventListener('tick', movePlayer);

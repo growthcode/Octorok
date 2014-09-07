@@ -1,6 +1,4 @@
 var CollisionDetector = function(bullet, player) {
-  this.bullet = bullet;
-  this.player = player;
   var that = this;
   var _findDistance = function() {
     var distance = Math.sqrt(
