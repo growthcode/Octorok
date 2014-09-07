@@ -18,7 +18,7 @@ var Ian = function() {
     stage.update();
   }
   var fireBullet = function(){
-    var bullet = new Bullet(that.shape.x, that.shape.y, Math.random() * 10, Math.random() * -10);
+    var bullet = new Bullet(that.shape.x, that.shape.y, Math.random() * 20 - 10 , Math.random() * - 10 - 2);
     bulletArray.push(bullet);
     stage.addChild(bullet.shape);
     setInterval(bullet.move,30);
