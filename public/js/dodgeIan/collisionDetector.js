@@ -19,6 +19,7 @@ var CollisionDetector = function(bullet, player) {
     }
   }
 }
+}
 var bulletPlayerDetection = function (){
 
   var bulletBodyDetection=[]
@@ -35,7 +36,7 @@ var bulletPlayerDetection = function (){
 }
 }
 
-    createjs.Ticker.addEventListener("tick", bulletPlayerDetection);
+    // createjs.Ticker.addEventListener("tick", bulletPlayerDetection);
 
 var injurePlayer = function(player, damage) {
   console.log(damage + "taken off");
@@ -52,18 +53,19 @@ var checkIfPlayerAlive = function(player) {
 
 var killPlayer = function(player) {
   var playerIndex = stage.children.indexOf(player.shape);
+  player.radius=0;
   stage.removeChildAt(playerIndex);
   player.alive = false;
   delete player;
   console.log(player.name + " was removed from canvas");
 }
 
-var checkAntonio = function() {
-  for (var i in bulletArray) {
-    new CollisionDetector(bulletArray[i], antonio).bulletPlayerCollision();
-  }
-}
+// var checkAntonio = function() {
+//   for (var i in bulletArray) {
+//     new CollisionDetector(bulletArray[i], antonio).bulletPlayerCollision();
+//   }
+// }
 
-createjs.Ticker.addEventListener('tick', checkAntonio);
+createjs.Ticker.addEventListener('tick', bulletPlayerDetection);
 
 
