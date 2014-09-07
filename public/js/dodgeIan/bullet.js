@@ -1,6 +1,6 @@
-var Bullet = function (posX, posY, radius, dx, dy) {
-  this.radius = radius;
-  this.damage = 40;
+var Bullet = function (posX, posY, dx, dy) {
+  this.radius = Math.random() * 10;
+  this.damage = this.radius * 10;
   this.shape = new createjs.Shape();
   this.shape.graphics.beginFill("green").drawCircle(0,0,radius);
   this.shape.x = posX;
