@@ -7,6 +7,7 @@ var Bullet = function (posX, posY, dx, dy) {
   this.shape.y = posY;
   this.dx = dx;
   this.dy = dy;
+  this.alive = true;
   var that = this;
   this.move = function() {
     if (that.shape.x + dx > canvas.width || that.shape.x + dx < 0) {
@@ -36,6 +37,7 @@ setInterval(bullet1.move, 30)
 var destroyBullet = function(bullet) {
   var bulletIndex = stage.children.indexOf(bullet.shape);
   stage.removeChildAt(bulletIndex);
+  bullet.alive = false;
   delete bullet;
   console.log(bullet + "was removed from canvas");
 }

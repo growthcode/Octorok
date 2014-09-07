@@ -1,6 +1,6 @@
 var playerArray=[];
 var Player = function(name, posX, posY, radius, gravatar){
-  this.radius=radius
+  this.radius = radius
   this.shape = new createjs.Shape();
   this.shape.graphics.beginFill("red").drawCircle(0, 0, radius);
   this.name = name;
@@ -8,6 +8,7 @@ var Player = function(name, posX, posY, radius, gravatar){
   this.shape.y = posY;
   this.stepSize = 10;
   this.hp = 100;
+  this.alive = true;
   var that = this;
   this.step = function(direction) {
     if (direction == "left") {
