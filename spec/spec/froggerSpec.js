@@ -1,5 +1,9 @@
 describe("Frogger Game: ", function () {
-
+  
+  afterEach(function() {
+    document.body.removeChild(canvas);
+  });
+  
   describe("Car model", function() {
     it("has a width of 50", function() {
       expect(carWidth).toEqual(50);
