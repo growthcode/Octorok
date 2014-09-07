@@ -18,16 +18,15 @@ var Ian = function() {
     stage.update();
   }
   var fireBullet = function(){
-    var bullet = new Bullet(that.shape.x, that.shape.y, Math.random() * 10, Math.random() * -10);
-      bulletArray.push(bullet);
+    var bullet = new Bullet(that.shape.x, that.shape.y, 5, Math.random() * 10, Math.random() * -10);
+    bulletArray.push(bullet);
     stage.addChild(bullet.shape);
     setInterval(bullet.move,30);
     stage.update();
-    var i = 0;
-    console.log("count of Bullets")
+    console.log("count of Bullets");
   }
   this.shoot = function() {
-    setInterval(fireBullet, 1000)
+    setInterval(fireBullet, 1000);
   }
 }
 
@@ -35,8 +34,6 @@ var bossIan = new Ian();
 stage.addChild(bossIan.shape);
 stage.update();
 
-createjs.Ticker.addEventListener('tick', bossIan.move)
-createjs.Ticker.addEventListener('tick', destroyBullets)
-
- bossIan.shoot()
+createjs.Ticker.addEventListener('tick', bossIan.move);
+bossIan.shoot();
 

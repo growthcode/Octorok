@@ -1,5 +1,5 @@
-var Bullet = function (posX,posY, radius, dx,dy) {
-  this.radius = radius
+var Bullet = function (posX, posY, radius, dx, dy) {
+  this.radius = radius;
   this.damage = 40;
   this.shape = new createjs.Shape();
   this.shape.graphics.beginFill("green").drawCircle(0,0,radius);
@@ -20,15 +20,8 @@ var Bullet = function (posX,posY, radius, dx,dy) {
   }
 }
 
-var sevenSixtyTwo = new Bullet(300,200,15,2,0);
-
-var fireBullet = function() {
-  sevenSixtyTwo.move();
+var fireBullet = function(bullet) {
+  bullet.move();
   stage.update();
   console.log('fire');
 }
-
-stage.addChild(sevenSixtyTwo.shape);
-stage.update();
-
-setInterval(sevenSixtyTwo.move, 30)
