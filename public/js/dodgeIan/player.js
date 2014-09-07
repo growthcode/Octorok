@@ -1,6 +1,7 @@
-var Player = function(name, posX, posY, gravatar){
+var Player = function(name, posX, posY, radius, gravatar){
+  this.radius=radius
   this.shape = new createjs.Shape();
-  this.shape.graphics.beginFill("red").drawCircle(100,100,30);
+  this.shape.graphics.beginFill("red").drawCircle(100,100,radius);
   this.name = name;
   this.shape.x = posX;
   this.shape.y = posY;
@@ -16,8 +17,8 @@ var Player = function(name, posX, posY, gravatar){
   }
 }
 
-var antonio = new Player("Antonio", 100, 200);
-var xang = new Player("Xang", 200, 200);
+var antonio = new Player("Antonio", 100, 200, 30);
+var xang = new Player("Xang", 200, 200, 30);
 
 stage.addChild(antonio.shape);
 stage.addChild(xang.shape);
