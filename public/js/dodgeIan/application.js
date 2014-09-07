@@ -6,4 +6,4 @@ canvas.style.border = "1px solid black";
 document.body.appendChild(canvas);
 
 var stage = new createjs.Stage('game-canvas');
-stage.update();
+
