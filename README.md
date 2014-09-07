@@ -15,7 +15,7 @@ You control Frogger, guiding him in four directions with the arrow keys.
 You must guide Frogger to each of the five empty slots at the top of the screen in order to advance to the next stage.  
 You start at the bottom of the screen beneath five lanes of traffic.  
 You must reach the sidewalk in the middle of the screen without getting hit by any vehicles.  
-You must not fall in the water on the way to one of the slots at the top.Ride the turtles and logs to the top, but don't get pulled off the side of the screen.  
+You must not fall in the water on the way to one of the slots at the top. Ride the turtles and logs to the top, but don't get pulled off the side of the screen.  
 Beware of diving turtles. If Frogger is on them when they dive, he loses a life.  
 Avoid crocodile mouths, catch flies in the slots for bonus points.  
 
@@ -57,7 +57,7 @@ Game 1 MVP - Phaser (goal time of Friday Night)
 3) Jasmine testing  
 
 
----Non MVP  
+---Non MVP
 3) Deploy Heroku, continuous integration, semaphore  
 3) Choosing a Theme  
 4) Time limit add  
@@ -67,4 +67,3 @@ Game 1 MVP - Phaser (goal time of Friday Night)
 
 ###Trello Link###
 https://trello.com/b/qkW1RMzd/frogger
-
