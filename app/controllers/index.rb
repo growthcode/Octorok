@@ -13,3 +13,7 @@ end
 get '/battles' do
   erb :battles
 end
+
+get '/dodgingIan' do
+  erb :dodgeIan
+end
