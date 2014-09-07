@@ -1,5 +1,5 @@
 var Player = function(name, posX, posY, radius, gravatar){
-  this.radius=radius
+  this.radius = radius
   this.shape = new createjs.Shape();
   this.shape.graphics.beginFill("red").drawCircle(0, 0, radius);
   this.name = name;
@@ -7,6 +7,7 @@ var Player = function(name, posX, posY, radius, gravatar){
   this.shape.y = posY;
   this.stepSize = 60;
   this.hp = 100;
+  this.alive = true;
   var that = this;
   this.stepLeft = function() {
     if((this.shape.x - this.radius) > 0) {
@@ -60,13 +61,9 @@ var Player = function(name, posX, posY, radius, gravatar){
   }.bind(this)
 }
 
-var antonio = new Player("Antonio", 400, 200, 30);
-var xang = new Player("Xang", 500, 200, 30);
+var antonio = new Player("Antonio", 400, 30, 30);
 
 stage.addChild(antonio.shape);
-stage.addChild(xang.shape);
 stage.update();
-
-
 
 $(document).on('keydown', xang.movePlayer);
