@@ -39,7 +39,7 @@ Jasmine Testing
 - Everyone writes after to learn how and so we can apply in future
 
 
-Game 1 MVP - Phaser (goal time of Friday Night)
+Game 1 MVP - Phaser (goal time of Friday Night)  
 1) Initialize Sinatra skeleton  
 1) Initialize a game window like canvas  
 1) Deploy Heroku, continuous integration, semaphore  
@@ -49,7 +49,7 @@ Game 1 MVP - Phaser (goal time of Friday Night)
 1) 3 functions: onload(), create(), update()  
 1) declare all of the objects of Frogger, variable names  
 1) generate moving logic, variable names  
-1) Event binding arrow keys moves frog
+1) Event binding arrow keys moves frog  
 1) Deploy heroku  
 2) Generating logs and cars and turtles  
 ---- 3) how fast each row of cars  
@@ -60,8 +60,10 @@ Game 1 MVP - Phaser (goal time of Friday Night)
 ---Non MVP
 3) Deploy Heroku, continuous integration, semaphore  
 3) Choosing a Theme  
-4) time limit add  
-4) score taking  
+4) Time limit add  
+4) Score taking  
 4) Flies (or other) as a bonus.  
 5) Powerups  
 
+###Trello Link###
+https://trello.com/b/qkW1RMzd/frogger
