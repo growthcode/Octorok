@@ -28,6 +28,7 @@ var Player = function(name, posX, posY, radius, gravatar){
       this.shape.y += this.stepSize
     }
   }
+}
 
 var antonio = new Player("Antonio", 400, 200, 30);
 var xang = new Player("Xang", 500, 200, 30);
