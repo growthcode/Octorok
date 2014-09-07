@@ -8,10 +8,6 @@ document.body.appendChild(canvas);
 var stage = new createjs.Stage('game-canvas');
 stage.update();
 
-var tick = function (event) {
-  fireBullet();
-}
-
 var movementListener = function(event) {
   if (event['keyCode'] === 39) {
     movePlayer("right");
@@ -19,7 +15,5 @@ var movementListener = function(event) {
     movePlayer("left");
   }
 }
-
-createjs.Ticker.addEventListener('tick', tick);
 
 $(document).on('keyup', movementListener);
