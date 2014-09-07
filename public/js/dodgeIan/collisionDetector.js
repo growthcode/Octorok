@@ -1,49 +1,72 @@
 var CollisionDetector = function(bullet, player){
   this.bullet = bullet
   this.player = player
+  var that = this
+  var _findDistance = function(){
+    that.distance = Math.sqrt(
+            ((bullet.shape.x - player.shape.x) * (bullet.shape.x - player.shape.x))
+          + ((bullet.shape.y - player.shape.y) * (bullet.shape.y - player.shape.y))
+           );
+   return that.distance
+  }
+  this.bulletPlayerCollision = function () {
+    var distance =  _findDistance()
+    if (distance<(bullet.radius+player.radius)){
+    return true
+  }
+    
+  }
 }
 // var bulletX=bullet.shape.x
 // var bulletY=bullet.shape.y
 
-CollisionDetector.prototype.findDistance = function(){
-   var distance = Math.sqrt(
-            ((bullet.shape.x - player.shape.x) * (bullet.shape.x - player.shape.x))
-          + ((bullet.shape.y - player.shape.y) * (bullet.shape.y - player.shape.y))
-           );
-   return distance
-}
+// CollisionDetector.prototype.findDistance = function(){
+//   // console.log(this)
+//   console.log(this.bullet)
+//   // console.log(this.player.shape.x)
+  
+//   // var bullet = this.bullet
+//   // var player = this.player
+//    this.distance = Math.sqrt(
+//             ((this.bullet.shape.x - this.player.shape.x) * (this.bullet.shape.x - this.player.shape.x))
+//           + ((this.bullet.shape.y - this.player.shape.y) * (this.bullet.shape.y - this.player.shape.y))
+//            );
+//    console.log("distance")
+//    return distance
+// }
 
 
-CollisionDetector.prototype.bulletPlayerCollision = function() {
-  // console.log(this)
-  var bullet = this.bullet
-  var player = this.player
-  // console.log(bullet)
-  // console.log(player)
-  // var distance = Math.sqrt(
-  //           ((bullet.shape.x - player.shape.x) * (bullet.shape.x - player.shape.x))
-  //         + ((bullet.shape.y - player.shape.y) * (bullet.shape.y - player.shape.y))
-  //          );
-  // debugger
-  // console.log('sdfgs')
-  // createjs.Ticker.addEventListener('tick', function() {
-    // console.log(distance)
-  // })
-  // console.log(this.bullet.shape.x)
-  // console.log(distance)
-  if (this.findDistance<(this.bullet.radius+this.player.radius)){
-    console.log("hi")
-  }
-}
+// CollisionDetector.prototype.bulletPlayerCollision = function() {
+//   // console.log(this)
+//   var bullet = this.bullet
+//   var player = this.player
+//   // console.log(bullet)
+//   // console.log(player)
+//   // var distance = Math.sqrt(
+//   //           ((bullet.shape.x - player.shape.x) * (bullet.shape.x - player.shape.x))
+//   //         + ((bullet.shape.y - player.shape.y) * (bullet.shape.y - player.shape.y))
+//   //          );
+//   // debugger
+//   // console.log('sdfgs')
+//   // createjs.Ticker.addEventListener('tick', function() {
+//     // console.log(distance)
+//   // })
+//   // console.log(this.bullet.shape.x)
+//   // console.log(distance)
+//   if (this.findDistance<(this.bullet.radius+this.player.radius)){
+//     console.log("hi")
+//   }
+// }
 // CollisionDetector(sevenSixtyTwo,antonio)
 
 var detector = new CollisionDetector(sevenSixtyTwo,antonio)
-detector.bulletPlayerCollision()
-
-setInterval(detector.bulletPlayerCollision(), 5)
 // detector.bulletPlayerCollision()
 createjs.Ticker.addEventListener('tick', detector.bulletPlayerCollision)
-
+// detector.findDistance()
+// setInterval(detector.bulletPlayerCollision(), 5)
+// detector.bulletPlayerCollision()
+// createjs.Ticker.addEventListener('tick', detector.bulletPlayerCollision)
+// detector.bulletPlayerCollision()
 // setInterval(console.log(bullet.shape.x + ' ' + player.shape.x), 3000)
 // bullet--
 // this.radius = radius
