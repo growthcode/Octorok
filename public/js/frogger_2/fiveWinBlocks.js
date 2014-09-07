@@ -2,8 +2,6 @@ var winBlockWidth = 50;
 var winBlockHeight = 45;
 var rightDifference = 10;
 
-
-
 var farLeftBlock = new createjs.Shape();
 farLeftBlock.graphics.beginFill("green").drawRect(0, 0, winBlockWidth, winBlockHeight);
 farLeftBlock.x = 99;
@@ -29,32 +27,7 @@ farRightBlock.graphics.beginFill("green").drawRect(0, 0, winBlockWidth, winBlock
 farRightBlock.x = 495;
 farRightBlock.y = 0;
 
-// var frogWin = function(){
-
-//   if (frog.y < 46){
-//     if(frog.x > 140 && frog.x <  200){
-//       console.log("win");
-//     }
-//     else{
-//       console.log("lose");
-//     }
-//   }
-
-//   if(frog.y <46){
-//     if(frog.x > 340 && frog.x < 400){
-//       console.log("win");
-//     }
-//     else{
-//       console.log("lose");
-//     }
-//   }
-// }
-
 stage.addChild(farLeftBlock, midLeftBlock, midBlock, midRigtBlock, farRightBlock);
 stage.update();
 
-// createjs.Ticker.addEventListener('tick', frogWin);
-
-
-// || frog.x > midLeftBlock + winBlockWidth && frog.x < midBlock || frog.x > midBlock + winBlockWidth && frog.x < midRigtBlock || frog.x > midRigtBlock + winBlockWidth && frog.x < farRightBlock){
 

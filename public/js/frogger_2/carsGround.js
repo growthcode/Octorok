@@ -74,9 +74,9 @@ function tick(event) {
   }
 
   for(var i in lane3){
-  if(lane3[i].x < 0- 100) {lane3[i].x = 800}
-  lane3[i].x -= lane1Vel;
-}
+    if (lane3[i].x < 0- 100) {lane3[i].x = 800}
+    lane3[i].x -= lane1Vel;
+  }
 
   for (var i in lane2) {
     if (lane2[i].x < 0 - 100) { lane2[i].x = 800 }
