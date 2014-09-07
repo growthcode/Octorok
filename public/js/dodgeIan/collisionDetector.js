@@ -8,10 +8,12 @@ var CollisionDetector = function(bullet, player) {
    return distance;
   }
   this.bulletPlayerCollision = function() {
-    if (_findDistance() < (bullet.radius + player.radius)) {
-      injurePlayer(player, bullet.damage);
-      destroyBullet(bullet);
-      checkIfPlayerAlive(player);
+    if (bullet.alive) {
+      if (_findDistance() < (bullet.radius + player.radius)) {
+        injurePlayer(player, bullet.damage);
+        destroyBullet(bullet);
+        checkIfPlayerAlive(player);
+      }
     }
   }
 }
@@ -32,6 +34,7 @@ var checkIfPlayerAlive = function(player) {
 var killPlayer = function(player) {
   var playerIndex = stage.children.indexOf(player.shape);
   stage.removeChildAt(playerIndex);
+  player.alive = false;
   delete player;
   console.log(player.name + " was removed from canvas");
 }
