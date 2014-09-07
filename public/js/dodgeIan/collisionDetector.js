@@ -1,7 +1,7 @@
 //CollisionDetector is valid for object with radiuses: bullets, players, boss(es)
 var CollisionDetector = function(object1, object2) {
   var that = this;
-  var _findDistance = function() {
+  this._findDistance = function() {
     var distance = Math.sqrt(
     ((object1.shape.x - object2.shape.x) * (object1.shape.x - object2.shape.x))
     + ((object1.shape.y - object2.shape.y) * (object1.shape.y - object2.shape.y))
@@ -11,7 +11,7 @@ var CollisionDetector = function(object1, object2) {
   this.bulletPlayerCollision = function() {
 
     if (object1.alive) {
-      if (_findDistance() < (object1.radius + object2.radius)) {
+      if (that._findDistance() < (object1.radius + object2.radius)) {
         console.log("hit!!! ouch")
         injurePlayer(object2, object1.damage);
         destroyBullet(object1);
