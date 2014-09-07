@@ -1,39 +1,26 @@
-WIDTH = canvas.width
-HEIGHT = canvas.height
-x = 20;
-y = 20;
-dx = 8;
-dy = 2;
-
-var Bullet = function (posX) {
+var Bullet = function (posX,posY,dx,dy) {
   this.damage = 40;
   this.shape = new createjs.Shape();
   this.shape.graphics.beginFill("green").drawCircle(0,0,10);
   this.shape.x = posX;
-  this.shape.y = 100;
-  this.velocity = 50;
+  this.shape.y = posY;
+  this.dx = dx;
+  this.dy = dy;
   var that = this;
-  // this.move = function() {
-  //   that.shape.y -= that.velocity;
-  // }
   this.move = function() {
-    that.shape.x = x
-    that.shape.y = y
     stage.update()
-    if (x + dx > WIDTH || x + dx < 0) {
+    if (that.shape.x + dx > canvas.width || that.shape.x + dx < 0) {
         dx = -dx;
       }
-    if (y + dy > HEIGHT) {
+    if (that.shape.y + dy > canvas.height) {
       dy = -dy;
      }
-    x += dx;
-    y += dy;
+    that.shape.x += dx;
+    that.shape.y += dy;
   }
-  stage.update();
-  console.log('move')
 }
 
-var sevenSixtyTwo = new Bullet(300);
+var sevenSixtyTwo = new Bullet(300,200,8,2);
 
 var fireBullet = function() {
   sevenSixtyTwo.move();
@@ -45,4 +32,3 @@ stage.addChild(sevenSixtyTwo.shape);
 stage.update();
 
 setInterval(sevenSixtyTwo.move, 30)
-// createjs.Ticker.addEventListener('tick', fireBullet);
