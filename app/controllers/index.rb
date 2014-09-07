@@ -9,3 +9,7 @@ end
 get '/frogger_2' do
   erb :frogger_2
 end
+
+get '/battles' do
+  erb :battles
+end

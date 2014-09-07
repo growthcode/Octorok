@@ -35,7 +35,8 @@ var froggerSpriteData = new createjs.SpriteSheet({
             [82, 264, 24, 26], // car3 racecar
             [116, 271, 32, 18], // beaver
             [0, 119, 339, 34], // water
-            [15, 12, 318, 32], // winning grass
+            [0, 55, 399, 54], // winning grass
+            [15, 12, 318, 32], // frogger logo
           ]
 });
 
