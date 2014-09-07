@@ -1,3 +1,4 @@
+var playerArray=[];
 var Player = function(name, posX, posY, radius, gravatar){
   this.radius = radius
   this.shape = new createjs.Shape();
@@ -18,20 +19,21 @@ var Player = function(name, posX, posY, radius, gravatar){
   }
 }
 
-var antonio = new Player("Antonio", 400, 30, 30);
+//Currently showing 1 player, multiple player collision works as well
+var player1 = new Player("player", 400, 30, 30);
 
-stage.addChild(antonio.shape);
+playerArray.push(player1);
+
+stage.addChild(player1.shape);
 stage.update();
 
 var movePlayer = function(event) {
   if (event['keyCode'] === 39 ) {
-    antonio.step("right");
-    console.log("right");
+    player1.step("right");
     stage.update();
   }
   if (event['keyCode'] === 37 ) {
-    antonio.step("left");
-    console.log("left");
+    player1.step("left");
     stage.update();
   }
 }
