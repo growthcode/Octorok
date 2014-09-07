@@ -12,20 +12,32 @@ var Player = function(name, posX, posY, radius, gravatar){
     if((this.shape.x - this.radius) > 0) {
       this.shape.x -= this.stepSize
     }
+    if(this.shape.x <= this.radius){
+      this.shape.x = this.radius;
+    }
   }
   this.stepRight = function() {
     if((this.shape.x + this.radius) < canvas.width) {
       this.shape.x += this.stepSize
+    }
+    if(this.shape.x >= canvas.width - this.radius){
+      this.shape.x = canvas.width - this.radius;
     }
   }
   this.stepUp = function() {
     if((this.shape.y - this.radius) > 0) {
       this.shape.y -= this.stepSize
     }
+    if(this.shape.y <= this.radius){
+      this.shape.y = this.radius;
+    }
   }
   this.stepDown = function() {
     if((this.shape.y + this.radius) < canvas.height) {
       this.shape.y += this.stepSize
+    }
+    if(this.shape.y >= canvas.height - this.radius){
+      this.shape.y = canvas.height - this.radius;
     }
   }
 }
@@ -41,30 +53,18 @@ var movePlayer = function(event) {
   if (event['keyCode'] === 37) {
     xang.stepLeft()
     stage.update();
-    if(xang.shape.x <= xang.radius){
-      xang.shape.x = xang.radius;
-    }
   }
   if (event['keyCode'] === 39) {
     xang.stepRight()
     stage.update();
-    if(xang.shape.x >= canvas.width - xang.radius){
-      xang.shape.x = canvas.width - xang.radius;
-    }
   }
   if (event['keyCode'] === 38) {
     xang.stepUp()
     stage.update();
-    if(xang.shape.y <= xang.radius){
-      xang.shape.y = xang.radius;
-    }
   }
   if (event['keyCode'] === 40) {
     xang.stepDown()
     stage.update();
-    if(xang.shape.y >= canvas.height - xang.radius){
-      xang.shape.y = canvas.height - xang.radius;
-    }
   }
 }
 
