@@ -66,4 +66,4 @@ var antonio = new Player("Antonio", 400, 30, 30);
 stage.addChild(antonio.shape);
 stage.update();
 
-$(document).on('keydown', xang.movePlayer);
+$(document).on('keydown', antonio.movePlayer);
