@@ -11,9 +11,13 @@ var CollisionDetector = function(bullet, player) {
   }
   this.bulletPlayerCollision = function() {
     if (_findDistance() < (bullet.radius + player.radius)) {
-      return true;
+      injurePlayer(player, bullet.damage);
     }
   }
+}
+
+var injurePlayer = function(player, damage) {
+  player.hp -= damage;
 }
 
 var checkIfPlayerAlive = function(player) {
