@@ -8,12 +8,26 @@ var CollisionDetector = function(bullet, player) {
    return distance;
   }
   this.bulletPlayerCollision = function() {
+
     if (bullet.alive) {
       if (_findDistance() < (bullet.radius + player.radius)) {
+        console.log("hit!!! ouch")
         injurePlayer(player, bullet.damage);
         destroyBullet(bullet);
         checkIfPlayerAlive(player);
+        return true;
       }
+    }
+  }
+}
+
+var bulletPlayerDetection = function (){
+  var bulletBodyDetection=[]
+  bulletCount = bulletArray.length
+  playerCount = playerArray.length
+    for (var i = 0; i<bulletCount; i++){
+      for (var x = 0; x<playerCount; x++){
+      new CollisionDetector(bulletArray[i], playerArray[x]).bulletPlayerCollision()
     }
   }
 }
@@ -33,17 +47,13 @@ var checkIfPlayerAlive = function(player) {
 
 var killPlayer = function(player) {
   var playerIndex = stage.children.indexOf(player.shape);
+  player.radius=0;
   stage.removeChildAt(playerIndex);
   player.alive = false;
   delete player;
   console.log(player.name + " was removed from canvas");
 }
 
-var checkAntonio = function() {
-  for (var i in bulletArray) {
-    new CollisionDetector(bulletArray[i], antonio).bulletPlayerCollision();
-  }
-}
+createjs.Ticker.addEventListener('tick', bulletPlayerDetection);
 
-createjs.Ticker.addEventListener('tick', checkAntonio);
 

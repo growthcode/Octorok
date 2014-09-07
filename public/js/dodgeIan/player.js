@@ -1,3 +1,4 @@
+var playerArray=[];
 var Player = function(name, posX, posY, radius, gravatar){
   this.radius = radius
   this.shape = new createjs.Shape();
@@ -61,9 +62,12 @@ var Player = function(name, posX, posY, radius, gravatar){
   }.bind(this)
 }
 
-var antonio = new Player("Antonio", 400, 30, 30);
+//Currently showing 1 player, multiple player collision works as well
+var player1 = new Player("player", 400, 30, 30);
 
-stage.addChild(antonio.shape);
+playerArray.push(player1);
+
+stage.addChild(player1.shape);
 stage.update();
 
-$(document).on('keydown', antonio.movePlayer);
+$(document).on('keydown', player1.movePlayer);
