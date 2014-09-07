@@ -10,23 +10,37 @@ var CollisionDetector = function(bullet, player) {
   this.bulletPlayerCollision = function() {
     if (_findDistance() < (bullet.radius + player.radius)) {
       injurePlayer(player, bullet.damage);
+      destroyBullet(bullet);
+      checkIfPlayerAlive(player);
     }
   }
 }
 
 var injurePlayer = function(player, damage) {
+  console.log(damage + "taken off");
   player.hp -= damage;
 }
 
 var checkIfPlayerAlive = function(player) {
   if (player.hp <= 0) {
-    return false;
+    killPlayer(player);
   } else {
-    return true;
+    console.log("he's alive!");
   }
 }
 
 var killPlayer = function(player) {
   var playerIndex = stage.children.indexOf(player.shape);
   stage.removeChildAt(playerIndex);
+  delete player;
+  console.log(player.name + " was removed from canvas");
 }
+
+var checkAntonio = function() {
+  for (var i in bulletArray) {
+    new CollisionDetector(bulletArray[i], antonio).bulletPlayerCollision();
+  }
+}
+
+createjs.Ticker.addEventListener('tick', checkAntonio);
+
