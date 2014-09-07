@@ -1,6 +1,4 @@
 var CollisionDetector = function(bullet, player) {
-  this.bullet = bullet;
-  this.player = player;
   var that = this;
   var _findDistance = function() {
     var distance = Math.sqrt(
@@ -12,29 +10,13 @@ var CollisionDetector = function(bullet, player) {
   this.bulletPlayerCollision = function() {
     if (_findDistance() < (bullet.radius + player.radius)) {
       console.log("hit!!! ouch")
+      injurePlayer(player, bullet.damage);
+      destroyBullet(bullet);
+      checkIfPlayerAlive(player);
       return true;
     }
   }
-
-  // this.bulletPlayerDetection = function (){
-  //   console.log("hisad")
-  //   bulletCount=bulletArray.length
-  //     if (bulletBodyDetection[i].bulletPlayerCollision){
-  //       console.log(bulletBodyDetection[i])
-  //     }
-  //   }
-  // }
 }
-
-// var bulletPlayerDetection = function (){
-//   bulletCount=bulletArray.length
-//   for ( var i = 0; i<bulletCount; i++){
-//     bulletBodyDetection[i]=CollisionDetector(bulletArray[i], player[i])
-//     if (bulletBodyDetection[i].bulletPlayerCollision){
-//       console.log(bulletBodyDetection[i])
-//     }
-//   }
-// }
 var bulletPlayerDetection = function (){
 
   var bulletBodyDetection=[]
@@ -50,7 +32,35 @@ var bulletPlayerDetection = function (){
   }
 }
 }
-    // createjs.Ticker.addEventListener("tick", bulletBodyDetection[i].bulletPlayerDetection);
-// setInterval(bulletPlayerDetection(),30)
+
     createjs.Ticker.addEventListener("tick", bulletPlayerDetection);
+
+var injurePlayer = function(player, damage) {
+  console.log(damage + "taken off");
+  player.hp -= damage;
+}
+
+var checkIfPlayerAlive = function(player) {
+  if (player.hp <= 0) {
+    killPlayer(player);
+  } else {
+    console.log("he's alive!");
+  }
+}
+
+var killPlayer = function(player) {
+  var playerIndex = stage.children.indexOf(player.shape);
+  stage.removeChildAt(playerIndex);
+  delete player;
+  console.log(player.name + " was removed from canvas");
+}
+
+var checkAntonio = function() {
+  for (var i in bulletArray) {
+    new CollisionDetector(bulletArray[i], antonio).bulletPlayerCollision();
+  }
+}
+
+createjs.Ticker.addEventListener('tick', checkAntonio);
+
 
