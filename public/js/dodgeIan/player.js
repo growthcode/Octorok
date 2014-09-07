@@ -69,4 +69,3 @@ var movePlayer = function(event) {
 }
 
 $(document).on('keydown', movePlayer);
-createjs.Ticker.addEventListener('tick', movePlayer);
