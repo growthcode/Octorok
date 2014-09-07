@@ -1,3 +1,4 @@
+var playerArray=[];
 var Player = function(name, posX, posY, radius, gravatar){
   this.radius=radius
   this.shape = new createjs.Shape();
@@ -19,6 +20,8 @@ var Player = function(name, posX, posY, radius, gravatar){
 
 var antonio = new Player("Antonio", 400, 200, 30);
 var xang = new Player("Xang", 500, 200, 30);
+playerArray.push(antonio,xang)
+// playerArray.push(xang)
 
 stage.addChild(antonio.shape);
 stage.addChild(xang.shape);
