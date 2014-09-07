@@ -35,17 +35,6 @@ var bossIan = new Ian();
 stage.addChild(bossIan.shape);
 stage.update();
 
-// function destroyBullets() {
-//   $(bulletArray).each(function(index, value){
-//     if (!(bulletArray[value].shape.visible)){
-//       delete value
-//     }
-//   })
-//       // debugger
-//     }
-//   }
-// }
-
 createjs.Ticker.addEventListener('tick', bossIan.move)
 createjs.Ticker.addEventListener('tick', destroyBullets)
 
