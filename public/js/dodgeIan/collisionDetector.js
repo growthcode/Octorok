@@ -15,3 +15,16 @@ var CollisionDetector = function(bullet, player) {
     }
   }
 }
+
+var checkIfPlayerAlive = function(player) {
+  if (player.hp <= 0) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+var killPlayer = function(player) {
+  var playerIndex = stage.children.indexOf(player.shape);
+  stage.removeChildAt(playerIndex);
+}
