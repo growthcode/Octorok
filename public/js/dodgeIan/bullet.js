@@ -21,7 +21,7 @@ var Bullet = function (posX,posY, radius, dx,dy) {
   }
 }
 
-var sevenSixtyTwo = new Bullet(300,200,15,8,2);
+var sevenSixtyTwo = new Bullet(300,300,15,8,0);
 
 var fireBullet = function() {
   sevenSixtyTwo.move();
