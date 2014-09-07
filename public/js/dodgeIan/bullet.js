@@ -1,7 +1,8 @@
-var Bullet = function (posX,posY,dx,dy) {
+var Bullet = function (posX,posY, radius, dx,dy) {
+  this.radius = radius
   this.damage = 40;
   this.shape = new createjs.Shape();
-  this.shape.graphics.beginFill("green").drawCircle(0,0,5);
+  this.shape.graphics.beginFill("green").drawCircle(0,0,radius);
   this.shape.x = posX;
   this.shape.y = posY;
   this.dx = dx;
@@ -19,7 +20,7 @@ var Bullet = function (posX,posY,dx,dy) {
   }
 }
 
-var sevenSixtyTwo = new Bullet(bossIan.shape.x, bossIan.shape.y, 16, -4);
+var sevenSixtyTwo = new Bullet(300,200,15,2,0);
 
 var fireBullet = function() {
   sevenSixtyTwo.move();
