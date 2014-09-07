@@ -1,16 +1,16 @@
-var carWidth=100;
-var carHeight=rowHeight - 10;
-var truckWidth=180;
-var truckHeight=rowHeight - 10;
+var carWidth=50;
+var carHeight=rowHeight - (canvas.height/60);
+var truckWidth=75;
+var truckHeight=rowHeight - (canvas.height/60);
 
 car1StartXPos=100;
-car1StartYPos=borderHeight - rowHeight * 2 + 5;
+car1StartYPos=borderHeight - rowHeight * 2 + (canvas.height/120);
 car2StartXPos=100;
-car2StartYPos=borderHeight - rowHeight * 4 + 5;
+car2StartYPos=borderHeight - rowHeight * 4 + (canvas.height/120);
 truck1StartXPos=400;
-truck1StartYPos=borderHeight - rowHeight * 2 + 5;
+truck1StartYPos=borderHeight - rowHeight * 2 + (canvas.height/120);
 truck2StartXPos=400;
-truck2StartYPos=borderHeight - rowHeight * 4 + 5;
+truck2StartYPos=borderHeight - rowHeight * 4 + (canvas.height/120);
 
 var lane1Vel=10;
 var lane2Vel=10;

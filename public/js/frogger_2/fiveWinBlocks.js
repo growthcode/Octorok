@@ -1,0 +1,60 @@
+var winBlockWidth = 50;
+var winBlockHeight = 45;
+var rightDifference = 10;
+
+
+
+var farLeftBlock = new createjs.Shape();
+farLeftBlock.graphics.beginFill("green").drawRect(0, 0, winBlockWidth, winBlockHeight);
+farLeftBlock.x = 99;
+farLeftBlock.y = 0;
+
+var midLeftBlock = new createjs.Shape();
+midLeftBlock.graphics.beginFill("green").drawRect(0, 0, winBlockWidth, winBlockHeight);
+midLeftBlock.x = 198;
+midLeftBlock.y = 0;
+
+var midBlock = new createjs.Shape();
+midBlock.graphics.beginFill("green").drawRect(0, 0, winBlockWidth, winBlockHeight);
+midBlock.x = 297;
+midBlock.y = 0
+
+var midRigtBlock = new createjs.Shape();
+midRigtBlock.graphics.beginFill("green").drawRect(0, 0, winBlockWidth, winBlockHeight);
+midRigtBlock.x = 396;
+midRigtBlock.y = 0;
+
+var farRightBlock = new createjs.Shape();
+farRightBlock.graphics.beginFill("green").drawRect(0, 0, winBlockWidth, winBlockHeight);
+farRightBlock.x = 495;
+farRightBlock.y = 0;
+
+// var frogWin = function(){
+
+//   if (frog.y < 46){
+//     if(frog.x > 140 && frog.x <  200){
+//       console.log("win");
+//     }
+//     else{
+//       console.log("lose");
+//     }
+//   }
+
+//   if(frog.y <46){
+//     if(frog.x > 340 && frog.x < 400){
+//       console.log("win");
+//     }
+//     else{
+//       console.log("lose");
+//     }
+//   }
+// }
+
+stage.addChild(farLeftBlock, midLeftBlock, midBlock, midRigtBlock, farRightBlock);
+stage.update();
+
+// createjs.Ticker.addEventListener('tick', frogWin);
+
+
+// || frog.x > midLeftBlock + winBlockWidth && frog.x < midBlock || frog.x > midBlock + winBlockWidth && frog.x < midRigtBlock || frog.x > midRigtBlock + winBlockWidth && frog.x < farRightBlock){
+
