@@ -9,7 +9,6 @@ var Bullet = function (posX,posY, radius, dx,dy) {
   this.dy = dy;
   var that = this;
   this.move = function() {
-    stage.update()
     if (that.shape.x + dx > canvas.width || that.shape.x + dx < 0) {
         dx = -dx;
       }
