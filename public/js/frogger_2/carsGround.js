@@ -10,6 +10,8 @@ car2StartXPos=100;
 car2StartYPos=borderHeight - rowHeight * 3 + (canvas.height/120);
 carLane3StartXPos= 0;
 carLane3StartYPos=borderHeight - rowHeight * 4 + (canvas.height/120);
+carLane4StartXPos= 0;
+carLane4StartYPos=borderHeight - rowHeight * 5 + (canvas.height/120);
 truck1StartXPos=400;
 truck1StartYPos=borderHeight - rowHeight * 2 + (canvas.height/120);
 truck2StartXPos=400;
@@ -23,6 +25,7 @@ var logLane2Vel=10;
 var lane1 = [];
 var lane2 = [];
 var lane3 = [];
+var lane4 = [];
 var imgLane1 = [];
 var imgLane2 = [];
 
@@ -111,12 +114,33 @@ car7.graphics.beginFill("black").drawRect(0, 0, carWidth, carHeight);
 car7.x = carLane3StartXPos + (xDifference * 4 );
 car7.y = carLane3StartYPos;
 
-lane3 = [car4, car5, car6, car7];
+var car8 = new createjs.Shape();
+car8.graphics.beginFill("red").drawRect(0, 0, carWidth, carHeight);
+car8.x = carLane4StartXPos + (xDifference *1);
+car8.y = carLane4StartYPos;
+
+var car9 = new createjs.Shape();
+car9.graphics.beginFill("blue").drawRect(0, 0, carWidth, carHeight);
+car9.x = carLane4StartXPos + (xDifference * 2);
+car9.y = carLane4StartYPos;
+
+var car10 = new createjs.Shape();
+car10.graphics.beginFill("green").drawRect(0, 0, carWidth, carHeight);
+car10.x = carLane4StartXPos + (xDifference * 3);
+car10.y = carLane4StartYPos;
+
+var car11 = new createjs.Shape();
+car11.graphics.beginFill("black").drawRect(0, 0, carWidth, carHeight);
+car11.x = carLane4StartXPos + (xDifference * 4 );
+car11.y = carLane4StartYPos;
+
 lane1.push(car1, truck1);
 lane2.push(car2, truck2);
+lane3 = [car4, car5, car6, car7];
+lane4 = [car8, car9, car10, car11];
 
+stage.addChild(car1, car2, truck1, truck2, imgLane2[0], imgLane2[1], imgLane1[0],imgLane1[1], car4, car5, car6, car7, car8, car9, car10, car11);
 
-stage.addChild(car1, car2, truck1, truck2, imgLane2[0], imgLane2[1], imgLane1[0],imgLane1[1], car4, car5, car6, car7);
 stage.update();
 
 function tick(event) {
@@ -143,6 +167,11 @@ function tick(event) {
   for (var i in lane3){
     if (lane3[i].x > stage.canvas.width + 450){lane3[i].x = -200}
       lane3[i].x += lane1Vel
+  }
+
+  for (var i in lane4){
+    if (lane4[i].x < 0 - 300) { lane4[i].x = 800}
+      lane4[i].x -= lane2Vel
   }
 
   for (var i in logArray1) {
