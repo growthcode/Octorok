@@ -18,25 +18,33 @@ Win.Controller = function(frog, slot) {
   }.bind(this)
 }
 
-slot1 = new Win.Slot(1, columnWidth, (columnWidth*2))
-slot2 = new Win.Slot(2, (columnWidth*4), (columnWidth*5))
-slot3 = new Win.Slot(3, (columnWidth*7), (columnWidth*8))
-slot4 = new Win.Slot(4, (columnWidth*10), (columnWidth*11))
-slot5 = new Win.Slot(5, (columnWidth*13), (columnWidth*14))
+slot1 = new Win.Slot(1, columnWidth, (columnWidth*2));
+slot2 = new Win.Slot(2, (columnWidth*4), (columnWidth*5));
+slot3 = new Win.Slot(3, (columnWidth*7), (columnWidth*8));
+slot4 = new Win.Slot(4, (columnWidth*10), (columnWidth*11));
+slot5 = new Win.Slot(5, (columnWidth*13), (columnWidth*14));
 
-winController1 = new Win.Controller(frog, slot1)
-winController2 = new Win.Controller(frog, slot2)
-winController3 = new Win.Controller(frog, slot3)
-winController4 = new Win.Controller(frog, slot4)
-winController5 = new Win.Controller(frog, slot5)
+winController1 = new Win.Controller(frog, slot1);
+winController2 = new Win.Controller(frog, slot2);
+winController3 = new Win.Controller(frog, slot3);
+winController4 = new Win.Controller(frog, slot4);
+winController5 = new Win.Controller(frog, slot5);
 
-createjs.Ticker.addEventListener('tick', winController1.checkSlot)
-createjs.Ticker.addEventListener('tick', winController2.checkSlot)
-createjs.Ticker.addEventListener('tick', winController3.checkSlot)
-createjs.Ticker.addEventListener('tick', winController4.checkSlot)
-createjs.Ticker.addEventListener('tick', winController5.checkSlot)
+createjs.Ticker.addEventListener('tick', winController1.checkSlot);
+createjs.Ticker.addEventListener('tick', winController2.checkSlot);
+createjs.Ticker.addEventListener('tick', winController3.checkSlot);
+createjs.Ticker.addEventListener('tick', winController4.checkSlot);
+createjs.Ticker.addEventListener('tick', winController5.checkSlot);
 
-var slots = [slot1.id, slot2.id, slot3.id, slot4.id, slot5.id]
+var slots = [slot1, slot2, slot3, slot4, slot5];
+
+var findSlotById = function(array, id) {
+  slot = $.grep(array, function(slot){
+    return slot.id === id;
+  })
+  return slot
+};
+
 var removeSlot = function(array, slot) {
   var index = array.indexOf(slot)
   array.splice(index, 1)
