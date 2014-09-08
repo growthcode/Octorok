@@ -55,4 +55,3 @@ factory = new Win.Factory(frog);
 factory.createSlots(5);
 factory.createControllers();
 createjs.Ticker.addEventListener('tick', factory.checkAllSlots)
-
