@@ -1,6 +1,6 @@
 body{
   position: relative;
-  background: url(/assets/homepage/black_denim.png);
+  background: url(/assets/homepage/use_your_illusion.png);
   background-color: #DBBB84 !important;
   width: 80%;
   margin: auto;
@@ -9,4 +9,8 @@ body{
   -webkit-box-shadow: -1px 10px 5px 11px rgba(0,0,0,0.35);
   -moz-box-shadow: -1px 10px 5px 11px rgba(0,0,0,0.35);
   box-shadow: -1px 10px 5px 11px rgba(0,0,0,0.35);
+}
+
+.jumbotron{
+  text-align: center
 }
