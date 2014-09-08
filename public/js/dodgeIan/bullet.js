@@ -21,17 +21,3 @@ var Bullet = function (posX, posY, dx, dy) {
     that.shape.y += dy;
   }
 }
-
-var fireBullet = function() {
-  bullet1.move();
-  stage.update();
-  console.log('fire');
-}
-
-var destroyBullet = function(bullet) {
-  var bulletIndex = stage.children.indexOf(bullet.shape);
-  stage.removeChildAt(bulletIndex);
-  bullet.alive = false;
-  delete bullet;
-  console.log(bullet + "was removed from canvas");
-}

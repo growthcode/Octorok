@@ -57,7 +57,7 @@ Game 1 MVP - Phaser (goal time of Friday Night)
 3) Jasmine testing  
 
 
----Non MVP
+---Non MVP  
 3) Deploy Heroku, continuous integration, semaphore  
 3) Choosing a Theme  
 4) Time limit add  
