@@ -14,7 +14,7 @@ var Controller = function(player, bullet) {
       if (that._findDistance() < (that.bullet.radius + player.radius)) {
         console.log("hit!!! ouch")
         that._injurePlayer(that.player, that.bullet.damage);
-        destroyBullet(that.bullet);
+        that._destroyBullet(that.bullet);
         that._checkIfPlayerAlive(player);
         return true;
       }
@@ -48,6 +48,13 @@ var Controller = function(player, bullet) {
     player.alive = false;
     delete player;
     console.log(player.name + " was removed from canvas");
+  }
+  this._destroyBullet = function(bullet) {
+    var bulletIndex = stage.children.indexOf(bullet.shape);
+    stage.removeChildAt(bulletIndex);
+    bullet.alive = false;
+    delete bullet;
+    console.log(bullet + "was removed from canvas");
   }
 }
 
