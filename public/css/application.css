@@ -25,3 +25,10 @@ body{
   padding:1em;
   background-color: #BABABA;
 }
+
+canvas{
+  padding-right: 0;
+  margin:5em auto;
+  display: block;
+  background-color:#BABABA;
+}
