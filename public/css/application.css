@@ -1,0 +1,34 @@
+body{
+  position: relative;
+  background: url(/assets/homepage/use_your_illusion.png);
+  width: 80%;
+  margin: auto;
+  min-height: 100%;
+  color: #4C412E;
+  -webkit-box-shadow: -1px 10px 5px 11px rgba(0,0,0,0.35);
+  -moz-box-shadow: -1px 10px 5px 11px rgba(0,0,0,0.35);
+  box-shadow: -1px 10px 5px 11px rgba(0,0,0,0.35);
+}
+
+.jumbotron{
+  margin-top: 2em;
+  padding-top: 2em;
+  text-align: center;
+}
+
+.center_text{
+  text-align: center;
+}
+
+.game_description{
+  border: 1px solid black;
+  padding:1em;
+  background-color: #BABABA;
+}
+
+canvas{
+  padding-right: 0;
+  margin:5em auto;
+  display: block;
+  background-color:#BABABA;
+}
