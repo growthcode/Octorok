@@ -39,6 +39,14 @@ describe("Dodge Ian Game", function() {
         controller.checkForCollision();
         expect(controller._injurePlayer).toHaveBeenCalledWith(player, bullet.damage);
       });
+      it("invokes destroyBullet function with appropriate argument within its body", function() {
+        var player = new Player("player", 100, 100, 10);
+        var bullet = new Bullet(100, 99, 10, 5);
+        var controller = new Controller(player, bullet);
+        spyOn(controller, "_destroyBullet");
+        controller.checkForCollision();
+        expect(controller._destroyBullet).toHaveBeenCalledWith(bullet);
+      });
     });
   });
 });
