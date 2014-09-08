@@ -48,18 +48,17 @@ var checkVehicleCollision = function(vehicle) {
   return (dx*dx+dy*dy<=(frog.radius*frog.radius));
 }
 
-var checkAllVehicleCollisions = function() {
-  if(checkVehicleCollision(car1) || checkVehicleCollision(car2) || checkVehicleCollision(truck1) || checkVehicleCollision(truck2)) {
-    resetFrogPosition();
-    numOfFrogLives -= 1;
-  }
-}
-
-// put this inside checkAllVehicleCollisions
-var check = function () {
+var checkAllVehicleCollisions = function () {
  return $.grep(vehicles, function(value) {
     return checkVehicleCollision(value) === true
   }).length > 0
+}
+
+var killFrogIfHitByVehicle = function() {
+  if(checkAllVehicleCollisions()) {
+    resetFrogPosition();
+    numOfFrogLives -= 1;
+  }
 }
 
 var checkLogCollision = function(log) {
@@ -120,7 +119,7 @@ var checkWaterCollisions = function(){
   stage.update();
 }
 
-createjs.Ticker.addEventListener('tick', checkAllVehicleCollisions);
+createjs.Ticker.addEventListener('tick', killFrogIfHitByVehicle);
 createjs.Ticker.addEventListener('tick', checkAllLogCollisions);
 createjs.Ticker.addEventListener('tick', keepFrogInBounds);
 createjs.Ticker.addEventListener('tick', checkWaterCollisions);
