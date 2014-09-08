@@ -14,6 +14,8 @@ carLane4StartXPos= 0;
 carLane4StartYPos=borderHeight - rowHeight * 5 + (canvas.height/120);
 carLane5StartXPos= 0;
 carLane5StartYPos=borderHeight - rowHeight * 6 + (canvas.height/120);
+grassLane6XPos= 0;
+grassLane6YPos=borderHeight - rowHeight * 6 + (canvas.height/120);
 truck1StartXPos=400;
 truck1StartYPos=borderHeight - rowHeight * 2 + (canvas.height/120);
 truck2StartXPos=400;
@@ -33,11 +35,11 @@ var imgLane2 = [];
 
 
 
-var froggerSafeGrass = new createjs.Bitmap("");
-froggerSafeGrass.x = car1StartXPos - 10;
-froggerSafeGrass.y = car1StartYPos -10;
-froggerSafeGrass.scaleX = 0.12;
-froggerSafeGrass.scaleY = 0.12;
+var froggerSafeGrass = new createjs.Bitmap("http://www.colourbox.com/preview/3694639-208698-top-view-of-green-grass-andflowers-background.jpg");
+froggerSafeGrass.x = grassLane6XPos;
+froggerSafeGrass.y = grassLane6YPos - 50;
+froggerSafeGrass.scaleX = 1;
+froggerSafeGrass.scaleY = 0.08;
 
 var imageCar1 = new createjs.Bitmap("http://www.dundjinni.com/forums/uploads/lingster/817_NYS-impala.png");
 imageCar1.x = car1StartXPos - 10;
@@ -170,7 +172,7 @@ lane3 = [car4, car5, car6, car7];
 lane4 = [car8, car9, car10, car11];
 lane5 = [car12, car13, car14, car15];
 
-stage.addChild(car1, car2, truck1, truck2, imgLane2[0], imgLane2[1], imgLane1[0],imgLane1[1], car4, car5, car6, car7, car8, car9, car10, car11, car12, car13, car14, car15);
+stage.addChild(car1, car2, truck1, truck2, imgLane2[0], imgLane2[1], imgLane1[0],imgLane1[1], car4, car5, car6, car7, car8, car9, car10, car11, car12, car13, car14, car15, froggerSafeGrass);
 
 stage.update();
 
