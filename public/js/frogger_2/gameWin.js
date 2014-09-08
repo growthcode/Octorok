@@ -1,16 +1,16 @@
-// var WinController = function(slotNumber) {
-//   this.slotNumber = slotNumber
-// }
+var WinController = function(frog, slotNumber) {
+  this.frog = frog
+  this.slotNumber = slotNumber
+}
 
-// WinController.prototype = {
-//   checkSlot: function()
-// }
-
-var checkWin = function() {
+WinController.prototype = {
+  checkWin: function() {
   // console.log('tick')
-  if(frog.x > columnWidth && frog.x < columnWidth*2 && frog.y <= rowHeight/2) {
-    console.log('you win')
+    if(this.frog.x > columnWidth && this.frog.x < columnWidth*2 && this.frog.y <= rowHeight/2) {
+      console.log('you win')
+    }
   }
 }
 
-createjs.Ticker.addEventListener('tick', checkWin)
+winController = new WinController(frog, 1)
+createjs.Ticker.addEventListener('tick', winController.checkWin)
