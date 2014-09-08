@@ -1,19 +1,21 @@
 Win = {}
 
-Win.Factory = function() {
+Win.Factory = function(character) {
+  this.character = character
   this.slots = [];
-  this.createSlots = function() {
-    for(var i = 1; i < 14; i += 3) {
+  this.createSlots = function(numberOfSlots) {
+    var limit = (numberOfSlots * 3) - 1;
+    for(var i = 1; i < limit; i += 3) {
       var slot = new Win.Slot((columnWidth*i), (columnWidth*(i+1)))
       this.slots.push(slot)
     }
   };
   this.createControllers = function() {
     for (var i in this.slots) {
-      var controller = new Win.Controller(frog, this.slots[i])
+      var controller = new Win.Controller(this.character, this.slots[i])
       createjs.Ticker.addEventListener('tick', controller.checkSlot)
     }
-  }.bind(this)
+  }
 }
 
 Win.Slot = function(leftBound, rightBound) {
@@ -22,20 +24,26 @@ Win.Slot = function(leftBound, rightBound) {
   this.active = false
 }
 
-Win.Controller = function(frog, slot) {
-  this.frog = frog
+Win.Controller = function(character, slot) {
+  this.character = character
   this.slot = slot
   this.checkSlot = function() {
-    if(this.frog.x > this.slot.leftBound && this.frog.x < this.slot.rightBound && this.frog.y <= rowHeight/2) {
-      this.slot.active = true
-      // removeSlot(slots, this.slot.id)
-      console.log('Inside Slot '+slot.active)
+    if (this.character.x > this.slot.leftBound && this.character.x < this.slot.rightBound && this.character.y <= rowHeight/2) {
+      if (this.slot.active === false) {
+        this.slot.active = true;
+        console.log('You Hit A Slot');
+      }
+      else if (this.slot.active === true) {
+        numOfFrogLives -= 1
+        console.log('Not Again, Dumbass')
+      }
+      resetFrogPosition();
     }
   }.bind(this)
 }
 
-factory = new Win.Factory();
-factory.createSlots();
+factory = new Win.Factory(frog);
+factory.createSlots(5);
 factory.createControllers();
 
 
