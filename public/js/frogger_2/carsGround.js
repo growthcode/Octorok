@@ -94,6 +94,102 @@ imagetruck2.scaleX = 0.25;
 imagetruck2.scaleY = 0.15;
 
 var imagebus2 = new createjs.Bitmap("http://www.clker.com/cliparts/6/2/7/e/w/Q/blue-bus-180-hi.png");
+
+
+//============== Lane 3 =====================
+
+
+var lane3Image1 = new createjs.Bitmap("");
+lane3Image1.x = carLane3StartXPos + (xDifference *1);
+lane3Image1.y = carLane3StartYPos;
+lane3Image1.scaleX = .1;
+lane3Image1.scaleY = .1;
+
+var lane3Image2 = new createjs.Bitmap("");
+lane3Image2.x = carLane3StartXPos + (xDifference * 2);
+lane3Image2.y = carLane3StartYPos;
+lane3Image2.scaleX = .1;
+lane3Image2.scaleY = .1;
+
+
+var lane3Image3 = new createjs.Bitmap("");
+lane3Image3.x = carLane3StartXPos + (xDifference * 3);
+lane3Image3.y = carLane3StartYPos;
+lane3Image3.scaleX = .1;
+lane3Image3.scaleY = .1;
+
+
+var lane3Image4 = new createjs.Bitmap("");
+lane3Image4.x = carLane3StartXPos + (xDifference * 4 );
+lane3Image4.y = carLane3StartYPos;
+lane3Image4.scaleX = .1;
+lane3Image4.scaleY = .1;
+
+
+
+//========================  Lane 4  ====
+//../assets/frogger_2/launch-d.png
+
+var lane4Image1 = new createjs.Bitmap("../assets/frogger_2/batttt_done.png");
+lane4Image1.x = carLane4StartXPos + (xDifference *1);
+lane4Image1.y = carLane4StartYPos;
+lane4Image1.scaleX = .2;
+lane4Image1.scaleY = .3;
+
+
+
+var lane4Image2 = new createjs.Bitmap("../assets/frogger_2/launch-d.png");
+lane4Image2.x = carLane4StartXPos + (xDifference * 2);
+lane4Image2.y = carLane4StartYPos;
+lane4Image2.scaleX = .1;
+lane4Image2.scaleY = .1;
+
+
+
+var lane4Image3 = new createjs.Bitmap("../assets/frogger_2/t72MainBattleTank.x3d._VP_top.png");
+lane4Image3.x = carLane4StartXPos + (xDifference * 3) - 40;
+lane4Image3.y = carLane4StartYPos;
+lane4Image3.scaleX = .25;
+lane4Image3.scaleY = .2;
+
+
+var lane4Image4 = new createjs.Bitmap("../assets/frogger_2/tank-GTA2.png");
+lane4Image4.x = carLane4StartXPos + (xDifference * 4) -10;
+lane4Image4.y = carLane4StartYPos;
+lane4Image4.scaleX = .35;
+lane4Image4.scaleY = .27;
+
+var lane5Image1 = new createjs.Bitmap("");
+lane5Image1.x = carLane4StartXPos + (xDifference *1);
+lane5Image1.y = carLane5StartYPos;
+lane5Image1.scaleX = .1;
+lane5Image1.scaleY = .1;
+
+var lane5Image2 = new createjs.Bitmap("../assets/frogger_2/toyota_i-road-580x282.png");
+lane5Image2.x = carLane4StartXPos + (xDifference *2) -7;
+lane5Image2.y = carLane5StartYPos - 10;
+lane5Image2.scaleX = .19;
+lane5Image2.scaleY = .18;
+
+
+
+
+var lane5Image3 = new createjs.Bitmap("");
+lane5Image3.x = carLane4StartXPos + (xDifference *3);
+lane5Image3.y = carLane5StartYPos;
+lane5Image3.scaleX = .1;
+lane5Image3.scaleY = .1;
+
+
+
+var lane5Image4 = new createjs.Bitmap("");
+lane5Image4.x = carLane4StartXPos + (xDifference *4);
+lane5Image4.y = carLane5StartYPos;
+lane5Image4.scaleX = .1;
+lane5Image4.scaleY = .1;
+
+
+
 imagebus2.x = 710;
 imagebus2.y = 440;
 imagebus2.scaleX = 0.3;
@@ -103,6 +199,9 @@ imagebus2.scaleY = 0.3;
 
 var imgLane1 = [imageCar1, imageTruck1, imageBus1];
 var imgLane2 = [imageCar2, imagetruck2, imagebus2];
+var imgLane3 = [lane3Image1, lane3Image2, lane3Image3, lane3Image4];
+var imgLane4 = [lane4Image1, lane4Image2, lane4Image3, lane4Image4];
+var imgLane5 = [lane5Image1, lane5Image2, lane5Image3, lane5Image4]
 
 var car1 = new createjs.Shape();
 car1.graphics.beginFill("white").drawRect(0, 0, carWidth, carHeight);
@@ -194,8 +293,10 @@ lane3 = [car4, car5, car6, car7];
 lane4 = [car8, car9, car10, car11];
 lane5 = [car12, car13, car14, car15];
 
+
+
 var vehicles = [car1,truck1,car2,truck2,car4,car5,car6,car7,car8,car9,car10,car11,car12,car13,car14,car15]
-stage.addChild(car1, car2, truck1, truck2, imgLane2[0], imgLane2[1], imgLane1[0],imgLane1[1], car4, car5, car6, car7, car8, car9, car10, car11, car12, car13, car14, car15, froggerSafeMedian, froggerStartRoad, froggerEndGrass);
+stage.addChild(car1, car2, truck1, truck2, imgLane2[0], imgLane2[1], imgLane1[0],imgLane1[1], car4, car5, car6, car7, car8, car9, car10, car11, car12, car13, car14, car15, lane3Image1, lane3Image2, lane3Image3, lane3Image4, lane4Image1, lane4Image2, lane4Image3, lane4Image4, lane5Image1, lane5Image2, lane5Image3, lane5Image4, froggerSafeMedian, froggerStartRoad, froggerEndGrass);
 stage.update();
 
 function tick(event) {
@@ -211,8 +312,24 @@ function tick(event) {
 
   for(var i in imgLane2){
     if (imgLane2[i].x < 0- 200) {imgLane2[i].x = 800}
-    imgLane2[i].x -= lane1Vel;
+    imgLane2[i].x -= lane1Vel
   }
+
+  for (var i in imgLane3){
+    if (imgLane3[i].x > stage.canvas.width + 450){imgLane3[i].x = -200}
+      imgLane3[i].x += lane1Vel
+  }
+
+  for (var i in imgLane4){
+    if (imgLane4[i].x < 0 -300){imgLane4[i].x = 800}
+      imgLane4[i].x -= lane1Vel
+  }
+
+   for (var i in imgLane5){
+    if (imgLane5[i].x > stage.canvas.width + 450){imgLane5[i].x = -200}
+      imgLane5[i].x += lane1Vel
+  }
+
 
   for (var i in lane2) {
     if (lane2[i].x < 0 - 200) { lane2[i].x = 800 }
@@ -233,6 +350,7 @@ function tick(event) {
     if (lane5[i].x > stage.canvas.width + 450){lane5[i].x = -200}
       lane5[i].x += lane1Vel
   }
+
 
   for (var i in logArray1) {
     if (logArray1[i].x > stage.canvas.width + 100) { logArray1[i].x = 0 }
