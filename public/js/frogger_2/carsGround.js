@@ -39,11 +39,11 @@ var imgLane1 = [];
 var imgLane2 = [];
 
 
-var froggerStartRoad = new createjs.Bitmap("../assets/frogger_2/road.jpg");
+var froggerStartRoad = new createjs.Bitmap("../assets/frogger_2/road.png");
 froggerStartRoad.x = frogStartRoadXPos;
 froggerStartRoad.y = frogStartRoadYPos - 50;
-froggerStartRoad.scaleX = 2.5;
-froggerStartRoad.scaleY = 1;
+froggerStartRoad.scaleX = .74;
+froggerStartRoad.scaleY = .3;
 
 var froggerSafeMedian = new createjs.Bitmap("../assets/frogger_2/divider.png");
 froggerSafeMedian.x = grassLane6XPos;
