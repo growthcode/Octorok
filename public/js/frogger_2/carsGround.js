@@ -33,8 +33,6 @@ var lane4 = [];
 var imgLane1 = [];
 var imgLane2 = [];
 
-
-
 var froggerSafeGrass = new createjs.Bitmap("http://www.colourbox.com/preview/3694639-208698-top-view-of-green-grass-andflowers-background.jpg");
 froggerSafeGrass.x = grassLane6XPos;
 froggerSafeGrass.y = grassLane6YPos - 50;
@@ -76,8 +74,6 @@ imagebus2.x = 710;
 imagebus2.y = 440;
 imagebus2.scaleX = 0.3;
 imagebus2.scaleY = 0.3;
-
-
 
 var imgLane1 = [imageCar1, imageTruck1, imageBus1];
 var imgLane2 = [imageCar2, imagetruck2, imagebus2];
@@ -141,10 +137,6 @@ var car11 = new createjs.Shape();
 car11.graphics.beginFill("black").drawRect(0, 0, carWidth, carHeight);
 car11.x = carLane4StartXPos + (xDifference * 4 );
 car11.y = carLane4StartYPos;
-
-
-
-
 
 var car12 = new createjs.Shape();
 car12.graphics.beginFill("red").drawRect(0, 0, carWidth, carHeight);
@@ -212,14 +204,14 @@ function tick(event) {
       lane5[i].x += lane1Vel
   }
 
-  for (var i in logArray1) {
-    if (logArray1[i].x > stage.canvas.width + 100) { logArray1[i].x = 0 }
-    logArray1[i].x += logLane1Vel
-  }
-  for (var i in logArray2) {
-    if (logArray2[i].x < 0 - 100) { logArray2[i].x = 800 }
-    logArray2[i].x -= logLane2Vel
-  }
+  // for (var i in logArray1) {
+  //   if (logArray1[i].x > stage.canvas.width + 100) { logArray1[i].x = 0 }
+  //   logArray1[i].x += logLane1Vel
+  // }
+  // for (var i in logArray2) {
+  //   if (logArray2[i].x < 0 - 100) { logArray2[i].x = 800 }
+  //   logArray2[i].x -= logLane2Vel
+  // }
 
   stage.update();
 }
