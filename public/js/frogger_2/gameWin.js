@@ -22,6 +22,7 @@ Win.Factory = function(character) {
     })
     if (activeSlots.length === this.slots.length) {
       console.log('YOU WIN!')
+      createjs.Ticker.removeEventListener('tick', factory.checkAllSlots)
     }
   }.bind(this);
 }
@@ -39,11 +40,11 @@ Win.Controller = function(character, slot) {
     if (this.character.x > this.slot.leftBound && this.character.x < this.slot.rightBound && this.character.y <= rowHeight/2) {
       if (this.slot.active === false) {
         this.slot.active = true;
-        console.log('You Hit A Slot');
+        console.log('You Hit A Slot!');
       }
       else if (this.slot.active === true) {
         numOfFrogLives -= 1
-        console.log('Not Again, Dumbass')
+        console.log('You Already Hit This Slot...')
       }
       resetFrogPosition();
     }
@@ -55,9 +56,3 @@ factory.createSlots(5);
 factory.createControllers();
 createjs.Ticker.addEventListener('tick', factory.checkAllSlots)
 
-// var checkAllSlots = function(slotArray) {
-//   activeSlots = $.grep(slotArray, function(slot){
-//     return slot.active === true;
-//   })
-//   return activeSlots.length
-// }
