@@ -21,39 +21,38 @@ var CollisionDetector = function(object1, object2) {
   }
 }
 
-var bulletPlayerDetection = function (){
-  var bulletBodyDetection=[]
-  bulletCount = bulletArray.length
-  playerCount = playerArray.length
-    for (var i = 0; i<bulletCount; i++){
-      for (var x = 0; x<playerCount; x++){
-      new CollisionDetector(bulletArray[i], playerArray[x]).bulletPlayerCollision()
+var Controller = function() {
+  this.bulletPlayerDetection = function (){
+    var bulletBodyDetection=[]
+    bulletCount = bulletArray.length
+    playerCount = playerArray.length
+      for (var i = 0; i < bulletCount; i++){
+        for (var x = 0; x < playerCount; x++){
+        new CollisionDetector(bulletArray[i], playerArray[x]).bulletPlayerCollision()
+      }
     }
   }
-}
-
-var injurePlayer = function(player, damage) {
-  console.log(damage + "taken off");
-  player.hp -= damage;
-}
-
-var checkIfPlayerAlive = function(player) {
-  if (player.hp <= 0) {
-    killPlayer(player);
-  } else {
-    console.log("he's alive!");
+  this.injurePlayer = function(player, damage) {
+    console.log(damage + "taken off");
+    player.hp -= damage;
+  }
+  this.checkIfPlayerAlive = function(player) {
+    if (player.hp <= 0) {
+      killPlayer(player);
+    } else {
+      console.log("he's alive!");
+    }
+  }
+  this.killPlayer = function(player) {
+    var playerIndex = stage.children.indexOf(player.shape);
+    player.radius=0;
+    stage.removeChildAt(playerIndex);
+    player.alive = false;
+    delete player;
+    console.log(player.name + " was removed from canvas");
   }
 }
 
-var killPlayer = function(player) {
-  var playerIndex = stage.children.indexOf(player.shape);
-  player.radius=0;
-  stage.removeChildAt(playerIndex);
-  player.alive = false;
-  delete player;
-  console.log(player.name + " was removed from canvas");
-}
+var gameController = new Controller();
 
-createjs.Ticker.addEventListener('tick', bulletPlayerDetection);
-
-
+createjs.Ticker.addEventListener('tick', gameController.bulletPlayerDetection);
