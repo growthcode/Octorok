@@ -16,4 +16,12 @@ describe("Dodge Ian Game", function() {
       expect(stage.update).toHaveBeenCalled();
     });
   });
+  
+  describe("Controller", function() {
+    it("findDistance function returns the correct distance between objects", function() {
+      var object1 = new Player("player", 100, 100, 10);
+      var object2 = new Bullet(100, 200);
+      expect(new CollisionDetector(object1, object2)._findDistance()).toEqual(100);
+    });
+  });
 });

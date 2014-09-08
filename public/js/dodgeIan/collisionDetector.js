@@ -9,7 +9,6 @@ var CollisionDetector = function(object1, object2) {
    return distance;
   }
   this.bulletPlayerCollision = function() {
-
     if (object1.alive) {
       if (that._findDistance() < (object1.radius + object2.radius)) {
         console.log("hit!!! ouch")
