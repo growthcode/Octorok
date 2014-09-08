@@ -106,7 +106,7 @@ var checkJumpInWater = function(){
 
 var checkWaterCollisions = function(){
   if(checkJumpInWater()){
-    console.log("water line crossed")
+    // console.log("water line crossed")
     // resetFrogPosition()
   }
   stage.update();

@@ -9,6 +9,7 @@ var stage = new createjs.Stage('game-canvas');
 var borderWidth=stage.canvas.width;
 var borderHeight=stage.canvas.height;
 var rowHeight = stage.canvas.height/13
+var columnWidth = stage.canvas.width/15
 
 var numOfFrogLives = 3;
 

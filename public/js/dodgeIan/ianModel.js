@@ -17,16 +17,16 @@ var Ian = function() {
     that.shape.x += that.dx;
     stage.update();
   }
-  var fireBullet = function(){
+  this.fireBullet = function(){
     var bullet = new Bullet(that.shape.x, that.shape.y, Math.random() * 20 - 10 , Math.random() * - 10 - 2);
     bulletArray.push(bullet);
     stage.addChild(bullet.shape);
-    setInterval(bullet.move,30);
+    setInterval(bullet.move, 30);
     stage.update();
     console.log("count of Bullets");
   }
   this.shoot = function() {
-    setInterval(fireBullet, 1000);
+    setInterval(that.fireBullet, 1000);
   }
 }
 
@@ -36,4 +36,3 @@ stage.update();
 
 createjs.Ticker.addEventListener('tick', bossIan.move);
 bossIan.shoot();
-
