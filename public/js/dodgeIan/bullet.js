@@ -1,11 +1,19 @@
-var BULLETMINSIZE=6;
-var Bullet = function (posX, posY, dx, dy) {
-  this.radius = Math.random() * 10+BULLETMINSIZE;
-  this.damage = this.radius * 2;
+var BULLET_MIN_SIZE = 6,
+    DAMAGE_MULTIPLIER = 2,
+    BULLET_COLOR = "green",
+    BULLET_RELATIVE_ORIGIN_X = 0, // should not change
+    BULLET_RELATIVE_ORIGIN_Y = 0; // should not change
+
+
+
+
+var Bullet = function (positionX, positionY, dx, dy) {
+  this.radius = Math.random() * 10 + BULLET_MIN_SIZE;
+  this.damage = this.radius * DAMAGE_MULTIPLIER;
   this.shape = new createjs.Shape();
-  this.shape.graphics.beginFill("green").drawCircle(0, 0, this.radius);
-  this.shape.x = posX;
-  this.shape.y = posY;
+  this.shape.graphics.beginFill(BULLET_COLOR).drawCircle(BULLET_RELATIVE_ORIGIN_X, BULLET_RELATIVE_ORIGIN_Y, this.radius);
+  this.shape.x = positionX;
+  this.shape.y = positionY;
   this.dx = dx;
   this.dy = dy;
   this.alive = true;
