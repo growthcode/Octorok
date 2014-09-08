@@ -25,10 +25,10 @@ for(var xLogPosition = 0; xLogPosition <200; xLogPosition ++){
 }
 
 function preload() {
-  game.load.image('car', '../assets/car.png');
-  game.load.image('log', '../assets/log.png');
-  game.load.image('water', '../assets/water.jpg');
-  game.load.image('frog', '../assets/frog.png');
+  game.load.image('car', '../assets/frogger_1/car.png');
+  game.load.image('log', '../assets/frogger_1/log.png');
+  game.load.image('water', '../assets/frogger_1/water.jpg');
+  game.load.image('frog', '../assets/frogger_1/frog.png');
 }
 
 
