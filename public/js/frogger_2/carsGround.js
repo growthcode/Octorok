@@ -12,6 +12,8 @@ carLane3StartXPos= 0;
 carLane3StartYPos=borderHeight - rowHeight * 4 + (canvas.height/120);
 carLane4StartXPos= 0;
 carLane4StartYPos=borderHeight - rowHeight * 5 + (canvas.height/120);
+carLane5StartXPos= 0;
+carLane5StartYPos=borderHeight - rowHeight * 6 + (canvas.height/120);
 truck1StartXPos=400;
 truck1StartYPos=borderHeight - rowHeight * 2 + (canvas.height/120);
 truck2StartXPos=400;
@@ -31,7 +33,11 @@ var imgLane2 = [];
 
 
 
-
+var froggerSafeGrass = new createjs.Bitmap("");
+froggerSafeGrass.x = car1StartXPos - 10;
+froggerSafeGrass.y = car1StartYPos -10;
+froggerSafeGrass.scaleX = 0.12;
+froggerSafeGrass.scaleY = 0.12;
 
 var imageCar1 = new createjs.Bitmap("http://www.dundjinni.com/forums/uploads/lingster/817_NYS-impala.png");
 imageCar1.x = car1StartXPos - 10;
@@ -134,12 +140,37 @@ car11.graphics.beginFill("black").drawRect(0, 0, carWidth, carHeight);
 car11.x = carLane4StartXPos + (xDifference * 4 );
 car11.y = carLane4StartYPos;
 
+
+
+
+
+var car12 = new createjs.Shape();
+car12.graphics.beginFill("red").drawRect(0, 0, carWidth, carHeight);
+car12.x = carLane4StartXPos + (xDifference *1);
+car12.y = carLane5StartYPos;
+
+var car13 = new createjs.Shape();
+car13.graphics.beginFill("blue").drawRect(0, 0, carWidth, carHeight);
+car13.x = carLane4StartXPos + (xDifference * 2);
+car13.y = carLane5StartYPos;
+
+var car14 = new createjs.Shape();
+car14.graphics.beginFill("green").drawRect(0, 0, carWidth, carHeight);
+car14.x = carLane4StartXPos + (xDifference * 3);
+car14.y = carLane5StartYPos;
+
+var car15 = new createjs.Shape();
+car15.graphics.beginFill("black").drawRect(0, 0, carWidth, carHeight);
+car15.x = carLane4StartXPos + (xDifference * 4 );
+car15.y = carLane5StartYPos;
+
 lane1.push(car1, truck1);
 lane2.push(car2, truck2);
 lane3 = [car4, car5, car6, car7];
 lane4 = [car8, car9, car10, car11];
+lane5 = [car12, car13, car14, car15];
 
-stage.addChild(car1, car2, truck1, truck2, imgLane2[0], imgLane2[1], imgLane1[0],imgLane1[1], car4, car5, car6, car7, car8, car9, car10, car11);
+stage.addChild(car1, car2, truck1, truck2, imgLane2[0], imgLane2[1], imgLane1[0],imgLane1[1], car4, car5, car6, car7, car8, car9, car10, car11, car12, car13, car14, car15);
 
 stage.update();
 
@@ -172,6 +203,11 @@ function tick(event) {
   for (var i in lane4){
     if (lane4[i].x < 0 - 300) { lane4[i].x = 800}
       lane4[i].x -= lane2Vel
+  }
+
+  for (var i in lane5){
+    if (lane5[i].x > stage.canvas.width + 450){lane5[i].x = -200}
+      lane5[i].x += lane1Vel
   }
 
   for (var i in logArray1) {
