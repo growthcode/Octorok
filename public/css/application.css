@@ -1,7 +1,6 @@
 body{
   position: relative;
   background: url(/assets/homepage/use_your_illusion.png);
-  background-color: #DBBB84 !important;
   width: 80%;
   margin: auto;
   min-height: 100%;
@@ -12,5 +11,17 @@ body{
 }
 
 .jumbotron{
-  text-align: center
+  margin-top: 2em;
+  padding-top: 2em;
+  text-align: center;
+}
+
+.center_text{
+  text-align: center;
+}
+
+.game_description{
+  border: 1px solid black;
+  padding:1em;
+  background-color: #BABABA;
 }
