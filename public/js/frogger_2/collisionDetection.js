@@ -34,18 +34,18 @@ var keepFrogInBounds = function() {
 }
 
 var checkVehicleCollision = function(vehicle) {
-  var distX = Math.abs(frog.x - (vehicle.x+vehicle.width/2));
-  var distY = Math.abs(frog.y - (vehicle.y+vehicle.height/2));
+  var distX = Math.abs(frog.x - (vehicle.x + vehicle.width/2));
+  var distY = Math.abs(frog.y - (vehicle.y + vehicle.height/2));
 
-  if (distX > (vehicle.width/2 + frog.radius)) { return false; }
-  if (distY > (vehicle.height/2 + frog.radius)) { return false; }
+  if (distX > (vehicle.width / 2 + frog.radius)) { return false; }
+  if (distY > (vehicle.height / 2 + frog.radius)) { return false; }
 
-  if (distX <= (vehicle.width/2)) { return true; }
-  if (distY <= (vehicle.height/2)) { return true; }
+  if (distX <= (vehicle.width / 2)) { return true; }
+  if (distY <= (vehicle.height / 2)) { return true; }
 
-  var dx=distX-vehicle.width/2;
-  var dy=distY-vehicle.height/2;
-  return (dx*dx+dy*dy<=(frog.radius*frog.radius));
+  var dx = distX - vehicle.width / 2;
+  var dy = distY - vehicle.height / 2;
+  return (dx * dx + dy * dy <= (frog.radius * frog.radius));
 }
 
 var checkAllVehicleCollisions = function() {
