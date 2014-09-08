@@ -4,6 +4,7 @@ Win.Slot = function(id, leftBound, rightBound) {
   this.id = id
   this.leftBound = leftBound;
   this.rightBound = rightBound;
+  this.active = false
 }
 
 Win.Controller = function(frog, slot) {
