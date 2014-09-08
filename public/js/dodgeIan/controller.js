@@ -1,5 +1,4 @@
-//CollisionDetector is valid for object with radiuses: bullets, players, boss(es)
-var CollisionDetector = function(object1, object2) {
+var Controller = function(object1, object2) {
   var that = this;
   this._findDistance = function() {
     var distance = Math.sqrt(
@@ -8,27 +7,24 @@ var CollisionDetector = function(object1, object2) {
     );
    return distance;
   }
-  this.bulletPlayerCollision = function() {
+  this.checkForCollision = function() {
     if (object1.alive) {
       if (that._findDistance() < (object1.radius + object2.radius)) {
         console.log("hit!!! ouch")
-        injurePlayer(object2, object1.damage);
+        that.injurePlayer(object2, object1.damage);
         destroyBullet(object1);
-        checkIfPlayerAlive(object2);
+        that.checkIfPlayerAlive(object2);
         return true;
       }
     }
   }
-}
-
-var Controller = function() {
-  this.bulletPlayerDetection = function (){
+  this.collisionScanner = function() {
     var bulletBodyDetection=[]
     bulletCount = bulletArray.length
     playerCount = playerArray.length
       for (var i = 0; i < bulletCount; i++){
         for (var x = 0; x < playerCount; x++){
-        new CollisionDetector(bulletArray[i], playerArray[x]).bulletPlayerCollision()
+        new Controller(bulletArray[i], playerArray[x]).checkForCollision()
       }
     }
   }
@@ -45,7 +41,7 @@ var Controller = function() {
   }
   this.killPlayer = function(player) {
     var playerIndex = stage.children.indexOf(player.shape);
-    player.radius=0;
+    player.radius = 0;
     stage.removeChildAt(playerIndex);
     player.alive = false;
     delete player;
@@ -55,4 +51,4 @@ var Controller = function() {
 
 var gameController = new Controller();
 
-createjs.Ticker.addEventListener('tick', gameController.bulletPlayerDetection);
+createjs.Ticker.addEventListener('tick', gameController.collisionScanner);

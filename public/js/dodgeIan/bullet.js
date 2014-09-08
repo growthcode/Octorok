@@ -30,7 +30,6 @@ var fireBullet = function() {
   console.log('fire');
 }
 
-
 stage.addChild(bullet1.shape);
 stage.update();
 setInterval(bullet1.move, 30)
