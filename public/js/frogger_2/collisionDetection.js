@@ -57,19 +57,9 @@ var checkAllVehicleCollisions = function() {
 
 // put this inside checkAllVehicleCollisions
 var check = function () {
-  var values = []
-  var falseValues = []
-  $(vehicles).each(function(i){
-  if(checkVehicleCollision(vehicles[i]) === false)
-    values.push(i)
-  })
-  return values.length > 0
-  // $.grep(values, function(value) {
-  //   if(value === true) {
-  //     falseValues.push(value)
-  //   }
-  // })
-  // return falseValues.length > 0
+ return $.grep(vehicles, function(value) {
+    return checkVehicleCollision(value) === true
+  }).length > 0
 }
 
 var checkLogCollision = function(log) {
