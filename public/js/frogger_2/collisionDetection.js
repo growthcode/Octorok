@@ -108,6 +108,7 @@ var checkWaterCollisions = function(){
   if(checkJumpInWater()){
     // console.log("water line crossed")
     // resetFrogPosition()
+    // numOfFrogLives -= 1
   }
   stage.update();
 }
