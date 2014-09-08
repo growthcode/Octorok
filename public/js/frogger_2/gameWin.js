@@ -1,7 +1,7 @@
 Win = {}
 
 Win.Factory = function(character) {
-  this.character = character
+  this.character = character;
   this.slots = [];
   this.createSlots = function(numberOfSlots) {
     var limit = (numberOfSlots * 3) - 1;
@@ -15,7 +15,15 @@ Win.Factory = function(character) {
       var controller = new Win.Controller(this.character, this.slots[i])
       createjs.Ticker.addEventListener('tick', controller.checkSlot)
     }
-  }
+  };
+  this.checkAllSlots = function() {
+    activeSlots = $.grep(this.slots, function(slot){
+      return slot.active === true;
+    })
+    if (activeSlots.length === this.slots.length) {
+      console.log('YOU WIN!')
+    }
+  }.bind(this);
 }
 
 Win.Slot = function(leftBound, rightBound) {
@@ -45,10 +53,11 @@ Win.Controller = function(character, slot) {
 factory = new Win.Factory(frog);
 factory.createSlots(5);
 factory.createControllers();
+createjs.Ticker.addEventListener('tick', factory.checkAllSlots)
 
-var checkAllSlots = function(slotArray) {
-  activeSlots = $.grep(slotArray, function(slot){
-    return slot.active === true;
-  })
-  return activeSlots.length
-}
+// var checkAllSlots = function(slotArray) {
+//   activeSlots = $.grep(slotArray, function(slot){
+//     return slot.active === true;
+//   })
+//   return activeSlots.length
+// }
