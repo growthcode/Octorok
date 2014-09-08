@@ -1,0 +1,127 @@
+Octorock Monday 09-07-14 Refactor Code:
+
+$$ Time box this assignment in morning stand up.  We want to refactor but we don't want to lose our focus.
+-----Maybe just do 1 and 2, MONDAY and do the rest on all future games.
+
+
+Steps to refactor:
+
+(1) Pull out all the CONSTANTS and default assignments and define them at the top.
+  - Define all the constants and default variables in CAPITAL LETTERS at the top of each JavaScript Sheet.
+  - Leave them at the top of each JavaScript file defined. The person who will create the "constant.js" file will consolidate them.
+
+
+
+(2) Create the constants page. Then make it DRY.
+  -Come back to make it even DRY'er after you have done the rest of the steps.  You should be able to consolidate and simplify a lot of information after.
+
+=====================================================
+
+
+$$ -In morning standup decide where the following information will go?
+  --- In "application.js" file? A new "game.js" file?
+
+
+
+//------------
+//System Vars
+//------------
+(3) Setup "System Variables"
+  -Set the "Stage", use the "CONSTANTS_VARIABLE" sheet
+  ---ht, wt, stageCommand, font, fillStyle
+  -Set Game State to: "GAMESTATE_PRELOAD"
+  $$$ First GAME_STATE is set here.
+
+
+//---------------
+//Preloading ...
+//---------------
+(4) Prepare the PRELOADING state of the game.
+  -Preload Art Assets
+    ---"obj.ready" property set equal to "false"
+    ---"obj.onload" and set equal to "setAssetReady" function
+    ---"obj.src" = PATH_OBJ
+    --- Create "function setAssetReady"
+  -Display Preloading
+    ---Use the constants!
+  -Create Preloading function
+
+
+//------------
+//Game Vars
+//------------
+(5) Declare named variables.
+  -Use "var nameOne, nameTwo, nameThree"
+  -For each group of related variables, do a seperate line of "var"
+
+(6) CREATING THE VIEW:
+  $$$Create "function initGame(){...}"
+    ---Setup the environment here, but WITHOUT functions being declared.
+    ---Functions will be declared elsewhere.
+  -Set all the variables equal to their CONSTANT, found in the constant.js file.
+  -Declare and initialize all the iterators
+  -Declare all the objects in the game, i.e. models
+    ---Create constructor functions for objects and be sure to have any variable that uses a constant in the PROTOTYPE.
+  ---Sidenote, we can do a standup and decide if we want to declare our constructor functions elsewhere so that there will be a more official "Model" for MVC.
+  $---THE ONLY KIND OF FUNCTION YOU SHOULD DECLARE/DEFINE IN THE GAME VARS IS:
+      ---One's relating to the VIEW
+      ---"joystick" code doing non-game type of actions, but view related... or "Pause" button
+      ---mouseClick offscreen.
+      ---Even this is debatable... we could discuss it in a standup.
+
+
+
+//------------
+//Game Loop - i.e. CONTROLLER!!
+//------------
+(7) Game Loop is like a "controller"
+  -The Game LOOP... "controls" the state of the entire game.
+  -"function update(){...}""
+    ---Inside here is a simple "if...else if... else if..."syntax that continuously checks the current state of the game.
+    ---Methods are ONLY invoked in this functionLoop. I.E.There are NO methods defined/declared in here.
+    ---Inside each if{block} there is methods that are run like:
+          if (gameState == GAMESTATE_GAMEPLAY)
+          {
+            updateUserInput();
+            updateGame();
+            updateDraw();
+          }
+          else if (gameState == GAMESTATE_MENU)
+          {
+            updateMenuUserInput();
+            updateMenuDraw();
+          }
+          else if (gameState == GAMESTATE_RESULTS)
+          {
+            updateResultsUserInput();
+            updateResultsDraw();
+          }......
+
+
+(8) Define Game state functions.
+  -Define them on the same scope as GAME LOOP... the global scope.
+  -DEFINE the gameState Functions immediately after the GAME LOOP, examples:
+          updateUserInput();
+          updateGame();
+          updateDraw();
+          updateMenuUserInput();
+          updateMenuDraw();
+          updateResultsUserInput();
+          updateResultsDraw();
+
+  -These are usually defined with a large if...else conditional and scoped methods.
+  -Everything that happens and is defined in here is how the environment reacts to user input...$$$ i.e. a controller $$$
+  -Every function defined in here is a REACTION to the User's choices and actions.
+    -some directly like making a mistake and losing a life.
+    -some indirectly like getting a high score and computer needing to update the high score page.
+  -SINGLE RESPONSIBILITY WHEN DECLARING/DEFINING/CREATING METHODS!!!!
+  -DO NOT CREATE A FUNCTION WITHIN A FUNCTION!!!
+
+
+
+
+AND THAT'S IT!!!
+BEAUTIFUL CODE that is OOP and MVC.
+
+
+
