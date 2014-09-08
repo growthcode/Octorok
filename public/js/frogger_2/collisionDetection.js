@@ -10,15 +10,30 @@ truck1['width'] = truckWidth
 truck1['height'] = truckHeight
 truck2['width'] = truckWidth
 truck2['height'] = truckHeight
-
-// log1['width'] = logWidth
-// log1['height'] = logHeight
-// log2['width'] = logWidth
-// log2['height'] = logHeight
-// longLog1['width'] = longLogWidth
-// longLog1['height'] = longLogHeight
-// longLog2['width'] = longLogWidth
-// longLog2['height'] = longLogHeight
+car4['width'] = carWidth
+car4['height'] = carHeight
+car5['width'] = carWidth
+car5['height'] = carHeight
+car6['width'] = carWidth
+car6['height'] = carHeight
+car7['width'] = carWidth
+car7['height'] = carHeight
+car8['width'] = carWidth
+car8['height'] = carHeight
+car9['width'] = carWidth
+car9['height'] = carHeight
+car10['width'] = carWidth
+car10['height'] = carHeight
+car11['width'] = carWidth
+car11['height'] = carHeight
+car12['width'] = carWidth
+car12['height'] = carHeight
+car13['width'] = carWidth
+car13['height'] = carHeight
+car14['width'] = carWidth
+car14['height'] = carHeight
+car15['width'] = carWidth
+car15['height'] = carHeight
 
 var resetFrogPosition = function() {
   frog.x = frogXStart
@@ -48,71 +63,81 @@ var checkVehicleCollision = function(vehicle) {
   return (dx * dx + dy * dy <= (frog.radius * frog.radius));
 }
 
-var checkAllVehicleCollisions = function() {
-  if(checkVehicleCollision(car1) || checkVehicleCollision(car2) || checkVehicleCollision(truck1) || checkVehicleCollision(truck2)) {
+var checkAllVehicleCollisions = function () {
+ return $.grep(vehicles, function(value) {
+    return checkVehicleCollision(value) === true
+  }).length > 0
+}
+
+var killFrogIfHitByVehicle = function() {
+  if(checkAllVehicleCollisions()) {
     resetFrogPosition();
     numOfFrogLives -= 1;
   }
 }
 
-// var checkLogCollision = function(log) {
-//   var distX = Math.abs(frog.x - (log.x+log.width/2));
-//   var distY = Math.abs(frog.y - (log.y+log.height/2));
-
-//   if (distX > (log.width/4 + frog.radius)) { return false; }
-//   if (distY > (log.height/4 + frog.radius)) { return false; }
-
-//   if (distX <= (log.width/4) && distY <= (log.height/4)) {
-//     return true;
-//   }
-// }
-
-// var checkAllLogCollisions = function() {
-//   if(checkLogCollision(log1) || checkLogCollision(longLog1)) {
-//     frog.x += logLane1Vel;
-//   }
-//   if(checkLogCollision(log2) || checkLogCollision(longLog2)) {
-//     frog.x -= logLane2Vel;
-//   }
-//   stage.update();
-// }
-
-// var checkWaterLogCollision = function(log) {
-//   var distX = Math.abs(frog.x - (log.x+log.width/2));
-//   var distY = Math.abs(frog.y - (log.y+log.height/2));
-
-//   if (distX > (log.width/2.5 + frog.radius)) { return false; }
-//   if (distY > (log.height/3 + frog.radius)) { return false; }
-
-//   if (distX <= (log.width) && distY <= log.height) {
-//     return true;
-//   }
-// }
-
-// var checkAllWaterLogCollisions = function() {
-//   if(checkWaterLogCollision(log1) || checkWaterLogCollision(longLog1)) {
-//     return true;
-//   }
-//   if(checkWaterLogCollision(log2) || checkWaterLogCollision(longLog2)) {
-//     return true;
-//   }
-// }
-
-// var checkJumpInWater = function(){
-//   if ((frog.y < waterYLine) && !(checkAllWaterLogCollisions())){
-//       return true
-//  }
-// }
-
-// var checkWaterCollisions = function(){
-//   if(checkJumpInWater()){
-//     // console.log("water line crossed")
-//     // resetFrogPosition()
-//   }
-//   stage.update();
-// }
-
 createjs.Ticker.addEventListener('tick', checkAllVehicleCollisions);
-// createjs.Ticker.addEventListener('tick', checkAllLogCollisions);
+createjs.Ticker.addEventListener('tick', checkAllLogCollisions);
+
+var checkLogCollision = function(log) {
+  var distX = Math.abs(frog.x - (log.x+log.width/2));
+  var distY = Math.abs(frog.y - (log.y+log.height/2));
+
+  if (distX > (log.width/4 + frog.radius)) { return false; }
+  if (distY > (log.height/4 + frog.radius)) { return false; }
+
+  if (distX <= (log.width/4) && distY <= (log.height/4)) {
+    return true;
+  }
+}
+
+var checkAllLogCollisions = function() {
+  if(checkLogCollision(log1) || checkLogCollision(longLog1)) {
+    frog.x += logLane1Vel;
+  }
+  if(checkLogCollision(log2) || checkLogCollision(longLog2)) {
+    frog.x -= logLane2Vel;
+  }
+  stage.update();
+}
+
+var checkWaterLogCollision = function(log) {
+  var distX = Math.abs(frog.x - (log.x+log.width/2));
+  var distY = Math.abs(frog.y - (log.y+log.height/2));
+
+  if (distX > (log.width/2.5 + frog.radius)) { return false; }
+  if (distY > (log.height/3 + frog.radius)) { return false; }
+
+  if (distX <= (log.width) && distY <= log.height) {
+    return true;
+  }
+}
+
+var checkAllWaterLogCollisions = function() {
+  if(checkWaterLogCollision(log1) || checkWaterLogCollision(longLog1)) {
+    return true;
+  }
+  if(checkWaterLogCollision(log2) || checkWaterLogCollision(longLog2)) {
+    return true;
+  }
+}
+
+var checkJumpInWater = function(){
+  if ((frog.y < waterYLine) && !(checkAllWaterLogCollisions())){
+      return true
+ }
+}
+
+var checkWaterCollisions = function(){
+  if(checkJumpInWater()){
+    console.log("water line crossed")
+    resetFrogPosition()
+    numOfFrogLives -= 1
+  }
+  stage.update();
+}
+
+createjs.Ticker.addEventListener('tick', killFrogIfHitByVehicle);
+createjs.Ticker.addEventListener('tick', checkAllLogCollisions);
 createjs.Ticker.addEventListener('tick', keepFrogInBounds);
-// createjs.Ticker.addEventListener('tick', checkWaterCollisions);
+createjs.Ticker.addEventListener('tick', checkWaterCollisions);
