@@ -1,6 +1,7 @@
 body{
   position: relative;
-  background-color: #DBBB84;
+  background: url(/assets/homepage/black_denim.png);
+  background-color: #DBBB84 !important;
   width: 80%;
   margin: auto;
   min-height: 100%;
