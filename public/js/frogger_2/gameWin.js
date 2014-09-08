@@ -46,16 +46,9 @@ factory = new Win.Factory(frog);
 factory.createSlots(5);
 factory.createControllers();
 
-
-var findSlotById = function(array, slotId) {
-  slot = $.grep(array, function(slot){
-    return slot.id === slotId;
+var checkAllSlots = function(slotArray) {
+  activeSlots = $.grep(slotArray, function(slot){
+    return slot.active === true;
   })
-  return slot
-};
-
-var removeSlot = function(array, slotId) {
-  // slot = findSlotById(array, slotId)
-  var index = array.indexOf(slotId)
-  array.splice(index, 1)
+  return activeSlots.length
 }
