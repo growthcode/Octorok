@@ -1,45 +1,47 @@
-var Controller = function(object1, object2) {
+var Controller = function(player, bullet) {
+  this.player = player;
+  this.bullet = bullet;
   var that = this;
   this._findDistance = function() {
     var distance = Math.sqrt(
-    ((object1.shape.x - object2.shape.x) * (object1.shape.x - object2.shape.x))
-    + ((object1.shape.y - object2.shape.y) * (object1.shape.y - object2.shape.y))
+    ((that.bullet.shape.x - player.shape.x) * (that.bullet.shape.x - player.shape.x))
+    + ((that.bullet.shape.y - player.shape.y) * (that.bullet.shape.y - player.shape.y))
     );
    return distance;
   }
   this.checkForCollision = function() {
-    if (object1.alive) {
-      if (that._findDistance() < (object1.radius + object2.radius)) {
+    if (that.bullet.alive) {
+      if (that._findDistance() < (that.bullet.radius + player.radius)) {
         console.log("hit!!! ouch")
-        that.injurePlayer(object2, object1.damage);
-        destroyBullet(object1);
-        that.checkIfPlayerAlive(object2);
+        that._injurePlayer(that.player, that.bullet.damage);
+        destroyBullet(that.bullet);
+        that._checkIfPlayerAlive(player);
         return true;
       }
     }
   }
   this.collisionScanner = function() {
-    var bulletBodyDetection=[]
-    bulletCount = bulletArray.length
-    playerCount = playerArray.length
-      for (var i = 0; i < bulletCount; i++){
-        for (var x = 0; x < playerCount; x++){
-        new Controller(bulletArray[i], playerArray[x]).checkForCollision()
+    var bulletBodyDetection = [];
+    bulletCount = bulletArray.length;
+    playerCount = playerArray.length;
+    for (var i = 0; i < bulletCount; i++) {
+      for (var x = 0; x < playerCount; x++) {
+        new Controller(bulletArray[i], playerArray[x]).checkForCollision();
       }
     }
   }
-  this.injurePlayer = function(player, damage) {
+  this._injurePlayer = function(player, damage) {
     console.log(damage + "taken off");
     player.hp -= damage;
   }
-  this.checkIfPlayerAlive = function(player) {
+  this._checkIfPlayerAlive = function(player) {
     if (player.hp <= 0) {
-      killPlayer(player);
+      that._killPlayer(player);
     } else {
       console.log("he's alive!");
     }
   }
-  this.killPlayer = function(player) {
+  this._killPlayer = function(player) {
     var playerIndex = stage.children.indexOf(player.shape);
     player.radius = 0;
     stage.removeChildAt(playerIndex);
