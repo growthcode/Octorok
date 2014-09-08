@@ -4,6 +4,8 @@ var truckWidth=180;
 var truckHeight=rowHeight - (canvas.height/60);
 
 xDifference = 300;
+frogStartRoadXPos=0;
+frogStartRoadYPos=borderHeight - rowHeight * 0 + (canvas.height/120);
 car1StartXPos=100;
 car1StartYPos=borderHeight - rowHeight * 2 + (canvas.height/120);
 car2StartXPos=100;
@@ -20,6 +22,9 @@ truck1StartXPos=400;
 truck1StartYPos=borderHeight - rowHeight * 2 + (canvas.height/120);
 truck2StartXPos=400;
 truck2StartYPos=borderHeight - rowHeight * 3 + (canvas.height/120);
+frogEndGrassXPos=0
+frogEndGrassYPos=borderHeight - rowHeight * 13 + (canvas.height/120);
+
 
 var lane1Vel=10;
 var lane2Vel=10;
@@ -34,6 +39,23 @@ var imgLane1 = [];
 var imgLane2 = [];
 
 
+var froggerStartRoad = new createjs.Bitmap("../assets/frogger_2/road.jpg");
+froggerStartRoad.x = frogStartRoadXPos;
+froggerStartRoad.y = frogStartRoadYPos - 50;
+froggerStartRoad.scaleX = 2.5;
+froggerStartRoad.scaleY = 1;
+
+var froggerSafeMedian = new createjs.Bitmap("../assets/frogger_2/divider.jpg");
+froggerSafeMedian.x = grassLane6XPos;
+froggerSafeMedian.y = grassLane6YPos - 50;
+froggerSafeMedian.scaleX = 2.5;
+froggerSafeMedian.scaleY = .5;
+
+var froggerEndGrass = new createjs.Bitmap("../assets/frogger_2/grass.png");
+froggerEndGrass.x = frogEndGrassXPos;
+froggerEndGrass.y = frogEndGrassYPos-10;
+froggerEndGrass.scaleX = 2.3;
+froggerEndGrass.scaleY = .7;
 
 var froggerSafeGrass = new createjs.Bitmap("http://www.colourbox.com/preview/3694639-208698-top-view-of-green-grass-andflowers-background.jpg");
 froggerSafeGrass.x = grassLane6XPos;
@@ -173,7 +195,7 @@ lane4 = [car8, car9, car10, car11];
 lane5 = [car12, car13, car14, car15];
 
 var vehicles = [car1,truck1,car2,truck2,car4,car5,car6,car7,car8,car9,car10,car11,car12,car13,car14,car15]
-stage.addChild(car1, car2, truck1, truck2, imgLane2[0], imgLane2[1], imgLane1[0],imgLane1[1], car4, car5, car6, car7, car8, car9, car10, car11, car12, car13, car14, car15, froggerSafeGrass);
+stage.addChild(car1, car2, truck1, truck2, imgLane2[0], imgLane2[1], imgLane1[0],imgLane1[1], car4, car5, car6, car7, car8, car9, car10, car11, car12, car13, car14, car15, froggerSafeMedian, froggerStartRoad, froggerEndGrass);
 stage.update();
 
 function tick(event) {
