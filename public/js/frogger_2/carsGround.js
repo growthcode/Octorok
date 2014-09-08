@@ -1,3 +1,48 @@
+// var vehicleMovingLeft = [];
+// var vehicleMovingRight = []
+
+// var vehicleCreator = function() {
+//   for (var i = 2; i < 7 ; i++) {
+//     if (i % 2 == 0) {
+//       logMovingLeft.push(new movingObject("short", 100, rowHeight * i - rowHeight - 5));
+//       logMovingLeft.push(new movingObject("medium", 400, rowHeight * i - rowHeight - 5));
+//       logMovingLeft.push(new movingObject("large", 700, rowHeight * i - rowHeight - 5));
+//     } else {
+//       movingObjectMovingRight.push(new movingObject("short", 100, rowHeight * i - rowHeight - 5));
+//       movingObjectMovingRight.push(new movingObject("medium", 400, rowHeight * i - rowHeight - 5));
+//       movingObjectMovingRight.push(new movingObject("large", 700, rowHeight * i - rowHeight - 5));
+//     }
+//   }
+//   for (var i in logMovingLeft) {
+//     if (logMovingLeft[i].type == "short") {
+//       logMovingLeft[i].shape.x = logMovingLeft[i].posX;
+//       logMovingLeft[i].shape.y = logMovingLeft[i].posY;
+//     } else if (logMovingLeft[i].type == "medium") {
+//       logMovingLeft[i].shape.x = logMovingLeft[i].posX;
+//       logMovingLeft[i].shape.y = logMovingLeft[i].posY;
+//     } else {
+//       logMovingLeft[i].shape.x = logMovingLeft[i].posX;
+//       logMovingLeft[i].shape.y = logMovingLeft[i].posY;
+//     }
+//     stage.addChild(logMovingLeft[i].shape);
+//   }
+//   for (var i in movingObjectMovingRight) {
+//     if (movingObjectMovingRight[i].type == "short") {
+//       movingObjectMovingRight[i].shape.x = movingObjectMovingRight[i].posX;
+//       movingObjectMovingRight[i].shape.y = movingObjectMovingRight[i].posY;
+//     } else if (movingObjectMovingRight[i].type == "medium") {
+//       movingObjectMovingRight[i].shape.x = movingObjectMovingRight[i].posX;
+//       movingObjectMovingRight[i].shape.y = movingObjectMovingRight[i].posY;
+//     } else {
+//       movingObjectMovingRight[i].shape.x = movingObjectMovingRight[i].posX;
+//       movingObjectMovingRight[i].shape.y = movingObjectMovingRight[i].posY;
+//     }
+//     stage.addChild(movingObjectMovingRight[i].shape);
+//   }
+//   stage.update();
+// }
+// vehicleCreator();
+
 var carWidth=100;
 var carHeight=rowHeight - (canvas.height/60);
 var truckWidth=180;
@@ -28,8 +73,9 @@ frogEndGrassYPos=borderHeight - rowHeight * 13 + (canvas.height/120);
 
 var lane1Vel=10;
 var lane2Vel=10;
-var logLane1Vel=10;
-var logLane2Vel=10;
+
+var logVelocity=10;
+
 
 var lane1 = [];
 var lane2 = [];
@@ -217,16 +263,16 @@ function tick(event) {
       lane5[i].x += lane1Vel
   }
 
-  for (var i in movingObjectMovingRight) {
-    if (movingObjectMovingRight[i].shape.x > stage.canvas.width + 100) { movingObjectMovingRight[i].shape.x = -100 }
-    movingObjectMovingRight[i].shape.x += logLane1Vel
-  }
-  for (var i in movingObjectMovingLeft) {
-    if (movingObjectMovingLeft[i].shape.x < -110) { movingObjectMovingLeft[i].shape.x = stage.canvas.width + 50 }
-    movingObjectMovingLeft[i].shape.x -= logLane2Vel
-  }
+  for (var i in logs) {
+    if (logs[i].direction == "right") {
+      if (logs[i].shape.x > stage.canvas.width + 100) { logs[i].shape.x = -100 }
+      logs[i].shape.x += logs[i].speed;
+    } else {
+      if (logs[i].shape.x < -110) { logs[i].shape.x = stage.canvas.width + 50 }
+      logs[i].shape.x -= logs[i].speed;
+    }
   stage.update();
-
+  }
 }
 
 createjs.Ticker.addEventListener("tick", tick);

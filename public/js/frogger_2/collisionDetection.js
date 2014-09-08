@@ -92,13 +92,24 @@ var checkLogCollision = function(log) {
 }
 
 var checkAllLogCollisions = function() {
-  if(checkLogCollision(log1) || checkLogCollision(longLog1)) {
-    frog.x += logLane1Vel;
+  for (var i in logMovingLeft) {
+    if (checkLogCollision(logMovingLeft[i])) {
+      frog.x += logVelocity;
+    }
+    if (checkLogCollision(logMovingLeft[i]))  {
+      frog.x -= logVelocity;
+    }
+    stage.update();
   }
-  if(checkLogCollision(log2) || checkLogCollision(longLog2)) {
-    frog.x -= logLane2Vel;
+  for (var i in movingObjectMovingRight) {
+    if (checkLogCollision(movingObjectMovingRight[i])) {
+      frog.x += logVelocity;
+    }
+    if( checkLogCollision(movingObjectMovingRight[i])) {
+      frog.x -= logVelocity;
+    }
+    stage.update();
   }
-  stage.update();
 }
 
 var checkWaterLogCollision = function(log) {
@@ -114,11 +125,21 @@ var checkWaterLogCollision = function(log) {
 }
 
 var checkAllWaterLogCollisions = function() {
-  if(checkWaterLogCollision(log1) || checkWaterLogCollision(longLog1)) {
-    return true;
+  for (var i in movingObjectMovingRight) {
+    if (checkWaterLogCollision(movingObjectMovingRight[i])) {
+      return true;
+    }
+    if (checkWaterLogCollision(movingObjectMovingRight[i])) {
+      return true;
+    }
   }
-  if(checkWaterLogCollision(log2) || checkWaterLogCollision(longLog2)) {
-    return true;
+  for (var i in logMovingLeft) {
+    if (checkWaterLogCollision(logMovingLeft[i])) {
+      return true;
+    }
+    if (checkWaterLogCollision(logMovingLeft[i])) {
+      return true;
+    }
   }
 }
 
