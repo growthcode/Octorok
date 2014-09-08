@@ -45,17 +45,17 @@ froggerStartRoad.y = frogStartRoadYPos - 50;
 froggerStartRoad.scaleX = 2.5;
 froggerStartRoad.scaleY = 1;
 
-var froggerSafeMedian = new createjs.Bitmap("../assets/frogger_2/divider.jpg");
+var froggerSafeMedian = new createjs.Bitmap("../assets/frogger_2/divider.png");
 froggerSafeMedian.x = grassLane6XPos;
 froggerSafeMedian.y = grassLane6YPos - 50;
-froggerSafeMedian.scaleX = 2.5;
-froggerSafeMedian.scaleY = .5;
+froggerSafeMedian.scaleX = 1;
+froggerSafeMedian.scaleY = .45;
 
 var froggerEndGrass = new createjs.Bitmap("../assets/frogger_2/grass.png");
 froggerEndGrass.x = frogEndGrassXPos;
 froggerEndGrass.y = frogEndGrassYPos-10;
-froggerEndGrass.scaleX = 2.3;
-froggerEndGrass.scaleY = .7;
+froggerEndGrass.scaleX = .79;
+froggerEndGrass.scaleY = .38;
 
 var froggerSafeGrass = new createjs.Bitmap("http://www.colourbox.com/preview/3694639-208698-top-view-of-green-grass-andflowers-background.jpg");
 froggerSafeGrass.x = grassLane6XPos;
