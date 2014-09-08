@@ -1,22 +1,22 @@
-var Log = function(type, image, posX, posY) {
-  if (type == "short") {
-    this.width = 50;
-  } else if (type == "medium") {
-    this.width = 75;
-  } else {
-    this.width = 100;
-  }
-  this.height = rowHeight;
+// var Log = function(type, image, posX, posY) {
+//   if (type == "short") {
+//     this.width = 50;
+//   } else if (type == "medium") {
+//     this.width = 75;
+//   } else {
+//     this.width = 100;
+//   }
+//   this.height = rowHeight;
   
-}
+// }
 
-logImgArray = [];
+// logImgArray = [];
 
-for (var i = 2; i < 7 ; i++){
-  new Log("short", imgArray[0], 100, rowHeight * i - rowHeight);
-  new Log("medium", imgArray[1], 400, rowHeight * i - rowHeight);
-  new Log("large", imgArray[2], 700, rowHeight * i - rowHeight);
-}
+// for (var i = 2; i < 7 ; i++){
+//   new Log("short", imgArray[0], 100, rowHeight * i - rowHeight);
+//   new Log("medium", imgArray[1], 400, rowHeight * i - rowHeight);
+//   new Log("large", imgArray[2], 700, rowHeight * i - rowHeight);
+// }
 
 var logWidth=50;
 var logHeight=rowHeight;
