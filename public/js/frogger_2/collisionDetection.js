@@ -10,6 +10,30 @@ truck1['width'] = truckWidth
 truck1['height'] = truckHeight
 truck2['width'] = truckWidth
 truck2['height'] = truckHeight
+car4['width'] = carWidth
+car4['height'] = carHeight
+car5['width'] = carWidth
+car5['height'] = carHeight
+car6['width'] = carWidth
+car6['height'] = carHeight
+car7['width'] = carWidth
+car7['height'] = carHeight
+car8['width'] = carWidth
+car8['height'] = carHeight
+car9['width'] = carWidth
+car9['height'] = carHeight
+car10['width'] = carWidth
+car10['height'] = carHeight
+car11['width'] = carWidth
+car11['height'] = carHeight
+car12['width'] = carWidth
+car12['height'] = carHeight
+car13['width'] = carWidth
+car13['height'] = carHeight
+car14['width'] = carWidth
+car14['height'] = carHeight
+car15['width'] = carWidth
+car15['height'] = carHeight
 
 log1['width'] = logWidth
 log1['height'] = logHeight
@@ -48,8 +72,14 @@ var checkVehicleCollision = function(vehicle) {
   return (dx*dx+dy*dy<=(frog.radius*frog.radius));
 }
 
-var checkAllVehicleCollisions = function() {
-  if(checkVehicleCollision(car1) || checkVehicleCollision(car2) || checkVehicleCollision(truck1) || checkVehicleCollision(truck2)) {
+var checkAllVehicleCollisions = function () {
+ return $.grep(vehicles, function(value) {
+    return checkVehicleCollision(value) === true
+  }).length > 0
+}
+
+var killFrogIfHitByVehicle = function() {
+  if(checkAllVehicleCollisions()) {
     resetFrogPosition();
     numOfFrogLives -= 1;
   }
@@ -108,11 +138,12 @@ var checkWaterCollisions = function(){
   if(checkJumpInWater()){
     // console.log("water line crossed")
     // resetFrogPosition()
+    // numOfFrogLives -= 1
   }
   stage.update();
 }
 
-createjs.Ticker.addEventListener('tick', checkAllVehicleCollisions);
+createjs.Ticker.addEventListener('tick', killFrogIfHitByVehicle);
 createjs.Ticker.addEventListener('tick', checkAllLogCollisions);
 createjs.Ticker.addEventListener('tick', keepFrogInBounds);
 createjs.Ticker.addEventListener('tick', checkWaterCollisions);

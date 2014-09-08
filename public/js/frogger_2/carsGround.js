@@ -194,8 +194,8 @@ lane3 = [car4, car5, car6, car7];
 lane4 = [car8, car9, car10, car11];
 lane5 = [car12, car13, car14, car15];
 
+var vehicles = [car1,truck1,car2,truck2,car4,car5,car6,car7,car8,car9,car10,car11,car12,car13,car14,car15]
 stage.addChild(car1, car2, truck1, truck2, imgLane2[0], imgLane2[1], imgLane1[0],imgLane1[1], car4, car5, car6, car7, car8, car9, car10, car11, car12, car13, car14, car15, froggerSafeMedian, froggerStartRoad, froggerEndGrass);
-
 stage.update();
 
 function tick(event) {
