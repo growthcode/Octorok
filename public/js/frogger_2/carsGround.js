@@ -173,47 +173,41 @@ function tick(event) {
     if (lane1[i].x > stage.canvas.width + 100) { lane1[i].x = -200 }
     lane1[i].x += lane1Vel
   }
-
   for (var i in imgLane1){
      if (imgLane1[i].x > stage.canvas.width + 100) {imgLane1[i].x = -200}
       imgLane1[i].x += lane1Vel
   }
-
   for(var i in imgLane2){
     if (imgLane2[i].x < 0- 200) {imgLane2[i].x = 800}
     imgLane2[i].x -= lane1Vel;
   }
-
   for (var i in lane2) {
     if (lane2[i].x < 0 - 200) { lane2[i].x = 800 }
     lane2[i].x -= lane2Vel
   }
-
   for (var i in lane3){
     if (lane3[i].x > stage.canvas.width + 450){lane3[i].x = -200}
       lane3[i].x += lane1Vel
   }
-
   for (var i in lane4){
     if (lane4[i].x < 0 - 300) { lane4[i].x = 800}
       lane4[i].x -= lane2Vel
   }
-
   for (var i in lane5){
     if (lane5[i].x > stage.canvas.width + 450){lane5[i].x = -200}
       lane5[i].x += lane1Vel
   }
 
-  // for (var i in logArray1) {
-  //   if (logArray1[i].x > stage.canvas.width + 100) { logArray1[i].x = 0 }
-  //   logArray1[i].x += logLane1Vel
-  // }
-  // for (var i in logArray2) {
-  //   if (logArray2[i].x < 0 - 100) { logArray2[i].x = 800 }
-  //   logArray2[i].x -= logLane2Vel
-  // }
-
+  for (var i in movingObjectMovingRight) {
+    if (movingObjectMovingRight[i].shape.x > stage.canvas.width + 100) { movingObjectMovingRight[i].shape.x = -100 }
+    movingObjectMovingRight[i].shape.x += logLane1Vel
+  }
+  for (var i in movingObjectMovingLeft) {
+    if (movingObjectMovingLeft[i].shape.x < -110) { movingObjectMovingLeft[i].shape.x = stage.canvas.width + 50 }
+    movingObjectMovingLeft[i].shape.x -= logLane2Vel
+  }
   stage.update();
+
 }
 
 createjs.Ticker.addEventListener("tick", tick);

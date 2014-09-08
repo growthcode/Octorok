@@ -1,27 +1,64 @@
-var Log = function(type, posX, posY) {
+var movingObject = function(type, posX, posY, speed) {
+  this.speed = speed
+  this.posX = posX;
+  this.posY = posY;
   this.height = rowHeight;
   this.shape = new createjs.Shape();
   if (type == "short") {
     this.width = 50;
-    this.shape.graphics.beginFill("blue").drawRect(posX, posY, this.width, this.height);
+    this.shape.graphics.beginFill("blue").drawRect(0, 0, this.width, this.height);
   } else if (type == "medium") {
     this.width = 75;
-    this.shape.graphics.beginFill("red").drawRect(posX, posY, this.width, this.height);
+    this.shape.graphics.beginFill("red").drawRect(0, 0, this.width, this.height);
   } else {
     this.width = 100;
-    this.shape.graphics.beginFill("green").drawRect(posX, posY, this.width, this.height);
+    this.shape.graphics.beginFill("green").drawRect(0, 0, this.width, this.height);
   }  
 }
 
+var movingObjectMovingLeft = [];
+var movingObjectMovingRight = [];
+
 var logCreator = function() {
   for (var i = 2; i < 7 ; i++) {
-    stage.addChild(new Log("short", 100, rowHeight * i - rowHeight).shape);
-    stage.addChild(new Log("medium", 400, rowHeight * i - rowHeight).shape);
-    stage.addChild(new Log("large", 700, rowHeight * i - rowHeight).shape);
+    if (i % 2 == 0) {
+      movingObjectMovingLeft.push(new movingObject("short", 100, rowHeight * i - rowHeight));
+      movingObjectMovingLeft.push(new movingObject("medium", 400, rowHeight * i - rowHeight));
+      movingObjectMovingLeft.push(new movingObject("large", 700, rowHeight * i - rowHeight));
+    } else {
+      movingObjectMovingRight.push(new movingObject("short", 100, rowHeight * i - rowHeight));
+      movingObjectMovingRight.push(new movingObject("medium", 400, rowHeight * i - rowHeight));
+      movingObjectMovingRight.push(new movingObject("large", 700, rowHeight * i - rowHeight));
+    }
+  }
+  for (var i in movingObjectMovingLeft) {
+    if (movingObjectMovingLeft[i].type == "short") {
+      movingObjectMovingLeft[i].shape.x = movingObjectMovingLeft[i].posX;
+      movingObjectMovingLeft[i].shape.y = movingObjectMovingLeft[i].posY;
+    } else if (movingObjectMovingLeft[i].type == "medium") {
+      movingObjectMovingLeft[i].shape.x = movingObjectMovingLeft[i].posX;
+      movingObjectMovingLeft[i].shape.y = movingObjectMovingLeft[i].posY;
+    } else {
+      movingObjectMovingLeft[i].shape.x = movingObjectMovingLeft[i].posX;
+      movingObjectMovingLeft[i].shape.y = movingObjectMovingLeft[i].posY;
+    }
+    stage.addChild(movingObjectMovingLeft[i].shape);
+  }
+  for (var i in movingObjectMovingRight) {
+    if (movingObjectMovingRight[i].type == "short") {
+      movingObjectMovingRight[i].shape.x = movingObjectMovingRight[i].posX;
+      movingObjectMovingRight[i].shape.y = movingObjectMovingRight[i].posY;
+    } else if (movingObjectMovingRight[i].type == "medium") {
+      movingObjectMovingRight[i].shape.x = movingObjectMovingRight[i].posX;
+      movingObjectMovingRight[i].shape.y = movingObjectMovingRight[i].posY;
+    } else {
+      movingObjectMovingRight[i].shape.x = movingObjectMovingRight[i].posX;
+      movingObjectMovingRight[i].shape.y = movingObjectMovingRight[i].posY;
+    }
+    stage.addChild(movingObjectMovingRight[i].shape);
   }
   stage.update();
 }
-
 logCreator();
 
 // var logWidth=50;
