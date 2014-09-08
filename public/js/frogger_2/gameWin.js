@@ -12,7 +12,8 @@ Win.Controller = function(frog, slot) {
   this.slot = slot
   this.checkSlot = function() {
     if(this.frog.x > this.slot.leftBound && this.frog.x < this.slot.rightBound && this.frog.y <= rowHeight/2) {
-      console.log('Inside Slot '+this.slot.id)
+      this.slot.active = true
+      console.log('Inside Slot '+this.slot.id+', '+slot.active)
     }
   }.bind(this)
 }
@@ -34,3 +35,9 @@ createjs.Ticker.addEventListener('tick', winController2.checkSlot)
 createjs.Ticker.addEventListener('tick', winController3.checkSlot)
 createjs.Ticker.addEventListener('tick', winController4.checkSlot)
 createjs.Ticker.addEventListener('tick', winController5.checkSlot)
+
+var slots = [slot1.id, slot2.id, slot3.id, slot4.id, slot5.id]
+var removeSlot = function(array, slot) {
+  var index = array.indexOf(slot)
+  array.splice(index, 1)
+}
