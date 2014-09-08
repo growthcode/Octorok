@@ -26,7 +26,7 @@ var Controller = function(player, bullet) {
     playerCount = playerArray.length;
     for (var i = 0; i < bulletCount; i++) {
       for (var x = 0; x < playerCount; x++) {
-        new Controller(bulletArray[i], playerArray[x]).checkForCollision();
+        new Controller(playerArray[x], bulletArray[i]).checkForCollision();
       }
     }
   }
