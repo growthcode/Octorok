@@ -28,12 +28,22 @@ get '/users/new' do
 end
 
 get '/users/sign_in' do
-  session
   erb :sign_in
 end
 
 post '/users/sign_in' do
   user = User.find_by_email(params[:email])
+  if user
+    session[:email]=user.email
+    session[:id]=user.id
+  else
+
+  end
+  redirect '/'
+end
+
+get '/sign_out' do
+  session.clear
   redirect '/'
 end
 
