@@ -8,7 +8,7 @@ end
 post '/users' do
   @user=User.create(first_name: params[:first_name],
                     last_name: params[:last_name],
-                    user_name: params[:username],
+                    username: params[:username],
                     email: params[:email],
                     password_hash: params[:password_hash])
   redirect '/'
