@@ -33,5 +33,3 @@ stage.update();
 var slotWidth = 35;
 var leftBorder = 10;
 var rightBorder = 15;
-
-

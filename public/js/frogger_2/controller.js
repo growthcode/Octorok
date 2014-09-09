@@ -16,7 +16,7 @@ Game.Controller.prototype.killFrog = function() {
   this.resetFrogPosition()
 }
 
-Game.Controller.prototype.keepFrogInBounds = function() {
+Game.Controller.prototype.killIfOutOfBounds = function() {
   if(this.character.x < 0 || (this.character.x+this.character.width) > canvas.width) {
     this.killFrog();
     console.log('too far...');
@@ -26,11 +26,11 @@ Game.Controller.prototype.keepFrogInBounds = function() {
 Game.Controller.prototype.rideLog = function(direction, logIndex) {
   if(direction === "left") {
     this.character.x -= this.logs[logIndex].speed
-    this.keepFrogInBounds()
+    this.killIfOutOfBounds()
   }
   else if(direction === "right") {
     this.character.x += this.logs[logIndex].speed
-    this.keepFrogInBounds()
+    this.killIfOutOfBounds()
   }
 }
 
