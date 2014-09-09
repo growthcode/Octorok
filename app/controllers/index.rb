@@ -1,4 +1,3 @@
-enable :sessions
 get '/' do
   erb :index
 end
@@ -7,18 +6,19 @@ get '/users' do
 end
 
 post '/users' do
-  @user = User.new(first_name: params[:first_name],
+  user = User.new(first_name: params[:first_name],
                     last_name: params[:last_name],
                     username: params[:username],
                     email: params[:email])
-  @user.password = params[:password_hash]
+  user.password = params[:password_hash]
   # @user.save!
 
-  if @user.save
+  if user.save
+    session[:email]=user.email
+    session[:id]=user.id
     redirect '/'
   else
-    # @errors = @user.errors.full_messages
-    # @errors2 = @user.errors
+    @errors = user.errors.full_messages
     erb :sign_up
   end
 end
