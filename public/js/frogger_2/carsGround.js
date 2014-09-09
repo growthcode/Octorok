@@ -1,47 +1,34 @@
-// var vehicleMovingLeft = [];
-// var vehicleMovingRight = []
+var vehicles = [];
 
-// var vehicleCreator = function() {
-//   for (var i = 2; i < 7 ; i++) {
-//     if (i % 2 == 0) {
-//       logMovingLeft.push(new movingObject("short", 100, rowHeight * i - rowHeight - 5));
-//       logMovingLeft.push(new movingObject("medium", 400, rowHeight * i - rowHeight - 5));
-//       logMovingLeft.push(new movingObject("large", 700, rowHeight * i - rowHeight - 5));
-//     } else {
-//       movingObjectMovingRight.push(new movingObject("short", 100, rowHeight * i - rowHeight - 5));
-//       movingObjectMovingRight.push(new movingObject("medium", 400, rowHeight * i - rowHeight - 5));
-//       movingObjectMovingRight.push(new movingObject("large", 700, rowHeight * i - rowHeight - 5));
-//     }
-//   }
-//   for (var i in logMovingLeft) {
-//     if (logMovingLeft[i].type == "short") {
-//       logMovingLeft[i].shape.x = logMovingLeft[i].posX;
-//       logMovingLeft[i].shape.y = logMovingLeft[i].posY;
-//     } else if (logMovingLeft[i].type == "medium") {
-//       logMovingLeft[i].shape.x = logMovingLeft[i].posX;
-//       logMovingLeft[i].shape.y = logMovingLeft[i].posY;
-//     } else {
-//       logMovingLeft[i].shape.x = logMovingLeft[i].posX;
-//       logMovingLeft[i].shape.y = logMovingLeft[i].posY;
-//     }
-//     stage.addChild(logMovingLeft[i].shape);
-//   }
-//   for (var i in movingObjectMovingRight) {
-//     if (movingObjectMovingRight[i].type == "short") {
-//       movingObjectMovingRight[i].shape.x = movingObjectMovingRight[i].posX;
-//       movingObjectMovingRight[i].shape.y = movingObjectMovingRight[i].posY;
-//     } else if (movingObjectMovingRight[i].type == "medium") {
-//       movingObjectMovingRight[i].shape.x = movingObjectMovingRight[i].posX;
-//       movingObjectMovingRight[i].shape.y = movingObjectMovingRight[i].posY;
-//     } else {
-//       movingObjectMovingRight[i].shape.x = movingObjectMovingRight[i].posX;
-//       movingObjectMovingRight[i].shape.y = movingObjectMovingRight[i].posY;
-//     }
-//     stage.addChild(movingObjectMovingRight[i].shape);
-//   }
-//   stage.update();
-// }
-// vehicleCreator();
+var vehicleCreator = function() {
+  for (var i = 8; i < 13 ; i++) {
+    if (i % 2 == 0) {
+      vehicles.push(new movingObject("short", 100, rowHeight * i - rowHeight - 5, "right"));
+      vehicles.push(new movingObject("medium", 400, rowHeight * i - rowHeight - 5, "right"));
+      vehicles.push(new movingObject("large", 700, rowHeight * i - rowHeight - 5, "right"));
+    } else {
+      vehicles.push(new movingObject("short", 100, rowHeight * i - rowHeight - 5, "left"));
+      vehicles.push(new movingObject("medium", 400, rowHeight * i - rowHeight - 5, "left"));
+      vehicles.push(new movingObject("large", 700, rowHeight * i - rowHeight - 5, "left"));
+    }
+  }
+  for (var i in vehicles) {
+    if (vehicles[i].size == "short") {
+      vehicles[i].shape.x = vehicles[i].posX;
+      vehicles[i].shape.y = vehicles[i].posY;
+    } else if (vehicles[i].size == "medium") {
+      vehicles[i].shape.x = vehicles[i].posX;
+      vehicles[i].shape.y = vehicles[i].posY;
+    } else {
+      vehicles[i].shape.x = vehicles[i].posX;
+      vehicles[i].shape.y = vehicles[i].posY;
+    }
+    stage.addChild(vehicles[i].shape);
+  }
+  stage.update();
+}
+
+vehicleCreator();
 
 var carWidth=100;
 var carHeight=rowHeight - (canvas.height/60);
@@ -73,9 +60,6 @@ frogEndGrassYPos=borderHeight - rowHeight * 13 + (canvas.height/120);
 
 var lane1Vel=10;
 var lane2Vel=10;
-
-var logVelocity=10;
-
 
 var lane1 = [];
 var lane2 = [];
@@ -140,138 +124,148 @@ imagebus2.y = 440;
 imagebus2.scaleX = 0.3;
 imagebus2.scaleY = 0.3;
 
-var imgLane1 = [imageCar1, imageTruck1, imageBus1];
-var imgLane2 = [imageCar2, imagetruck2, imagebus2];
+// var imgLane1 = [imageCar1, imageTruck1, imageBus1];
+// var imgLane2 = [imageCar2, imagetruck2, imagebus2];
 
-var car1 = new createjs.Shape();
-car1.graphics.beginFill("white").drawRect(0, 0, carWidth, carHeight);
-car1.x = car1StartXPos;
-car1.y = car1StartYPos;
+// var car1 = new createjs.Shape();
+// car1.graphics.beginFill("white").drawRect(0, 0, carWidth, carHeight);
+// car1.x = car1StartXPos;
+// car1.y = car1StartYPos;
 
-var car2 = new createjs.Shape();
-car2.graphics.beginFill("white").drawRect(0, 0, carWidth, carHeight);
-car2.x = car2StartXPos;
-car2.y = car2StartYPos;
+// var car2 = new createjs.Shape();
+// car2.graphics.beginFill("white").drawRect(0, 0, carWidth, carHeight);
+// car2.x = car2StartXPos;
+// car2.y = car2StartYPos;
 
-var truck1 = new createjs.Shape();
-truck1.graphics.beginFill("white").drawRect(0, 0, truckWidth, truckHeight);
-truck1.x = truck1StartXPos;
-truck1.y = truck1StartYPos;
+// var truck1 = new createjs.Shape();
+// truck1.graphics.beginFill("white").drawRect(0, 0, truckWidth, truckHeight);
+// truck1.x = truck1StartXPos;
+// truck1.y = truck1StartYPos;
 
-var truck2 = new createjs.Shape();
-truck2.graphics.beginFill("white").drawRect(0, 0, truckWidth, truckHeight);
-truck2.x = truck2StartXPos;
-truck2.y = truck2StartYPos;
+// var truck2 = new createjs.Shape();
+// truck2.graphics.beginFill("white").drawRect(0, 0, truckWidth, truckHeight);
+// truck2.x = truck2StartXPos;
+// truck2.y = truck2StartYPos;
 
-var car4 = new createjs.Shape();
-car4.graphics.beginFill("red").drawRect(0, 0, carWidth, carHeight);
-car4.x = carLane3StartXPos + (xDifference *1);
-car4.y = carLane3StartYPos;
+// var car4 = new createjs.Shape();
+// car4.graphics.beginFill("red").drawRect(0, 0, carWidth, carHeight);
+// car4.x = carLane3StartXPos + (xDifference *1);
+// car4.y = carLane3StartYPos;
 
-var car5 = new createjs.Shape();
-car5.graphics.beginFill("blue").drawRect(0, 0, carWidth, carHeight);
-car5.x = carLane3StartXPos + (xDifference * 2);
-car5.y = carLane3StartYPos;
+// var car5 = new createjs.Shape();
+// car5.graphics.beginFill("blue").drawRect(0, 0, carWidth, carHeight);
+// car5.x = carLane3StartXPos + (xDifference * 2);
+// car5.y = carLane3StartYPos;
 
-var car6 = new createjs.Shape();
-car6.graphics.beginFill("green").drawRect(0, 0, carWidth, carHeight);
-car6.x = carLane3StartXPos + (xDifference * 3);
-car6.y = carLane3StartYPos;
+// var car6 = new createjs.Shape();
+// car6.graphics.beginFill("green").drawRect(0, 0, carWidth, carHeight);
+// car6.x = carLane3StartXPos + (xDifference * 3);
+// car6.y = carLane3StartYPos;
 
-var car7 = new createjs.Shape();
-car7.graphics.beginFill("black").drawRect(0, 0, carWidth, carHeight);
-car7.x = carLane3StartXPos + (xDifference * 4 );
-car7.y = carLane3StartYPos;
+// var car7 = new createjs.Shape();
+// car7.graphics.beginFill("black").drawRect(0, 0, carWidth, carHeight);
+// car7.x = carLane3StartXPos + (xDifference * 4 );
+// car7.y = carLane3StartYPos;
 
-var car8 = new createjs.Shape();
-car8.graphics.beginFill("red").drawRect(0, 0, carWidth, carHeight);
-car8.x = carLane4StartXPos + (xDifference *1);
-car8.y = carLane4StartYPos;
+// var car8 = new createjs.Shape();
+// car8.graphics.beginFill("red").drawRect(0, 0, carWidth, carHeight);
+// car8.x = carLane4StartXPos + (xDifference *1);
+// car8.y = carLane4StartYPos;
 
-var car9 = new createjs.Shape();
-car9.graphics.beginFill("blue").drawRect(0, 0, carWidth, carHeight);
-car9.x = carLane4StartXPos + (xDifference * 2);
-car9.y = carLane4StartYPos;
+// var car9 = new createjs.Shape();
+// car9.graphics.beginFill("blue").drawRect(0, 0, carWidth, carHeight);
+// car9.x = carLane4StartXPos + (xDifference * 2);
+// car9.y = carLane4StartYPos;
 
-var car10 = new createjs.Shape();
-car10.graphics.beginFill("green").drawRect(0, 0, carWidth, carHeight);
-car10.x = carLane4StartXPos + (xDifference * 3);
-car10.y = carLane4StartYPos;
+// var car10 = new createjs.Shape();
+// car10.graphics.beginFill("green").drawRect(0, 0, carWidth, carHeight);
+// car10.x = carLane4StartXPos + (xDifference * 3);
+// car10.y = carLane4StartYPos;
 
-var car11 = new createjs.Shape();
-car11.graphics.beginFill("black").drawRect(0, 0, carWidth, carHeight);
-car11.x = carLane4StartXPos + (xDifference * 4 );
-car11.y = carLane4StartYPos;
+// var car11 = new createjs.Shape();
+// car11.graphics.beginFill("black").drawRect(0, 0, carWidth, carHeight);
+// car11.x = carLane4StartXPos + (xDifference * 4 );
+// car11.y = carLane4StartYPos;
 
-var car12 = new createjs.Shape();
-car12.graphics.beginFill("red").drawRect(0, 0, carWidth, carHeight);
-car12.x = carLane4StartXPos + (xDifference *1);
-car12.y = carLane5StartYPos;
+// var car12 = new createjs.Shape();
+// car12.graphics.beginFill("red").drawRect(0, 0, carWidth, carHeight);
+// car12.x = carLane4StartXPos + (xDifference *1);
+// car12.y = carLane5StartYPos;
 
-var car13 = new createjs.Shape();
-car13.graphics.beginFill("blue").drawRect(0, 0, carWidth, carHeight);
-car13.x = carLane4StartXPos + (xDifference * 2);
-car13.y = carLane5StartYPos;
+// var car13 = new createjs.Shape();
+// car13.graphics.beginFill("blue").drawRect(0, 0, carWidth, carHeight);
+// car13.x = carLane4StartXPos + (xDifference * 2);
+// car13.y = carLane5StartYPos;
 
-var car14 = new createjs.Shape();
-car14.graphics.beginFill("green").drawRect(0, 0, carWidth, carHeight);
-car14.x = carLane4StartXPos + (xDifference * 3);
-car14.y = carLane5StartYPos;
+// var car14 = new createjs.Shape();
+// car14.graphics.beginFill("green").drawRect(0, 0, carWidth, carHeight);
+// car14.x = carLane4StartXPos + (xDifference * 3);
+// car14.y = carLane5StartYPos;
 
-var car15 = new createjs.Shape();
-car15.graphics.beginFill("black").drawRect(0, 0, carWidth, carHeight);
-car15.x = carLane4StartXPos + (xDifference * 4 );
-car15.y = carLane5StartYPos;
+// var car15 = new createjs.Shape();
+// car15.graphics.beginFill("black").drawRect(0, 0, carWidth, carHeight);
+// car15.x = carLane4StartXPos + (xDifference * 4 );
+// car15.y = carLane5StartYPos;
 
-lane1.push(car1, truck1);
-lane2.push(car2, truck2);
-lane3 = [car4, car5, car6, car7];
-lane4 = [car8, car9, car10, car11];
-lane5 = [car12, car13, car14, car15];
+// lane1.push(car1, truck1);
+// lane2.push(car2, truck2);
+// lane3 = [car4, car5, car6, car7];
+// lane4 = [car8, car9, car10, car11];
+// lane5 = [car12, car13, car14, car15];
 
-var vehicles = [car1,truck1,car2,truck2,car4,car5,car6,car7,car8,car9,car10,car11,car12,car13,car14,car15]
-stage.addChild(car1, car2, truck1, truck2, imgLane2[0], imgLane2[1], imgLane1[0],imgLane1[1], car4, car5, car6, car7, car8, car9, car10, car11, car12, car13, car14, car15, froggerSafeMedian, froggerStartRoad, froggerEndGrass);
-stage.update();
+// var vehicles = [car1,truck1,car2,truck2,car4,car5,car6,car7,car8,car9,car10,car11,car12,car13,car14,car15]
+// stage.addChild(car1, car2, truck1, truck2, imgLane2[0], imgLane2[1], imgLane1[0],imgLane1[1], car4, car5, car6, car7, car8, car9, car10, car11, car12, car13, car14, car15, froggerSafeMedian, froggerStartRoad, froggerEndGrass);
+// stage.update();
 
 function tick(event) {
-  for (var i in lane1) {
-    if (lane1[i].x > stage.canvas.width + 100) { lane1[i].x = -200 }
-    lane1[i].x += lane1Vel
+  for (var i in vehicles) {
+    if (vehicles[i].direction == "right") {
+      if (vehicles[i].shape.x > stage.canvas.width + 100) { vehicles[i].shape.x = -100 }
+        vehicles[i].shape.x += vehicles[i].speed;
+    } else {
+      if (vehicles[i].shape.x < -110) { vehicles[i].shape.x = stage.canvas.width + 50 }
+        vehicles[i].shape.x -= vehicles[i].speed;
+    }
+    stage.update();
   }
-  for (var i in imgLane1){
-     if (imgLane1[i].x > stage.canvas.width + 100) {imgLane1[i].x = -200}
-      imgLane1[i].x += lane1Vel
-  }
-  for(var i in imgLane2){
-    if (imgLane2[i].x < 0- 200) {imgLane2[i].x = 800}
-    imgLane2[i].x -= lane1Vel;
-  }
-  for (var i in lane2) {
-    if (lane2[i].x < 0 - 200) { lane2[i].x = 800 }
-    lane2[i].x -= lane2Vel
-  }
-  for (var i in lane3){
-    if (lane3[i].x > stage.canvas.width + 450){lane3[i].x = -200}
-      lane3[i].x += lane1Vel
-  }
-  for (var i in lane4){
-    if (lane4[i].x < 0 - 300) { lane4[i].x = 800}
-      lane4[i].x -= lane2Vel
-  }
-  for (var i in lane5){
-    if (lane5[i].x > stage.canvas.width + 450){lane5[i].x = -200}
-      lane5[i].x += lane1Vel
-  }
+  //   for (var i in lane1) {
+  //     if (lane1[i].x > stage.canvas.width + 100) { lane1[i].x = -200 }
+  //       lane1[i].x += lane1Vel
+  //   }
+  //   for (var i in imgLane1){
+  //    if (imgLane1[i].x > stage.canvas.width + 100) {imgLane1[i].x = -200}
+  //     imgLane1[i].x += lane1Vel
+  // }
+  // for(var i in imgLane2){
+  //   if (imgLane2[i].x < 0- 200) {imgLane2[i].x = 800}
+  //     imgLane2[i].x -= lane1Vel;
+  // }
+  // for (var i in lane2) {
+  //   if (lane2[i].x < 0 - 200) { lane2[i].x = 800 }
+  //     lane2[i].x -= lane2Vel
+  // }
+  // for (var i in lane3){
+  //   if (lane3[i].x > stage.canvas.width + 450){lane3[i].x = -200}
+  //     lane3[i].x += lane1Vel
+  // }
+  // for (var i in lane4){
+  //   if (lane4[i].x < 0 - 300) { lane4[i].x = 800}
+  //     lane4[i].x -= lane2Vel
+  // }
+  // for (var i in lane5){
+  //   if (lane5[i].x > stage.canvas.width + 450){lane5[i].x = -200}
+  //     lane5[i].x += lane1Vel
+  // }
 
   for (var i in logs) {
     if (logs[i].direction == "right") {
       if (logs[i].shape.x > stage.canvas.width + 100) { logs[i].shape.x = -100 }
-      logs[i].shape.x += logs[i].speed;
+        logs[i].shape.x += logs[i].speed;
     } else {
       if (logs[i].shape.x < -110) { logs[i].shape.x = stage.canvas.width + 50 }
-      logs[i].shape.x -= logs[i].speed;
+        logs[i].shape.x -= logs[i].speed;
     }
-  stage.update();
+    stage.update();
   }
 }
 

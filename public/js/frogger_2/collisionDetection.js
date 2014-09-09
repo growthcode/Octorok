@@ -2,38 +2,38 @@ var waterYLine = (stage.canvas.height*6/13).toFixed(2)
 
 frog['radius'] = frogRadius
 
-car1['width'] = carWidth
-car1['height'] = carHeight
-car2['width'] = carWidth
-car2['height'] = carHeight
-truck1['width'] = truckWidth
-truck1['height'] = truckHeight
-truck2['width'] = truckWidth
-truck2['height'] = truckHeight
-car4['width'] = carWidth
-car4['height'] = carHeight
-car5['width'] = carWidth
-car5['height'] = carHeight
-car6['width'] = carWidth
-car6['height'] = carHeight
-car7['width'] = carWidth
-car7['height'] = carHeight
-car8['width'] = carWidth
-car8['height'] = carHeight
-car9['width'] = carWidth
-car9['height'] = carHeight
-car10['width'] = carWidth
-car10['height'] = carHeight
-car11['width'] = carWidth
-car11['height'] = carHeight
-car12['width'] = carWidth
-car12['height'] = carHeight
-car13['width'] = carWidth
-car13['height'] = carHeight
-car14['width'] = carWidth
-car14['height'] = carHeight
-car15['width'] = carWidth
-car15['height'] = carHeight
+// car1['width'] = carWidth
+// car1['height'] = carHeight
+// car2['width'] = carWidth
+// car2['height'] = carHeight
+// truck1['width'] = truckWidth
+// truck1['height'] = truckHeight
+// truck2['width'] = truckWidth
+// truck2['height'] = truckHeight
+// car4['width'] = carWidth
+// car4['height'] = carHeight
+// car5['width'] = carWidth
+// car5['height'] = carHeight
+// car6['width'] = carWidth
+// car6['height'] = carHeight
+// car7['width'] = carWidth
+// car7['height'] = carHeight
+// car8['width'] = carWidth
+// car8['height'] = carHeight
+// car9['width'] = carWidth
+// car9['height'] = carHeight
+// car10['width'] = carWidth
+// car10['height'] = carHeight
+// car11['width'] = carWidth
+// car11['height'] = carHeight
+// car12['width'] = carWidth
+// car12['height'] = carHeight
+// car13['width'] = carWidth
+// car13['height'] = carHeight
+// car14['width'] = carWidth
+// car14['height'] = carHeight
+// car15['width'] = carWidth
+// car15['height'] = carHeight
 
 var resetFrogPosition = function() {
   frog.x = frogXStart
@@ -49,8 +49,8 @@ var keepFrogInBounds = function() {
 }
 
 var checkVehicleCollision = function(vehicle) {
-  var distX = Math.abs(frog.x - (vehicle.x + vehicle.width/2));
-  var distY = Math.abs(frog.y - (vehicle.y + vehicle.height/2));
+  var distX = Math.abs(frog.x - (vehicle.shape.x + vehicle.width/2));
+  var distY = Math.abs(frog.y - (vehicle.shape.y + vehicle.height/2));
 
   if (distX > (vehicle.width / 2 + frog.radius)) { return false; }
   if (distY > (vehicle.height / 2 + frog.radius)) { return false; }
