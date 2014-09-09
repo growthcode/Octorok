@@ -168,7 +168,7 @@ Game.Controller.prototype.createSlots = function(numberOfSlots) {
   };
 
 Game.Controller.prototype.checkSlot = function(slot) {
-  if (this.character.x > slot.leftBound && this.character.x < slot.rightBound && this.character.y <= finishLineBoundary - rowHeight -.5) {
+  if (this.character.x > slot.leftBound && this.character.x < slot.rightBound && this.character.y <= finishLineBoundary - rowHeight + 0.5) {
     if (slot.active === false) {
       slot.active = true;
       console.log('You Hit A Slot!');
