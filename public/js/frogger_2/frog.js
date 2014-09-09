@@ -1,7 +1,7 @@
 var verticalMoveDistance = rowHeight;
 var horizontalMoveDistance = columnWidth;
 var frogXStart = (canvas.width / 2) - 23 / 2;
-var frogYStart = canvas.height - 17;
+var frogYStart = canvas.height - 20.5;
 
 var Frog = function(posX, posY) {
   this.lives = 3

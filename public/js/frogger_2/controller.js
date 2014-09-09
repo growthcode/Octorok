@@ -115,6 +115,15 @@ Game.Controller.prototype.moveObjects = function() {
   }
 }
 
+Game.Controller.prototype.checkIfGameLost = function() {
+  if (this.character.lives === 0) {
+    console.log("You Lost...");
+    // temporary: set lives back to 3 to avoid infinite console.log
+    this.character.lives += 3
+  }
+}
+
+// TODO: MODIFY/IMPLEMENT THESE 4 FUNCTIONS
 var checkJumpInWater = function() {
   if ((frog.y < waterYLine) && !(checkAllWaterLogCollisions())) {
     return true
@@ -128,6 +137,27 @@ var checkWaterCollisions = function() {
   }
 }
 
+var checkWaterLogCollision = function(log) {
+  var distX = Math.abs(frog.x - (log.x+log.width/2));
+  var distY = Math.abs(frog.y - (log.y+log.height/2));
+
+  if (distX > (log.width/2.5 + frog.radius)) { return false; }
+  if (distY > (log.height/3 + frog.radius)) { return false; }
+
+  if (distX <= (log.width) && distY <= log.height) {
+    return true;
+  }
+}
+
+var checkAllWaterLogCollisions = function() {
+  for (var i in logs) {
+    if (checkWaterLogCollision(logs[i])) {
+      return true;
+    }
+  }
+}
+//
+
 var frog = new Frog();
 var gameController = new Game.Controller();
 gameController.logCreator();
@@ -138,22 +168,4 @@ stage.update();
 createjs.Ticker.addEventListener('tick', gameController.checkAllVehicleCollisions.bind(gameController));
 createjs.Ticker.addEventListener('tick', gameController.checkAllLogCollisions.bind(gameController));
 createjs.Ticker.addEventListener("tick", gameController.moveObjects.bind(gameController));
-// var checkWaterLogCollision = function(log) {
-//   var distX = Math.abs(frog.x - (log.x+log.width/2));
-//   var distY = Math.abs(frog.y - (log.y+log.height/2));
-
-//   if (distX > (log.width/2.5 + frog.radius)) { return false; }
-//   if (distY > (log.height/3 + frog.radius)) { return false; }
-
-//   if (distX <= (log.width) && distY <= log.height) {
-//     return true;
-//   }
-// }
-
-// var checkAllWaterLogCollisions = function() {
-//   for (var i in logs) {
-//     if (checkWaterLogCollision(logs[i])) {
-//       return true;
-//     }
-//   }
-// }
+createjs.Ticker.addEventListener('tick', gameController.checkIfGameLost.bind(gameController));
