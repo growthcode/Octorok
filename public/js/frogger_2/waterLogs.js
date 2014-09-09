@@ -28,3 +28,6 @@ var logCreator = function() {
 }
 
 logCreator();
+
+stage.addChild(frog);
+stage.update();

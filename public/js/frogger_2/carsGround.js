@@ -1,65 +1,64 @@
-Controller = {}
+// Controller = {}
 
-Controller.Collision = function(character) {
-  this.character = character;
-  this.vehicles = [];
-  this.logs = [];
-}
+// Controller.Collision = function(character) {
+//   this.character = character;
+//   this.vehicles = [];
+//   this.logs = [];
+// }
 
-Controller.Collision.prototype.resetFrogPosition = function() {
-  this.character.x = frogXStart
-  this.character.y = frogYStart
-}
+// Controller.Collision.prototype.resetFrogPosition = function() {
+//   this.character.x = frogXStart
+//   this.character.y = frogYStart
+// }
 
-Controller.Collision.prototype.killFrog = function() {
-  this.character.lives -= 1
-  this.resetFrogPosition()
-}
+// Controller.Collision.prototype.killFrog = function() {
+//   this.character.lives -= 1
+//   this.resetFrogPosition()
+// }
 
-Controller.Collision.prototype.keepFrogInBounds = function() {
-  if(this.character.x < 0 || (this.character.x+this.character.width) > borderWidth) {
-    this.killFrog()
-    console.log('too far...')
-  }
-}
+// Controller.Collision.prototype.keepFrogInBounds = function() {
+//   if(this.character.x < 0 || (this.character.x+this.character.width) > borderWidth) {
+//     this.killFrog()
+//     console.log('too far...')
+//   }
+// }
 
-Controller.Collision.prototype.rideLog = function(direction, logIndex) {
-  if(direction === "left") {
-    this.character.x -= this.logs[logIndex].speed
-    this.keepFrogInBounds()
-  }
-  else if(direction === "right") {
-    this.character.x += this.logs[logIndex].speed
-    this.keepFrogInBounds()
-  }
-}
+// Controller.Collision.prototype.rideLog = function(direction, logIndex) {
+//   if(direction === "left") {
+//     this.character.x -= this.logs[logIndex].speed
+//     this.keepFrogInBounds()
+//   }
+//   else if(direction === "right") {
+//     this.character.x += this.logs[logIndex].speed
+//     this.keepFrogInBounds()
+//   }
+// }
 
-Controller.Collision.prototype.checkCollision = function(movingObject) {
-  if (this.character.x > movingObject.x + movingObject.width || this.character.x + this.character.width < movingObject.x || this.character.y > movingObject.y + movingObject.height || this.character.y + this.character.height < movingObject.y ) {
-    return false
-  };
-  return true;
-}
+// Controller.Collision.prototype.checkCollision = function(movingObject) {
+//   if (this.character.x > movingObject.x + movingObject.width || this.character.x + this.character.width < movingObject.x || this.character.y > movingObject.y + movingObject.height || this.character.y + this.character.height < movingObject.y ) {
+//     return false
+//   };
+//   return true;
+// }
 
-Controller.Collision.prototype.checkAllVehicleCollisions = function() {
-  for (var i in this.vehicles) {
-    if (this.checkCollision(this.vehicles[i])) {
-      console.log('you been hit, son')
-      // resetFrogPosition();
-      this.killFrog()
-    }
-  }
-}
+// Controller.Collision.prototype.checkAllVehicleCollisions = function() {
+//   for (var i in this.vehicles) {
+//     if (this.checkCollision(this.vehicles[i])) {
+//       console.log('you been hit, son')
+//       this.killFrog()
+//     }
+//   }
+// }
 
-Controller.Collision.prototype.checkAllLogCollisions = function() {
-  for (var i in this.logs) {
-    if (this.checkCollision(this.logs[i])) {
-      this.rideLog(this.logs[i].direction, i)
-    }
-  }
-}
+// Controller.Collision.prototype.checkAllLogCollisions = function() {
+//   for (var i in this.logs) {
+//     if (this.checkCollision(this.logs[i])) {
+//       this.rideLog(this.logs[i].direction, i)
+//     }
+//   }
+// }
 
-var collisionController = new Controller.Collision(frog)
+// var collisionController = new Controller.Collision(frog)
 
 
 var vehicleCreator = function() {

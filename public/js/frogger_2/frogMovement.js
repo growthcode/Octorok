@@ -17,8 +17,8 @@ Frog.prototype = new createjs.Sprite(froggerSpriteData, "frogJumpUp");
 var frog = new Frog()
 
 
-stage.addChild(frog);
-stage.update();
+// stage.addChild(frog);
+// stage.update();
 
 $(document).on('keyup', movefrog);
 
