@@ -2,47 +2,38 @@ var waterYLine = (stage.canvas.height*6/13).toFixed(2)
 
 frog['radius'] = frogRadius
 
-car1['width'] = carWidth
-car1['height'] = carHeight
-car2['width'] = carWidth
-car2['height'] = carHeight
-truck1['width'] = truckWidth
-truck1['height'] = truckHeight
-truck2['width'] = truckWidth
-truck2['height'] = truckHeight
-car4['width'] = carWidth
-car4['height'] = carHeight
-car5['width'] = carWidth
-car5['height'] = carHeight
-car6['width'] = carWidth
-car6['height'] = carHeight
-car7['width'] = carWidth
-car7['height'] = carHeight
-car8['width'] = carWidth
-car8['height'] = carHeight
-car9['width'] = carWidth
-car9['height'] = carHeight
-car10['width'] = carWidth
-car10['height'] = carHeight
-car11['width'] = carWidth
-car11['height'] = carHeight
-car12['width'] = carWidth
-car12['height'] = carHeight
-car13['width'] = carWidth
-car13['height'] = carHeight
-car14['width'] = carWidth
-car14['height'] = carHeight
-car15['width'] = carWidth
-car15['height'] = carHeight
-
-log1['width'] = logWidth
-log1['height'] = logHeight
-log2['width'] = logWidth
-log2['height'] = logHeight
-longLog1['width'] = longLogWidth
-longLog1['height'] = longLogHeight
-longLog2['width'] = longLogWidth
-longLog2['height'] = longLogHeight
+// car1['width'] = carWidth
+// car1['height'] = carHeight
+// car2['width'] = carWidth
+// car2['height'] = carHeight
+// truck1['width'] = truckWidth
+// truck1['height'] = truckHeight
+// truck2['width'] = truckWidth
+// truck2['height'] = truckHeight
+// car4['width'] = carWidth
+// car4['height'] = carHeight
+// car5['width'] = carWidth
+// car5['height'] = carHeight
+// car6['width'] = carWidth
+// car6['height'] = carHeight
+// car7['width'] = carWidth
+// car7['height'] = carHeight
+// car8['width'] = carWidth
+// car8['height'] = carHeight
+// car9['width'] = carWidth
+// car9['height'] = carHeight
+// car10['width'] = carWidth
+// car10['height'] = carHeight
+// car11['width'] = carWidth
+// car11['height'] = carHeight
+// car12['width'] = carWidth
+// car12['height'] = carHeight
+// car13['width'] = carWidth
+// car13['height'] = carHeight
+// car14['width'] = carWidth
+// car14['height'] = carHeight
+// car15['width'] = carWidth
+// car15['height'] = carHeight
 
 var resetFrogPosition = function() {
   frog.x = frogXStart
@@ -58,18 +49,18 @@ var keepFrogInBounds = function() {
 }
 
 var checkVehicleCollision = function(vehicle) {
-  var distX = Math.abs(frog.x - (vehicle.x+vehicle.width/2));
-  var distY = Math.abs(frog.y - (vehicle.y+vehicle.height/2));
+  var distX = Math.abs(frog.x - (vehicle.shape.x + vehicle.width/2));
+  var distY = Math.abs(frog.y - (vehicle.shape.y + vehicle.height/2));
 
-  if (distX > (vehicle.width/2 + frog.radius)) { return false; }
-  if (distY > (vehicle.height/2 + frog.radius)) { return false; }
+  if (distX > (vehicle.width / 2 + frog.radius)) { return false; }
+  if (distY > (vehicle.height / 2 + frog.radius)) { return false; }
 
-  if (distX <= (vehicle.width/2)) { return true; }
-  if (distY <= (vehicle.height/2)) { return true; }
+  if (distX <= (vehicle.width / 2)) { return true; }
+  if (distY <= (vehicle.height / 2)) { return true; }
 
-  var dx=distX-vehicle.width/2;
-  var dy=distY-vehicle.height/2;
-  return (dx*dx+dy*dy<=(frog.radius*frog.radius));
+  var dx = distX - vehicle.width / 2;
+  var dy = distY - vehicle.height / 2;
+  return (dx * dx + dy * dy <= (frog.radius * frog.radius));
 }
 
 var checkAllVehicleCollisions = function () {
@@ -85,6 +76,9 @@ var killFrogIfHitByVehicle = function() {
   }
 }
 
+createjs.Ticker.addEventListener('tick', checkAllVehicleCollisions);
+createjs.Ticker.addEventListener('tick', checkAllLogCollisions);
+
 var checkLogCollision = function(log) {
   var distX = Math.abs(frog.x - (log.x+log.width/2));
   var distY = Math.abs(frog.y - (log.y+log.height/2));
@@ -98,13 +92,24 @@ var checkLogCollision = function(log) {
 }
 
 var checkAllLogCollisions = function() {
-  if(checkLogCollision(log1) || checkLogCollision(longLog1)) {
-    frog.x += logLane1Vel;
+  for (var i in logMovingLeft) {
+    if (checkLogCollision(logMovingLeft[i])) {
+      frog.x += logVelocity;
+    }
+    if (checkLogCollision(logMovingLeft[i]))  {
+      frog.x -= logVelocity;
+    }
+    stage.update();
   }
-  if(checkLogCollision(log2) || checkLogCollision(longLog2)) {
-    frog.x -= logLane2Vel;
+  for (var i in movingObjectMovingRight) {
+    if (checkLogCollision(movingObjectMovingRight[i])) {
+      frog.x += logVelocity;
+    }
+    if( checkLogCollision(movingObjectMovingRight[i])) {
+      frog.x -= logVelocity;
+    }
+    stage.update();
   }
-  stage.update();
 }
 
 var checkWaterLogCollision = function(log) {
@@ -120,11 +125,21 @@ var checkWaterLogCollision = function(log) {
 }
 
 var checkAllWaterLogCollisions = function() {
-  if(checkWaterLogCollision(log1) || checkWaterLogCollision(longLog1)) {
-    return true;
+  for (var i in movingObjectMovingRight) {
+    if (checkWaterLogCollision(movingObjectMovingRight[i])) {
+      return true;
+    }
+    if (checkWaterLogCollision(movingObjectMovingRight[i])) {
+      return true;
+    }
   }
-  if(checkWaterLogCollision(log2) || checkWaterLogCollision(longLog2)) {
-    return true;
+  for (var i in logMovingLeft) {
+    if (checkWaterLogCollision(logMovingLeft[i])) {
+      return true;
+    }
+    if (checkWaterLogCollision(logMovingLeft[i])) {
+      return true;
+    }
   }
 }
 
@@ -136,9 +151,9 @@ var checkJumpInWater = function(){
 
 var checkWaterCollisions = function(){
   if(checkJumpInWater()){
-    // console.log("water line crossed")
-    // resetFrogPosition()
-    // numOfFrogLives -= 1
+    console.log("water line crossed")
+    resetFrogPosition()
+    numOfFrogLives -= 1
   }
   stage.update();
 }
