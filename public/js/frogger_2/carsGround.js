@@ -3,19 +3,17 @@ var vehicles = [];
 var vehicleCreator = function() {
   for (var i = 8; i < 13 ; i++) {
     if (i % 2 == 0) {
-      vehicles.push(new Vehicle(100, rowHeight * i - rowHeight - 5, "right"));
-      vehicles.push(new Vehicle(400, rowHeight * i - rowHeight - 5, "right"));
-      vehicles.push(new Vehicle(700, rowHeight * i - rowHeight - 5, "right"));
+      vehicles.push(new Vehicle(0, finishLineBoundary + (rowHeight * i - rowHeight), "right"));
+      vehicles.push(new Vehicle(140, finishLineBoundary + (rowHeight * i - rowHeight), "right"));
+      vehicles.push(new Vehicle(280, finishLineBoundary + (rowHeight * i - rowHeight), "right"));
     } else {
-      vehicles.push(new Vehicle(100, rowHeight * i - rowHeight - 5, "left"));
-      vehicles.push(new Vehicle(400, rowHeight * i - rowHeight - 5, "left"));
-      vehicles.push(new Vehicle(700, rowHeight * i - rowHeight - 5, "left"));
+      vehicles.push(new Vehicle(0, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
+      vehicles.push(new Vehicle(140, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
+      vehicles.push(new Vehicle(280, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
     }
   }
   for (var i in vehicles) {
     stage.addChild(vehicles[i]);
-    vehicles[i].width = vehicles[i].getBounds().width;
-    vehicles[i].height = vehicles[i].getBounds().width;
   }
   stage.update();
 }
