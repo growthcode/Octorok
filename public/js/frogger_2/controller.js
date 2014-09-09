@@ -1,19 +1,20 @@
 Game = {};
 
 Game.Controller = function(character) {
-  this.character = character || frog
+  this.character = character || frog;
   this.vehicles = [];
   this.logs = [];
+  this.waterYLine = 140;
 }
 
 Game.Controller.prototype.resetFrogPosition = function() {
-  this.character.x = frogXStart
-  this.character.y = frogYStart
+  this.character.x = frogXStart;
+  this.character.y = frogYStart;
 }
 
 Game.Controller.prototype.killFrog = function() {
-  this.character.lives -= 1
-  this.resetFrogPosition()
+  this.character.lives -= 1;
+  this.resetFrogPosition();
 }
 
 Game.Controller.prototype.killIfOutOfBounds = function() {
@@ -25,18 +26,18 @@ Game.Controller.prototype.killIfOutOfBounds = function() {
 
 Game.Controller.prototype.rideLog = function(direction, logIndex) {
   if(direction === "left") {
-    this.character.x -= this.logs[logIndex].speed
-    this.killIfOutOfBounds()
+    this.character.x -= this.logs[logIndex].speed;
+    this.killIfOutOfBounds();
   }
   else if(direction === "right") {
-    this.character.x += this.logs[logIndex].speed
-    this.killIfOutOfBounds()
+    this.character.x += this.logs[logIndex].speed;
+    this.killIfOutOfBounds();
   }
 }
 
 Game.Controller.prototype.checkCollision = function(movingObject) {
   if (this.character.x > movingObject.x + movingObject.width || this.character.x + this.character.width < movingObject.x || this.character.y > movingObject.y + movingObject.height || this.character.y + this.character.height < movingObject.y ) {
-    return false
+    return false;
   };
   return true;
 }
@@ -44,8 +45,8 @@ Game.Controller.prototype.checkCollision = function(movingObject) {
 Game.Controller.prototype.checkAllVehicleCollisions = function() {
   for (var i in this.vehicles) {
     if (this.checkCollision(this.vehicles[i])) {
-      console.log('you been hit, son')
-      this.killFrog()
+      console.log('you been hit, son');
+      this.killFrog();
     }
   }
 }
@@ -53,7 +54,35 @@ Game.Controller.prototype.checkAllVehicleCollisions = function() {
 Game.Controller.prototype.checkAllLogCollisions = function() {
   for (var i in this.logs) {
     if (this.checkCollision(this.logs[i])) {
-      this.rideLog(this.logs[i].direction, i)
+      this.rideLog(this.logs[i].direction, i);
+    }
+  }
+}
+
+Game.Controller.prototype.checkWaterCollision = function() {
+  if ((this.character.y < this.waterYLine) && !(this.checkAllWaterLogCollisions())) {
+    console.log("died in the water");
+    this.killFrog();
+  }
+}
+
+Game.Controller.prototype.logLandingArea = function(log) {
+  var distX = Math.abs(frog.x - (log.x+log.width/2));
+  var distY = Math.abs(frog.y - (log.y+log.height/2));
+
+  if (distX > (log.width/2.5 + frog.width / 2)) { return false; }
+  if (distY > (log.height/3 + frog.width / 2)) { return false; }
+
+  if (distX <= (log.width) && distY <= log.height) {
+    console.log("i'm on the log");
+    return true;
+  }
+}
+
+Game.Controller.prototype.checkAllWaterLogCollisions = function() {
+  for (var i in this.logs) {
+    if (this.logLandingArea(this.logs[i])) {
+      return true;
     }
   }
 }
@@ -123,40 +152,6 @@ Game.Controller.prototype.checkIfGameLost = function() {
   }
 }
 
-// TODO: MODIFY/IMPLEMENT THESE 4 FUNCTIONS
-var checkJumpInWater = function() {
-  if ((frog.y < waterYLine) && !(checkAllWaterLogCollisions())) {
-    return true
-  }
-}
-
-var checkWaterCollisions = function() {
-  if (checkJumpInWater()) {
-    console.log("water line crossed")
-    frog.resetPosition();
-  }
-}
-
-var checkWaterLogCollision = function(log) {
-  var distX = Math.abs(frog.x - (log.x+log.width/2));
-  var distY = Math.abs(frog.y - (log.y+log.height/2));
-
-  if (distX > (log.width/2.5 + frog.radius)) { return false; }
-  if (distY > (log.height/3 + frog.radius)) { return false; }
-
-  if (distX <= (log.width) && distY <= log.height) {
-    return true;
-  }
-}
-
-var checkAllWaterLogCollisions = function() {
-  for (var i in logs) {
-    if (checkWaterLogCollision(logs[i])) {
-      return true;
-    }
-  }
-}
-
 var frog = new Frog();
 var gameController = new Game.Controller();
 gameController.logCreator();
@@ -168,3 +163,4 @@ createjs.Ticker.addEventListener('tick', gameController.checkAllVehicleCollision
 createjs.Ticker.addEventListener('tick', gameController.checkAllLogCollisions.bind(gameController));
 createjs.Ticker.addEventListener("tick", gameController.moveObjects.bind(gameController));
 createjs.Ticker.addEventListener('tick', gameController.checkIfGameLost.bind(gameController));
+createjs.Ticker.addEventListener('tick', gameController.checkWaterCollision.bind(gameController));
