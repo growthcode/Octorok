@@ -4,6 +4,7 @@ Game.Controller = function(character) {
   this.character = character || frog;
   this.vehicles = [];
   this.logs = [];
+  this.slots = [];
   this.waterYLine = 140;
 }
 
@@ -156,13 +157,61 @@ Game.Controller.prototype.checkIfGameLost = function() {
   }
 }
 
+Game.Controller.prototype.createSlots = function(numberOfSlots) {
+  var leftBound = (11/399) * canvas.width;
+  var rightBound;
+    for(var i=0; i < numberOfSlots; i++) {
+      rightBound = leftBound + ((32/399) * canvas.width);
+      this.slots.push(new Game.Slot(leftBound, rightBound));
+      leftBound += (84.5/399)*canvas.width;
+    }
+  };
+
+Game.Controller.prototype.checkSlot = function(slot) {
+  if (this.character.x > slot.leftBound && this.character.x < slot.rightBound && this.character.y <= finishLineBoundary - rowHeight -.5) {
+    if (slot.active === false) {
+      slot.active = true;
+      console.log('You Hit A Slot!');
+    }
+    else if (slot.active === true) {
+      this.killFrog()
+      console.log('You Already Hit This Slot...')
+    }
+    this.resetFrogPosition()
+  }
+}
+
+Game.Controller.prototype.checkAllSlots = function() {
+  for (var i in this.slots) {
+    this.checkSlot(this.slots[i])
+  }
+  activeSlots = $.grep(this.slots, function(slot){
+    return slot.active === true;
+  })
+  if (activeSlots.length === this.slots.length) {
+    console.log('YOU WIN!')
+    // temporary: set active slots back to false to avoid infinite console.log
+    $.each(activeSlots, function(index, slot) {
+      slot.active = false
+    })
+  }
+}
+
+Game.Slot = function(leftBound, rightBound) {
+  this.leftBound = leftBound;
+  this.rightBound = rightBound;
+  this.active = false
+}
+
 var frog = new Frog();
 var gameController = new Game.Controller();
 gameController.logCreator();
 gameController.vehicleCreator();
+gameController.createSlots(5);
 stage.addChild(frog);
 stage.update();
 
+createjs.Ticker.addEventListener('tick', gameController.checkAllSlots.bind(gameController))
 createjs.Ticker.addEventListener('tick', gameController.checkAllVehicleCollisions.bind(gameController));
 createjs.Ticker.addEventListener('tick', gameController.checkAllLogCollisions.bind(gameController));
 createjs.Ticker.addEventListener("tick", gameController.moveObjects.bind(gameController));
