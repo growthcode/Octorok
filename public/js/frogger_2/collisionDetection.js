@@ -35,14 +35,25 @@ frog['radius'] = frogRadius
 // car15['width'] = carWidth
 // car15['height'] = carHeight
 
-// rectangle
-checkIntersection = function(rect1,rect2) {
-  if (rect1.x > rect2.x + rect2.width || rect1.x + rect1.width < rect2.x || rect1.y > rect2.y + rect2.height || rect1.y + rect1.height < rect2.y ) {
+CollisionController = {}
+
+CollisionController.Vehicle = function(character, vehicle) {
+  this.character = character;
+  this.vehicles = [];
+}
+
+CollisionController.Vehicle.prototype.checkIntersection = function(vehicle) {
+  if (this.character.x > vehicle.x + vehicle.width || this.character.x + this.character.width < vehicle.x || this.character.y > vehicle.y + vehicle.height || this.character.y + this.character.height < vehicle.y ) {
     return false
   };
   return true;
 }
 
+CollisionController.Vehicle.prototype.checkAllVehicleCollisions = function() {
+ return $.grep(this.vehicles, function(vehicle) {
+    return this.checkIntersection(vehicle) === true
+  }).length > 0
+}.bind(this)
 
 
 var resetFrogPosition = function() {
