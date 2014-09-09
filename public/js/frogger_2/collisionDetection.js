@@ -23,7 +23,7 @@ var checkAllVehicleCollisions = function () {
 
 var killFrogIfHitByVehicle = function() {
   if(checkAllVehicleCollisions()) {
-    resetFrogPosition();
+    frog.resetPosition();
     numOfFrogLives -= 1;
   }
 }
@@ -84,7 +84,7 @@ var checkJumpInWater = function() {
 var checkWaterCollisions = function() {
   if (checkJumpInWater()) {
     console.log("water line crossed")
-    resetFrogPosition()
+    frog.resetPosition()
     numOfFrogLives -= 1
   }
   stage.update();

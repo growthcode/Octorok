@@ -20,7 +20,7 @@ describe("Frogger Game: ", function () {
       expect(frog.y).toBeLessThan(borderHeight-frogRadius)
     });
     xit("is reset to the correct starting point", function() {
-      resetFrogPosition();
+      frog.resetPosition();
       expect(frog.x).toEqual(400);
       expect(frog.y).toEqual(565);
     });
