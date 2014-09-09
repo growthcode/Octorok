@@ -4,6 +4,7 @@ Game.Controller = function(character) {
   this.character = character || frog;
   this.vehicles = [];
   this.logs = [];
+  this.waterYLine = 140;
 }
 
 Game.Controller.prototype.resetFrogPosition = function() {
@@ -36,7 +37,7 @@ Game.Controller.prototype.rideLog = function(direction, logIndex) {
 
 Game.Controller.prototype.checkCollision = function(movingObject) {
   if (this.character.x > movingObject.x + movingObject.width || this.character.x + this.character.width < movingObject.x || this.character.y > movingObject.y + movingObject.height || this.character.y + this.character.height < movingObject.y ) {
-    return false
+    return false;
   };
   return true;
 }
@@ -59,10 +60,29 @@ Game.Controller.prototype.checkAllLogCollisions = function() {
 }
 
 Game.Controller.prototype.checkWaterCollision = function() {
-  if (this.character.y < 160 && this.character.y > 55) {
-    if (!this.checkAllLogCollisions) {
-      console.log("die in water");
-      this.killFrog();
+  if ((this.character.y < this.waterYLine) && !(this.checkAllWaterLogCollisions())) {
+    console.log("died in the water");
+    this.killFrog();
+  }
+}
+
+Game.Controller.prototype.logLandingArea = function(log) {
+  var distX = Math.abs(frog.x - (log.x+log.width/2));
+  var distY = Math.abs(frog.y - (log.y+log.height/2));
+
+  if (distX > (log.width/2.5 + frog.width / 2)) { return false; }
+  if (distY > (log.height/3 + frog.width / 2)) { return false; }
+
+  if (distX <= (log.width) && distY <= log.height) {
+    console.log("i'm on the log");
+    return true;
+  }
+}
+
+Game.Controller.prototype.checkAllWaterLogCollisions = function() {
+  for (var i in this.logs) {
+    if (this.logLandingArea(this.logs[i])) {
+      return true;
     }
   }
 }
@@ -129,35 +149,6 @@ Game.Controller.prototype.checkIfGameLost = function() {
     console.log("You Lost...");
     // temporary: set lives back to 3 to avoid infinite console.log
     this.character.lives += 3
-  }
-}
-
-// TODO: MODIFY/IMPLEMENT THESE 4 FUNCTIONS
-var checkJumpInWater = function() {
-  if ((frog.y < waterYLine) && !(checkAllWaterLogCollisions())) {
-    return true
-  }
-}
-
-
-
-var checkWaterLogCollision = function(log) {
-  var distX = Math.abs(frog.x - (log.x+log.width/2));
-  var distY = Math.abs(frog.y - (log.y+log.height/2));
-
-  if (distX > (log.width/2.5 + frog.radius)) { return false; }
-  if (distY > (log.height/3 + frog.radius)) { return false; }
-
-  if (distX <= (log.width) && distY <= log.height) {
-    return true;
-  }
-}
-
-var checkAllWaterLogCollisions = function() {
-  for (var i in logs) {
-    if (checkWaterLogCollision(logs[i])) {
-      return true;
-    }
   }
 }
 
