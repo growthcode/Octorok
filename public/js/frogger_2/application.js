@@ -17,23 +17,9 @@ var finishLineBoundary = landFinish.getBounds().height;
 var rowHeight = (canvas.height - finishLineBoundary) / 13;
 var columnWidth = canvas.width / 16;
 
-var Vehicle = function(posX, posY, direction) {
-  this.direction = direction;
-  this.x = posX;
-  this.y = posY;
-  this.height = this.getBounds().height;
-  this.width = this.getBounds().width;
-}
-  
-Vehicle.prototype = new createjs.Sprite(froggerSpriteData, "carSedan");
-Vehicle.prototype.speed = 5;
-
-var numOfFrogLives = 3;
-
 var checkIfGameLost = function() {
-  if (numOfFrogLives == 0) {
+  if (frog.lives == 0) {
     console.log("You Lost...");
-    numOfFrogLives = 3;
   }
 }
 

@@ -1,7 +1,7 @@
 Game = {};
 
 Game.Controller = function(character) {
-  this.character = character;
+  this.character = character || frog
   this.vehicles = [];
   this.logs = [];
 }
@@ -58,6 +58,63 @@ Game.Controller.prototype.checkAllLogCollisions = function() {
   }
 }
 
+Game.Controller.prototype.logCreator = function() {
+  for (var i = 1; i < 6 ; i++) {
+    if (i % 2 == 0) { 
+      this.logs.push(new Log(0, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
+      this.logs.push(new Log(200, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
+    } else {
+      this.logs.push(new Log(0, finishLineBoundary + (rowHeight * i - rowHeight), "right"));
+      this.logs.push(new Log(200, finishLineBoundary + (rowHeight * i - rowHeight), "right"));
+    }
+  }
+  for (var i in this.logs) {
+    stage.addChild(this.logs[i]);
+  }
+  stage.update();
+}
+
+Game.Controller.prototype.vehicleCreator = function() {
+  for (var i = 8; i < 13 ; i++) {
+    if (i % 2 == 0) {
+      this.vehicles.push(new Vehicle(0, finishLineBoundary + (rowHeight * i - rowHeight), "right"));
+      this.vehicles.push(new Vehicle(140, finishLineBoundary + (rowHeight * i - rowHeight), "right"));
+      this.vehicles.push(new Vehicle(280, finishLineBoundary + (rowHeight * i - rowHeight), "right"));
+    } else {
+      this.vehicles.push(new Vehicle(0, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
+      this.vehicles.push(new Vehicle(140, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
+      this.vehicles.push(new Vehicle(280, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
+    }
+  }
+  for (var i in this.vehicles) {
+    stage.addChild(this.vehicles[i]);
+  }
+  stage.update();
+}
+
+Game.Controller.prototype.moveObjects = function() {
+  for (var i in this.logs) {
+    if (this.logs[i].direction == "right") {
+      if (this.logs[i].x > stage.canvas.width + 100) { this.logs[i].x = -100 }
+        this.logs[i].x += this.logs[i].speed;
+    } else {
+      if (this.logs[i].x < -110) { this.logs[i].x = stage.canvas.width + 50 }
+        this.logs[i].x -= this.logs[i].speed;
+    }
+    stage.update();
+  }
+  for (var i in this.vehicles) {
+    if (this.vehicles[i].direction == "right") {
+      if (this.vehicles[i].x > stage.canvas.width + 100) { this.vehicles[i].x = -100 }
+        this.vehicles[i].x += this.vehicles[i].speed;
+    } else {
+      if (this.vehicles[i].x < -110) { this.vehicles[i].x = stage.canvas.width + 50 }
+        this.vehicles[i].x -= this.vehicles[i].speed;
+    }
+    stage.update();
+  }
+}
+
 var checkJumpInWater = function() {
   if ((frog.y < waterYLine) && !(checkAllWaterLogCollisions())) {
     return true
@@ -71,75 +128,16 @@ var checkWaterCollisions = function() {
   }
 }
 
-var logCreator = function() {
-  for (var i = 1; i < 6 ; i++) {
-    if (i % 2 == 0) { 
-      gameController.logs.push(new Log(0, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
-      gameController.logs.push(new Log(200, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
-    } else {
-      gameController.logs.push(new Log(0, finishLineBoundary + (rowHeight * i - rowHeight), "right"));
-      gameController.logs.push(new Log(200, finishLineBoundary + (rowHeight * i - rowHeight), "right"));
-    }
-  }
-  for (var i in gameController.logs) {
-    stage.addChild(gameController.logs[i]);
-  }
-  stage.update();
-}
-
 var frog = new Frog();
+var gameController = new Game.Controller();
+gameController.logCreator();
+gameController.vehicleCreator();
 stage.addChild(frog);
 stage.update();
 
-
-var vehicleCreator = function() {
-  for (var i = 8; i < 13 ; i++) {
-    if (i % 2 == 0) {
-      gameController.vehicles.push(new Vehicle(0, finishLineBoundary + (rowHeight * i - rowHeight), "right"));
-      gameController.vehicles.push(new Vehicle(140, finishLineBoundary + (rowHeight * i - rowHeight), "right"));
-      gameController.vehicles.push(new Vehicle(280, finishLineBoundary + (rowHeight * i - rowHeight), "right"));
-    } else {
-      gameController.vehicles.push(new Vehicle(0, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
-      gameController.vehicles.push(new Vehicle(140, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
-      gameController.vehicles.push(new Vehicle(280, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
-    }
-  }
-  for (var i in gameController.vehicles) {
-    stage.addChild(gameController.vehicles[i]);
-  }
-  stage.update();
-}
-
-var moveObjects = function() {
-  for (var i in gameController.logs) {
-    if (gameController.logs[i].direction == "right") {
-      if (gameController.logs[i].x > stage.canvas.width + 100) { gameController.logs[i].x = -100 }
-        gameController.logs[i].x += gameController.logs[i].speed;
-    } else {
-      if (gameController.logs[i].x < -110) { gameController.logs[i].x = stage.canvas.width + 50 }
-        gameController.logs[i].x -= gameController.logs[i].speed;
-    }
-    stage.update();
-  }
-  for (var i in gameController.vehicles) {
-    if (gameController.vehicles[i].direction == "right") {
-      if (gameController.vehicles[i].x > stage.canvas.width + 100) { gameController.vehicles[i].x = -100 }
-        gameController.vehicles[i].x += gameController.vehicles[i].speed;
-    } else {
-      if (gameController.vehicles[i].x < -110) { gameController.vehicles[i].x = stage.canvas.width + 50 }
-        gameController.vehicles[i].x -= gameController.vehicles[i].speed;
-    }
-    stage.update();
-  }
-}
-
-var gameController = new Game.Controller(frog);
-logCreator();
-vehicleCreator();
-
 createjs.Ticker.addEventListener('tick', gameController.checkAllVehicleCollisions.bind(gameController));
 createjs.Ticker.addEventListener('tick', gameController.checkAllLogCollisions.bind(gameController));
-createjs.Ticker.addEventListener("tick", moveObjects);
+createjs.Ticker.addEventListener("tick", gameController.moveObjects.bind(gameController));
 // var checkWaterLogCollision = function(log) {
 //   var distX = Math.abs(frog.x - (log.x+log.width/2));
 //   var distY = Math.abs(frog.y - (log.y+log.height/2));
