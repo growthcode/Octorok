@@ -11,27 +11,16 @@ var borderHeight=stage.canvas.height;
 var rowHeight = stage.canvas.height/13
 var columnWidth = stage.canvas.width/15
 
-var movingObject = function(type, posX, posY, direction) {
+var movingObject = function(posX, posY, direction) {
   this.direction = direction;
-  this.posX = posX;
-  this.posY = posY;
+  this.x = posX;
+  this.y = posY;
   this.height = rowHeight;
-  this.shape = new createjs.Shape();
-  if (type == "short") {
-    this.width = 50;
-    this.shape.graphics.beginFill("blue").drawRect(0, 0, this.width, this.height);
-  } else if (type == "medium") {
-    this.width = 75;
-    this.shape.graphics.beginFill("red").drawRect(0, 0, this.width, this.height);
-  } else {
-    this.width = 100;
-    this.shape.graphics.beginFill("green").drawRect(0, 0, this.width, this.height);
-  }  
 }
 
-// movingObject.prototype = new createjs.()
-
+movingObject.prototype = new createjs.Sprite(froggerSpriteData, "carSedan");
 movingObject.prototype.speed = 10;
+
 var numOfFrogLives = 3;
 
 var checkIfGameLost = function() {
