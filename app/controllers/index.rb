@@ -36,10 +36,12 @@ post '/users/sign_in' do
   if user
     session[:email]=user.email
     session[:id]=user.id
+    redirect '/'
   else
-
+    @error="Login Failed"
+    erb :sign_in
   end
-  redirect '/'
+
 end
 
 get '/sign_out' do
