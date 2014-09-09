@@ -24,6 +24,7 @@ end
 
 post '/users/sign_in' do
   user=User.find_by_email(params[:email])
+  redirect '/'
 end
 
 get '/frogger_1' do
