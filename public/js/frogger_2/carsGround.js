@@ -17,8 +17,16 @@ Controller.Collision.prototype.checkAllVehicleCollisions = function() {
   for (var i in this.vehicles) {
     if (this.checkIntersection(this.vehicles[i])) {
       console.log('you been hit, son')
-      resetFrogPosition();
+      // resetFrogPosition();
       numOfFrogLives -= 1
+    }
+  }
+}
+
+Controller.Collision.prototype.checkAllLogCollisions = function() {
+  for (var i in this.logs) {
+    if (this.checkIntersection(this.logs[i])) {
+      console.log('you touched a log')
     }
   }
 }
@@ -46,7 +54,7 @@ var vehicleCreator = function() {
 
 vehicleCreator();
 createjs.Ticker.addEventListener('tick', collisionController.checkAllVehicleCollisions.bind(collisionController))
-
+createjs.Ticker.addEventListener('tick', collisionController.checkAllLogCollisions.bind(collisionController))
 
 var carWidth=100;
 var carHeight=rowHeight - (canvas.height/60);
@@ -106,13 +114,13 @@ froggerEndGrass.scaleX = 2.3;
 froggerEndGrass.scaleY = .7;
 
 var moveObjects = function() {
-  for (var i in logs) {
-    if (logs[i].direction == "right") {
-      if (logs[i].x > stage.canvas.width + 100) { logs[i].x = -100 }
-        logs[i].x += logs[i].speed;
+  for (var i in collisionController.logs) {
+    if (collisionController.logs[i].direction == "right") {
+      if (collisionController.logs[i].x > stage.canvas.width + 100) { collisionController.logs[i].x = -100 }
+        collisionController.logs[i].x += collisionController.logs[i].speed;
     } else {
-      if (logs[i].x < -110) { logs[i].x = stage.canvas.width + 50 }
-        logs[i].x -= logs[i].speed;
+      if (collisionController.logs[i].x < -110) { collisionController.logs[i].x = stage.canvas.width + 50 }
+        collisionController.logs[i].x -= collisionController.logs[i].speed;
     }
     stage.update();
   }
