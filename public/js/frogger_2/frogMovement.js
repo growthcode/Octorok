@@ -6,14 +6,15 @@ var frogYStart = canvas.height - 17;
 var frog = new createjs.Sprite(froggerSpriteData, "frogJumpUp");
 
 var Frog = function(posX, posY) {
+  this.lives = 3
   var that = this;
   this.x = frogXStart;
   this.y = frogYStart;
   this.width = this.getBounds().width;
   this.height = this.getBounds().height;
   this.resetPosition = function() {
-    frog.x = frogXStart
-    frog.y = frogYStart
+    that.x = frogXStart
+    that.y = frogYStart
     stage.update();
   }
   this.keepInBounds = function() {
@@ -39,9 +40,6 @@ var Frog = function(posX, posY) {
 }
 Frog.prototype = new createjs.Sprite(froggerSpriteData, "frogJumpUp");
 var frog = new Frog()
-
-stage.addChild(frog);
-stage.update();
 
 function movefrog(event){
   if (event['keyCode'] === 39 ) {
