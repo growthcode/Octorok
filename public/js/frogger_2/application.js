@@ -13,11 +13,9 @@ var stage = new createjs.Stage('game-canvas');
 stage.addChild(landFinish);
 stage.update();
 
-var borderWidth = stage.canvas.width;
-var borderHeight = stage.canvas.height;
 var finishLineBoundary = landFinish.getBounds().height;
-var rowHeight = (stage.canvas.height - finishLineBoundary) / 13;
-var columnWidth = stage.canvas.width / 16;
+var rowHeight = (canvas.height - finishLineBoundary) / 13;
+var columnWidth = canvas.width / 16;
 
 var Vehicle = function(posX, posY, direction) {
   this.direction = direction;

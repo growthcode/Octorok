@@ -1,4 +1,3 @@
-var frogRadius= borderHeight / 26;
 var verticalMoveDistance = rowHeight;
 var horizontalMoveDistance = columnWidth;
 var frogXStart = (canvas.width / 2) - 23 / 2;
@@ -18,17 +17,17 @@ var Frog = function(posX, posY) {
     stage.update();
   }
   this.keepInBounds = function() {
-    if (that.x >= (borderWidth - frogRadius)) {
-      that.x = borderWidth - frogRadius;
+    if (that.x >= (canvas.width - that.width)) {
+      that.x = canvas.width - that.width;
     }
-    if (that.x <= frogRadius) {
-      that.x = frogRadius;
+    if (that.x <= that.width) {
+      that.x = that.width;
     }
-    if (that.y >= (borderHeight - frogRadius)) {
-      that.y = borderHeight - frogRadius;
+    if (that.y >= (canvas.height - that.height)) {
+      that.y = canvas.height - that.height;
     }
-    if (that.y <= frogRadius){
-      that.y = frogRadius;
+    if (that.y <= that.height){
+      that.y = that.height;
     }
   }
   this.move = function(direction) {
@@ -43,8 +42,6 @@ var frog = new Frog()
 
 stage.addChild(frog);
 stage.update();
-
-$(document).on('keyup', movefrog);
 
 function movefrog(event){
   if (event['keyCode'] === 39 ) {
@@ -62,3 +59,5 @@ function movefrog(event){
   frog.keepInBounds();
   stage.update();
 }
+
+$(document).on('keyup', movefrog);

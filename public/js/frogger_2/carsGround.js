@@ -17,7 +17,7 @@ Controller.Collision.prototype.checkAllVehicleCollisions = function() {
   for (var i in this.vehicles) {
     if (this.checkIntersection(this.vehicles[i])) {
       console.log('you been hit, son')
-      resetFrogPosition();
+      frog.resetPosition();
       numOfFrogLives -= 1
     }
   }
@@ -55,25 +55,25 @@ var truckHeight=rowHeight - (canvas.height/60);
 
 xDifference = 300;
 frogStartRoadXPos=0;
-frogStartRoadYPos=borderHeight - rowHeight * 0 + (canvas.height/120);
+frogStartRoadYPos=canvas.height - rowHeight * 0 + (canvas.height/120);
 car1StartXPos=100;
-car1StartYPos=borderHeight - rowHeight * 2 + (canvas.height/120);
+car1StartYPos=canvas.height - rowHeight * 2 + (canvas.height/120);
 car2StartXPos=100;
-car2StartYPos=borderHeight - rowHeight * 3 + (canvas.height/120);
+car2StartYPos=canvas.height - rowHeight * 3 + (canvas.height/120);
 carLane3StartXPos= 0;
-carLane3StartYPos=borderHeight - rowHeight * 4 + (canvas.height/120);
+carLane3StartYPos=canvas.height - rowHeight * 4 + (canvas.height/120);
 carLane4StartXPos= 0;
-carLane4StartYPos=borderHeight - rowHeight * 5 + (canvas.height/120);
+carLane4StartYPos=canvas.height - rowHeight * 5 + (canvas.height/120);
 carLane5StartXPos= 0;
-carLane5StartYPos=borderHeight - rowHeight * 6 + (canvas.height/120);
+carLane5StartYPos=canvas.height - rowHeight * 6 + (canvas.height/120);
 grassLane6XPos= 0;
-grassLane6YPos=borderHeight - rowHeight * 6 + (canvas.height/120);
+grassLane6YPos=canvas.height - rowHeight * 6 + (canvas.height/120);
 truck1StartXPos=400;
-truck1StartYPos=borderHeight - rowHeight * 2 + (canvas.height/120);
+truck1StartYPos=canvas.height - rowHeight * 2 + (canvas.height/120);
 truck2StartXPos=400;
-truck2StartYPos=borderHeight - rowHeight * 3 + (canvas.height/120);
+truck2StartYPos=canvas.height - rowHeight * 3 + (canvas.height/120);
 frogEndGrassXPos=0
-frogEndGrassYPos=borderHeight - rowHeight * 13 + (canvas.height/120);
+frogEndGrassYPos=canvas.height - rowHeight * 13 + (canvas.height/120);
 
 
 var lane1Vel=10;
