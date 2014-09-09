@@ -10,11 +10,6 @@ var Frog = function(posX, posY) {
   this.y = frogYStart;
   this.width = this.getBounds().width;
   this.height = this.getBounds().height;
-  this.resetPosition = function() {
-    that.x = frogXStart
-    that.y = frogYStart
-    stage.update();
-  }
   this.keepInBounds = function() {
     if (that.x >= (canvas.width - that.width)) {
       that.x = canvas.width - that.width;
@@ -40,7 +35,6 @@ Frog.prototype = new createjs.Sprite(froggerSpriteData, "frogJumpUp");
 
 function moveFrog(event){
   if (event['keyCode'] === 39 ) {
-    console.log(event);
     frog.move("right");
   }
   if (event['keyCode'] === 37 ) {
