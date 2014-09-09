@@ -16,3 +16,8 @@ stage.update();
 var finishLineBoundary = landFinish.getBounds().height;
 var rowHeight = (canvas.height - finishLineBoundary) / 13;
 var columnWidth = canvas.width / 16;
+
+var verticalMoveDistance = rowHeight;
+var horizontalMoveDistance = columnWidth;
+var frogXStart = (canvas.width / 2) - 23 / 2;
+var frogYStart = canvas.height - 20.5;
