@@ -1,4 +1,27 @@
-var vehicles = [];
+Controller.Collision = function(character) {
+  this.character = character;
+  this.vehicles = [];
+  this.logs = [];
+}
+
+Controller.Collision.prototype.checkIntersection = function(vehicle) {
+  if (this.character.x > vehicle.x + vehicle.width || this.character.x + this.character.width < vehicle.x || this.character.y > vehicle.y + vehicle.height || this.character.y + this.character.height < vehicle.y ) {
+    return false
+  };
+  return true;
+}
+
+Controller.Collision.prototype.checkAllVehicleCollisions = function() {
+  for (var i in this.vehicles) {
+    if (this.checkIntersection(this.vehicles[i])) {
+      console.log('you been hit, son')
+    }
+  }
+}
+
+var collisionController = new Controller.Collision(frog)
+
+// var vehicles = [];
 
 var vehicleCreator = function() {
   for (var i = 8; i < 13 ; i++) {
@@ -13,7 +36,7 @@ var vehicleCreator = function() {
     }
   }
   for (var i in collisionController.vehicles) {
-    stage.addChild(collisionController[vehicles.i]);
+    stage.addChild(collisionController.vehicles[i]);
     collisionController.vehicles[i].width = collisionController.vehicles[i].getBounds().width;
     collisionController.vehicles[i].height = collisionController.vehicles[i].getBounds().width;
   }
@@ -21,6 +44,9 @@ var vehicleCreator = function() {
 }
 
 vehicleCreator();
+
+createjs.Ticker.addEventListener('tick', collisionController.checkAllVehicleCollisions)
+
 
 var carWidth=100;
 var carHeight=rowHeight - (canvas.height/60);

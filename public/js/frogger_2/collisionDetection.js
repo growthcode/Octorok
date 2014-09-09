@@ -37,30 +37,32 @@ frog['radius'] = frogRadius
 
 Controller = {}
 
-Controller.Collision = function(character) {
-  this.character = character;
-  this.vehicles = [];
-  this.logs = [];
-}
+// Controller.Collision = function(character) {
+//   this.character = character;
+//   this.vehicles = [];
+//   this.logs = [];
+// }
 
-Controller.Collision.prototype.checkIntersection = function(vehicle) {
-  if (this.character.x > vehicle.x + vehicle.width || this.character.x + this.character.width < vehicle.x || this.character.y > vehicle.y + vehicle.height || this.character.y + this.character.height < vehicle.y ) {
-    return false
-  };
-  return true;
-}
+// Controller.Collision.prototype.checkIntersection = function(vehicle) {
+//   if (this.character.x > vehicle.x + vehicle.width || this.character.x + this.character.width < vehicle.x || this.character.y > vehicle.y + vehicle.height || this.character.y + this.character.height < vehicle.y ) {
+//     return false
+//   };
+//   return true;
+// }
 
-Controller.Collision.prototype.checkAllVehicleCollisions = function() {
-  for (var i in this.vehicles) {
-    if (this.checkIntersection(this.vehicles[i])) {
-      console.log('you been hit, son')
-    }
-  }
-}
+// Controller.Collision.prototype.checkAllVehicleCollisions = function() {
+//   for (var i in this.vehicles) {
+//     if (this.checkIntersection(this.vehicles[i])) {
+//       console.log('you been hit, son')
+//     }
+//   }
+// }
 
-var collisionController = new Controller.Collision(frog)
+// var collisionController = new Controller.Collision(frog)
+// createjs.Ticker.addEventListener('tick', collisionController.checkAllVehicleCollisions)
 
-createjs.Ticker.addEventListener('tick', collisionController.checkAllVehicleCollisions)
+// createjs.Ticker.addEventListener('tick', collisionController.checkIntersection(collisionController.vehicles[0]))
+
 //test data//
 // var car1 = {
 //   x: 100,

@@ -8,7 +8,8 @@ var frog = new createjs.Sprite(froggerSpriteData, "frogJumpUp");
 var Frog = function(posX, posY) {
   this.x = frogXStart;
   this.y = frogYStart;
-  this.height = rowHeight;
+  this.width = this.getBounds().width;
+  this.height = this.getBounds().height;
 }
 Frog.prototype = new createjs.Sprite(froggerSpriteData, "frogJumpUp");
 var frog = new Frog()
