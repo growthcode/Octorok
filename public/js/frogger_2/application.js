@@ -21,16 +21,15 @@ var rowHeight = (stage.canvas.height - finishLineBoundary) / 13;
 var columnWidth = stage.canvas.width / 16;
 
 
-Log.prototype = new createjs.Sprite(froggerSpriteData, "medLog");
-Log.prototype.speed = 10;
 
 var Vehicle = function(posX, posY, direction) {
   this.direction = direction;
   this.x = posX;
   this.y = posY;
-  this.height = rowHeight;
+  this.height = this.getBounds().height;
+  this.width = this.getBounds().width;
 }
-
+  
 Vehicle.prototype = new createjs.Sprite(froggerSpriteData, "carSedan");
 Vehicle.prototype.speed = 10;
 
