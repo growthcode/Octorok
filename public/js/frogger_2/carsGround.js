@@ -6,6 +6,15 @@ Controller.Collision = function(character) {
   this.logs = [];
 }
 
+Controller.Collision.prototype.rideLog = function(direction) {
+  if(direction === "left") {
+    this.character.x -= this.logs.speed
+  }
+  else if(direction === "right") {
+    this.character.x += this.logs.speed
+  }
+}
+
 Controller.Collision.prototype.checkIntersection = function(vehicle) {
   if (this.character.x > vehicle.x + vehicle.width || this.character.x + this.character.width < vehicle.x || this.character.y > vehicle.y + vehicle.height || this.character.y + this.character.height < vehicle.y ) {
     return false
@@ -26,7 +35,7 @@ Controller.Collision.prototype.checkAllVehicleCollisions = function() {
 Controller.Collision.prototype.checkAllLogCollisions = function() {
   for (var i in this.logs) {
     if (this.checkIntersection(this.logs[i])) {
-      console.log('you touched a log')
+      this.rideLog(this.logs[i].direction)
     }
   }
 }
