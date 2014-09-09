@@ -33,6 +33,7 @@ var Controller = function(player, bullet) {
   this._injurePlayer = function(player, damage) {
     console.log(damage + "taken off");
     player.hp -= damage;
+    that._displayHpBar(that._remainingHp(player));
   }
   this._checkIfPlayerAlive = function(player) {
     if (player.hp <= 0) {
@@ -55,6 +56,12 @@ var Controller = function(player, bullet) {
     bullet.alive = false;
     delete bullet;
     console.log(bullet + "was removed from canvas");
+  }
+  this._remainingHp = function(player) {
+    return Math.floor(player.hp);
+  }
+  this._displayHpBar = function(value) {
+    $('progress').attr('value', value);
   }
 }
 
