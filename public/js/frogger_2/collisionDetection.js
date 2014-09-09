@@ -35,25 +35,34 @@ frog['radius'] = frogRadius
 // car15['width'] = carWidth
 // car15['height'] = carHeight
 
-CollisionController = {}
+Controller = {}
 
-CollisionController.Vehicle = function(character) {
+Controller.Collision = function(character) {
   this.character = character;
   this.vehicles = [];
+  this.logs
 }
 
-CollisionController.Vehicle.prototype.checkIntersection = function(vehicle) {
+Controller.Collision.prototype.checkIntersection = function(vehicle) {
   if (this.character.x > vehicle.x + vehicle.width || this.character.x + this.character.width < vehicle.x || this.character.y > vehicle.y + vehicle.height || this.character.y + this.character.height < vehicle.y ) {
     return false
   };
   return true;
 }
 
-CollisionController.Vehicle.prototype.checkAllVehicleCollisions = function() {
- $.grep(this.vehicles, function(vehicle) {
-    return this.checkIntersection(vehicle) === true
-  }).length > 0
-}.bind(this)
+Controller.Collision.prototype.checkAllVehicleCollisions = function() {
+  for (var i in this.vehicles) {
+    if (this.checkIntersection(this.vehicles[i])) {
+      console.log('you been hit')
+    }
+    else {console.log('you safe')}
+  }
+
+  // return $(this.vehicles).each(function(index, value) {
+  //   return value
+  // })
+  // this.checkIntersection()
+}
 
 
 
@@ -79,10 +88,9 @@ var froggy = {
   height: 20
 }
 
-var controller = new CollisionController.Vehicle(froggy)
+var controller = new Controller.Collision(froggy)
 controller.vehicles.push(car1)
 controller.vehicles.push(car2)
-
 //
 
 var resetFrogPosition = function() {
