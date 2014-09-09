@@ -1,19 +1,19 @@
 Game = {};
 
 Game.Controller = function(character) {
-  this.character = character || frog
+  this.character = character || frog;
   this.vehicles = [];
   this.logs = [];
 }
 
 Game.Controller.prototype.resetFrogPosition = function() {
-  this.character.x = frogXStart
-  this.character.y = frogYStart
+  this.character.x = frogXStart;
+  this.character.y = frogYStart;
 }
 
 Game.Controller.prototype.killFrog = function() {
-  this.character.lives -= 1
-  this.resetFrogPosition()
+  this.character.lives -= 1;
+  this.resetFrogPosition();
 }
 
 Game.Controller.prototype.killIfOutOfBounds = function() {
@@ -25,12 +25,12 @@ Game.Controller.prototype.killIfOutOfBounds = function() {
 
 Game.Controller.prototype.rideLog = function(direction, logIndex) {
   if(direction === "left") {
-    this.character.x -= this.logs[logIndex].speed
-    this.killIfOutOfBounds()
+    this.character.x -= this.logs[logIndex].speed;
+    this.killIfOutOfBounds();
   }
   else if(direction === "right") {
-    this.character.x += this.logs[logIndex].speed
-    this.killIfOutOfBounds()
+    this.character.x += this.logs[logIndex].speed;
+    this.killIfOutOfBounds();
   }
 }
 
@@ -44,8 +44,8 @@ Game.Controller.prototype.checkCollision = function(movingObject) {
 Game.Controller.prototype.checkAllVehicleCollisions = function() {
   for (var i in this.vehicles) {
     if (this.checkCollision(this.vehicles[i])) {
-      console.log('you been hit, son')
-      this.killFrog()
+      console.log('you been hit, son');
+      this.killFrog();
     }
   }
 }
@@ -53,7 +53,7 @@ Game.Controller.prototype.checkAllVehicleCollisions = function() {
 Game.Controller.prototype.checkAllLogCollisions = function() {
   for (var i in this.logs) {
     if (this.checkCollision(this.logs[i])) {
-      this.rideLog(this.logs[i].direction, i)
+      this.rideLog(this.logs[i].direction, i);
     }
   }
 }
