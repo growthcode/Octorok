@@ -31,7 +31,7 @@ var Vehicle = function(posX, posY, direction) {
 }
   
 Vehicle.prototype = new createjs.Sprite(froggerSpriteData, "carSedan");
-Vehicle.prototype.speed = 10;
+Vehicle.prototype.speed = 5;
 
 var numOfFrogLives = 3;
 

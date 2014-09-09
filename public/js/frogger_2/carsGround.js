@@ -11,10 +11,14 @@ Controller.Collision.prototype.resetFrogPosition = function() {
   this.character.y = frogYStart
 }
 
+Controller.Collision.prototype.killFrog = function() {
+  this.character.lives -= 1
+  this.resetFrogPosition()
+}
+
 Controller.Collision.prototype.keepFrogInBounds = function() {
   if(this.character.x < 0 || (this.character.x+this.character.width) > borderWidth) {
-    this.resetFrogPosition()
-    numOfFrogLives -= 1;
+    this.killFrog()
     console.log('too far...')
   }
 }
@@ -42,7 +46,7 @@ Controller.Collision.prototype.checkAllVehicleCollisions = function() {
     if (this.checkCollision(this.vehicles[i])) {
       console.log('you been hit, son')
       // resetFrogPosition();
-      numOfFrogLives -= 1
+      this.killFrog()
     }
   }
 }

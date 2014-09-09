@@ -7,6 +7,7 @@ var frogYStart=borderHeight - frogRadius;
 var frog = new createjs.Sprite(froggerSpriteData, "frogJumpUp");
 
 var Frog = function(posX, posY) {
+  this.lives = 3
   this.x = frogXStart;
   this.y = frogYStart;
   this.width = this.getBounds().width;

@@ -7,7 +7,7 @@ var Log = function(posX, posY, direction) {
 }
 
 Log.prototype = new createjs.Sprite(froggerSpriteData, "smLog");
-Log.prototype.speed = 10;
+Log.prototype.speed = 5;
 
 // var logs = [];
 
