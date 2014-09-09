@@ -6,12 +6,12 @@ Controller.Collision = function(character) {
   this.logs = [];
 }
 
-Controller.Collision.prototype.rideLog = function(direction) {
+Controller.Collision.prototype.rideLog = function(direction, logIndex) {
   if(direction === "left") {
-    this.character.x -= this.logs.speed
+    this.character.x -= this.logs[logIndex].speed
   }
   else if(direction === "right") {
-    this.character.x += this.logs.speed
+    this.character.x += this.logs[logIndex].speed
   }
 }
 
@@ -35,7 +35,7 @@ Controller.Collision.prototype.checkAllVehicleCollisions = function() {
 Controller.Collision.prototype.checkAllLogCollisions = function() {
   for (var i in this.logs) {
     if (this.checkIntersection(this.logs[i])) {
-      this.rideLog(this.logs[i].direction)
+      this.rideLog(this.logs[i].direction, i)
     }
   }
 }
