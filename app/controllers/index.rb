@@ -6,11 +6,12 @@ get '/users' do
 end
 
 post '/users' do
-  @user=User.create(first_name: params[:first_name],
+  @user = User.new(first_name: params[:first_name],
                     last_name: params[:last_name],
                     username: params[:username],
-                    email: params[:email],
-                    password_hash: params[:password_hash])
+                    email: params[:email])
+  @user.password = params[:password_hash]
+  @user.save!
   redirect '/'
 end
 
@@ -23,7 +24,7 @@ get '/users/sign_in' do
 end
 
 post '/users/sign_in' do
-  user=User.find_by_email(params[:email])
+  user = User.find_by_email(params[:email])
   redirect '/'
 end
 
