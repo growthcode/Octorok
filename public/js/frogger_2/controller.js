@@ -45,6 +45,7 @@ Game.Controller.prototype.checkAllVehicleCollisions = function() {
   for (var i in this.vehicles) {
     if (this.checkCollision(this.vehicles[i])) {
       console.log('you been hit, son')
+      createjs.Sound.play("carHit");
       this.killFrog()
     }
   }
@@ -60,7 +61,7 @@ Game.Controller.prototype.checkAllLogCollisions = function() {
 
 Game.Controller.prototype.logCreator = function() {
   for (var i = 1; i < 6 ; i++) {
-    if (i % 2 == 0) { 
+    if (i % 2 == 0) {
       this.logs.push(new Log(0, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
       this.logs.push(new Log(200, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
     } else {
@@ -168,3 +169,19 @@ createjs.Ticker.addEventListener('tick', gameController.checkAllVehicleCollision
 createjs.Ticker.addEventListener('tick', gameController.checkAllLogCollisions.bind(gameController));
 createjs.Ticker.addEventListener("tick", gameController.moveObjects.bind(gameController));
 createjs.Ticker.addEventListener('tick', gameController.checkIfGameLost.bind(gameController));
+var yPossition = 20;
+
+var rect = new createjs.Shape();
+rect.graphics.beginFill("red").drawRect(0,0, 34, 30);
+rect.x = 11;
+rect.y = yPossition;
+
+var rect1 = new createjs.Shape();
+rect1.graphics.beginFill("red").drawRect(0,0, 34, 30);
+rect1.x = 96;
+rect1.y = yPossition;
+
+
+
+stage.addChild(rect, rect1);
+stage.update();

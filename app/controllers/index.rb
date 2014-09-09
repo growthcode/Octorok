@@ -6,12 +6,21 @@ get '/users' do
 end
 
 post '/users' do
-  @user=User.create(first_name: params[:first_name],
+  user = User.new(first_name: params[:first_name],
                     last_name: params[:last_name],
-                    user_name: params[:username],
-                    email: params[:email],
-                    password_hash: params[:password_hash])
-  redirect '/'
+                    username: params[:username],
+                    email: params[:email])
+  user.password = params[:password_hash]
+  # @user.save!
+
+  if user.save
+    session[:email]=user.email
+    session[:id]=user.id
+    redirect '/'
+  else
+    @errors = user.errors.full_messages
+    erb :sign_up
+  end
 end
 
 get '/users/new' do
@@ -23,7 +32,20 @@ get '/users/sign_in' do
 end
 
 post '/users/sign_in' do
-  user=User.find_by_email(params[:email])
+  user = User.find_by_email(params[:email])
+  if user
+    session[:email]=user.email
+    session[:id]=user.id
+    redirect '/'
+  else
+    @error="Login Failed"
+    erb :sign_in
+  end
+
+end
+
+get '/sign_out' do
+  session.clear
   redirect '/'
 end
 
