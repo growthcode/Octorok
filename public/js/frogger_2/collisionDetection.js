@@ -37,7 +37,7 @@ frog['radius'] = frogRadius
 
 CollisionController = {}
 
-CollisionController.Vehicle = function(character, vehicle) {
+CollisionController.Vehicle = function(character) {
   this.character = character;
   this.vehicles = [];
 }
@@ -50,11 +50,40 @@ CollisionController.Vehicle.prototype.checkIntersection = function(vehicle) {
 }
 
 CollisionController.Vehicle.prototype.checkAllVehicleCollisions = function() {
- return $.grep(this.vehicles, function(vehicle) {
+ $.grep(this.vehicles, function(vehicle) {
     return this.checkIntersection(vehicle) === true
   }).length > 0
 }.bind(this)
 
+
+
+//test data//
+var car1 = {
+  x: 100,
+  y: 100,
+  width: 20,
+  height: 20
+}
+
+var car2 = {
+  x: 200,
+  y: 200,
+  width: 20,
+  height: 20
+}
+
+var froggy = {
+  x: 110,
+  y: 110,
+  width: 20,
+  height: 20
+}
+
+var controller = new CollisionController.Vehicle(froggy)
+controller.vehicles.push(car1)
+controller.vehicles.push(car2)
+
+//
 
 var resetFrogPosition = function() {
   frog.x = frogXStart
@@ -98,7 +127,7 @@ var killFrogIfHitByVehicle = function() {
 }
 
 createjs.Ticker.addEventListener('tick', checkAllVehicleCollisions);
-createjs.Ticker.addEventListener('tick', checkAllLogCollisions);
+// createjs.Ticker.addEventListener('tick', checkAllLogCollisions);
 
 var checkLogCollision = function(log) {
   var distX = Math.abs(frog.x - (log.x+log.width/2));
@@ -180,6 +209,6 @@ var checkWaterCollisions = function(){
 }
 
 createjs.Ticker.addEventListener('tick', killFrogIfHitByVehicle);
-createjs.Ticker.addEventListener('tick', checkAllLogCollisions);
+// createjs.Ticker.addEventListener('tick', checkAllLogCollisions);
 createjs.Ticker.addEventListener('tick', keepFrogInBounds);
 createjs.Ticker.addEventListener('tick', checkWaterCollisions);
