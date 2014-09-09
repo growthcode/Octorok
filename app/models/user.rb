@@ -4,5 +4,4 @@ class User < ActiveRecord::Base
             :user_name, presence: true, uniqueness: true
             :email, presence: true, uniqueness: true
             :password_hash, presence: true, length: { minimum: 6 }
-
 end

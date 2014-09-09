@@ -6,7 +6,12 @@ get '/users' do
 end
 
 post '/users' do
-
+  @user=User.create(first_name: params[:first_name],
+                    last_name: params[:last_name],
+                    username: params[:username],
+                    email: params[:email],
+                    password: params[:email])
+  redirect '/'
 end
 
 get '/users/new' do
@@ -15,6 +20,10 @@ end
 
 get '/users/sign_in' do
   erb :sign_in
+end
+
+post '/users/sign_in' do
+  user=User.find_by_email(params[:email])
 end
 
 get '/frogger_1' do
