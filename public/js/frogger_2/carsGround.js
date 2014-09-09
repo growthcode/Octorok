@@ -3,27 +3,19 @@ var vehicles = [];
 var vehicleCreator = function() {
   for (var i = 8; i < 13 ; i++) {
     if (i % 2 == 0) {
-      vehicles.push(new movingObject("short", 100, rowHeight * i - rowHeight - 5, "right"));
-      vehicles.push(new movingObject("medium", 400, rowHeight * i - rowHeight - 5, "right"));
-      vehicles.push(new movingObject("large", 700, rowHeight * i - rowHeight - 5, "right"));
+      vehicles.push(new Vehicle(100, rowHeight * i - rowHeight - 5, "right"));
+      vehicles.push(new Vehicle(400, rowHeight * i - rowHeight - 5, "right"));
+      vehicles.push(new Vehicle(700, rowHeight * i - rowHeight - 5, "right"));
     } else {
-      vehicles.push(new movingObject("short", 100, rowHeight * i - rowHeight - 5, "left"));
-      vehicles.push(new movingObject("medium", 400, rowHeight * i - rowHeight - 5, "left"));
-      vehicles.push(new movingObject("large", 700, rowHeight * i - rowHeight - 5, "left"));
+      vehicles.push(new Vehicle(100, rowHeight * i - rowHeight - 5, "left"));
+      vehicles.push(new Vehicle(400, rowHeight * i - rowHeight - 5, "left"));
+      vehicles.push(new Vehicle(700, rowHeight * i - rowHeight - 5, "left"));
     }
   }
   for (var i in vehicles) {
-    if (vehicles[i].size == "short") {
-      vehicles[i].shape.x = vehicles[i].posX;
-      vehicles[i].shape.y = vehicles[i].posY;
-    } else if (vehicles[i].size == "medium") {
-      vehicles[i].shape.x = vehicles[i].posX;
-      vehicles[i].shape.y = vehicles[i].posY;
-    } else {
-      vehicles[i].shape.x = vehicles[i].posX;
-      vehicles[i].shape.y = vehicles[i].posY;
-    }
-    stage.addChild(vehicles[i].shape);
+    stage.addChild(vehicles[i]);
+    vehicles[i].width = vehicles[i].getBounds().width;
+    vehicles[i].height = vehicles[i].getBounds().width;
   }
   stage.update();
 }
@@ -88,41 +80,41 @@ froggerEndGrass.scaleX = 2.3;
 froggerEndGrass.scaleY = .7;
 
 
-var imageCar1 = new createjs.Bitmap("http://www.dundjinni.com/forums/uploads/lingster/817_NYS-impala.png");
-imageCar1.x = car1StartXPos - 10;
-imageCar1.y = car1StartYPos -10;
-imageCar1.scaleX = 0.12;
-imageCar1.scaleY = 0.12;
+// var imageCar1 = new createjs.Bitmap("http://www.dundjinni.com/forums/uploads/lingster/817_NYS-impala.png");
+// imageCar1.x = car1StartXPos - 10;
+// imageCar1.y = car1StartYPos -10;
+// imageCar1.scaleX = 0.12;
+// imageCar1.scaleY = 0.12;
 
-var imageTruck1 = new createjs.Bitmap("http://www.dundjinni.com/forums/uploads/GroovyDave/2BE_schoolbus_GD.png");
-imageTruck1.x = truck1StartXPos - 6;
-imageTruck1.y = truck1StartYPos -7;
-imageTruck1.scaleX = 0.11;
-imageTruck1.scaleY = 0.09;
+// var imageTruck1 = new createjs.Bitmap("http://www.dundjinni.com/forums/uploads/GroovyDave/2BE_schoolbus_GD.png");
+// imageTruck1.x = truck1StartXPos - 6;
+// imageTruck1.y = truck1StartYPos -7;
+// imageTruck1.scaleX = 0.11;
+// imageTruck1.scaleY = 0.09;
 
-var imageBus1 = new createjs.Bitmap("http://roadincorporated.com/images/uploads/ferrari_250/top.png");
-imageBus1.x = car1StartXPos - 10;
-imageBus1.y = car1StartYPos -10;
-imageBus1.scaleX = 0.15;
-imageBus1.scaleY = 0.15;
+// var imageBus1 = new createjs.Bitmap("http://roadincorporated.com/images/uploads/ferrari_250/top.png");
+// imageBus1.x = car1StartXPos - 10;
+// imageBus1.y = car1StartYPos -10;
+// imageBus1.scaleX = 0.15;
+// imageBus1.scaleY = 0.15;
 
-var imageCar2 = new createjs.Bitmap("http://roadincorporated.com/images/uploads/ferrari_250/top.png");
-imageCar2.x = car2StartXPos - 10;
-imageCar2.y = car2StartYPos -10;
-imageCar2.scaleX = 0.15;
-imageCar2.scaleY = 0.15;
+// var imageCar2 = new createjs.Bitmap("http://roadincorporated.com/images/uploads/ferrari_250/top.png");
+// imageCar2.x = car2StartXPos - 10;
+// imageCar2.y = car2StartYPos -10;
+// imageCar2.scaleX = 0.15;
+// imageCar2.scaleY = 0.15;
 
-var imagetruck2 = new createjs.Bitmap("http://www.dundjinni.com/forums/uploads/heruca/Fire_Truck2_SR_hrc.png");
-imagetruck2.x = truck2StartXPos -3;
-imagetruck2.y = truck2StartYPos - 3;
-imagetruck2.scaleX = 0.25;
-imagetruck2.scaleY = 0.15;
+// var imagetruck2 = new createjs.Bitmap("http://www.dundjinni.com/forums/uploads/heruca/Fire_Truck2_SR_hrc.png");
+// imagetruck2.x = truck2StartXPos -3;
+// imagetruck2.y = truck2StartYPos - 3;
+// imagetruck2.scaleX = 0.25;
+// imagetruck2.scaleY = 0.15;
 
-var imagebus2 = new createjs.Bitmap("http://www.clker.com/cliparts/6/2/7/e/w/Q/blue-bus-180-hi.png");
-imagebus2.x = 710;
-imagebus2.y = 440;
-imagebus2.scaleX = 0.3;
-imagebus2.scaleY = 0.3;
+// var imagebus2 = new createjs.Bitmap("http://www.clker.com/cliparts/6/2/7/e/w/Q/blue-bus-180-hi.png");
+// imagebus2.x = 710;
+// imagebus2.y = 440;
+// imagebus2.scaleX = 0.3;
+// imagebus2.scaleY = 0.3;
 
 // var imgLane1 = [imageCar1, imageTruck1, imageBus1];
 // var imgLane2 = [imageCar2, imagetruck2, imagebus2];
@@ -217,56 +209,27 @@ imagebus2.scaleY = 0.3;
 // stage.addChild(car1, car2, truck1, truck2, imgLane2[0], imgLane2[1], imgLane1[0],imgLane1[1], car4, car5, car6, car7, car8, car9, car10, car11, car12, car13, car14, car15, froggerSafeMedian, froggerStartRoad, froggerEndGrass);
 // stage.update();
 
-function tick(event) {
-  for (var i in vehicles) {
-    if (vehicles[i].direction == "right") {
-      if (vehicles[i].shape.x > stage.canvas.width + 100) { vehicles[i].shape.x = -100 }
-        vehicles[i].shape.x += vehicles[i].speed;
+var moveObjects = function() {
+  for (var i in logs) {
+    if (logs[i].direction == "right") {
+      if (logs[i].x > stage.canvas.width + 100) { logs[i].x = -100 }
+        logs[i].x += logs[i].speed;
     } else {
-      if (vehicles[i].shape.x < -110) { vehicles[i].shape.x = stage.canvas.width + 50 }
-        vehicles[i].shape.x -= vehicles[i].speed;
+      if (logs[i].x < -110) { logs[i].x = stage.canvas.width + 50 }
+        logs[i].x -= logs[i].speed;
     }
     stage.update();
   }
-  //   for (var i in lane1) {
-  //     if (lane1[i].x > stage.canvas.width + 100) { lane1[i].x = -200 }
-  //       lane1[i].x += lane1Vel
-  //   }
-  //   for (var i in imgLane1){
-  //    if (imgLane1[i].x > stage.canvas.width + 100) {imgLane1[i].x = -200}
-  //     imgLane1[i].x += lane1Vel
-  // }
-  // for(var i in imgLane2){
-  //   if (imgLane2[i].x < 0- 200) {imgLane2[i].x = 800}
-  //     imgLane2[i].x -= lane1Vel;
-  // }
-  // for (var i in lane2) {
-  //   if (lane2[i].x < 0 - 200) { lane2[i].x = 800 }
-  //     lane2[i].x -= lane2Vel
-  // }
-  // for (var i in lane3){
-  //   if (lane3[i].x > stage.canvas.width + 450){lane3[i].x = -200}
-  //     lane3[i].x += lane1Vel
-  // }
-  // for (var i in lane4){
-  //   if (lane4[i].x < 0 - 300) { lane4[i].x = 800}
-  //     lane4[i].x -= lane2Vel
-  // }
-  // for (var i in lane5){
-  //   if (lane5[i].x > stage.canvas.width + 450){lane5[i].x = -200}
-  //     lane5[i].x += lane1Vel
-  // }
-
-  for (var i in logs) {
-    if (logs[i].direction == "right") {
-      if (logs[i].shape.x > stage.canvas.width + 100) { logs[i].shape.x = -100 }
-        logs[i].shape.x += logs[i].speed;
+  for (var i in vehicles) {
+    if (vehicles[i].direction == "right") {
+      if (vehicles[i].x > stage.canvas.width + 100) { vehicles[i].x = -100 }
+        vehicles[i].x += vehicles[i].speed;
     } else {
-      if (logs[i].shape.x < -110) { logs[i].shape.x = stage.canvas.width + 50 }
-        logs[i].shape.x -= logs[i].speed;
+      if (vehicles[i].x < -110) { vehicles[i].x = stage.canvas.width + 50 }
+        vehicles[i].x -= vehicles[i].speed;
     }
     stage.update();
   }
 }
 
-createjs.Ticker.addEventListener("tick", tick);
+createjs.Ticker.addEventListener("tick", moveObjects);
