@@ -1,3 +1,9 @@
+<div id = "sign-in-error">
+  <%if @error%>
+    <%=@error%>
+  <%end%>
+</div>
+
 <form id="sign-in" method="post" action="/users/sign_in">
   <label class="label" for="email">Email</label>
   <input type="email" name="email" placeholder="e.g., me@example.com"><br>
