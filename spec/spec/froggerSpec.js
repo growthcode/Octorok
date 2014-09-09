@@ -1,33 +1,38 @@
 describe("Frogger Game: ", function () {
   
-  afterEach(function() {
-    document.body.removeChild(canvas);
+  describe("Vehicle model", function() {
+    it("is instantiated at the correct coordinates", function() {
+      var car = new Vehicle(10, 20, "right");
+      expect(car.x).toEqual(10);
+      expect(car.y).toEqual(20);
+    });
   });
   
-  describe("Car model", function() {
-    it("has a width of 50", function() {
-      expect(carWidth).toEqual(50);
-    });
-  });
-
+  
   describe("Frog", function() {
-    xit("cannot starts game within the horizontal boundaries", function() {
-      expect(frog.x).toBeGreaterThan(frogRadius)
-      expect(frog.x).toBeLessThan(borderWidth-frogRadius)
+    
+    beforeEach(function() {
+      var frog = new Frog(100, 100);
     });
-    xit("cannot starts game within the vertical boundaries", function() {
-      expect(frog.y).toBeGreaterThan(frogRadius)
-      expect(frog.y).toBeLessThan(borderHeight-frogRadius)
+    
+    it("starts game with 3 lives", function() {
+      expect(frog.lives).toEqual(3);
     });
-    xit("is reset to the correct starting point", function() {
-      resetFrogPosition();
-      expect(frog.x).toEqual(400);
-      expect(frog.y).toEqual(565);
+    it("is reset to the correct starting point", function() {
+      frog.resetPosition();
+      expect(frog.x).toEqual(frogXStart);
+      expect(frog.y).toEqual(frogYStart);
+    });
+    it("is not able to step outside of canvas boundaries", function() {
+      spyOn(frog, "keepInBounds");
+      moveFrog("right");
+      expect(frog.keepInBounds).toHaveBeenCalled();
     });
   });
 
-  describe("Collision with", function() {
-    xit("car resets the frog's position to starting point", function() {
+  describe("Collisions", function() {
+    xit("with a car reset the frog's position to starting point", function() {
+      
     });
     xit("log moves the frog along with the log", function() {
     });
