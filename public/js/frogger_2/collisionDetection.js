@@ -60,6 +60,7 @@ Controller.Collision.prototype.checkAllVehicleCollisions = function() {
 
 var collisionController = new Controller.Collision(frog)
 
+createjs.Ticker.addEventListener('tick', collisionController.checkAllVehicleCollisions)
 //test data//
 // var car1 = {
 //   x: 100,
