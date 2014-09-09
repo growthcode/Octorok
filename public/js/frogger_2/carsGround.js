@@ -6,9 +6,14 @@ Controller.Collision = function(character) {
   this.logs = [];
 }
 
+Controller.Collision.prototype.resetFrogPosition = function() {
+  this.character.x = frogXStart
+  this.character.y = frogYStart
+}
+
 Controller.Collision.prototype.keepFrogInBounds = function() {
   if(this.character.x < 0 || (this.character.x+this.character.width) > borderWidth) {
-    resetFrogPosition();
+    this.resetFrogPosition()
     numOfFrogLives -= 1;
     console.log('too far...')
   }
