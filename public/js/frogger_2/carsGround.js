@@ -1,24 +1,52 @@
-var vehicles = [];
+Controller = {}
+
+Controller.Collision = function(character) {
+  this.character = character;
+  this.vehicles = [];
+  this.logs = [];
+}
+
+Controller.Collision.prototype.checkIntersection = function(vehicle) {
+  if (this.character.x > vehicle.x + vehicle.width || this.character.x + this.character.width < vehicle.x || this.character.y > vehicle.y + vehicle.height || this.character.y + this.character.height < vehicle.y ) {
+    return false
+  };
+  return true;
+}
+
+Controller.Collision.prototype.checkAllVehicleCollisions = function() {
+  for (var i in this.vehicles) {
+    if (this.checkIntersection(this.vehicles[i])) {
+      console.log('you been hit, son')
+      resetFrogPosition();
+      numOfFrogLives -= 1
+    }
+  }
+}
+
+var collisionController = new Controller.Collision(frog)
+
 
 var vehicleCreator = function() {
   for (var i = 8; i < 13 ; i++) {
     if (i % 2 == 0) {
-      vehicles.push(new Vehicle(0, finishLineBoundary + (rowHeight * i - rowHeight), "right"));
-      vehicles.push(new Vehicle(140, finishLineBoundary + (rowHeight * i - rowHeight), "right"));
-      vehicles.push(new Vehicle(280, finishLineBoundary + (rowHeight * i - rowHeight), "right"));
+      collisionController.vehicles.push(new Vehicle(0, finishLineBoundary + (rowHeight * i - rowHeight), "right"));
+      collisionController.vehicles.push(new Vehicle(140, finishLineBoundary + (rowHeight * i - rowHeight), "right"));
+      collisionController.vehicles.push(new Vehicle(280, finishLineBoundary + (rowHeight * i - rowHeight), "right"));
     } else {
-      vehicles.push(new Vehicle(0, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
-      vehicles.push(new Vehicle(140, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
-      vehicles.push(new Vehicle(280, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
+      collisionController.vehicles.push(new Vehicle(0, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
+      collisionController.vehicles.push(new Vehicle(140, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
+      collisionController.vehicles.push(new Vehicle(280, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
     }
   }
-  for (var i in vehicles) {
-    stage.addChild(vehicles[i]);
+  for (var i in collisionController.vehicles) {
+    stage.addChild(collisionController.vehicles[i]);
   }
   stage.update();
 }
 
 vehicleCreator();
+createjs.Ticker.addEventListener('tick', collisionController.checkAllVehicleCollisions.bind(collisionController))
+
 
 var carWidth=100;
 var carHeight=rowHeight - (canvas.height/60);
@@ -88,13 +116,13 @@ var moveObjects = function() {
     }
     stage.update();
   }
-  for (var i in vehicles) {
-    if (vehicles[i].direction == "right") {
-      if (vehicles[i].x > stage.canvas.width + 100) { vehicles[i].x = -100 }
-        vehicles[i].x += vehicles[i].speed;
+  for (var i in collisionController.vehicles) {
+    if (collisionController.vehicles[i].direction == "right") {
+      if (collisionController.vehicles[i].x > stage.canvas.width + 100) { collisionController.vehicles[i].x = -100 }
+        collisionController.vehicles[i].x += collisionController.vehicles[i].speed;
     } else {
-      if (vehicles[i].x < -110) { vehicles[i].x = stage.canvas.width + 50 }
-        vehicles[i].x -= vehicles[i].speed;
+      if (collisionController.vehicles[i].x < -110) { collisionController.vehicles[i].x = stage.canvas.width + 50 }
+        collisionController.vehicles[i].x -= collisionController.vehicles[i].speed;
     }
     stage.update();
   }

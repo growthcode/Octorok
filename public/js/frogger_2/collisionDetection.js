@@ -1,98 +1,5 @@
 var waterYLine = (stage.canvas.height*6/13).toFixed(2)
 
-frog['radius'] = frogRadius
-
-// car1['width'] = carWidth
-// car1['height'] = carHeight
-// car2['width'] = carWidth
-// car2['height'] = carHeight
-// truck1['width'] = truckWidth
-// truck1['height'] = truckHeight
-// truck2['width'] = truckWidth
-// truck2['height'] = truckHeight
-// car4['width'] = carWidth
-// car4['height'] = carHeight
-// car5['width'] = carWidth
-// car5['height'] = carHeight
-// car6['width'] = carWidth
-// car6['height'] = carHeight
-// car7['width'] = carWidth
-// car7['height'] = carHeight
-// car8['width'] = carWidth
-// car8['height'] = carHeight
-// car9['width'] = carWidth
-// car9['height'] = carHeight
-// car10['width'] = carWidth
-// car10['height'] = carHeight
-// car11['width'] = carWidth
-// car11['height'] = carHeight
-// car12['width'] = carWidth
-// car12['height'] = carHeight
-// car13['width'] = carWidth
-// car13['height'] = carHeight
-// car14['width'] = carWidth
-// car14['height'] = carHeight
-// car15['width'] = carWidth
-// car15['height'] = carHeight
-
-Controller = {}
-
-Controller.Collision = function(character) {
-  this.character = character;
-  this.vehicles = [];
-  this.logs
-}
-
-Controller.Collision.prototype.checkIntersection = function(vehicle) {
-  if (this.character.x > vehicle.x + vehicle.width || this.character.x + this.character.width < vehicle.x || this.character.y > vehicle.y + vehicle.height || this.character.y + this.character.height < vehicle.y ) {
-    return false
-  };
-  return true;
-}
-
-Controller.Collision.prototype.checkAllVehicleCollisions = function() {
-  for (var i in this.vehicles) {
-    if (this.checkIntersection(this.vehicles[i])) {
-      console.log('you been hit')
-    }
-    else {console.log('you safe')}
-  }
-
-  // return $(this.vehicles).each(function(index, value) {
-  //   return value
-  // })
-  // this.checkIntersection()
-}
-
-
-
-//test data//
-var car1 = {
-  x: 100,
-  y: 100,
-  width: 20,
-  height: 20
-}
-
-var car2 = {
-  x: 200,
-  y: 200,
-  width: 20,
-  height: 20
-}
-
-var froggy = {
-  x: 110,
-  y: 110,
-  width: 20,
-  height: 20
-}
-
-var controller = new Controller.Collision(froggy)
-controller.vehicles.push(car1)
-controller.vehicles.push(car2)
-//
-
 var resetFrogPosition = function() {
   frog.x = frogXStart
   frog.y = frogYStart
@@ -133,9 +40,6 @@ var killFrogIfHitByVehicle = function() {
     numOfFrogLives -= 1;
   }
 }
-
-// createjs.Ticker.addEventListener('tick', checkAllVehicleCollisions);
-// createjs.Ticker.addEventListener('tick', checkAllLogCollisions);
 
 var checkLogCollision = function(log) {
   var distX = Math.abs(frog.x - (log.x+log.width/2));
@@ -198,8 +102,3 @@ var checkWaterCollisions = function() {
   }
   stage.update();
 }
-
-// createjs.Ticker.addEventListener('tick', killFrogIfHitByVehicle);
-// createjs.Ticker.addEventListener('tick', checkAllLogCollisions);
-// createjs.Ticker.addEventListener('tick', keepFrogInBounds);
-// createjs.Ticker.addEventListener('tick', checkWaterCollisions);
