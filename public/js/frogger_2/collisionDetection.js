@@ -35,7 +35,6 @@ frog['radius'] = frogRadius
 // car15['width'] = carWidth
 // car15['height'] = carHeight
 
-Controller = {}
 
 // Controller.Collision = function(character) {
 //   this.character = character;
@@ -85,9 +84,10 @@ Controller = {}
 //   height: 20
 // }
 
+// var controller = new Controller.Collision(frog)
 // controller.vehicles.push(car1)
 // controller.vehicles.push(car2)
-//
+// createjs.Ticker.addEventListener('tick', controller.checkAllVehicleCollisions)
 
 var resetFrogPosition = function() {
   frog.x = frogXStart

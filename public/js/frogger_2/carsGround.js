@@ -1,3 +1,5 @@
+Controller = {}
+
 Controller.Collision = function(character) {
   this.character = character;
   this.vehicles = [];
@@ -15,13 +17,14 @@ Controller.Collision.prototype.checkAllVehicleCollisions = function() {
   for (var i in this.vehicles) {
     if (this.checkIntersection(this.vehicles[i])) {
       console.log('you been hit, son')
+      resetFrogPosition();
+      numOfFrogLives -= 1
     }
   }
 }
 
 var collisionController = new Controller.Collision(frog)
 
-// var vehicles = [];
 
 var vehicleCreator = function() {
   for (var i = 8; i < 13 ; i++) {
@@ -44,8 +47,7 @@ var vehicleCreator = function() {
 }
 
 vehicleCreator();
-
-createjs.Ticker.addEventListener('tick', collisionController.checkAllVehicleCollisions)
+createjs.Ticker.addEventListener('tick', collisionController.checkAllVehicleCollisions.bind(collisionController))
 
 
 var carWidth=100;
