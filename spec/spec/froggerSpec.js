@@ -12,7 +12,7 @@ describe("Frogger Game: ", function () {
   describe("Frog", function() {
     
     beforeEach(function() {
-      var frog = new Frog(100, 100);
+      frog = new Frog(100, 100);
     });
     
     it("starts game with 3 lives", function() {
@@ -31,8 +31,21 @@ describe("Frogger Game: ", function () {
   });
 
   describe("Collisions", function() {
-    xit("with a car reset the frog's position to starting point", function() {
-      
+    
+    beforeEach(function() {
+      gameController.vehicles.push(new Vehicle(100, 100, "right"));
+    });
+    
+    it("with a car reset the frog's position to starting point", function() {
+      frog.x = 99;
+      frog.y = 99;
+      spyOn(gameController, "killFrog").and.callThrough();
+      spyOn(gameController, "resetFrogPosition").and.callThrough();
+      gameController.checkAllVehicleCollisions();
+      expect(gameController.killFrog).toHaveBeenCalled();
+      expect(gameController.resetFrogPosition).toHaveBeenCalled();
+      expect(frog.x).toEqual(frogXStart);
+      expect(frog.y).toEqual(frogYStart);
     });
     xit("log moves the frog along with the log", function() {
     });
