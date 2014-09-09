@@ -90,11 +90,11 @@ Game.Controller.prototype.checkAllWaterLogCollisions = function() {
 Game.Controller.prototype.logCreator = function() {
   for (var i = 1; i < 6 ; i++) {
     if (i % 2 == 0) { 
-      this.logs.push(new Log(0, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
-      this.logs.push(new Log(200, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
+      this.logs.push(new SmallLog(0, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
+      this.logs.push(new MediumLog(200, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
     } else {
-      this.logs.push(new Log(0, finishLineBoundary + (rowHeight * i - rowHeight), "right"));
-      this.logs.push(new Log(200, finishLineBoundary + (rowHeight * i - rowHeight), "right"));
+      this.logs.push(new SmallLog(0, finishLineBoundary + (rowHeight * i - rowHeight), "right"));
+      this.logs.push(new LargeLog(200, finishLineBoundary + (rowHeight * i - rowHeight), "right"));
     }
   }
   for (var i in this.logs) {
@@ -105,14 +105,18 @@ Game.Controller.prototype.logCreator = function() {
 
 Game.Controller.prototype.vehicleCreator = function() {
   for (var i = 8; i < 13 ; i++) {
-    if (i % 2 == 0) {
-      this.vehicles.push(new Vehicle(0, finishLineBoundary + (rowHeight * i - rowHeight), "right"));
-      this.vehicles.push(new Vehicle(140, finishLineBoundary + (rowHeight * i - rowHeight), "right"));
-      this.vehicles.push(new Vehicle(280, finishLineBoundary + (rowHeight * i - rowHeight), "right"));
+    if (i == 12) {
+      this.vehicles.push(new Sedan(0, 5 * i + (rowHeight * i - (rowHeight + 7)), "left"));
+      this.vehicles.push(new Sedan(140, 5 * i + (rowHeight * i - (rowHeight + 7)), "left"));
+      this.vehicles.push(new Sedan(280, 5 * i + (rowHeight * i - (rowHeight + 7)), "left"));
+    } else if (i % 2 == 0) {
+      this.vehicles.push(new Mazzeratti(0, 5 * i + (rowHeight * i - (rowHeight + 7)), "left"));
+      this.vehicles.push(new Sedan(140, 5 * i + (rowHeight * i - (rowHeight + 7)), "left"));
+      this.vehicles.push(new Mazzeratti(280, 5 * i + (rowHeight * i - (rowHeight + 7)), "left"));
     } else {
-      this.vehicles.push(new Vehicle(0, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
-      this.vehicles.push(new Vehicle(140, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
-      this.vehicles.push(new Vehicle(280, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
+      this.vehicles.push(new Ferrari(0, 5 * i + (rowHeight * i - (rowHeight + 7)), "right"));
+      this.vehicles.push(new Ferrari(140, 5 * i + (rowHeight * i - (rowHeight + 7)), "right"));
+      this.vehicles.push(new Ferrari(280, 5 * i + (rowHeight * i - (rowHeight + 7)), "right"));
     }
   }
   for (var i in this.vehicles) {
@@ -124,10 +128,10 @@ Game.Controller.prototype.vehicleCreator = function() {
 Game.Controller.prototype.moveObjects = function() {
   for (var i in this.logs) {
     if (this.logs[i].direction == "right") {
-      if (this.logs[i].x > stage.canvas.width + 100) { this.logs[i].x = -100 }
+      if (this.logs[i].x > stage.canvas.width + 180) { this.logs[i].x = -180 }
         this.logs[i].x += this.logs[i].speed;
     } else {
-      if (this.logs[i].x < -110) { this.logs[i].x = stage.canvas.width + 50 }
+      if (this.logs[i].x < -180) { this.logs[i].x = stage.canvas.width }
         this.logs[i].x -= this.logs[i].speed;
     }
     stage.update();
