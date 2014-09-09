@@ -6,12 +6,22 @@ Controller.Collision = function(character) {
   this.logs = [];
 }
 
+Controller.Collision.prototype.keepFrogInBounds = function() {
+  if(this.character.x < 0 || (this.character.x+this.character.width) > borderWidth) {
+    resetFrogPosition();
+    numOfFrogLives -= 1;
+    console.log('too far...')
+  }
+}
+
 Controller.Collision.prototype.rideLog = function(direction, logIndex) {
   if(direction === "left") {
     this.character.x -= this.logs[logIndex].speed
+    this.keepFrogInBounds()
   }
   else if(direction === "right") {
     this.character.x += this.logs[logIndex].speed
+    this.keepFrogInBounds()
   }
 }
 
