@@ -3,13 +3,13 @@ var logs = [];
 var logCreator = function() {
   for (var i = 2; i < 7 ; i++) {
     if (i % 2 == 0) {
-      logs.push(new movingObject(100, rowHeight * i - rowHeight, "left"));
-      logs.push(new movingObject(400, rowHeight * i - rowHeight, "left"));
-      logs.push(new movingObject(700, rowHeight * i - rowHeight, "left"));
+      logs.push(new Log(100, rowHeight * i - rowHeight, "left"));
+      logs.push(new Log(400, rowHeight * i - rowHeight, "left"));
+      logs.push(new Log(700, rowHeight * i - rowHeight, "left"));
     } else {
-      logs.push(new movingObject(100, rowHeight * i - rowHeight, "right"));
-      logs.push(new movingObject(400, rowHeight * i - rowHeight, "right"));
-      logs.push(new movingObject(700, rowHeight * i - rowHeight, "right"));
+      logs.push(new Log(100, rowHeight * i - rowHeight, "right"));
+      logs.push(new Log(400, rowHeight * i - rowHeight, "right"));
+      logs.push(new Log(700, rowHeight * i - rowHeight, "right"));
     }
   }
   for (var i in logs) {

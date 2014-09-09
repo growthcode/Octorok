@@ -3,13 +3,13 @@ var vehicles = [];
 var vehicleCreator = function() {
   for (var i = 8; i < 13 ; i++) {
     if (i % 2 == 0) {
-      vehicles.push(new movingObject(100, rowHeight * i - rowHeight - 5, "right"));
-      vehicles.push(new movingObject(400, rowHeight * i - rowHeight - 5, "right"));
-      vehicles.push(new movingObject(700, rowHeight * i - rowHeight - 5, "right"));
+      vehicles.push(new Vehicle(100, rowHeight * i - rowHeight - 5, "right"));
+      vehicles.push(new Vehicle(400, rowHeight * i - rowHeight - 5, "right"));
+      vehicles.push(new Vehicle(700, rowHeight * i - rowHeight - 5, "right"));
     } else {
-      vehicles.push(new movingObject(100, rowHeight * i - rowHeight - 5, "left"));
-      vehicles.push(new movingObject(400, rowHeight * i - rowHeight - 5, "left"));
-      vehicles.push(new movingObject(700, rowHeight * i - rowHeight - 5, "left"));
+      vehicles.push(new Vehicle(100, rowHeight * i - rowHeight - 5, "left"));
+      vehicles.push(new Vehicle(400, rowHeight * i - rowHeight - 5, "left"));
+      vehicles.push(new Vehicle(700, rowHeight * i - rowHeight - 5, "left"));
     }
   }
   for (var i in vehicles) {
@@ -210,16 +210,6 @@ froggerEndGrass.scaleY = .7;
 // stage.update();
 
 var moveObjects = function() {
-  for (var i in vehicles) {
-    if (vehicles[i].direction == "right") {
-      if (vehicles[i].x > stage.canvas.width + 100) { vehicles[i].x = -100 }
-        vehicles[i].x += vehicles[i].speed;
-    } else {
-      if (vehicles[i].x < -110) { vehicles[i].x = stage.canvas.width + 50 }
-        vehicles[i].x -= vehicles[i].speed;
-    }
-    stage.update();
-  }
   for (var i in logs) {
     if (logs[i].direction == "right") {
       if (logs[i].x > stage.canvas.width + 100) { logs[i].x = -100 }
@@ -230,35 +220,16 @@ var moveObjects = function() {
     }
     stage.update();
   }
-  //   for (var i in lane1) {
-  //     if (lane1[i].x > stage.canvas.width + 100) { lane1[i].x = -200 }
-  //       lane1[i].x += lane1Vel
-  //   }
-  //   for (var i in imgLane1){
-  //    if (imgLane1[i].x > stage.canvas.width + 100) {imgLane1[i].x = -200}
-  //     imgLane1[i].x += lane1Vel
-  // }
-  // for(var i in imgLane2){
-  //   if (imgLane2[i].x < 0- 200) {imgLane2[i].x = 800}
-  //     imgLane2[i].x -= lane1Vel;
-  // }
-  // for (var i in lane2) {
-  //   if (lane2[i].x < 0 - 200) { lane2[i].x = 800 }
-  //     lane2[i].x -= lane2Vel
-  // }
-  // for (var i in lane3){
-  //   if (lane3[i].x > stage.canvas.width + 450){lane3[i].x = -200}
-  //     lane3[i].x += lane1Vel
-  // }
-  // for (var i in lane4){
-  //   if (lane4[i].x < 0 - 300) { lane4[i].x = 800}
-  //     lane4[i].x -= lane2Vel
-  // }
-  // for (var i in lane5){
-  //   if (lane5[i].x > stage.canvas.width + 450){lane5[i].x = -200}
-  //     lane5[i].x += lane1Vel
-  // }
-
+  for (var i in vehicles) {
+    if (vehicles[i].direction == "right") {
+      if (vehicles[i].x > stage.canvas.width + 100) { vehicles[i].x = -100 }
+        vehicles[i].x += vehicles[i].speed;
+    } else {
+      if (vehicles[i].x < -110) { vehicles[i].x = stage.canvas.width + 50 }
+        vehicles[i].x -= vehicles[i].speed;
+    }
+    stage.update();
+  }
 }
 
 createjs.Ticker.addEventListener("tick", moveObjects);

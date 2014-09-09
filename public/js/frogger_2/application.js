@@ -11,15 +11,25 @@ var borderHeight=stage.canvas.height;
 var rowHeight = stage.canvas.height/13
 var columnWidth = stage.canvas.width/15
 
-var movingObject = function(posX, posY, direction) {
+var Log = function(posX, posY, direction) {
   this.direction = direction;
   this.x = posX;
   this.y = posY;
   this.height = rowHeight;
 }
 
-movingObject.prototype = new createjs.Sprite(froggerSpriteData, "carSedan");
-movingObject.prototype.speed = 10;
+Log.prototype = new createjs.Sprite(froggerSpriteData, "medLog");
+Log.prototype.speed = 10;
+
+var Vehicle = function(posX, posY, direction) {
+  this.direction = direction;
+  this.x = posX;
+  this.y = posY;
+  this.height = rowHeight;
+}
+
+Vehicle.prototype = new createjs.Sprite(froggerSpriteData, "carSedan");
+Vehicle.prototype.speed = 10;
 
 var numOfFrogLives = 3;
 
