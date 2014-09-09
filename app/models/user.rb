@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
-  validates :first_name, presence: true
-            :last_name, presence: true
-            :user_name, presence: true, uniqueness: true
-            :email, presence: true, uniqueness: true
-            :password_hash, presence: true, length: { minimum: 6 }
+  # validates  :first_name, presence: true
+  # validates  :last_name, presence: true
+  # validates  :user_name, presence: true, uniqueness: true
+  # validates  :email, presence: true, uniqueness: true
+  # validates  :password_hash, presence: true, length: { minimum: 6 }
 end

@@ -1,11 +1,7 @@
-<form id="sign-in" method="post" action="/users">
-  <label class="label" for="first_name">First Name</label>
-  <input type="text" name="first_name" placeholder="First Name"><br>
-  <label class="label" for="last_name">Last Name</label>
-  <input type="text" name="last_name" placeholder="Last Name"><br>
+<form id="sign-in" method="post" action="/users/sign_in">
   <label class="label" for="email">Email</label>
   <input type="email" name="email" placeholder="e.g., me@example.com"><br>
-  <label class="label" for="password">Password</label>
-  <input type="password" name="password" placeholder="6 or more characters"><br>
+  <label class="label" for="password_hash">Password</label>
+  <input type="password" name="password_hash" placeholder="6 or more characters"><br>
   <div class="submit"><input type="submit" value="Sign Up"></div>
 </form>
