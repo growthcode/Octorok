@@ -179,82 +179,82 @@ var imgLane4 = [lane4Image1, lane4Image2, lane4Image3, lane4Image4];
 var imgLane5 = [lane5Image1, lane5Image2, lane5Image3, lane5Image4]
 
 var car1 = new createjs.Shape();
-car1.graphics.beginFill("white").drawRect(0, 0, carWidth, carHeight);
+car1.graphics.beginFill("rgba(255,255,255,0)").drawRect(0, 0, carWidth, carHeight);
 car1.x = car1StartXPos;
 car1.y = car1StartYPos;
 
 var car2 = new createjs.Shape();
-car2.graphics.beginFill("white").drawRect(0, 0, carWidth, carHeight);
+car2.graphics.beginFill("rgba(255,255,255,0)").drawRect(0, 0, carWidth, carHeight);
 car2.x = car2StartXPos;
 car2.y = car2StartYPos;
 
 var truck1 = new createjs.Shape();
-truck1.graphics.beginFill("white").drawRect(0, 0, truckWidth, truckHeight);
+truck1.graphics.beginFill("rgba(255,255,255,0)").drawRect(0, 0, truckWidth, truckHeight);
 truck1.x = truck1StartXPos;
 truck1.y = truck1StartYPos;
 
 var truck2 = new createjs.Shape();
-truck2.graphics.beginFill("white").drawRect(0, 0, truckWidth, truckHeight);
+truck2.graphics.beginFill("rgba(255,255,255,0)").drawRect(0, 0, truckWidth, truckHeight);
 truck2.x = truck2StartXPos;
 truck2.y = truck2StartYPos;
 
 var car4 = new createjs.Shape();
-car4.graphics.beginFill("red").drawRect(0, 0, carWidth, carHeight);
+car4.graphics.beginFill("rgba(255,255,255,0)").drawRect(0, 0, carWidth, carHeight);
 car4.x = carLane3StartXPos + (xDifference *1);
 car4.y = carLane3StartYPos;
 
 var car5 = new createjs.Shape();
-car5.graphics.beginFill("blue").drawRect(0, 0, carWidth, carHeight);
+car5.graphics.beginFill("rgba(255,255,255,0)").drawRect(0, 0, carWidth, carHeight);
 car5.x = carLane3StartXPos + (xDifference * 2);
 car5.y = carLane3StartYPos;
 
 var car6 = new createjs.Shape();
-car6.graphics.beginFill("green").drawRect(0, 0, carWidth, carHeight);
+car6.graphics.beginFill("rgba(255,255,255,0)").drawRect(0, 0, carWidth, carHeight);
 car6.x = carLane3StartXPos + (xDifference * 3);
 car6.y = carLane3StartYPos;
 
 var car7 = new createjs.Shape();
-car7.graphics.beginFill("black").drawRect(0, 0, carWidth, carHeight);
+car7.graphics.beginFill("rgba(255,255,255,0)").drawRect(0, 0, carWidth, carHeight);
 car7.x = carLane3StartXPos + (xDifference * 4 );
 car7.y = carLane3StartYPos;
 
 var car8 = new createjs.Shape();
-car8.graphics.beginFill("red").drawRect(0, 0, carWidth, carHeight);
+car8.graphics.beginFill("rgba(255,255,255,0)").drawRect(0, 0, carWidth, carHeight);
 car8.x = carLane4StartXPos + (xDifference *1);
 car8.y = carLane4StartYPos;
 
 var car9 = new createjs.Shape();
-car9.graphics.beginFill("blue").drawRect(0, 0, carWidth, carHeight);
+car9.graphics.beginFill("rgba(255,255,255,0)").drawRect(0, 0, carWidth, carHeight);
 car9.x = carLane4StartXPos + (xDifference * 2);
 car9.y = carLane4StartYPos;
 
 var car10 = new createjs.Shape();
-car10.graphics.beginFill("green").drawRect(0, 0, carWidth, carHeight);
+car10.graphics.beginFill("rgba(255,255,255,0)").drawRect(0, 0, carWidth, carHeight);
 car10.x = carLane4StartXPos + (xDifference * 3);
 car10.y = carLane4StartYPos;
 
 var car11 = new createjs.Shape();
-car11.graphics.beginFill("green").drawRect(0, 0, carWidth, carHeight);
+car11.graphics.beginFill("rgba(255,255,255,0)").drawRect(0, 0, carWidth, carHeight);
 car11.x = carLane4StartXPos + (xDifference * 4 );
 car11.y = carLane4StartYPos;
 
 var car12 = new createjs.Shape();
-car12.graphics.beginFill("red").drawRect(0, 0, carWidth, carHeight);
+car12.graphics.beginFill("rgba(255,255,255,0)").drawRect(0, 0, carWidth, carHeight);
 car12.x = carLane4StartXPos + (xDifference *1);
 car12.y = carLane5StartYPos;
 
 var car13 = new createjs.Shape();
-car13.graphics.beginFill("blue").drawRect(0, 0, carWidth, carHeight);
+car13.graphics.beginFill("rgba(255,255,255,0)").drawRect(0, 0, carWidth, carHeight);
 car13.x = carLane4StartXPos + (xDifference * 2);
 car13.y = carLane5StartYPos;
 
 var car14 = new createjs.Shape();
-car14.graphics.beginFill("green").drawRect(0, 0, carWidth, carHeight);
+car14.graphics.beginFill("rgba(255,255,255,0)").drawRect(0, 0, carWidth, carHeight);
 car14.x = carLane4StartXPos + (xDifference * 3);
 car14.y = carLane5StartYPos;
 
 var car15 = new createjs.Shape();
-car15.graphics.beginFill("black").drawRect(0, 0, carWidth, carHeight);
+car15.graphics.beginFill("rgba(255,255,255,0)").drawRect(0, 0, carWidth, carHeight);
 car15.x = carLane4StartXPos + (xDifference * 4 );
 car15.y = carLane5StartYPos;
 
@@ -324,6 +324,7 @@ function tick(event) {
     if (logArray1[i].x > stage.canvas.width + 100) { logArray1[i].x = 0 }
     logArray1[i].x += logLane1Vel
   }
+
   for (var i in logArray2) {
     if (logArray2[i].x < 0 - 100) { logArray2[i].x = 800 }
     logArray2[i].x -= logLane2Vel
