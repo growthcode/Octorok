@@ -1,17 +1,4 @@
-var waterYLine = (stage.canvas.height*6/13).toFixed(2)
-
-var resetFrogPosition = function() {
-  frog.x = frogXStart
-  frog.y = frogYStart
-  stage.update
-}
-
-var keepFrogInBounds = function() {
-  if((frog.x-frog.radius) < 0 || (frog.x+frog.radius) > borderWidth) {
-    resetFrogPosition();
-    numOfFrogLives -= 1;
-  }
-}
+var waterYLine = (stage.canvas.height*6/13).toFixed(2);
 
 var checkVehicleCollision = function(vehicle) {
   var distX = Math.abs(frog.x - (vehicle.x + vehicle.width/2));
