@@ -1,3 +1,4 @@
+enable :sessions
 get '/' do
   erb :index
 end
@@ -11,8 +12,15 @@ post '/users' do
                     username: params[:username],
                     email: params[:email])
   @user.password = params[:password_hash]
-  @user.save!
-  redirect '/'
+  # @user.save!
+
+  if @user.save
+    redirect '/'
+  else
+    # @errors = @user.errors.full_messages
+    # @errors2 = @user.errors
+    erb :sign_up
+  end
 end
 
 get '/users/new' do
@@ -20,6 +28,7 @@ get '/users/new' do
 end
 
 get '/users/sign_in' do
+  session
   erb :sign_in
 end
 
