@@ -1,66 +1,3 @@
-// Controller = {}
-
-// Controller.Collision = function(character) {
-//   this.character = character;
-//   this.vehicles = [];
-//   this.logs = [];
-// }
-
-// Controller.Collision.prototype.resetFrogPosition = function() {
-//   this.character.x = frogXStart
-//   this.character.y = frogYStart
-// }
-
-// Controller.Collision.prototype.killFrog = function() {
-//   this.character.lives -= 1
-//   this.resetFrogPosition()
-// }
-
-// Controller.Collision.prototype.keepFrogInBounds = function() {
-//   if(this.character.x < 0 || (this.character.x+this.character.width) > borderWidth) {
-//     this.killFrog()
-//     console.log('too far...')
-//   }
-// }
-
-// Controller.Collision.prototype.rideLog = function(direction, logIndex) {
-//   if(direction === "left") {
-//     this.character.x -= this.logs[logIndex].speed
-//     this.keepFrogInBounds()
-//   }
-//   else if(direction === "right") {
-//     this.character.x += this.logs[logIndex].speed
-//     this.keepFrogInBounds()
-//   }
-// }
-
-// Controller.Collision.prototype.checkCollision = function(movingObject) {
-//   if (this.character.x > movingObject.x + movingObject.width || this.character.x + this.character.width < movingObject.x || this.character.y > movingObject.y + movingObject.height || this.character.y + this.character.height < movingObject.y ) {
-//     return false
-//   };
-//   return true;
-// }
-
-// Controller.Collision.prototype.checkAllVehicleCollisions = function() {
-//   for (var i in this.vehicles) {
-//     if (this.checkCollision(this.vehicles[i])) {
-//       console.log('you been hit, son')
-//       this.killFrog()
-//     }
-//   }
-// }
-
-// Controller.Collision.prototype.checkAllLogCollisions = function() {
-//   for (var i in this.logs) {
-//     if (this.checkCollision(this.logs[i])) {
-//       this.rideLog(this.logs[i].direction, i)
-//     }
-//   }
-// }
-
-// var collisionController = new Controller.Collision(frog)
-
-
 var vehicleCreator = function() {
   for (var i = 8; i < 13 ; i++) {
     if (i % 2 == 0) {
@@ -90,25 +27,25 @@ var truckHeight=rowHeight - (canvas.height/60);
 
 xDifference = 300;
 frogStartRoadXPos=0;
-frogStartRoadYPos=borderHeight - rowHeight * 0 + (canvas.height/120);
+frogStartRoadYPos=canvas.height - rowHeight * 0 + (canvas.height/120);
 car1StartXPos=100;
-car1StartYPos=borderHeight - rowHeight * 2 + (canvas.height/120);
+car1StartYPos=canvas.height - rowHeight * 2 + (canvas.height/120);
 car2StartXPos=100;
-car2StartYPos=borderHeight - rowHeight * 3 + (canvas.height/120);
+car2StartYPos=canvas.height - rowHeight * 3 + (canvas.height/120);
 carLane3StartXPos= 0;
-carLane3StartYPos=borderHeight - rowHeight * 4 + (canvas.height/120);
+carLane3StartYPos=canvas.height - rowHeight * 4 + (canvas.height/120);
 carLane4StartXPos= 0;
-carLane4StartYPos=borderHeight - rowHeight * 5 + (canvas.height/120);
+carLane4StartYPos=canvas.height - rowHeight * 5 + (canvas.height/120);
 carLane5StartXPos= 0;
-carLane5StartYPos=borderHeight - rowHeight * 6 + (canvas.height/120);
+carLane5StartYPos=canvas.height - rowHeight * 6 + (canvas.height/120);
 grassLane6XPos= 0;
-grassLane6YPos=borderHeight - rowHeight * 6 + (canvas.height/120);
+grassLane6YPos=canvas.height - rowHeight * 6 + (canvas.height/120);
 truck1StartXPos=400;
-truck1StartYPos=borderHeight - rowHeight * 2 + (canvas.height/120);
+truck1StartYPos=canvas.height - rowHeight * 2 + (canvas.height/120);
 truck2StartXPos=400;
-truck2StartYPos=borderHeight - rowHeight * 3 + (canvas.height/120);
+truck2StartYPos=canvas.height - rowHeight * 3 + (canvas.height/120);
 frogEndGrassXPos=0
-frogEndGrassYPos=borderHeight - rowHeight * 13 + (canvas.height/120);
+frogEndGrassYPos=canvas.height - rowHeight * 13 + (canvas.height/120);
 
 
 var lane1Vel=10;

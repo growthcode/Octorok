@@ -1,4 +1,4 @@
-var winBlockWidth = 50;
+var winBlockWidth = 35;
 var winBlockHeight = 45;
 var rightDifference = 10;
 
@@ -29,5 +29,9 @@ farRightBlock.y = 0;
 
 stage.addChild(farLeftBlock, midLeftBlock, midBlock, midRigtBlock, farRightBlock);
 stage.update();
+
+var slotWidth = 35;
+var leftBorder = 10;
+var rightBorder = 15;
 
 

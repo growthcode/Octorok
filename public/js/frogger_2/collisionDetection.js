@@ -20,6 +20,17 @@ Controller.Collision.prototype.keepFrogInBounds = function() {
   if(this.character.x < 0 || (this.character.x+this.character.width) > borderWidth) {
     this.killFrog()
     console.log('too far...')
+
+var checkAllVehicleCollisions = function () {
+ return $.grep(vehicles, function(value) {
+    return checkVehicleCollision(value) === true
+  }).length > 0
+}
+
+var killFrogIfHitByVehicle = function() {
+  if(checkAllVehicleCollisions()) {
+    frog.resetPosition();
+    numOfFrogLives -= 1;
   }
 }
 
@@ -58,8 +69,24 @@ Controller.Collision.prototype.checkAllLogCollisions = function() {
   }
 }
 
+var checkJumpInWater = function() {
+  if ((frog.y < waterYLine) && !(checkAllWaterLogCollisions())) {
+    return true
+  }
+}
+
+var checkWaterCollisions = function() {
+  if (checkJumpInWater()) {
+    console.log("water line crossed")
+    frog.resetPosition()
+    numOfFrogLives -= 1
+  }
+}
+
 var collisionController = new Controller.Collision(frog)
 
+
+var waterYLine = (stage.canvas.height*6/13).toFixed(2);
 // var waterYLine = (stage.canvas.height*6/13).toFixed(2)
 
 // var resetFrogPosition = function() {

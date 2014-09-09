@@ -13,14 +13,14 @@ describe("Frogger Game: ", function () {
   describe("Frog", function() {
     xit("cannot starts game within the horizontal boundaries", function() {
       expect(frog.x).toBeGreaterThan(frogRadius)
-      expect(frog.x).toBeLessThan(borderWidth-frogRadius)
+      expect(frog.x).toBeLessThan(canvas.width-frogRadius)
     });
     xit("cannot starts game within the vertical boundaries", function() {
       expect(frog.y).toBeGreaterThan(frogRadius)
-      expect(frog.y).toBeLessThan(borderHeight-frogRadius)
+      expect(frog.y).toBeLessThan(canvas.height-frogRadius)
     });
     xit("is reset to the correct starting point", function() {
-      resetFrogPosition();
+      frog.resetPosition();
       expect(frog.x).toEqual(400);
       expect(frog.y).toEqual(565);
     });
