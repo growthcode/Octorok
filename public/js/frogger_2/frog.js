@@ -3,8 +3,6 @@ var horizontalMoveDistance = columnWidth;
 var frogXStart = (canvas.width / 2) - 23 / 2;
 var frogYStart = canvas.height - 17;
 
-var frog = new createjs.Sprite(froggerSpriteData, "frogJumpUp");
-
 var Frog = function(posX, posY) {
   this.lives = 3
   var that = this;
@@ -39,9 +37,8 @@ var Frog = function(posX, posY) {
   }
 }
 Frog.prototype = new createjs.Sprite(froggerSpriteData, "frogJumpUp");
-var frog = new Frog()
 
-function movefrog(event){
+function moveFrog(event){
   if (event['keyCode'] === 39 ) {
     frog.move("right");
   }
@@ -58,4 +55,4 @@ function movefrog(event){
   stage.update();
 }
 
-$(document).on('keyup', movefrog);
+$(document).on('keyup', moveFrog);
