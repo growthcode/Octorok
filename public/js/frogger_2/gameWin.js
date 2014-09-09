@@ -46,7 +46,7 @@ Win.Controller = function(character, slot) {
         numOfFrogLives -= 1
         console.log('You Already Hit This Slot...')
       }
-      resetFrogPosition();
+      frog.resetPosition();
     }
   }.bind(this)
 }
