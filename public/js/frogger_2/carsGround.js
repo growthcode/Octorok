@@ -15,8 +15,8 @@ Controller.Collision.prototype.rideLog = function(direction, logIndex) {
   }
 }
 
-Controller.Collision.prototype.checkIntersection = function(vehicle) {
-  if (this.character.x > vehicle.x + vehicle.width || this.character.x + this.character.width < vehicle.x || this.character.y > vehicle.y + vehicle.height || this.character.y + this.character.height < vehicle.y ) {
+Controller.Collision.prototype.checkCollision = function(movingObject) {
+  if (this.character.x > movingObject.x + movingObject.width || this.character.x + this.character.width < movingObject.x || this.character.y > movingObject.y + movingObject.height || this.character.y + this.character.height < movingObject.y ) {
     return false
   };
   return true;
@@ -24,7 +24,7 @@ Controller.Collision.prototype.checkIntersection = function(vehicle) {
 
 Controller.Collision.prototype.checkAllVehicleCollisions = function() {
   for (var i in this.vehicles) {
-    if (this.checkIntersection(this.vehicles[i])) {
+    if (this.checkCollision(this.vehicles[i])) {
       console.log('you been hit, son')
       // resetFrogPosition();
       numOfFrogLives -= 1
@@ -34,7 +34,7 @@ Controller.Collision.prototype.checkAllVehicleCollisions = function() {
 
 Controller.Collision.prototype.checkAllLogCollisions = function() {
   for (var i in this.logs) {
-    if (this.checkIntersection(this.logs[i])) {
+    if (this.checkCollision(this.logs[i])) {
       this.rideLog(this.logs[i].direction, i)
     }
   }
