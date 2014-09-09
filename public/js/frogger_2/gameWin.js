@@ -46,7 +46,7 @@ Win.Controller = function(character, slot) {
   this.character = character
   this.slot = slot
   this.checkSlot = function() {
-    if (this.character.x > this.slot.leftBound && this.character.x < this.slot.rightBound && this.character.y <= finishLineBoundary - rowHeight) {
+    if (this.character.x > this.slot.leftBound && this.character.x < this.slot.rightBound && this.character.y <= finishLineBoundary - rowHeight -.5) {
       if (this.slot.active === false) {
         this.slot.active = true;
         console.log('You Hit A Slot!');
