@@ -35,6 +35,64 @@ frog['radius'] = frogRadius
 // car15['width'] = carWidth
 // car15['height'] = carHeight
 
+Controller = {}
+
+Controller.Collision = function(character) {
+  this.character = character;
+  this.vehicles = [];
+  this.logs
+}
+
+Controller.Collision.prototype.checkIntersection = function(vehicle) {
+  if (this.character.x > vehicle.x + vehicle.width || this.character.x + this.character.width < vehicle.x || this.character.y > vehicle.y + vehicle.height || this.character.y + this.character.height < vehicle.y ) {
+    return false
+  };
+  return true;
+}
+
+Controller.Collision.prototype.checkAllVehicleCollisions = function() {
+  for (var i in this.vehicles) {
+    if (this.checkIntersection(this.vehicles[i])) {
+      console.log('you been hit')
+    }
+    else {console.log('you safe')}
+  }
+
+  // return $(this.vehicles).each(function(index, value) {
+  //   return value
+  // })
+  // this.checkIntersection()
+}
+
+
+
+//test data//
+var car1 = {
+  x: 100,
+  y: 100,
+  width: 20,
+  height: 20
+}
+
+var car2 = {
+  x: 200,
+  y: 200,
+  width: 20,
+  height: 20
+}
+
+var froggy = {
+  x: 110,
+  y: 110,
+  width: 20,
+  height: 20
+}
+
+var controller = new Controller.Collision(froggy)
+controller.vehicles.push(car1)
+controller.vehicles.push(car2)
+//
+
 var resetFrogPosition = function() {
   frog.x = frogXStart
   frog.y = frogYStart
