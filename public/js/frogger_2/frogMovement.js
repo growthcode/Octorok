@@ -1,5 +1,6 @@
 var frogRadius= borderHeight / 26;
-var moveDistance = borderHeight / 13
+var verticalMoveDistance = rowHeight;
+var horizontalMoveDistance = columnWidth;
 var frogXStart=borderWidth/2;
 var frogYStart=borderHeight - frogRadius;
 
@@ -23,25 +24,25 @@ $(document).on('keyup', movefrog);
 function movefrog(event){
 
   if (event['keyCode'] === 39 ) {
-    frog.x = frog.x + moveDistance
+    frog.x = frog.x + horizontalMoveDistance;
     if(frog.x >= (borderWidth-frogRadius)){
       frog.x = borderWidth-frogRadius;
     }
   }
   if (event['keyCode'] === 37 ) {
-    frog.x = frog.x - moveDistance
+    frog.x = frog.x - horizontalMoveDistance;
     if(frog.x <= frogRadius){
       frog.x = frogRadius;
     }
   }
   if (event['keyCode'] === 40 ) {
-    frog.y = frog.y + moveDistance
+    frog.y = frog.y + verticalMoveDistance;
     if(frog.y >= (borderHeight - frogRadius)){
       frog.y = borderHeight - frogRadius;
     }
   }
   if (event['keyCode'] === 38 ) {
-    frog.y = frog.y - moveDistance
+    frog.y = frog.y - verticalMoveDistance;
     if(frog.y <= frogRadius){
       frog.y = frogRadius;
     }
