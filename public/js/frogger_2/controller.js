@@ -58,6 +58,15 @@ Game.Controller.prototype.checkAllLogCollisions = function() {
   }
 }
 
+Game.Controller.prototype.checkWaterCollision = function() {
+  if (this.character.y < 160 && this.character.y > 55) {
+    if (!this.checkAllLogCollisions) {
+      console.log("die in water");
+      this.killFrog();
+    }
+  }
+}
+
 Game.Controller.prototype.logCreator = function() {
   for (var i = 1; i < 6 ; i++) {
     if (i % 2 == 0) { 
@@ -130,12 +139,7 @@ var checkJumpInWater = function() {
   }
 }
 
-var checkWaterCollisions = function() {
-  if (checkJumpInWater()) {
-    console.log("water line crossed")
-    frog.resetPosition();
-  }
-}
+
 
 var checkWaterLogCollision = function(log) {
   var distX = Math.abs(frog.x - (log.x+log.width/2));
@@ -168,3 +172,4 @@ createjs.Ticker.addEventListener('tick', gameController.checkAllVehicleCollision
 createjs.Ticker.addEventListener('tick', gameController.checkAllLogCollisions.bind(gameController));
 createjs.Ticker.addEventListener("tick", gameController.moveObjects.bind(gameController));
 createjs.Ticker.addEventListener('tick', gameController.checkIfGameLost.bind(gameController));
+createjs.Ticker.addEventListener('tick', gameController.checkWaterCollision.bind(gameController));
