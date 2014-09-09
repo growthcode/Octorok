@@ -40,7 +40,7 @@ Controller = {}
 Controller.Collision = function(character) {
   this.character = character;
   this.vehicles = [];
-  this.logs
+  this.logs = [];
 }
 
 Controller.Collision.prototype.checkIntersection = function(vehicle) {
@@ -53,44 +53,37 @@ Controller.Collision.prototype.checkIntersection = function(vehicle) {
 Controller.Collision.prototype.checkAllVehicleCollisions = function() {
   for (var i in this.vehicles) {
     if (this.checkIntersection(this.vehicles[i])) {
-      console.log('you been hit')
+      console.log('you been hit, son')
     }
-    else {console.log('you safe')}
   }
-
-  // return $(this.vehicles).each(function(index, value) {
-  //   return value
-  // })
-  // this.checkIntersection()
 }
 
-
+var collisionController = new Controller.Collision(frog)
 
 //test data//
-var car1 = {
-  x: 100,
-  y: 100,
-  width: 20,
-  height: 20
-}
+// var car1 = {
+//   x: 100,
+//   y: 100,
+//   width: 20,
+//   height: 20
+// }
 
-var car2 = {
-  x: 200,
-  y: 200,
-  width: 20,
-  height: 20
-}
+// var car2 = {
+//   x: 200,
+//   y: 200,
+//   width: 20,
+//   height: 20
+// }
 
-var froggy = {
-  x: 110,
-  y: 110,
-  width: 20,
-  height: 20
-}
+// var froggy = {
+//   x: 110,
+//   y: 110,
+//   width: 20,
+//   height: 20
+// }
 
-var controller = new Controller.Collision(froggy)
-controller.vehicles.push(car1)
-controller.vehicles.push(car2)
+// controller.vehicles.push(car1)
+// controller.vehicles.push(car2)
 //
 
 var resetFrogPosition = function() {

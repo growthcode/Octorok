@@ -3,19 +3,19 @@ var vehicles = [];
 var vehicleCreator = function() {
   for (var i = 8; i < 13 ; i++) {
     if (i % 2 == 0) {
-      vehicles.push(new Vehicle(100, rowHeight * i - rowHeight - 5, "right"));
-      vehicles.push(new Vehicle(400, rowHeight * i - rowHeight - 5, "right"));
-      vehicles.push(new Vehicle(700, rowHeight * i - rowHeight - 5, "right"));
+      collisionController.vehicles.push(new Vehicle(100, rowHeight * i - rowHeight - 5, "right"));
+      collisionController.vehicles.push(new Vehicle(400, rowHeight * i - rowHeight - 5, "right"));
+      collisionController.vehicles.push(new Vehicle(700, rowHeight * i - rowHeight - 5, "right"));
     } else {
-      vehicles.push(new Vehicle(100, rowHeight * i - rowHeight - 5, "left"));
-      vehicles.push(new Vehicle(400, rowHeight * i - rowHeight - 5, "left"));
-      vehicles.push(new Vehicle(700, rowHeight * i - rowHeight - 5, "left"));
+      collisionController.vehicles.push(new Vehicle(100, rowHeight * i - rowHeight - 5, "left"));
+      collisionController.vehicles.push(new Vehicle(400, rowHeight * i - rowHeight - 5, "left"));
+      collisionController.vehicles.push(new Vehicle(700, rowHeight * i - rowHeight - 5, "left"));
     }
   }
-  for (var i in vehicles) {
-    stage.addChild(vehicles[i]);
-    vehicles[i].width = vehicles[i].getBounds().width;
-    vehicles[i].height = vehicles[i].getBounds().width;
+  for (var i in collisionController.vehicles) {
+    stage.addChild(collisionController[vehicles.i]);
+    collisionController.vehicles[i].width = collisionController.vehicles[i].getBounds().width;
+    collisionController.vehicles[i].height = collisionController.vehicles[i].getBounds().width;
   }
   stage.update();
 }
@@ -220,13 +220,13 @@ var moveObjects = function() {
     }
     stage.update();
   }
-  for (var i in vehicles) {
-    if (vehicles[i].direction == "right") {
-      if (vehicles[i].x > stage.canvas.width + 100) { vehicles[i].x = -100 }
-        vehicles[i].x += vehicles[i].speed;
+  for (var i in collisionController.vehicles) {
+    if (collisionController.vehicles[i].direction == "right") {
+      if (collisionController.vehicles[i].x > stage.canvas.width + 100) { collisionController.vehicles[i].x = -100 }
+        collisionController.vehicles[i].x += collisionController.vehicles[i].speed;
     } else {
-      if (vehicles[i].x < -110) { vehicles[i].x = stage.canvas.width + 50 }
-        vehicles[i].x -= vehicles[i].speed;
+      if (collisionController.vehicles[i].x < -110) { collisionController.vehicles[i].x = stage.canvas.width + 50 }
+        collisionController.vehicles[i].x -= collisionController.vehicles[i].speed;
     }
     stage.update();
   }
