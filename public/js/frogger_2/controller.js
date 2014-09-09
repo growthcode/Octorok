@@ -156,7 +156,6 @@ var checkAllWaterLogCollisions = function() {
     }
   }
 }
-//
 
 var frog = new Frog();
 var gameController = new Game.Controller();

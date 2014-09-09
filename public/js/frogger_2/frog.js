@@ -40,6 +40,7 @@ Frog.prototype = new createjs.Sprite(froggerSpriteData, "frogJumpUp");
 
 function moveFrog(event){
   if (event['keyCode'] === 39 ) {
+    console.log(event);
     frog.move("right");
   }
   if (event['keyCode'] === 37 ) {
