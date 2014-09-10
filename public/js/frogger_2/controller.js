@@ -172,11 +172,16 @@ Game.Controller.prototype.createSlots = function(numberOfSlots) {
     }
   };
 
+Game.Controller.prototype.addActiveSlotImage = function(slot) {
+  console.log('oh yeah baby');
+}
+
 Game.Controller.prototype.checkSlot = function(slot) {
   if (this.character.x > slot.leftBound && this.character.x < slot.rightBound && this.character.y <= gameBottomStart - (rowHeight * 13)) {
     if (slot.active === false) {
       slot.active = true;
       console.log('You Hit A Slot!');
+      this.addActiveSlotImage();
     }
     else if (slot.active === true) {
       this.killFrog()
