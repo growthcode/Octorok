@@ -137,22 +137,23 @@ Game.Controller.prototype.logCreator = function() {
   stage.update();
 }
 
-Game.Controller.prototype.vehicleCreator = function() {
-  for (var i = 11; i > 6 ; i--) {
-    if (i == 10) {
-      this.vehicles.push(new Mazzeratti(0, finishLineBoundary + rowHeight * i + (rowHeight - carHeight) / 2, "left"));
-      this.vehicles.push(new Truck(140, finishLineBoundary + rowHeight * i + (rowHeight - carHeight) / 2, "left"));
-      this.vehicles.push(new Sedan(280, finishLineBoundary + rowHeight * i + (rowHeight - carHeight) / 2, "left"));
-    } else if (i % 2 == 0) {
-      this.vehicles.push(new Mazzeratti(0, finishLineBoundary + rowHeight * i + (rowHeight - carHeight) / 2, "left"));
-      this.vehicles.push(new Sedan(140, finishLineBoundary + rowHeight * i + (rowHeight - carHeight) / 2, "left"));
-      this.vehicles.push(new Buggatti(280, finishLineBoundary + rowHeight * i + (rowHeight - carHeight) / 2, "left"));
-    } else {
-      this.vehicles.push(new Ferrari(0, finishLineBoundary + rowHeight * i + (rowHeight - carHeight) / 2, "right"));
-      this.vehicles.push(new Ferrari(140, finishLineBoundary + rowHeight * i + (rowHeight - carHeight) / 2, "right"));
-      this.vehicles.push(new Ferrari(280, finishLineBoundary + rowHeight * i + (rowHeight - carHeight) / 2, "right"));
-    }
+Game.Controller.prototype.generateVehicles = function() {
+  var chooseLeftFacingVehicle = function(rowNumber) {
+    var leftFacingVehicles = [
+      new Truck(499, finishLineBoundary + rowHeight * rowNumber + (rowHeight - carHeight) / 2, "left"),
+      new Sedan(499, finishLineBoundary + rowHeight * rowNumber + (rowHeight - carHeight) / 2, "left"),
+      new Buggatti(499, finishLineBoundary + rowHeight * rowNumber + (rowHeight - carHeight) / 2, "left"),
+      new Mazzeratti(499, finishLineBoundary + rowHeight * rowNumber + (rowHeight - carHeight) / 2, "left")
+    ];
+    return leftFacingVehicles[Math.floor(Math.random() * leftFacingVehicles.length)];
   }
+  
+  this.vehicles.push(chooseLeftFacingVehicle(11));
+  this.vehicles.push(new Ferrari(-100, finishLineBoundary + rowHeight * 10 + (rowHeight - carHeight) / 2, "right"));
+  this.vehicles.push(chooseLeftFacingVehicle(9));
+  this.vehicles.push(new Ferrari(-100, finishLineBoundary + rowHeight * 8 + (rowHeight - carHeight) / 2, "right"));
+  this.vehicles.push(chooseLeftFacingVehicle(7));
+  
   for (var i in this.vehicles) {
     stage.addChild(this.vehicles[i]);
   }
@@ -172,10 +173,18 @@ Game.Controller.prototype.moveObjects = function() {
   }
   for (var i in this.vehicles) {
     if (this.vehicles[i].direction == "right") {
-      if (this.vehicles[i].x > stage.canvas.width + 100) { this.vehicles[i].x = -100 }
+      if (this.vehicles[i].x > stage.canvas.width + 100) { 
+        stage.removeChild(this.vehicles[i]);
+        this.vehicles[i] = null;
+        this.vehicles.splice(i, 1);
+      }
         this.vehicles[i].x += this.vehicles[i].speed;
     } else {
-      if (this.vehicles[i].x < -110) { this.vehicles[i].x = stage.canvas.width + 50 }
+      if (this.vehicles[i].x < -100) { 
+        stage.removeChild(this.vehicles[i]);
+        this.vehicles[i] = null;
+        this.vehicles.splice(i, 1);
+      }
         this.vehicles[i].x -= this.vehicles[i].speed;
     }
     stage.update();
@@ -216,12 +225,12 @@ Game.Controller.prototype.removeAllActiveSlotImages = function() {
 Game.Controller.prototype.createSlots = function(numberOfSlots) {
   var leftBound = (11/399) * canvas.width;
   var rightBound;
-    for(var i=0; i < numberOfSlots; i++) {
-      rightBound = leftBound + ((32/399) * canvas.width);
-      this.slots.push(new Game.Slot(leftBound, rightBound));
-      leftBound += (84.5/399)*canvas.width;
-    }
-  };
+  for(var i=0; i < numberOfSlots; i++) {
+    rightBound = leftBound + ((32/399) * canvas.width);
+    this.slots.push(new Game.Slot(leftBound, rightBound));
+    leftBound += (84.5/399)*canvas.width;
+  }
+};
 
 Game.Controller.prototype.checkSlot = function(slot) {
   if (this.character.x > slot.leftBound && this.character.x < slot.rightBound && this.character.y <= gameBottomStart - (rowHeight * 13)) {
@@ -255,13 +264,21 @@ Game.Controller.prototype.checkAllSlots = function() {
   }
 }
 
-Game.Controller.prototype.gameSceneSetup = function(){
+Game.Controller.prototype.startGame = function() {
+  this.checkAllSlots();
+  this.checkAllVehicleCollisions();
+  this.checkAllLogCollisions();
+  this.moveObjects();
+  this.checkIfGameLost();
+  this.checkWaterCollision();
+}
+
+Game.Controller.prototype.gameSceneSetup = function() {
   this.frogLivesContainer.x = 5;
   this.frogLivesContainer.y = gameBottomStart;
   this.addLives(3);
   stage.addChild(this.frogLivesContainer);
   this.logCreator();
-  this.vehicleCreator();
   this.createSlots(3);
   stage.addChild(this.character);
   stage.update();
@@ -279,14 +296,14 @@ $(document).on('keydown', function(){
   event.preventDefault();
 });
 
-
 var gameController = new Game.Controller();
+
+gameController.logCreator();
+setInterval(gameController.generateVehicles.bind(gameController), 2000);
+gameController.createSlots(5);
+stage.addChild(frog);
+stage.update();
 gameController.gameSceneSetup();
 
-createjs.Ticker.addEventListener('tick', gameController.checkAllSlots.bind(gameController))
-createjs.Ticker.addEventListener('tick', gameController.checkAllVehicleCollisions.bind(gameController));
-createjs.Ticker.addEventListener('tick', gameController.checkAllLogCollisions.bind(gameController));
-createjs.Ticker.addEventListener("tick", gameController.moveObjects.bind(gameController));
-createjs.Ticker.addEventListener('tick', gameController.checkIfGameLost.bind(gameController));
-createjs.Ticker.addEventListener('tick', gameController.checkWaterCollision.bind(gameController));
+createjs.Ticker.addEventListener('tick', gameController.startGame.bind(gameController));
 
