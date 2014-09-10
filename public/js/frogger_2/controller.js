@@ -90,7 +90,8 @@ Game.Controller.prototype.logLandingArea = function(log) {
   var characterBottom = this.character.y + this.character.height
   var logTop = log.y
   var logBottom = log.y + log.height
-  if (characterLeftSide >= logLeftSide && characterRightSide <= logRightSide && characterTop >= logTop && characterBottom <= logBottom) {
+  var characterMidX = this.character.width / 2
+  if (characterLeftSide >= logLeftSide - characterMidX && characterRightSide <= logRightSide + characterMidX && characterTop >= logTop && characterBottom <= logBottom) {
     console.log("i'm on the log");
     return true;
   }
