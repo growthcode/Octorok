@@ -172,8 +172,16 @@ Game.Controller.prototype.createSlots = function(numberOfSlots) {
     }
   };
 
+
 Game.Controller.prototype.addActiveSlotImage = function(slot) {
-  console.log('oh yeah baby');
+  var testImage = new createjs.Shape()
+  testImage.graphics.beginFill('red').drawCircle(0,0, 15)
+  testImage.x = (slot.leftBound + slot.rightBound) / 2
+  testImage.y = 300
+  stage.addChild(testImage);
+  stage.update();
+  console.log(slot.leftBound)
+  console.log(slot.rightBound)
 }
 
 Game.Controller.prototype.checkSlot = function(slot) {
@@ -181,7 +189,7 @@ Game.Controller.prototype.checkSlot = function(slot) {
     if (slot.active === false) {
       slot.active = true;
       console.log('You Hit A Slot!');
-      this.addActiveSlotImage();
+      this.addActiveSlotImage(slot);
     }
     else if (slot.active === true) {
       this.killFrog()
