@@ -5,6 +5,7 @@ Game.Controller = function(character) {
   this.vehicles = [];
   this.logs = [];
   this.slots = [];
+  this.activeSlotImages = []
   this.waterYLine = frogYStart - (rowHeight * 7);
 }
 
@@ -162,6 +163,29 @@ Game.Controller.prototype.checkIfGameLost = function() {
   }
 }
 
+Game.Controller.prototype.addActiveSlotImage = function(slot) {
+  var frogActiveSlot = new createjs.Bitmap("../../assets/frogger_2/frog_active_slot.png")
+  frogActiveSlot.x = slot.leftBound + 2
+  frogActiveSlot.y = gameBottomStart - (rowHeight * 14)
+  frogActiveSlot.scaleX = 0.4;
+  frogActiveSlot.scaleY = 0.4;
+  stage.addChild(frogActiveSlot);
+  stage.update();
+  this.activeSlotImages.push(frogActiveSlot)
+}
+
+Game.Controller.prototype.removeActiveSlotIamge = function(activeSlotImage) {
+  window.setTimeout(function() {
+    stage.removeChild(activeSlotImage)
+  }, 2000)
+}
+
+Game.Controller.prototype.removeAllActiveSlotImages = function() {
+  for(var i in this.activeSlotImages) {
+    this.removeActiveSlotIamge(this.activeSlotImages[i])
+  }
+}
+
 Game.Controller.prototype.createSlots = function(numberOfSlots) {
   var leftBound = (11/399) * canvas.width;
   var rightBound;
@@ -171,16 +195,6 @@ Game.Controller.prototype.createSlots = function(numberOfSlots) {
       leftBound += (84.5/399)*canvas.width;
     }
   };
-
-Game.Controller.prototype.addActiveSlotImage = function(slot) {
-  var frogActiveSlot = new createjs.Bitmap("../../assets/frogger_2/frog_active_slot.png")
-  frogActiveSlot.x = slot.leftBound + 2
-  frogActiveSlot.y = gameBottomStart - (rowHeight * 14)
-  frogActiveSlot.scaleX = 0.4;
-  frogActiveSlot.scaleY = 0.4;
-  stage.addChild(frogActiveSlot);
-  stage.update();
-}
 
 Game.Controller.prototype.checkSlot = function(slot) {
   if (this.character.x > slot.leftBound && this.character.x < slot.rightBound && this.character.y <= gameBottomStart - (rowHeight * 13)) {
@@ -206,6 +220,7 @@ Game.Controller.prototype.checkAllSlots = function() {
   })
   if (activeSlots.length === this.slots.length) {
     console.log('YOU WIN!')
+    this.removeAllActiveSlotImages()
     // temporary: set active slots back to false to avoid infinite console.log
     $.each(activeSlots, function(index, slot) {
       slot.active = false
