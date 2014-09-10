@@ -4,6 +4,7 @@ Game.Controller = function(character) {
   this.character = character || frog;
   this.vehicles = [];
   this.logs = [];
+  this.slots = [];
   this.waterYLine = 140;
 }
 
@@ -45,8 +46,9 @@ Game.Controller.prototype.checkCollision = function(movingObject) {
 Game.Controller.prototype.checkAllVehicleCollisions = function() {
   for (var i in this.vehicles) {
     if (this.checkCollision(this.vehicles[i])) {
-      console.log('you been hit, son');
-      this.killFrog();
+      console.log('you been hit, son')
+      createjs.Sound.play("carHit");
+      this.killFrog()
     }
   }
 }
@@ -90,11 +92,11 @@ Game.Controller.prototype.checkAllWaterLogCollisions = function() {
 Game.Controller.prototype.logCreator = function() {
   for (var i = 1; i < 6 ; i++) {
     if (i % 2 == 0) {
-      this.logs.push(new Log(0, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
-      this.logs.push(new Log(200, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
+      this.logs.push(new SmallLog(0, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
+      this.logs.push(new MediumLog(200, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
     } else {
-      this.logs.push(new Log(0, finishLineBoundary + (rowHeight * i - rowHeight), "right"));
-      this.logs.push(new Log(200, finishLineBoundary + (rowHeight * i - rowHeight), "right"));
+      this.logs.push(new SmallLog(0, finishLineBoundary + (rowHeight * i - rowHeight), "right"));
+      this.logs.push(new LargeLog(200, finishLineBoundary + (rowHeight * i - rowHeight), "right"));
     }
   }
   for (var i in this.logs) {
@@ -105,14 +107,18 @@ Game.Controller.prototype.logCreator = function() {
 
 Game.Controller.prototype.vehicleCreator = function() {
   for (var i = 8; i < 13 ; i++) {
-    if (i % 2 == 0) {
-      this.vehicles.push(new Vehicle(0, finishLineBoundary + (rowHeight * i - rowHeight), "right"));
-      this.vehicles.push(new Vehicle(140, finishLineBoundary + (rowHeight * i - rowHeight), "right"));
-      this.vehicles.push(new Vehicle(280, finishLineBoundary + (rowHeight * i - rowHeight), "right"));
+    if (i == 12) {
+      this.vehicles.push(new Sedan(0, 5 * i + (rowHeight * i - (rowHeight + 7)), "left"));
+      this.vehicles.push(new Sedan(140, 5 * i + (rowHeight * i - (rowHeight + 7)), "left"));
+      this.vehicles.push(new Sedan(280, 5 * i + (rowHeight * i - (rowHeight + 7)), "left"));
+    } else if (i % 2 == 0) {
+      this.vehicles.push(new Mazzeratti(0, 5 * i + (rowHeight * i - (rowHeight + 7)), "left"));
+      this.vehicles.push(new Sedan(140, 5 * i + (rowHeight * i - (rowHeight + 7)), "left"));
+      this.vehicles.push(new Mazzeratti(280, 5 * i + (rowHeight * i - (rowHeight + 7)), "left"));
     } else {
-      this.vehicles.push(new Vehicle(0, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
-      this.vehicles.push(new Vehicle(140, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
-      this.vehicles.push(new Vehicle(280, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
+      this.vehicles.push(new Ferrari(0, 5 * i + (rowHeight * i - (rowHeight + 7)), "right"));
+      this.vehicles.push(new Ferrari(140, 5 * i + (rowHeight * i - (rowHeight + 7)), "right"));
+      this.vehicles.push(new Ferrari(280, 5 * i + (rowHeight * i - (rowHeight + 7)), "right"));
     }
   }
   for (var i in this.vehicles) {
@@ -124,10 +130,10 @@ Game.Controller.prototype.vehicleCreator = function() {
 Game.Controller.prototype.moveObjects = function() {
   for (var i in this.logs) {
     if (this.logs[i].direction == "right") {
-      if (this.logs[i].x > stage.canvas.width + 100) { this.logs[i].x = -100 }
+      if (this.logs[i].x > stage.canvas.width + 180) { this.logs[i].x = -180 }
         this.logs[i].x += this.logs[i].speed;
     } else {
-      if (this.logs[i].x < -110) { this.logs[i].x = stage.canvas.width + 50 }
+      if (this.logs[i].x < -180) { this.logs[i].x = stage.canvas.width }
         this.logs[i].x -= this.logs[i].speed;
     }
     stage.update();
@@ -152,6 +158,52 @@ Game.Controller.prototype.checkIfGameLost = function() {
   }
 }
 
+Game.Controller.prototype.createSlots = function(numberOfSlots) {
+  var leftBound = (11/399) * canvas.width;
+  var rightBound;
+    for(var i=0; i < numberOfSlots; i++) {
+      rightBound = leftBound + ((32/399) * canvas.width);
+      this.slots.push(new Game.Slot(leftBound, rightBound));
+      leftBound += (84.5/399)*canvas.width;
+    }
+  };
+
+Game.Controller.prototype.checkSlot = function(slot) {
+  if (this.character.x > slot.leftBound && this.character.x < slot.rightBound && this.character.y <= finishLineBoundary - rowHeight + 0.5) {
+    if (slot.active === false) {
+      slot.active = true;
+      console.log('You Hit A Slot!');
+    }
+    else if (slot.active === true) {
+      this.killFrog()
+      console.log('You Already Hit This Slot...')
+    }
+    this.resetFrogPosition()
+  }
+}
+
+Game.Controller.prototype.checkAllSlots = function() {
+  for (var i in this.slots) {
+    this.checkSlot(this.slots[i])
+  }
+  activeSlots = $.grep(this.slots, function(slot){
+    return slot.active === true;
+  })
+  if (activeSlots.length === this.slots.length) {
+    console.log('YOU WIN!')
+    // temporary: set active slots back to false to avoid infinite console.log
+    $.each(activeSlots, function(index, slot) {
+      slot.active = false
+    })
+  }
+}
+
+Game.Slot = function(leftBound, rightBound) {
+  this.leftBound = leftBound;
+  this.rightBound = rightBound;
+  this.active = false
+}
+
 var frog = new Frog();
 $(document).on('keyup', frog.moveFrog.bind(frog));
 $(document).on('keydown', function(){
@@ -162,9 +214,11 @@ $(document).on('keydown', function(){
 var gameController = new Game.Controller();
 gameController.logCreator();
 gameController.vehicleCreator();
+gameController.createSlots(5);
 stage.addChild(frog);
 stage.update();
 
+createjs.Ticker.addEventListener('tick', gameController.checkAllSlots.bind(gameController))
 createjs.Ticker.addEventListener('tick', gameController.checkAllVehicleCollisions.bind(gameController));
 createjs.Ticker.addEventListener('tick', gameController.checkAllLogCollisions.bind(gameController));
 createjs.Ticker.addEventListener("tick", gameController.moveObjects.bind(gameController));

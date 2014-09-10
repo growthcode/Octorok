@@ -5,9 +5,9 @@ landFinish.y = 0;
 var canvas = document.createElement('canvas');
 canvas.id = "frogger-2-game-canvas"
 canvas.width = landFinish.getBounds().width;
-canvas.height = 360;
+canvas.height = 455;
 
-var gameBottomStart = 327; // canvas.height former size before game boundaries
+var gameBottomStart = 418; // canvas.height former size before game boundaries
 canvas.style.border = "1px solid black";
 document.body.appendChild(canvas);
 
@@ -19,4 +19,12 @@ var finishLineBoundary = landFinish.getBounds().height;
 var rowHeight = (gameBottomStart - finishLineBoundary) / 13;
 var columnWidth = canvas.width / 16;
 
+var verticalMoveDistance = rowHeight;
+var horizontalMoveDistance = columnWidth;
 
+var gameBoundaryHeight = canvas.height - finishLineBoundary
+
+var frogWidth = 26;
+var frogHeight = 26;
+var frogXStart = (canvas.width / 2) - frogWidth / 2;
+var frogYStart = (canvas.height - gameBoundaryHeight / 13) - (rowHeight - 26)/2;

@@ -1,7 +1,10 @@
-var verticalMoveDistance = rowHeight;
-var horizontalMoveDistance = columnWidth;
-var frogXStart = (canvas.width / 2) - 23 / 2;
-var frogYStart = gameBottomStart - 20.5;
+var queue;
+queue = new createjs.LoadQueue();
+queue.installPlugin(createjs.Sound);
+queue.loadManifest([
+  {id: "carHit", src: "../assets/frogger_2/carHitFrog.mp3"},
+  {id: "marioJump", src: "../assets/frogger_2/mario.mp3"},
+  {id: "jumpInSlot", src: "../assets/frogger_2/frog_get_to_top.mp3"}]);
 
 var Frog = function(posX, posY) {
   this.lives = 3
@@ -67,6 +70,7 @@ Frog.prototype.moveFrog = function(event){
     this.move("right");
     this.gotoAndPlay("frogJumpRight");
   }
-  this.keepInBounds();
+  createjs.Sound.play("marioJump");
+  frog.keepInBounds();
   stage.update();
 }
