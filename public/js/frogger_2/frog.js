@@ -39,20 +39,17 @@ Frog.prototype = new createjs.Sprite(froggerSpriteData, "frogJumpUp");
 function moveFrog(event){
   if (event['keyCode'] === 39 ) {
     frog.move("right");
-    createjs.Sound.play("marioJump");
   }
   if (event['keyCode'] === 37 ) {
     frog.move("left");
-    createjs.Sound.play("marioJump");
   }
   if (event['keyCode'] === 40 ) {
     frog.move("down");
-    createjs.Sound.play("marioJump");
   }
   if (event['keyCode'] === 38 ) {
     frog.move("up");
-    createjs.Sound.play("marioJump");
   }
+  createjs.Sound.play("marioJump");
   frog.keepInBounds();
   stage.update();
 }

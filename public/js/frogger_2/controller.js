@@ -92,8 +92,8 @@ Game.Controller.prototype.checkAllWaterLogCollisions = function() {
 Game.Controller.prototype.logCreator = function() {
   for (var i = 1; i < 6 ; i++) {
     if (i % 2 == 0) {
-      this.logs.push(new Log(0, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
-      this.logs.push(new Log(200, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
+      this.logs.push(new SmallLog(0, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
+      this.logs.push(new MediumLog(200, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
     } else {
       this.logs.push(new SmallLog(0, finishLineBoundary + (rowHeight * i - rowHeight), "right"));
       this.logs.push(new LargeLog(200, finishLineBoundary + (rowHeight * i - rowHeight), "right"));
