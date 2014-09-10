@@ -5,6 +5,7 @@ Game.Controller = function(character) {
   this.vehicles = [];
   this.logs = [];
   this.slots = [];
+  this.activeSlotImages = []
   this.waterYLine = frogYStart - (rowHeight * 7);
 }
 
@@ -69,16 +70,20 @@ Game.Controller.prototype.checkWaterCollision = function() {
 }
 
 Game.Controller.prototype.logLandingArea = function(log) {
-  var distX = Math.abs(this.character.x - (log.x+log.width/2));
-  var distY = Math.abs(this.character.y - (log.y+log.height/2));
-
-  if (distX > (log.width / 2 + this.character.width / 2)) { return false; }
-  if (distY > (log.height / 4 + this.character.width / 4)) { return false; }
-
-  if (distX <= (log.width) && distY <= log.height) {
+  var characterLeftSide = this.character.x
+  var characterRightSide = this.character.x + this.character.width
+  var logLeftSide = log.x
+  var logRightSide = log.x + log.width
+  var characterTop = this.character.y
+  var characterBottom = this.character.y + this.character.height
+  var logTop = log.y
+  var logBottom = log.y + log.height
+  var characterMidX = this.character.width / 2
+  if (characterLeftSide >= logLeftSide - characterMidX && characterRightSide <= logRightSide + characterMidX && characterTop >= logTop && characterBottom <= logBottom) {
     console.log("i'm on the log");
     return true;
   }
+  return false
 }
 
 Game.Controller.prototype.checkAllWaterLogCollisions = function() {
@@ -158,6 +163,29 @@ Game.Controller.prototype.checkIfGameLost = function() {
   }
 }
 
+Game.Controller.prototype.addActiveSlotImage = function(slot) {
+  var frogActiveSlot = new createjs.Bitmap("../../assets/frogger_2/frog_active_slot.png")
+  frogActiveSlot.x = slot.leftBound + 2
+  frogActiveSlot.y = gameBottomStart - (rowHeight * 14)
+  frogActiveSlot.scaleX = 0.4;
+  frogActiveSlot.scaleY = 0.4;
+  stage.addChild(frogActiveSlot);
+  stage.update();
+  this.activeSlotImages.push(frogActiveSlot)
+}
+
+Game.Controller.prototype.removeActiveSlotIamge = function(activeSlotImage) {
+  window.setTimeout(function() {
+    stage.removeChild(activeSlotImage)
+  }, 2000)
+}
+
+Game.Controller.prototype.removeAllActiveSlotImages = function() {
+  for(var i in this.activeSlotImages) {
+    this.removeActiveSlotIamge(this.activeSlotImages[i])
+  }
+}
+
 Game.Controller.prototype.createSlots = function(numberOfSlots) {
   var leftBound = (11/399) * canvas.width;
   var rightBound;
@@ -173,6 +201,7 @@ Game.Controller.prototype.checkSlot = function(slot) {
     if (slot.active === false) {
       slot.active = true;
       console.log('You Hit A Slot!');
+      this.addActiveSlotImage(slot);
     }
     else if (slot.active === true) {
       this.killFrog()
@@ -191,6 +220,7 @@ Game.Controller.prototype.checkAllSlots = function() {
   })
   if (activeSlots.length === this.slots.length) {
     console.log('YOU WIN!')
+    this.removeAllActiveSlotImages()
     // temporary: set active slots back to false to avoid infinite console.log
     $.each(activeSlots, function(index, slot) {
       slot.active = false
