@@ -68,19 +68,6 @@ Game.Controller.prototype.checkWaterCollision = function() {
   }
 }
 
-// Game.Controller.prototype.logLandingArea = function(log) {
-//   var distX = Math.abs((this.character.x+this.character.width/2) - (log.x+log.width/2));
-//   var distY = Math.abs((this.character.y+this.character.height/2) - (log.y+log.height/2));
-
-//   if (distX > (log.width / 2 + this.character.width / 2)) { return false; }
-//   if (distY > (log.height / 4 + this.character.width / 4)) { return false; }
-
-//   if (distX <= (log.width) && distY <= log.height) {
-//     console.log("i'm on the log");
-//     return true;
-//   }
-// }
-
 Game.Controller.prototype.logLandingArea = function(log) {
   var characterLeftSide = this.character.x
   var characterRightSide = this.character.x + this.character.width
