@@ -16,6 +16,8 @@ var froggerSpriteData = new createjs.SpriteSheet({
                 winningGrass:[17],
                 froggerLogo:[18],
                 froggerExtraLife:[19],
+                truck:[20],
+                carRacecar3:[21]
               },
   images: ["../../assets/frogger_2/froggerSprite.png"],
   frames: [
@@ -39,6 +41,8 @@ var froggerSpriteData = new createjs.SpriteSheet({
             [0, 55, 399, 54], // winning grass
             [15, 12, 318, 32], // frogger logo
             [12, 369, 23, 17],  // frog up 1
+            [106, 302, 46, 18], // truck
+            [73, 301, 25, 26] // car3 racecar
           ]
 });
 
