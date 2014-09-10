@@ -5,7 +5,7 @@ Game.Controller = function(character) {
   this.vehicles = [];
   this.logs = [];
   this.slots = [];
-  this.waterYLine = 140;
+  this.waterYLine = frogYStart - (rowHeight * 7);
 }
 
 Game.Controller.prototype.resetFrogPosition = function() {
@@ -69,11 +69,11 @@ Game.Controller.prototype.checkWaterCollision = function() {
 }
 
 Game.Controller.prototype.logLandingArea = function(log) {
-  var distX = Math.abs(frog.x - (log.x+log.width/2));
-  var distY = Math.abs(frog.y - (log.y+log.height/2));
+  var distX = Math.abs(this.character.x - (log.x+log.width/2));
+  var distY = Math.abs(this.character.y - (log.y+log.height/2));
 
-  if (distX > (log.width/2.5 + frog.width / 2)) { return false; }
-  if (distY > (log.height/3 + frog.width / 2)) { return false; }
+  if (distX > (log.width / 2 + this.character.width / 2)) { return false; }
+  if (distY > (log.height / 4 + this.character.width / 4)) { return false; }
 
   if (distX <= (log.width) && distY <= log.height) {
     console.log("i'm on the log");
@@ -106,19 +106,19 @@ Game.Controller.prototype.logCreator = function() {
 }
 
 Game.Controller.prototype.vehicleCreator = function() {
-  for (var i = 8; i < 13 ; i++) {
-    if (i == 12) {
-      this.vehicles.push(new Sedan(0, 5 * i + (rowHeight * i - (rowHeight + 7)), "left"));
-      this.vehicles.push(new Sedan(140, 5 * i + (rowHeight * i - (rowHeight + 7)), "left"));
-      this.vehicles.push(new Sedan(280, 5 * i + (rowHeight * i - (rowHeight + 7)), "left"));
+  for (var i = 11; i > 6 ; i--) {
+    if (i == 10) {
+      this.vehicles.push(new Sedan(0, finishLineBoundary + rowHeight * i + (rowHeight - carHeight) / 2, "left"));
+      this.vehicles.push(new Sedan(140, finishLineBoundary + rowHeight * i + (rowHeight - carHeight) / 2, "left"));
+      this.vehicles.push(new Sedan(280, finishLineBoundary + rowHeight * i + (rowHeight - carHeight) / 2, "left"));
     } else if (i % 2 == 0) {
-      this.vehicles.push(new Mazzeratti(0, 5 * i + (rowHeight * i - (rowHeight + 7)), "left"));
-      this.vehicles.push(new Sedan(140, 5 * i + (rowHeight * i - (rowHeight + 7)), "left"));
-      this.vehicles.push(new Mazzeratti(280, 5 * i + (rowHeight * i - (rowHeight + 7)), "left"));
+      this.vehicles.push(new Mazzeratti(0, finishLineBoundary + rowHeight * i + (rowHeight - carHeight) / 2, "left"));
+      this.vehicles.push(new Sedan(140, finishLineBoundary + rowHeight * i + (rowHeight - carHeight) / 2, "left"));
+      this.vehicles.push(new Mazzeratti(280, finishLineBoundary + rowHeight * i + (rowHeight - carHeight) / 2, "left"));
     } else {
-      this.vehicles.push(new Ferrari(0, 5 * i + (rowHeight * i - (rowHeight + 7)), "right"));
-      this.vehicles.push(new Ferrari(140, 5 * i + (rowHeight * i - (rowHeight + 7)), "right"));
-      this.vehicles.push(new Ferrari(280, 5 * i + (rowHeight * i - (rowHeight + 7)), "right"));
+      this.vehicles.push(new Ferrari(0, finishLineBoundary + rowHeight * i + (rowHeight - carHeight) / 2, "right"));
+      this.vehicles.push(new Ferrari(140, finishLineBoundary + rowHeight * i + (rowHeight - carHeight) / 2, "right"));
+      this.vehicles.push(new Ferrari(280, finishLineBoundary + rowHeight * i + (rowHeight - carHeight) / 2, "right"));
     }
   }
   for (var i in this.vehicles) {
@@ -169,7 +169,7 @@ Game.Controller.prototype.createSlots = function(numberOfSlots) {
   };
 
 Game.Controller.prototype.checkSlot = function(slot) {
-  if (this.character.x > slot.leftBound && this.character.x < slot.rightBound && this.character.y <= finishLineBoundary - rowHeight + 0.5) {
+  if (this.character.x > slot.leftBound && this.character.x < slot.rightBound && this.character.y <= gameBottomStart - (rowHeight * 13)) {
     if (slot.active === false) {
       slot.active = true;
       console.log('You Hit A Slot!');
