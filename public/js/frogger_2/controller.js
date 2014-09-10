@@ -69,11 +69,11 @@ Game.Controller.prototype.checkWaterCollision = function() {
 }
 
 Game.Controller.prototype.logLandingArea = function(log) {
-  var distX = Math.abs(frog.x - (log.x+log.width/2));
-  var distY = Math.abs(frog.y - (log.y+log.height/2));
+  var distX = Math.abs(this.character.x - (log.x+log.width/2));
+  var distY = Math.abs(this.character.y - (log.y+log.height/2));
 
-  if (distX > (log.width/2.5 + frog.width / 2)) { return false; }
-  if (distY > (log.height/3 + frog.width / 2)) { return false; }
+  if (distX > (log.width / 2 + this.character.width / 2)) { return false; }
+  if (distY > (log.height / 4 + this.character.width / 4)) { return false; }
 
   if (distX <= (log.width) && distY <= log.height) {
     console.log("i'm on the log");

@@ -6,7 +6,7 @@ var Log = function(posX, posY, direction) {
   this.width = this.getBounds().width;
 }
 
-Log.prototype.speed = 5;
+Log.prototype.speed = 2;
 
 var SmallLog = function(posX, posY, direction) {
   Log.prototype.constructor.call(this, posX, posY, direction);
