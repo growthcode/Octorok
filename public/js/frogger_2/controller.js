@@ -5,7 +5,7 @@ Game.Controller = function(character) {
   this.vehicles = [];
   this.logs = [];
   this.slots = [];
-  this.waterYLine = 140;
+  this.waterYLine = frogYStart - (rowHeight * 7);
 }
 
 Game.Controller.prototype.resetFrogPosition = function() {
