@@ -46,9 +46,9 @@ Game.Controller.prototype.checkCollision = function(movingObject) {
 Game.Controller.prototype.checkAllVehicleCollisions = function() {
   for (var i in this.vehicles) {
     if (this.checkCollision(this.vehicles[i])) {
-      console.log('you been hit, son')
+      console.log('you been hit, son');
       createjs.Sound.play("carHit");
-      this.killFrog()
+      this.killFrog();
     }
   }
 }
@@ -108,13 +108,13 @@ Game.Controller.prototype.logCreator = function() {
 Game.Controller.prototype.vehicleCreator = function() {
   for (var i = 11; i > 6 ; i--) {
     if (i == 10) {
-      this.vehicles.push(new Sedan(0, finishLineBoundary + rowHeight * i + (rowHeight - carHeight) / 2, "left"));
-      this.vehicles.push(new Sedan(140, finishLineBoundary + rowHeight * i + (rowHeight - carHeight) / 2, "left"));
+      this.vehicles.push(new Mazzeratti(0, finishLineBoundary + rowHeight * i + (rowHeight - carHeight) / 2, "left"));
+      this.vehicles.push(new Truck(140, finishLineBoundary + rowHeight * i + (rowHeight - carHeight) / 2, "left"));
       this.vehicles.push(new Sedan(280, finishLineBoundary + rowHeight * i + (rowHeight - carHeight) / 2, "left"));
     } else if (i % 2 == 0) {
       this.vehicles.push(new Mazzeratti(0, finishLineBoundary + rowHeight * i + (rowHeight - carHeight) / 2, "left"));
       this.vehicles.push(new Sedan(140, finishLineBoundary + rowHeight * i + (rowHeight - carHeight) / 2, "left"));
-      this.vehicles.push(new Mazzeratti(280, finishLineBoundary + rowHeight * i + (rowHeight - carHeight) / 2, "left"));
+      this.vehicles.push(new Buggatti(280, finishLineBoundary + rowHeight * i + (rowHeight - carHeight) / 2, "left"));
     } else {
       this.vehicles.push(new Ferrari(0, finishLineBoundary + rowHeight * i + (rowHeight - carHeight) / 2, "right"));
       this.vehicles.push(new Ferrari(140, finishLineBoundary + rowHeight * i + (rowHeight - carHeight) / 2, "right"));
