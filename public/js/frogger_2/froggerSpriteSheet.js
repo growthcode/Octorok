@@ -18,22 +18,22 @@ var froggerSpriteData = new createjs.SpriteSheet({
               },
   images: ["../../assets/frogger_2/froggerSprite.png"],
   frames: [
-            [13, 334, 17, 23], // frog right 1
-            [43, 335, 25, 22], // frog right 2
-            [82, 335, 18, 23], // frog left 1
-            [112, 338, 25, 22],  // frog left 2
-            [12, 369, 23, 17],  // frog up 1
-            [46, 366, 22, 25],  // frog up 2
-            [80, 369, 23, 17],  // frog down 1
-            [114, 366, 22, 25],  // frog down 2
-            [7, 230, 85, 21], // small log
-            [7, 197, 117, 21], // med log
-            [7, 165, 178, 21], // large Log
-            [156, 373,89,22], //log like aligator
-            [10, 267, 28, 20], // car1 normal
-            [46, 265, 28, 24], // car2 racecar
+            [13, 334, 26, 26], // frog right 1
+            [43, 335, 26, 26], // frog right 2
+            [82, 335, 26, 26], // frog left 1
+            [112, 338, 26, 26],  // frog left 2
+            [12, 369, 26, 26],  // frog up 1
+            [46, 366, 26, 26],  // frog up 2
+            [80, 369, 26, 26],  // frog down 1
+            [114, 366, 26, 26],  // frog down 2
+            [7, 230, 85, 28], // small log
+            [7, 197, 117, 28], // med log
+            [7, 165, 178, 28], // large Log
+            [156, 373,89,26], //log like aligator
+            [10, 267, 28, 26], // car1 normal
+            [46, 265, 28, 26], // car2 racecar
             [82, 264, 24, 26], // car3 racecar
-            [116, 271, 32, 18], // beaver
+            [116, 271, 32, 26], // beaver
             [0, 119, 339, 34], // water
             [0, 55, 399, 54], // winning grass
             [15, 12, 318, 32], // frogger logo
