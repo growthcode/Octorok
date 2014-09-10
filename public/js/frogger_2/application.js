@@ -21,7 +21,8 @@ var columnWidth = canvas.width / 16;
 var verticalMoveDistance = rowHeight;
 var horizontalMoveDistance = columnWidth;
 
-var gameBoundaryHeight = canvas.height - finishLineBoundary
+var gameBoundaryHeight = canvas.height - finishLineBoundary;
+var carHeight = 26;
 
 var frogWidth = 26;
 var frogHeight = 26;

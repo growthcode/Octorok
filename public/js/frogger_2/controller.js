@@ -106,19 +106,19 @@ Game.Controller.prototype.logCreator = function() {
 }
 
 Game.Controller.prototype.vehicleCreator = function() {
-  for (var i = 8; i < 13 ; i++) {
+  for (var i = 12; i > 7 ; i--) {
     if (i == 12) {
-      this.vehicles.push(new Sedan(0, 5 * i + (rowHeight * i - (rowHeight + 7)), "left"));
-      this.vehicles.push(new Sedan(140, 5 * i + (rowHeight * i - (rowHeight + 7)), "left"));
-      this.vehicles.push(new Sedan(280, 5 * i + (rowHeight * i - (rowHeight + 7)), "left"));
+      this.vehicles.push(new Sedan(0, rowHeight * i + (rowHeight - carHeight) / 2, "left"));
+      this.vehicles.push(new Sedan(140, rowHeight * i + (rowHeight - carHeight) / 2, "left"));
+      this.vehicles.push(new Sedan(280, rowHeight * i + (rowHeight - carHeight) / 2, "left"));
     } else if (i % 2 == 0) {
-      this.vehicles.push(new Mazzeratti(0, 5 * i + (rowHeight * i - (rowHeight + 7)), "left"));
-      this.vehicles.push(new Sedan(140, 5 * i + (rowHeight * i - (rowHeight + 7)), "left"));
-      this.vehicles.push(new Mazzeratti(280, 5 * i + (rowHeight * i - (rowHeight + 7)), "left"));
+      this.vehicles.push(new Mazzeratti(0, rowHeight * i + (rowHeight - carHeight) / 2, "left"));
+      this.vehicles.push(new Sedan(140, rowHeight * i + (rowHeight - carHeight) / 2, "left"));
+      this.vehicles.push(new Mazzeratti(280, rowHeight * i + (rowHeight - carHeight) / 2, "left"));
     } else {
-      this.vehicles.push(new Ferrari(0, 5 * i + (rowHeight * i - (rowHeight + 7)), "right"));
-      this.vehicles.push(new Ferrari(140, 5 * i + (rowHeight * i - (rowHeight + 7)), "right"));
-      this.vehicles.push(new Ferrari(280, 5 * i + (rowHeight * i - (rowHeight + 7)), "right"));
+      this.vehicles.push(new Ferrari(0, rowHeight * i + (rowHeight - carHeight) / 2, "right"));
+      this.vehicles.push(new Ferrari(140, rowHeight * i + (rowHeight - carHeight) / 2, "right"));
+      this.vehicles.push(new Ferrari(280, rowHeight * i + (rowHeight - carHeight) / 2, "right"));
     }
   }
   for (var i in this.vehicles) {
