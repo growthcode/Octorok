@@ -1,8 +1,7 @@
-var Vehicle = function(posX, posY, direction, speed) {
+var Vehicle = function(posX, posY, direction) {
   this.direction = direction;
   this.x = posX;
   this.y = posY;
-  this.speed = speed
   this.height = this.getBounds().height;
   this.width = this.getBounds().width;
 }
