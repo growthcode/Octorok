@@ -1,10 +1,10 @@
 describe("Frogger Game: ", function () {
   
-  describe("Vehicle model", function() {
-    it("is instantiated at the correct coordinates", function() {
-      var car = new Vehicle(10, 20, "right");
-      expect(car.x).toEqual(10);
-      expect(car.y).toEqual(20);
+  describe("Car model", function() {
+    it("has the correct dimensions", function() {
+      var car = new Sedan(10, 20, "right");
+      expect(car.height).toEqual(26);
+      expect(car.width).toEqual(28);
     });
   });
   
@@ -24,7 +24,8 @@ describe("Frogger Game: ", function () {
     });
     it("is not able to step outside of canvas boundaries", function() {
       spyOn(frog, "keepInBounds");
-      moveFrog("right");
+      ("right");
+      frog.moveFrog("down");
       expect(frog.keepInBounds).toHaveBeenCalled();
     });
   });
@@ -32,7 +33,7 @@ describe("Frogger Game: ", function () {
   describe("Collisions", function() {
     
     beforeEach(function() {
-      gameController.vehicles.push(new Vehicle(100, 100, "right"));
+      gameController.vehicles.push(new Sedan(100, 100, "right"));
       gameController.logs.push(log = new Log(100, 100, "right"));
       frog.x = 99;
       frog.y = 99;

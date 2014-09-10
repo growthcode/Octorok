@@ -6,7 +6,8 @@ Game.Controller = function(character) {
   this.logs = [];
   this.slots = [];
   this.frogLivesContainer = new createjs.Container();
-  this.waterYLine = 140;
+  this.activeSlotImages = []
+  this.waterYLine = frogYStart - (rowHeight * 7);
 }
 
 Game.Controller.prototype.resetFrogPosition = function() {
@@ -47,9 +48,9 @@ Game.Controller.prototype.checkCollision = function(movingObject) {
 Game.Controller.prototype.checkAllVehicleCollisions = function() {
   for (var i in this.vehicles) {
     if (this.checkCollision(this.vehicles[i])) {
-      console.log('you been hit, son')
+      console.log('you been hit, son');
       createjs.Sound.play("carHit");
-      this.killFrog()
+      this.killFrog();
     }
   }
 }
@@ -70,16 +71,20 @@ Game.Controller.prototype.checkWaterCollision = function() {
 }
 
 Game.Controller.prototype.logLandingArea = function(log) {
-  var distX = Math.abs(frog.x - (log.x+log.width/2));
-  var distY = Math.abs(frog.y - (log.y+log.height/2));
-
-  if (distX > (log.width/2.5 + frog.width / 2)) { return false; }
-  if (distY > (log.height/3 + frog.width / 2)) { return false; }
-
-  if (distX <= (log.width) && distY <= log.height) {
+  var characterLeftSide = this.character.x
+  var characterRightSide = this.character.x + this.character.width
+  var logLeftSide = log.x
+  var logRightSide = log.x + log.width
+  var characterTop = this.character.y
+  var characterBottom = this.character.y + this.character.height
+  var logTop = log.y
+  var logBottom = log.y + log.height
+  var characterMidX = this.character.width / 2
+  if (characterLeftSide >= logLeftSide - characterMidX && characterRightSide <= logRightSide + characterMidX && characterTop >= logTop && characterBottom <= logBottom) {
     console.log("i'm on the log");
     return true;
   }
+  return false
 }
 
 Game.Controller.prototype.checkAllWaterLogCollisions = function() {
@@ -107,19 +112,19 @@ Game.Controller.prototype.logCreator = function() {
 }
 
 Game.Controller.prototype.vehicleCreator = function() {
-  for (var i = 8; i < 13 ; i++) {
-    if (i == 12) {
-      this.vehicles.push(new Sedan(0, 5 * i + (rowHeight * i - (rowHeight + 7)), "left"));
-      this.vehicles.push(new Sedan(140, 5 * i + (rowHeight * i - (rowHeight + 7)), "left"));
-      this.vehicles.push(new Sedan(280, 5 * i + (rowHeight * i - (rowHeight + 7)), "left"));
+  for (var i = 11; i > 6 ; i--) {
+    if (i == 10) {
+      this.vehicles.push(new Mazzeratti(0, finishLineBoundary + rowHeight * i + (rowHeight - carHeight) / 2, "left"));
+      this.vehicles.push(new Truck(140, finishLineBoundary + rowHeight * i + (rowHeight - carHeight) / 2, "left"));
+      this.vehicles.push(new Sedan(280, finishLineBoundary + rowHeight * i + (rowHeight - carHeight) / 2, "left"));
     } else if (i % 2 == 0) {
-      this.vehicles.push(new Mazzeratti(0, 5 * i + (rowHeight * i - (rowHeight + 7)), "left"));
-      this.vehicles.push(new Sedan(140, 5 * i + (rowHeight * i - (rowHeight + 7)), "left"));
-      this.vehicles.push(new Mazzeratti(280, 5 * i + (rowHeight * i - (rowHeight + 7)), "left"));
+      this.vehicles.push(new Mazzeratti(0, finishLineBoundary + rowHeight * i + (rowHeight - carHeight) / 2, "left"));
+      this.vehicles.push(new Sedan(140, finishLineBoundary + rowHeight * i + (rowHeight - carHeight) / 2, "left"));
+      this.vehicles.push(new Buggatti(280, finishLineBoundary + rowHeight * i + (rowHeight - carHeight) / 2, "left"));
     } else {
-      this.vehicles.push(new Ferrari(0, 5 * i + (rowHeight * i - (rowHeight + 7)), "right"));
-      this.vehicles.push(new Ferrari(140, 5 * i + (rowHeight * i - (rowHeight + 7)), "right"));
-      this.vehicles.push(new Ferrari(280, 5 * i + (rowHeight * i - (rowHeight + 7)), "right"));
+      this.vehicles.push(new Ferrari(0, finishLineBoundary + rowHeight * i + (rowHeight - carHeight) / 2, "right"));
+      this.vehicles.push(new Ferrari(140, finishLineBoundary + rowHeight * i + (rowHeight - carHeight) / 2, "right"));
+      this.vehicles.push(new Ferrari(280, finishLineBoundary + rowHeight * i + (rowHeight - carHeight) / 2, "right"));
     }
   }
   for (var i in this.vehicles) {
@@ -159,6 +164,29 @@ Game.Controller.prototype.checkIfGameLost = function() {
   }
 }
 
+Game.Controller.prototype.addActiveSlotImage = function(slot) {
+  var frogActiveSlot = new createjs.Bitmap("../../assets/frogger_2/frog_active_slot.png")
+  frogActiveSlot.x = slot.leftBound + 2
+  frogActiveSlot.y = gameBottomStart - (rowHeight * 14)
+  frogActiveSlot.scaleX = 0.4;
+  frogActiveSlot.scaleY = 0.4;
+  stage.addChild(frogActiveSlot);
+  stage.update();
+  this.activeSlotImages.push(frogActiveSlot)
+}
+
+Game.Controller.prototype.removeActiveSlotIamge = function(activeSlotImage) {
+  window.setTimeout(function() {
+    stage.removeChild(activeSlotImage)
+  }, 2000)
+}
+
+Game.Controller.prototype.removeAllActiveSlotImages = function() {
+  for(var i in this.activeSlotImages) {
+    this.removeActiveSlotIamge(this.activeSlotImages[i])
+  }
+}
+
 Game.Controller.prototype.createSlots = function(numberOfSlots) {
   var leftBound = (11/399) * canvas.width;
   var rightBound;
@@ -170,10 +198,11 @@ Game.Controller.prototype.createSlots = function(numberOfSlots) {
   };
 
 Game.Controller.prototype.checkSlot = function(slot) {
-  if (this.character.x > slot.leftBound && this.character.x < slot.rightBound && this.character.y <= finishLineBoundary - rowHeight + 0.5) {
+  if (this.character.x > slot.leftBound && this.character.x < slot.rightBound && this.character.y <= gameBottomStart - (rowHeight * 13)) {
     if (slot.active === false) {
       slot.active = true;
       console.log('You Hit A Slot!');
+      this.addActiveSlotImage(slot);
     }
     else if (slot.active === true) {
       this.killFrog()
@@ -192,6 +221,7 @@ Game.Controller.prototype.checkAllSlots = function() {
   })
   if (activeSlots.length === this.slots.length) {
     console.log('YOU WIN!')
+    this.removeAllActiveSlotImages()
     // temporary: set active slots back to false to avoid infinite console.log
     $.each(activeSlots, function(index, slot) {
       slot.active = false

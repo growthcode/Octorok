@@ -21,7 +21,7 @@ var Frog = function(posX, posY) {
       that.x = that.width;
     }
     if (that.y >= (gameBottomStart - that.height)) {
-      that.y = gameBottomStart - that.height;
+      that.y = gameBottomStart - that.height - 1;
     }
     if (that.y <= that.height){
       that.y = that.height;
