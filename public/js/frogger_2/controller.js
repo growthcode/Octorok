@@ -228,6 +228,15 @@ Game.Controller.prototype.checkAllSlots = function() {
   }
 }
 
+Game.Controller.prototype.startGame = function() {
+  this.checkAllSlots();
+  this.checkAllVehicleCollisions();
+  this.checkAllLogCollisions();
+  this.moveObjects();
+  this.checkIfGameLost();
+  this.checkWaterCollision();
+}
+
 Game.Slot = function(leftBound, rightBound) {
   this.leftBound = leftBound;
   this.rightBound = rightBound;
@@ -240,7 +249,6 @@ $(document).on('keydown', function(){
   event.preventDefault();
 });
 
-
 var gameController = new Game.Controller();
 gameController.logCreator();
 gameController.vehicleCreator();
@@ -248,10 +256,5 @@ gameController.createSlots(5);
 stage.addChild(frog);
 stage.update();
 
-createjs.Ticker.addEventListener('tick', gameController.checkAllSlots.bind(gameController))
-createjs.Ticker.addEventListener('tick', gameController.checkAllVehicleCollisions.bind(gameController));
-createjs.Ticker.addEventListener('tick', gameController.checkAllLogCollisions.bind(gameController));
-createjs.Ticker.addEventListener("tick", gameController.moveObjects.bind(gameController));
-createjs.Ticker.addEventListener('tick', gameController.checkIfGameLost.bind(gameController));
-createjs.Ticker.addEventListener('tick', gameController.checkWaterCollision.bind(gameController));
+createjs.Ticker.addEventListener('tick', gameController.startGame.bind(gameController));
 
