@@ -5,6 +5,7 @@ Game.Controller = function(character) {
   this.vehicles = [];
   this.logs = [];
   this.slots = [];
+  this.frogLivesContainer = new createjs.Container();
   this.waterYLine = 140;
 }
 
@@ -198,6 +199,43 @@ Game.Controller.prototype.checkAllSlots = function() {
   }
 }
 
+Game.Controller.prototype.addLives = function(livesToAdd){
+  var lastFrogInContainerIndex = this.frogLivesContainer.getNumChildren() - 1
+  var lastFrogInContainer = this.frogLivesContainer.children[lastFrogInContainerIndex]
+  var lastFrogPosX = 0
+  var lastFrogWidth = 0
+  if(this.frogLivesContainer.getNumChildren() > 0) {
+    lastFrogPosX = lastFrogInContainer.x;
+    lastFrogWidth = lastFrogInContainer.getBounds().width;
+  }
+  var startPosX = lastFrogPosX + lastFrogWidth;
+  for (var i = 0; i < livesToAdd; i++){
+    var froggerExtraLife = new createjs.Sprite(froggerSpriteData, "froggerExtraLife");
+    froggerExtraLife.x = startPosX
+    startPosX += 3 + froggerExtraLife.getBounds().width;
+    this.frogLivesContainer.addChild(froggerExtraLife)
+  }
+}
+
+Game.Controller.prototype.removeLives = function(livesToRemove){
+  for(var i = 0; i < livesToRemove; i++) {
+    var lastFrogInContainerIndex = this.frogLivesContainer.children.length - 1;
+    this.frogLivesContainer.removeChildAt(lastFrogInContainerIndex);
+  }
+}
+
+Game.Controller.prototype.gameSceneSetup = function(){
+  this.frogLivesContainer.x = 5;
+  this.frogLivesContainer.y = gameBottomStart;
+  this.addLives(5);
+  stage.addChild(this.frogLivesContainer);
+  this.logCreator();
+  this.vehicleCreator();
+  this.createSlots(5);
+  stage.addChild(this.character);
+  stage.update();
+}
+
 Game.Slot = function(leftBound, rightBound) {
   this.leftBound = leftBound;
   this.rightBound = rightBound;
@@ -205,18 +243,14 @@ Game.Slot = function(leftBound, rightBound) {
 }
 
 var frog = new Frog();
-$(document).on('keyup', frog.moveFrog.bind(frog));
-$(document).on('keydown', function(){
+  $(document).on('keyup', frog.moveFrog.bind(frog));
+  $(document).on('keydown', function(){
   event.preventDefault();
 });
 
 
 var gameController = new Game.Controller();
-gameController.logCreator();
-gameController.vehicleCreator();
-gameController.createSlots(5);
-stage.addChild(frog);
-stage.update();
+gameController.gameSceneSetup();
 
 createjs.Ticker.addEventListener('tick', gameController.checkAllSlots.bind(gameController))
 createjs.Ticker.addEventListener('tick', gameController.checkAllVehicleCollisions.bind(gameController));
