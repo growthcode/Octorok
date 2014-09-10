@@ -10,6 +10,31 @@ Game.Controller = function(character) {
   this.waterYLine = frogYStart - (rowHeight * 7);
 }
 
+Game.Controller.prototype.addLives = function(livesToAdd){
+  var lastFrogInContainerIndex = this.frogLivesContainer.getNumChildren() - 1
+  var lastFrogInContainer = this.frogLivesContainer.children[lastFrogInContainerIndex]
+  var lastFrogPosX = 0
+  var lastFrogWidth = 0
+  if(this.frogLivesContainer.getNumChildren() > 0) {
+    lastFrogPosX = lastFrogInContainer.x;
+    lastFrogWidth = lastFrogInContainer.getBounds().width;
+  }
+  var startPosX = lastFrogPosX + lastFrogWidth;
+  for (var i = 0; i < livesToAdd; i++){
+    var froggerExtraLife = new createjs.Sprite(froggerSpriteData, "froggerExtraLife");
+    froggerExtraLife.x = startPosX
+    startPosX += 3 + froggerExtraLife.getBounds().width;
+    this.frogLivesContainer.addChild(froggerExtraLife)
+  }
+}
+
+Game.Controller.prototype.removeLives = function(livesToRemove){
+  for(var i = 0; i < livesToRemove; i++) {
+    var lastFrogInContainerIndex = this.frogLivesContainer.children.length - 1;
+    this.frogLivesContainer.removeChildAt(lastFrogInContainerIndex);
+  }
+}
+
 Game.Controller.prototype.resetFrogPosition = function() {
   this.character.x = frogXStart;
   this.character.y = frogYStart;
@@ -17,6 +42,7 @@ Game.Controller.prototype.resetFrogPosition = function() {
 
 Game.Controller.prototype.killFrog = function() {
   this.character.lives -= 1;
+  this.removeLives(1)
   this.resetFrogPosition();
 }
 
@@ -229,31 +255,6 @@ Game.Controller.prototype.checkAllSlots = function() {
   }
 }
 
-Game.Controller.prototype.addLives = function(livesToAdd){
-  var lastFrogInContainerIndex = this.frogLivesContainer.getNumChildren() - 1
-  var lastFrogInContainer = this.frogLivesContainer.children[lastFrogInContainerIndex]
-  var lastFrogPosX = 0
-  var lastFrogWidth = 0
-  if(this.frogLivesContainer.getNumChildren() > 0) {
-    lastFrogPosX = lastFrogInContainer.x;
-    lastFrogWidth = lastFrogInContainer.getBounds().width;
-  }
-  var startPosX = lastFrogPosX + lastFrogWidth;
-  for (var i = 0; i < livesToAdd; i++){
-    var froggerExtraLife = new createjs.Sprite(froggerSpriteData, "froggerExtraLife");
-    froggerExtraLife.x = startPosX
-    startPosX += 3 + froggerExtraLife.getBounds().width;
-    this.frogLivesContainer.addChild(froggerExtraLife)
-  }
-}
-
-Game.Controller.prototype.removeLives = function(livesToRemove){
-  for(var i = 0; i < livesToRemove; i++) {
-    var lastFrogInContainerIndex = this.frogLivesContainer.children.length - 1;
-    this.frogLivesContainer.removeChildAt(lastFrogInContainerIndex);
-  }
-}
-
 Game.Controller.prototype.gameSceneSetup = function(){
   this.frogLivesContainer.x = 5;
   this.frogLivesContainer.y = gameBottomStart;
@@ -261,7 +262,7 @@ Game.Controller.prototype.gameSceneSetup = function(){
   stage.addChild(this.frogLivesContainer);
   this.logCreator();
   this.vehicleCreator();
-  this.createSlots(5);
+  this.createSlots(3);
   stage.addChild(this.character);
   stage.update();
 }
