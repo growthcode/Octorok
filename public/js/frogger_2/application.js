@@ -13,7 +13,6 @@ document.body.appendChild(canvas);
 
 var stage = new createjs.Stage('frogger-2-game-canvas');
 stage.addChild(landFinish);
-stage.update();
 
 var finishLineBoundary = landFinish.getBounds().height;
 var rowHeight = (gameBottomStart - finishLineBoundary) / 13;

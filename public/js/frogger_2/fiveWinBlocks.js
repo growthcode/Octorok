@@ -28,7 +28,6 @@ farRightBlock.x = 495;
 farRightBlock.y = 0;
 
 stage.addChild(farLeftBlock, midLeftBlock, midBlock, midRigtBlock, farRightBlock);
-stage.update();
 
 var slotWidth = 35;
 var leftBorder = 10;

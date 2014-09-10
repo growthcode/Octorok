@@ -134,7 +134,6 @@ Game.Controller.prototype.logCreator = function() {
   for (var i in this.logs) {
     stage.addChild(this.logs[i]);
   }
-  stage.update();
 }
 
 Game.Controller.prototype.generateVehicles = function() {
@@ -157,7 +156,6 @@ Game.Controller.prototype.generateVehicles = function() {
   for (var i in this.vehicles) {
     stage.addChild(this.vehicles[i]);
   }
-  stage.update();
 }
 
 Game.Controller.prototype.moveObjects = function() {
@@ -169,7 +167,7 @@ Game.Controller.prototype.moveObjects = function() {
       if (this.logs[i].x < -180) { this.logs[i].x = stage.canvas.width }
         this.logs[i].x -= this.logs[i].speed;
     }
-    stage.update();
+ 
   }
   for (var i in this.vehicles) {
     if (this.vehicles[i].direction == "right") {
@@ -187,7 +185,7 @@ Game.Controller.prototype.moveObjects = function() {
       }
         this.vehicles[i].x -= this.vehicles[i].speed;
     }
-    stage.update();
+ 
   }
 }
 
@@ -206,7 +204,6 @@ Game.Controller.prototype.addActiveSlotImage = function(slot) {
   frogActiveSlot.scaleX = 0.4;
   frogActiveSlot.scaleY = 0.4;
   stage.addChild(frogActiveSlot);
-  stage.update();
   this.activeSlotImages.push(frogActiveSlot)
 }
 
@@ -281,7 +278,6 @@ Game.Controller.prototype.gameSceneSetup = function() {
   this.logCreator();
   this.createSlots(3);
   stage.addChild(this.character);
-  stage.update();
 }
 
 Game.Slot = function(leftBound, rightBound) {
@@ -302,8 +298,8 @@ gameController.logCreator();
 setInterval(gameController.generateVehicles.bind(gameController), 2000);
 gameController.createSlots(5);
 stage.addChild(frog);
-stage.update();
 gameController.gameSceneSetup();
 
 createjs.Ticker.addEventListener('tick', gameController.startGame.bind(gameController));
+createjs.Ticker.addEventListener('tick', function() { stage.update() });
 
