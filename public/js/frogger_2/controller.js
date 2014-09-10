@@ -274,8 +274,8 @@ Game.Slot = function(leftBound, rightBound) {
 }
 
 var frog = new Frog();
-  $(document).on('keyup', frog.moveFrog.bind(frog));
-  $(document).on('keydown', function(){
+$(document).on('keyup', frog.moveFrog.bind(frog));
+$(document).on('keydown', function(){
   event.preventDefault();
 });
 
