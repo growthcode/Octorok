@@ -89,7 +89,7 @@ Game.Controller.prototype.checkAllWaterLogCollisions = function() {
 
 Game.Controller.prototype.logCreator = function() {
   for (var i = 1; i < 6 ; i++) {
-    if (i % 2 == 0) { 
+    if (i % 2 == 0) {
       this.logs.push(new Log(0, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
       this.logs.push(new Log(200, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
     } else {
@@ -153,6 +153,12 @@ Game.Controller.prototype.checkIfGameLost = function() {
 }
 
 var frog = new Frog();
+$(document).on('keyup', frog.moveFrog.bind(frog));
+$(document).on('keydown', function(){
+  event.preventDefault();
+});
+
+
 var gameController = new Game.Controller();
 gameController.logCreator();
 gameController.vehicleCreator();
@@ -164,3 +170,4 @@ createjs.Ticker.addEventListener('tick', gameController.checkAllLogCollisions.bi
 createjs.Ticker.addEventListener("tick", gameController.moveObjects.bind(gameController));
 createjs.Ticker.addEventListener('tick', gameController.checkIfGameLost.bind(gameController));
 createjs.Ticker.addEventListener('tick', gameController.checkWaterCollision.bind(gameController));
+

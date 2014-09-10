@@ -1,7 +1,7 @@
 var verticalMoveDistance = rowHeight;
 var horizontalMoveDistance = columnWidth;
 var frogXStart = (canvas.width / 2) - 23 / 2;
-var frogYStart = canvas.height - 20.5;
+var frogYStart = gameBottomStart - 20.5;
 
 var Frog = function(posX, posY) {
   this.lives = 3
@@ -17,37 +17,56 @@ var Frog = function(posX, posY) {
     if (that.x <= that.width) {
       that.x = that.width;
     }
-    if (that.y >= (canvas.height - that.height)) {
-      that.y = canvas.height - that.height;
+    if (that.y >= (gameBottomStart - that.height)) {
+      that.y = gameBottomStart - that.height;
     }
     if (that.y <= that.height){
       that.y = that.height;
     }
-  }
+  };
   this.move = function(direction) {
     if (direction == "up") { that.y = that.y - verticalMoveDistance; }
     if (direction == "down") { that.y = that.y + verticalMoveDistance; }
     if (direction == "left") { that.x = that.x - horizontalMoveDistance; }
     if (direction == "right") { that.x = that.x + horizontalMoveDistance; }
-  }
+  };
+  this.on('animationend', function(){
+  switch (this.currentAnimation){
+      case "frogJumpUp":
+        this.gotoAndStop("frogJumpUp");
+        break;
+      case "frogJumpDown":
+        this.gotoAndStop("frogJumpDown");
+        break;
+      case "frogJumpLeft":
+        this.gotoAndStop("frogJumpLeft");
+        break; 
+      case "frogJumpRight":
+        this.gotoAndStop("frogJumpRight");
+        break;
+    }
+  })
 }
 Frog.prototype = new createjs.Sprite(froggerSpriteData, "frogJumpUp");
 
-function moveFrog(event){
-  if (event['keyCode'] === 39 ) {
-    frog.move("right");
-  }
-  if (event['keyCode'] === 37 ) {
-    frog.move("left");
+Frog.prototype.moveFrog = function(event){
+  if (event['keyCode'] === 38 ) {
+    this.move("up");
+    this.gotoAndPlay("frogJumpUp");
   }
   if (event['keyCode'] === 40 ) {
-    frog.move("down");
+    this.move("down");
+    this.gotoAndPlay("frogJumpDown");
+
   }
-  if (event['keyCode'] === 38 ) {
-    frog.move("up");
+  if (event['keyCode'] === 37 ) {
+    this.move("left");
+    this.gotoAndPlay("frogJumpLeft");
   }
-  frog.keepInBounds();
+  if (event['keyCode'] === 39 ) {
+    this.move("right");
+    this.gotoAndPlay("frogJumpRight");
+  }
+  this.keepInBounds();
   stage.update();
 }
-
-$(document).on('keyup', moveFrog);
