@@ -172,16 +172,14 @@ Game.Controller.prototype.createSlots = function(numberOfSlots) {
     }
   };
 
-
 Game.Controller.prototype.addActiveSlotImage = function(slot) {
-  var testImage = new createjs.Shape()
-  testImage.graphics.beginFill('red').drawCircle(0,0, 15)
-  testImage.x = (slot.leftBound + slot.rightBound) / 2
-  testImage.y = 300
-  stage.addChild(testImage);
+  var frogActiveSlot = new createjs.Bitmap("../../assets/frogger_2/frog_active_slot.png")
+  frogActiveSlot.x = slot.leftBound + 2
+  frogActiveSlot.y = gameBottomStart - (rowHeight * 14)
+  frogActiveSlot.scaleX = 0.4;
+  frogActiveSlot.scaleY = 0.4;
+  stage.addChild(frogActiveSlot);
   stage.update();
-  console.log(slot.leftBound)
-  console.log(slot.rightBound)
 }
 
 Game.Controller.prototype.checkSlot = function(slot) {
