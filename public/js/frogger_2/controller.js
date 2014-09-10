@@ -46,8 +46,9 @@ Game.Controller.prototype.checkCollision = function(movingObject) {
 Game.Controller.prototype.checkAllVehicleCollisions = function() {
   for (var i in this.vehicles) {
     if (this.checkCollision(this.vehicles[i])) {
-      console.log('you been hit, son');
-      this.killFrog();
+      console.log('you been hit, son')
+      createjs.Sound.play("carHit");
+      this.killFrog()
     }
   }
 }
@@ -90,7 +91,7 @@ Game.Controller.prototype.checkAllWaterLogCollisions = function() {
 
 Game.Controller.prototype.logCreator = function() {
   for (var i = 1; i < 6 ; i++) {
-    if (i % 2 == 0) { 
+    if (i % 2 == 0) {
       this.logs.push(new SmallLog(0, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
       this.logs.push(new MediumLog(200, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
     } else {
@@ -217,3 +218,4 @@ createjs.Ticker.addEventListener('tick', gameController.checkAllLogCollisions.bi
 createjs.Ticker.addEventListener("tick", gameController.moveObjects.bind(gameController));
 createjs.Ticker.addEventListener('tick', gameController.checkIfGameLost.bind(gameController));
 createjs.Ticker.addEventListener('tick', gameController.checkWaterCollision.bind(gameController));
+

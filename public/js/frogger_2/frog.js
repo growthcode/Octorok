@@ -1,3 +1,11 @@
+var queue;
+queue = new createjs.LoadQueue();
+queue.installPlugin(createjs.Sound);
+queue.loadManifest([
+  {id: "carHit", src: "../assets/frogger_2/carHitFrog.mp3"},
+  {id: "marioJump", src: "../assets/frogger_2/mario.mp3"},
+  {id: "jumpInSlot", src: "../assets/frogger_2/frog_get_to_top.mp3"}]);
+
 var Frog = function(posX, posY) {
   this.lives = 3
   var that = this;
@@ -41,6 +49,7 @@ function moveFrog(event){
   if (event['keyCode'] === 38 ) {
     frog.move("up");
   }
+  createjs.Sound.play("marioJump");
   frog.keepInBounds();
   stage.update();
 }
