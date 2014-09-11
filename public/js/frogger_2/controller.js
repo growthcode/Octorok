@@ -20,7 +20,7 @@ Game.Controller.prototype.displayUsernameAndScore = function() {
   }).done(function(data) {
     that.username = new createjs.Text(data.username +":", "bold 22px Courier New", "#007600")
     that.username.x = that.frogLivesContainer.x + that.frogLivesContainer.getBounds().width + 10
-    that.username.y = canvas.height - 26
+    that.username.y = gameBottomStart;
     stage.addChild(that.username);
     that.displayScore();
   })
@@ -29,7 +29,7 @@ Game.Controller.prototype.displayUsernameAndScore = function() {
 Game.Controller.prototype.displayScore = function() {
   this.scoreDisplay = new createjs.Text(this.score, "bold 22px Courier New", "#007600")
   this.scoreDisplay.x = this.username.x + this.username.getBounds().width + 6
-  this.scoreDisplay.y = canvas.height - 26
+  this.scoreDisplay.y = gameBottomStart;
   stage.addChild(this.scoreDisplay)
 }
 
