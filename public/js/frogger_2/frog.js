@@ -18,10 +18,16 @@ startButton.y = canvas.height/2;
 stage.addChild(startButton);
 stage.update();
 
-var welcomeText = new createjs.Text("Welcome to Frogger!", "36px Arial", "#ff7700");
+var welcomeText = new createjs.Text("Welcome to Frogger", "36px Arial", "#ff7700");
 welcomeText.x = 30;
 welcomeText.y = 100;
 stage.addChild(welcomeText);
+stage.update();
+
+var clickToPlayText = new createjs.Text("Click to Play!", "36px Arial", "#ff7700");
+clickToPlayText.x = canvas.width/4 ;
+clickToPlayText.y = 250;
+stage.addChild(clickToPlayText);
 stage.update();
 
 function playSong(event){
