@@ -5,7 +5,6 @@ var landFinish = new createjs.Sprite(froggerSpriteData, "winningGrass");
 landFinish.x = 0;
 landFinish.y = 0;
 
-
 var canvas = document.createElement('canvas');
 canvas.id = "frogger-2-game-canvas"
 canvas.width = landFinish.getBounds().width;
