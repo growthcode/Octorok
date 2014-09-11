@@ -257,7 +257,7 @@ Game.Controller.prototype.checkAllSlots = function() {
 
 Game.Controller.prototype.gameSceneSetup = function(){
   this.frogLivesContainer.x = 5;
-  this.frogLivesContainer.y = gameBottomStart;
+  this.frogLivesContainer.y = gameBottomStart + 5;
   this.addLives(3);
   stage.addChild(this.frogLivesContainer);
   this.logCreator();
