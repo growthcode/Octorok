@@ -1,4 +1,5 @@
-var Vehicle = function(posX, posY, direction) {
+var Vehicle = function(posX, posY, direction, speed) {
+  this.speed = speed;
   this.direction = direction;
   this.x = posX;
   this.y = posY;
@@ -8,28 +9,28 @@ var Vehicle = function(posX, posY, direction) {
 
 Vehicle.prototype.speed = 5;
 
-var Sedan = function(posX, posY, direction) {
-  Vehicle.prototype.constructor.call(this, posX, posY, direction);
+var Sedan = function(posX, posY, direction, speed) {
+  Vehicle.prototype.constructor.call(this, posX, posY, direction, speed);
 }
 Sedan.prototype = new createjs.Sprite(froggerSpriteData, "carSedan");
 
-var Ferrari = function(posX, posY, direction) {
-  Vehicle.prototype.constructor.call(this, posX, posY, direction);
+var Ferrari = function(posX, posY, direction, speed) {
+  Vehicle.prototype.constructor.call(this, posX, posY, direction, speed);
 }
 Ferrari.prototype = new createjs.Sprite(froggerSpriteData, "carRacecar1");
 
-var Mazzeratti = function(posX, posY, direction) {
-  Vehicle.prototype.constructor.call(this, posX, posY, direction);
+var Mazzeratti = function(posX, posY, direction, speed) {
+  Vehicle.prototype.constructor.call(this, posX, posY, direction, speed);
 }
 Mazzeratti.prototype = new createjs.Sprite(froggerSpriteData, "carRacecar2");
 
-var Buggatti = function(posX, posY, direction) {
-  Vehicle.prototype.constructor.call(this, posX, posY, direction);
+var Buggatti = function(posX, posY, direction, speed) {
+  Vehicle.prototype.constructor.call(this, posX, posY, direction, speed);
 }
 Buggatti.prototype = new createjs.Sprite(froggerSpriteData, "carRacecar3");
 
-var Truck = function(posX, posY, direction) {
-  Vehicle.prototype.constructor.call(this, posX, posY, direction);
+var Truck = function(posX, posY, direction, speed) {
+  Vehicle.prototype.constructor.call(this, posX, posY, direction, speed);
 }
 Truck.prototype = new createjs.Sprite(froggerSpriteData, "truck");
 
