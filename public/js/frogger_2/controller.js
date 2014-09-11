@@ -1,6 +1,8 @@
 Game = {};
 
 Game.Controller = function(character) {
+  this.username = ""
+  this.score = 0
   this.character = character || frog;
   this.vehicles = [];
   this.logs = [];
@@ -8,6 +10,33 @@ Game.Controller = function(character) {
   this.frogLivesContainer = new createjs.Container();
   this.activeSlotImages = []
   this.waterYLine = frogYStart - (rowHeight * 7);
+}
+
+Game.Controller.prototype.displayUsernameAndScore = function() {
+  var that = this
+  $.ajax({
+    url: "/users/"+"user.id",
+    type: 'get'
+  }).done(function(data) {
+    that.username = new createjs.Text(data.username +":", "bold 22px Courier New", "#007600")
+    that.username.x = that.frogLivesContainer.x + that.frogLivesContainer.getBounds().width + 10
+    that.username.y = gameBottomStart;
+    stage.addChild(that.username);
+    that.displayScore();
+  })
+}
+
+Game.Controller.prototype.displayScore = function() {
+  this.scoreDisplay = new createjs.Text(this.score, "bold 22px Courier New", "#007600")
+  this.scoreDisplay.x = this.username.x + this.username.getBounds().width + 6
+  this.scoreDisplay.y = gameBottomStart;
+  stage.addChild(this.scoreDisplay)
+}
+
+Game.Controller.prototype.updateScore = function(points) {
+  this.score += points;
+  stage.removeChild(this.scoreDisplay)
+  this.displayScore();
 }
 
 Game.Controller.prototype.addLives = function(livesToAdd){
@@ -49,7 +78,6 @@ Game.Controller.prototype.killFrog = function() {
 Game.Controller.prototype.killIfOutOfBounds = function() {
   if(this.character.x < 0 || (this.character.x+this.character.width) > canvas.width) {
     this.killFrog();
-    console.log('too far...');
     createjs.Sound.play("die");
   }
 }
@@ -75,7 +103,6 @@ Game.Controller.prototype.checkCollision = function(movingObject) {
 Game.Controller.prototype.checkAllVehicleCollisions = function() {
   for (var i in this.vehicles) {
     if (this.checkCollision(this.vehicles[i])) {
-      console.log('you been hit, son');
       createjs.Sound.play("die");
       this.killFrog();
     }
@@ -92,7 +119,6 @@ Game.Controller.prototype.checkAllLogCollisions = function() {
 
 Game.Controller.prototype.checkWaterCollision = function() {
   if ((this.character.y < this.waterYLine) && !(this.checkAllWaterLogCollisions())) {
-    console.log("died in the water");
     createjs.Sound.play("die");
     this.killFrog();
   }
@@ -109,7 +135,6 @@ Game.Controller.prototype.logLandingArea = function(log) {
   var logBottom = log.y + log.height
   var characterMidX = this.character.width / 2
   if (characterLeftSide >= logLeftSide - characterMidX && characterRightSide <= logRightSide + characterMidX && characterTop >= logTop && characterBottom <= logBottom) {
-    console.log("i'm on the log");
     return true;
   }
   return false
@@ -201,8 +226,11 @@ Game.Controller.prototype.moveObjects = function() {
 Game.Controller.prototype.checkIfGameLost = function() {
   if (this.character.lives === 0) {
     console.log("You Lost...");
+    this.updateScore(-this.score);
+    this.displayScore();
     // temporary: set lives back to 3 to avoid infinite console.log
     this.character.lives += 3
+    this.addLives(3)
   }
 }
 
@@ -242,14 +270,12 @@ Game.Controller.prototype.checkSlot = function(slot) {
   if (this.character.x > slot.leftBound && this.character.x < slot.rightBound && this.character.y <= gameBottomStart - (rowHeight * 13)) {
     if (slot.active === false) {
       slot.active = true;
-      console.log('You Hit A Slot!');
       this.addActiveSlotImage(slot);
-      createjs.Sound.play("jumpInSlot");
+      this.updateScore(1);
     }
     else if (slot.active === true) {
       this.killFrog()
       createjs.play.Sound("die");
-      console.log('You Already Hit This Slot...')
     }
     this.resetFrogPosition()
   }
@@ -286,6 +312,7 @@ Game.Controller.prototype.gameSceneSetup = function() {
   this.frogLivesContainer.y = gameBottomStart + 5;
   this.addLives(3);
   stage.addChild(this.frogLivesContainer);
+  this.displayUsernameAndScore();
   this.logCreator();
   this.createSlots(5);
   stage.addChild(this.character);
@@ -312,5 +339,3 @@ gameController.gameSceneSetup();
 
 createjs.Ticker.addEventListener('tick', gameController.startGame.bind(gameController));
 createjs.Ticker.addEventListener('tick', function() { stage.update() });
-
-
