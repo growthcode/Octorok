@@ -70,6 +70,13 @@ Frog.prototype.moveFrog = function(event){
     this.move("right");
     this.gotoAndPlay("frogJumpRight");
   }
+  if (event['keyCode'] === 80 ) {
+    createjs.Ticker.removeAllEventListeners();
+  }
+  if (event['keyCode'] === 82 ) {
+    createjs.Ticker.addEventListener('tick', gameController.startGame.bind(gameController));
+    createjs.Ticker.addEventListener('tick', function() { stage.update() });
+  }
   createjs.Sound.play("marioJump");
   frog.keepInBounds();
 }

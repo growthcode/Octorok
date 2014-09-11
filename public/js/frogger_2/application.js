@@ -41,4 +41,3 @@ var frogXStart = (canvas.width / 2) - frogWidth / 2;
 var frogYStart = (gameBottomStart - rowHeight) + (rowHeight - 26)/2;
 
 
-
