@@ -1,15 +1,21 @@
 Game = {};
 
-Game.Controller = function(character) {
-  this.username = ""
-  this.score = 0
-  this.character = character || frog;
+Game.Controller = function(level) {
+  this.level = level;
   this.vehicles = [];
   this.logs = [];
   this.slots = [];
   this.frogLivesContainer = new createjs.Container();
   this.activeSlotImages = []
   this.waterYLine = frogYStart - (rowHeight * 7);
+  this.generateCharacter = function() {
+    var frog = new Frog();
+    $(document).on('keyup', frog.moveFrog.bind(frog));
+    $(document).on('keydown', function(){
+      event.preventDefault();
+    });
+  }
+  this.character = this.generateCharacter;
 }
 
 Game.Controller.prototype.displayUsernameAndScore = function() {
@@ -318,24 +324,70 @@ Game.Controller.prototype.gameSceneSetup = function() {
   stage.addChild(this.character);
 }
 
+Game.Controller.prototype.initiateEnemies = function() {
+  setInterval(gameController.generateVehicles.bind(gameController), 2000);
+  if (this.level > 1) {}
+    setInterval(gameController.generateSnake.bind(gameController), 3000);
+  }
+}
+
+Game.Controller.prototype.listener = function(event){
+  if (event['keyCode'] === 38 ) {
+    this.character.move("up");
+    this.character.gotoAndPlay("frogJumpUp");
+    createjs.Sound.play("marioJump");
+  }
+  if (event['keyCode'] === 40 ) {
+    this.character.move("down");
+    this.character.gotoAndPlay("frogJumpDown");
+    createjs.Sound.play("marioJump");
+  }
+  if (event['keyCode'] === 37 ) {
+    this.character.move("left");
+    this.character.gotoAndPlay("frogJumpLeft");
+    createjs.Sound.play("marioJump");
+  }
+  if (event['keyCode'] === 39 ) {
+    this.character.move("right");
+    this.character.gotoAndPlay("frogJumpRight");
+    createjs.Sound.play("marioJump");
+  }
+  if (event['keyCode'] === 80 ) {
+    Game.masterController.stopTicker();
+  }
+  if (event['keyCode'] === 82 ) {
+    Game.masterController.startTicker();
+  }
+  frog.keepInBounds();
+}
+
+
 Game.Slot = function(leftBound, rightBound) {
   this.leftBound = leftBound;
   this.rightBound = rightBound;
   this.active = false
 }
 
-var frog = new Frog();
-$(document).on('keyup', frog.moveFrog.bind(frog));
-$(document).on('keydown', function(){
-  event.preventDefault();
-});
+Game.masterController = {
+  level : 1,
+  beginArcade : function() {
+    var gameController = new Game.Controller(level);
+  },
+  changeLevel : function() {
+    this.level ++;
+    var gameController = new Game.Controller(level);
+  },
+  setupScene : function() {
+    gameController.gameSceneSetup();
+  },
+  startTicker : function() {
+    createjs.Ticker.addEventListener('tick', gameController.startGame.bind(gameController));
+    createjs.Ticker.addEventListener('tick', function() { stage.update() });
+  },
+  stopTicker : function() {
+    createjs.Ticker.removeAllEventListeners();
+  }
+}
 
-var gameController = new Game.Controller();
+masterController.beginArcade();
 
-setInterval(gameController.generateVehicles.bind(gameController), 2000);
-setInterval(gameController.generateSnake.bind(gameController), 3000);
-
-gameController.gameSceneSetup();
-
-createjs.Ticker.addEventListener('tick', gameController.startGame.bind(gameController));
-createjs.Ticker.addEventListener('tick', function() { stage.update() });
