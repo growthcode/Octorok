@@ -32,7 +32,3 @@ canvas{
   display: block;
   background-color:#BABABA;
 }
-
-#frogger-2-game-canvas{
-  background: url(/assets/frogger_2/frogger_2_canvas.png);
-}
