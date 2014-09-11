@@ -50,6 +50,7 @@ Game.Controller.prototype.killIfOutOfBounds = function() {
   if(this.character.x < 0 || (this.character.x+this.character.width) > canvas.width) {
     this.killFrog();
     console.log('too far...');
+    createjs.Sound.play("die");
   }
 }
 
@@ -75,7 +76,7 @@ Game.Controller.prototype.checkAllVehicleCollisions = function() {
   for (var i in this.vehicles) {
     if (this.checkCollision(this.vehicles[i])) {
       console.log('you been hit, son');
-      createjs.Sound.play("carHit");
+      createjs.Sound.play("die");
       this.killFrog();
     }
   }
@@ -92,6 +93,7 @@ Game.Controller.prototype.checkAllLogCollisions = function() {
 Game.Controller.prototype.checkWaterCollision = function() {
   if ((this.character.y < this.waterYLine) && !(this.checkAllWaterLogCollisions())) {
     console.log("died in the water");
+    createjs.Sound.play("die");
     this.killFrog();
   }
 }
@@ -147,13 +149,13 @@ Game.Controller.prototype.generateVehicles = function() {
     ];
     return leftFacingVehicles[Math.floor(Math.random() * leftFacingVehicles.length)];
   }
-  
+
   this.vehicles.push(chooseLeftFacingVehicle(11));
   this.vehicles.push(new Ferrari(-100, finishLineBoundary + rowHeight * 10 + (rowHeight - carHeight) / 2, "right"));
   this.vehicles.push(chooseLeftFacingVehicle(9));
   this.vehicles.push(new Ferrari(-100, finishLineBoundary + rowHeight * 8 + (rowHeight - carHeight) / 2, "right"));
   this.vehicles.push(chooseLeftFacingVehicle(7));
-  
+
   for (var i in this.vehicles) {
     stage.addChild(this.vehicles[i]);
   }
@@ -173,14 +175,14 @@ Game.Controller.prototype.moveObjects = function() {
   }
   for (var i in this.vehicles) {
     if (this.vehicles[i].direction == "right") {
-      if (this.vehicles[i].x > stage.canvas.width + 100) { 
+      if (this.vehicles[i].x > stage.canvas.width + 100) {
         stage.removeChild(this.vehicles[i]);
         this.vehicles[i] = null;
         this.vehicles.splice(i, 1);
       }
         this.vehicles[i].x += this.vehicles[i].speed;
     } else {
-      if (this.vehicles[i].x < -100) { 
+      if (this.vehicles[i].x < -100) {
         stage.removeChild(this.vehicles[i]);
         this.vehicles[i] = null;
         this.vehicles.splice(i, 1);
@@ -238,9 +240,11 @@ Game.Controller.prototype.checkSlot = function(slot) {
       slot.active = true;
       console.log('You Hit A Slot!');
       this.addActiveSlotImage(slot);
+      createjs.Sound.play("jumpInSlot");
     }
     else if (slot.active === true) {
       this.killFrog()
+      createjs.play.Sound("die");
       console.log('You Already Hit This Slot...')
     }
     this.resetFrogPosition()
