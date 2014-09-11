@@ -2,9 +2,34 @@ var queue;
 queue = new createjs.LoadQueue();
 queue.installPlugin(createjs.Sound);
 queue.loadManifest([
-  {id: "carHit", src: "../assets/frogger_2/carHitFrog.mp3"},
-  {id: "marioJump", src: "../assets/frogger_2/mario.mp3"},
-  {id: "jumpInSlot", src: "../assets/frogger_2/frog_get_to_top.mp3"}]);
+  {id: "die", src: "../assets/frogger_2/Frog_die.mp3"},
+  {id: "marioJump", src: "../assets/frogger_2/frog_hop.mp3"},
+  {id: "jumpInSlot", src: "../assets/frogger_2/frog_get_to_top.mp3"},
+  {id: "mainSong", src: "../assets/frogger_2/froggerMainSong.mp3"}]);
+
+var startButton = new createjs.Shape();
+startButton.graphics.beginFill("red").drawCircle(0,0, 50);
+startButton.addEventListener("click", playSong);
+startButton.x = 50;
+startButton.y = 200;
+stage.addChild(startButton);
+stage.update();
+
+function playSong(event){
+  console.log("click");
+  var replay = true;
+  var replaying = createjs.Sound.play("mainSong");
+  replaying.addEventListener("complete", replayMainSong);
+  stage.removeChild(startButton);
+  stage.update();
+}
+
+function replayMainSong(){
+  var replaying = createjs.Sound.play("mainSong");
+  replaying.addEventListener("complete", playSong);
+  stage.update();
+}
+
 
 var Frog = function(posX, posY) {
   this.lives = 3
@@ -56,20 +81,22 @@ Frog.prototype.moveFrog = function(event){
   if (event['keyCode'] === 38 ) {
     this.move("up");
     this.gotoAndPlay("frogJumpUp");
+    createjs.Sound.play("marioJump");
   }
   if (event['keyCode'] === 40 ) {
     this.move("down");
     this.gotoAndPlay("frogJumpDown");
-
+    createjs.Sound.play("marioJump");
   }
   if (event['keyCode'] === 37 ) {
     this.move("left");
     this.gotoAndPlay("frogJumpLeft");
+    createjs.Sound.play("marioJump");
   }
   if (event['keyCode'] === 39 ) {
     this.move("right");
     this.gotoAndPlay("frogJumpRight");
+    createjs.Sound.play("marioJump");
   }
-  createjs.Sound.play("marioJump");
   frog.keepInBounds();
 }

@@ -78,6 +78,7 @@ Game.Controller.prototype.killFrog = function() {
 Game.Controller.prototype.killIfOutOfBounds = function() {
   if(this.character.x < 0 || (this.character.x+this.character.width) > canvas.width) {
     this.killFrog();
+    createjs.Sound.play("die");
   }
 }
 
@@ -102,7 +103,7 @@ Game.Controller.prototype.checkCollision = function(movingObject) {
 Game.Controller.prototype.checkAllVehicleCollisions = function() {
   for (var i in this.vehicles) {
     if (this.checkCollision(this.vehicles[i])) {
-      createjs.Sound.play("carHit");
+      createjs.Sound.play("die");
       this.killFrog();
     }
   }
@@ -118,6 +119,7 @@ Game.Controller.prototype.checkAllLogCollisions = function() {
 
 Game.Controller.prototype.checkWaterCollision = function() {
   if ((this.character.y < this.waterYLine) && !(this.checkAllWaterLogCollisions())) {
+    createjs.Sound.play("die");
     this.killFrog();
   }
 }
@@ -171,20 +173,20 @@ Game.Controller.prototype.generateVehicles = function() {
     ];
     return leftFacingVehicles[Math.floor(Math.random() * leftFacingVehicles.length)];
   }
-  
+
   this.vehicles.push(chooseLeftFacingVehicle(11, 5));
   this.vehicles.push(new Ferrari(-50, finishLineBoundary + rowHeight * 10 + (rowHeight - carHeight) / 2, "right", 6));
   this.vehicles.push(chooseLeftFacingVehicle(9, 9));
   this.vehicles.push(new Ferrari(-50, finishLineBoundary + rowHeight * 8 + (rowHeight - carHeight) / 2, "right", 4));
   this.vehicles.push(chooseLeftFacingVehicle(7, 8));
-  
+
   for (var i in this.vehicles) {
     stage.addChild(this.vehicles[i]);
   }
 }
 
 Game.Controller.prototype.generateSnake = function() {
-  this.vehicles.push(new Snake(435, finishLineBoundary + rowHeight * 5 + (rowHeight - carHeight) / 2, "left", 20));  
+  this.vehicles.push(new Snake(435, finishLineBoundary + rowHeight * 5 + (rowHeight - carHeight) / 2, "left", 20));
   stage.addChild(this.vehicles[this.vehicles.length - 1]);
 }
 
@@ -197,11 +199,11 @@ Game.Controller.prototype.moveObjects = function() {
       if (this.logs[i].x < -180) { this.logs[i].x = stage.canvas.width }
         this.logs[i].x -= this.logs[i].speed;
     }
- 
+
   }
   for (var i in this.vehicles) {
     if (this.vehicles[i].direction == "right") {
-      if (this.vehicles[i].x > stage.canvas.width + 100) { 
+      if (this.vehicles[i].x > stage.canvas.width + 100) {
         stage.removeChild(this.vehicles[i]);
         this.vehicles[i] = null;
         this.vehicles.splice(i, 1);
@@ -209,7 +211,7 @@ Game.Controller.prototype.moveObjects = function() {
         this.vehicles[i].x += this.vehicles[i].speed;
       }
     } else {
-      if (this.vehicles[i].x < -100) { 
+      if (this.vehicles[i].x < -100) {
         stage.removeChild(this.vehicles[i]);
         this.vehicles[i] = null;
         this.vehicles.splice(i, 1);
@@ -269,6 +271,7 @@ Game.Controller.prototype.checkSlot = function(slot) {
     }
     else if (slot.active === true) {
       this.killFrog()
+      createjs.play.Sound("die");
     }
     this.resetFrogPosition()
   }
