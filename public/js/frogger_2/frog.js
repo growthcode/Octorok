@@ -98,5 +98,13 @@ Frog.prototype.moveFrog = function(event){
     this.gotoAndPlay("frogJumpRight");
     createjs.Sound.play("marioJump");
   }
+  if (event['keyCode'] === 80 ) {
+    createjs.Ticker.removeAllEventListeners();
+  }
+  if (event['keyCode'] === 82 ) {
+    createjs.Ticker.addEventListener('tick', gameController.startGame.bind(gameController));
+    createjs.Ticker.addEventListener('tick', function() { stage.update() });
+  }
+  createjs.Sound.play("marioJump");
   frog.keepInBounds();
 }
