@@ -78,7 +78,6 @@ Game.Controller.prototype.killFrog = function() {
 Game.Controller.prototype.killIfOutOfBounds = function() {
   if(this.character.x < 0 || (this.character.x+this.character.width) > canvas.width) {
     this.killFrog();
-    console.log('too far...');
   }
 }
 
@@ -103,7 +102,6 @@ Game.Controller.prototype.checkCollision = function(movingObject) {
 Game.Controller.prototype.checkAllVehicleCollisions = function() {
   for (var i in this.vehicles) {
     if (this.checkCollision(this.vehicles[i])) {
-      console.log('you been hit, son');
       createjs.Sound.play("carHit");
       this.killFrog();
     }
@@ -120,7 +118,6 @@ Game.Controller.prototype.checkAllLogCollisions = function() {
 
 Game.Controller.prototype.checkWaterCollision = function() {
   if ((this.character.y < this.waterYLine) && !(this.checkAllWaterLogCollisions())) {
-    console.log("died in the water");
     this.killFrog();
   }
 }
@@ -136,7 +133,6 @@ Game.Controller.prototype.logLandingArea = function(log) {
   var logBottom = log.y + log.height
   var characterMidX = this.character.width / 2
   if (characterLeftSide >= logLeftSide - characterMidX && characterRightSide <= logRightSide + characterMidX && characterTop >= logTop && characterBottom <= logBottom) {
-    console.log("i'm on the log");
     return true;
   }
   return false
@@ -263,13 +259,11 @@ Game.Controller.prototype.checkSlot = function(slot) {
   if (this.character.x > slot.leftBound && this.character.x < slot.rightBound && this.character.y <= gameBottomStart - (rowHeight * 13)) {
     if (slot.active === false) {
       slot.active = true;
-      console.log('You Hit A Slot!');
       this.addActiveSlotImage(slot);
       this.updateScore();
     }
     else if (slot.active === true) {
       this.killFrog()
-      console.log('You Already Hit This Slot...')
     }
     this.resetFrogPosition()
   }
