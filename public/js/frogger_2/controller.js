@@ -354,6 +354,8 @@ $(document).on('keydown', function(){
 
 var gameController = new Game.Controller();
 
+var qwerty = function (){
+
 setInterval(gameController.generateVehicles.bind(gameController), 2000);
 setInterval(gameController.generateSnake.bind(gameController), 3000);
 
@@ -361,3 +363,4 @@ gameController.gameSceneSetup();
 
 createjs.Ticker.addEventListener('tick', gameController.startGame.bind(gameController));
 createjs.Ticker.addEventListener('tick', function() { stage.update() });
+}
