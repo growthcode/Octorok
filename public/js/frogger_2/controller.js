@@ -225,6 +225,8 @@ Game.Controller.prototype.moveObjects = function() {
 Game.Controller.prototype.checkIfGameLost = function() {
   if (this.character.lives === 0) {
     console.log("You Lost...");
+    this.updateScore(-this.score);
+    this.displayScore();
     // temporary: set lives back to 3 to avoid infinite console.log
     this.character.lives += 3
   }
