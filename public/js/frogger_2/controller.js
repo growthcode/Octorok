@@ -10,12 +10,13 @@ Game.Controller = function(level) {
   this.waterYLine = frogYStart - (rowHeight * 7);
   this.generateCharacter = function() {
     var frog = new Frog();
-    $(document).on('keyup', frog.moveFrog.bind(frog));
+    $(document).on('keyup', this.listener.bind(this));
     $(document).on('keydown', function(){
       event.preventDefault();
     });
+    return frog;
   }
-  this.character = this.generateCharacter;
+  this.character = this.generateCharacter();
 }
 
 Game.Controller.prototype.displayUsernameAndScore = function() {
@@ -270,7 +271,7 @@ Game.Controller.prototype.createSlots = function(numberOfSlots) {
     this.slots.push(new Game.Slot(leftBound, rightBound));
     leftBound += (84.5/399)*canvas.width;
   }
-};
+}
 
 Game.Controller.prototype.checkSlot = function(slot) {
   if (this.character.x > slot.leftBound && this.character.x < slot.rightBound && this.character.y <= gameBottomStart - (rowHeight * 13)) {
@@ -295,12 +296,13 @@ Game.Controller.prototype.checkAllSlots = function() {
     return slot.active === true;
   })
   if (activeSlots.length === this.slots.length) {
-    console.log('YOU WIN!')
-    this.removeAllActiveSlotImages()
+    console.log('YOU WIN!');
+    this.removeAllActiveSlotImages();
     // temporary: set active slots back to false to avoid infinite console.log
     $.each(activeSlots, function(index, slot) {
       slot.active = false
     })
+    Game.masterController.changeLevel();
   }
 }
 
@@ -325,10 +327,14 @@ Game.Controller.prototype.gameSceneSetup = function() {
 }
 
 Game.Controller.prototype.initiateEnemies = function() {
-  setInterval(gameController.generateVehicles.bind(gameController), 2000);
-  if (this.level > 1) {}
-    setInterval(gameController.generateSnake.bind(gameController), 3000);
+  setInterval(this.generateVehicles.bind(gameController), 2000);
+  if (this.level > 1) {
+    setInterval(this.generateSnake, 3000);
   }
+}
+
+Game.Controller.prototype.clearEnemies = function() {
+  this.vehicles = null;
 }
 
 Game.Controller.prototype.listener = function(event){
@@ -358,7 +364,7 @@ Game.Controller.prototype.listener = function(event){
   if (event['keyCode'] === 82 ) {
     Game.masterController.startTicker();
   }
-  frog.keepInBounds();
+  this.character.keepInBounds();
 }
 
 
@@ -371,14 +377,24 @@ Game.Slot = function(leftBound, rightBound) {
 Game.masterController = {
   level : 1,
   beginArcade : function() {
-    var gameController = new Game.Controller(level);
+    gameController = new Game.Controller(this.level);
+    this.setupScene();
+    this.createEnemeies();
+    this.startTicker();
   },
   changeLevel : function() {
+    this.stopTicker();
+    this.clearStage();
+    gameController.clearEnemies();
+    gameController = null;
     this.level ++;
-    var gameController = new Game.Controller(level);
+    this.beginArcade();
   },
   setupScene : function() {
-    gameController.gameSceneSetup();
+    gameController.gameSceneSetup.bind(gameController)();
+  },
+  createEnemeies: function() {
+    gameController.initiateEnemies.bind(gameController)();
   },
   startTicker : function() {
     createjs.Ticker.addEventListener('tick', gameController.startGame.bind(gameController));
@@ -386,8 +402,11 @@ Game.masterController = {
   },
   stopTicker : function() {
     createjs.Ticker.removeAllEventListeners();
+  },
+  clearStage : function() {
+    stage.removeAllChildren();
   }
 }
 
-masterController.beginArcade();
+Game.masterController.beginArcade();
 
