@@ -8,20 +8,32 @@ queue.loadManifest([
   {id: "mainSong", src: "../assets/frogger_2/froggerMainSong.mp3"}]);
 
 var startButton = new createjs.Shape();
-startButton.graphics.beginFill("red").drawCircle(0,0, 50);
+startButton.graphics.beginFill("black").drawCircle(0,0, 500);
 startButton.addEventListener("click", playSong);
-startButton.x = 50;
-startButton.y = 200;
+startButton.x = canvas.width/2;
+startButton.y = canvas.height/2;
 stage.addChild(startButton);
 stage.update();
 
+var welcomeText = new createjs.Text("Welcome to Frogger", "36px Arial", "#277C27");
+welcomeText.x = 30;
+welcomeText.y = 100;
+stage.addChild(welcomeText);
+stage.update();
+
+var clickToPlayText = new createjs.Text("Click to Play!", "36px Arial", "#277C27");
+clickToPlayText.x = canvas.width/4 ;
+clickToPlayText.y = 250;
+stage.addChild(clickToPlayText);
+stage.update();
+
 function playSong(event){
+  stage.removeChild(startButton);
+  stage.update();
   console.log("click");
   var replay = true;
   var replaying = createjs.Sound.play("mainSong");
   replaying.addEventListener("complete", replayMainSong);
-  stage.removeChild(startButton);
-  stage.update();
 }
 
 function replayMainSong(){
