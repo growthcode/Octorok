@@ -98,5 +98,4 @@ Frog.prototype.moveFrog = function(event){
     createjs.Sound.play("marioJump");
   }
   frog.keepInBounds();
-  stage.update();
 }

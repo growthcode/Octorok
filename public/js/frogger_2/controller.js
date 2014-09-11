@@ -136,30 +136,33 @@ Game.Controller.prototype.logCreator = function() {
   for (var i in this.logs) {
     stage.addChild(this.logs[i]);
   }
-  stage.update();
 }
 
 Game.Controller.prototype.generateVehicles = function() {
-  var chooseLeftFacingVehicle = function(rowNumber) {
+  var chooseLeftFacingVehicle = function(rowNumber, speed) {
     var leftFacingVehicles = [
-      new Truck(499, finishLineBoundary + rowHeight * rowNumber + (rowHeight - carHeight) / 2, "left"),
-      new Sedan(499, finishLineBoundary + rowHeight * rowNumber + (rowHeight - carHeight) / 2, "left"),
-      new Buggatti(499, finishLineBoundary + rowHeight * rowNumber + (rowHeight - carHeight) / 2, "left"),
-      new Mazzeratti(499, finishLineBoundary + rowHeight * rowNumber + (rowHeight - carHeight) / 2, "left")
+      new Truck(439, finishLineBoundary + rowHeight * rowNumber + (rowHeight - carHeight) / 2, "left", speed),
+      new Sedan(439, finishLineBoundary + rowHeight * rowNumber + (rowHeight - carHeight) / 2, "left", speed),
+      new Buggatti(439, finishLineBoundary + rowHeight * rowNumber + (rowHeight - carHeight) / 2, "left", speed),
+      new Mazzeratti(439, finishLineBoundary + rowHeight * rowNumber + (rowHeight - carHeight) / 2, "left", speed)
     ];
     return leftFacingVehicles[Math.floor(Math.random() * leftFacingVehicles.length)];
   }
 
-  this.vehicles.push(chooseLeftFacingVehicle(11));
-  this.vehicles.push(new Ferrari(-100, finishLineBoundary + rowHeight * 10 + (rowHeight - carHeight) / 2, "right"));
-  this.vehicles.push(chooseLeftFacingVehicle(9));
-  this.vehicles.push(new Ferrari(-100, finishLineBoundary + rowHeight * 8 + (rowHeight - carHeight) / 2, "right"));
-  this.vehicles.push(chooseLeftFacingVehicle(7));
+  this.vehicles.push(chooseLeftFacingVehicle(11, 5));
+  this.vehicles.push(new Ferrari(-50, finishLineBoundary + rowHeight * 10 + (rowHeight - carHeight) / 2, "right", 6));
+  this.vehicles.push(chooseLeftFacingVehicle(9, 9));
+  this.vehicles.push(new Ferrari(-50, finishLineBoundary + rowHeight * 8 + (rowHeight - carHeight) / 2, "right", 4));
+  this.vehicles.push(chooseLeftFacingVehicle(7, 8));
 
   for (var i in this.vehicles) {
     stage.addChild(this.vehicles[i]);
   }
-  stage.update();
+}
+
+Game.Controller.prototype.generateSnake = function() {
+  this.vehicles.push(new Snake(435, finishLineBoundary + rowHeight * 5 + (rowHeight - carHeight) / 2, "left", 20));
+  stage.addChild(this.vehicles[this.vehicles.length - 1]);
 }
 
 Game.Controller.prototype.moveObjects = function() {
@@ -171,7 +174,7 @@ Game.Controller.prototype.moveObjects = function() {
       if (this.logs[i].x < -180) { this.logs[i].x = stage.canvas.width }
         this.logs[i].x -= this.logs[i].speed;
     }
-    stage.update();
+
   }
   for (var i in this.vehicles) {
     if (this.vehicles[i].direction == "right") {
@@ -179,17 +182,18 @@ Game.Controller.prototype.moveObjects = function() {
         stage.removeChild(this.vehicles[i]);
         this.vehicles[i] = null;
         this.vehicles.splice(i, 1);
-      }
+      } else {
         this.vehicles[i].x += this.vehicles[i].speed;
+      }
     } else {
       if (this.vehicles[i].x < -100) {
         stage.removeChild(this.vehicles[i]);
         this.vehicles[i] = null;
         this.vehicles.splice(i, 1);
-      }
+      } else {
         this.vehicles[i].x -= this.vehicles[i].speed;
+      }
     }
-    stage.update();
   }
 }
 
@@ -208,7 +212,6 @@ Game.Controller.prototype.addActiveSlotImage = function(slot) {
   frogActiveSlot.scaleX = 0.4;
   frogActiveSlot.scaleY = 0.4;
   stage.addChild(frogActiveSlot);
-  stage.update();
   this.activeSlotImages.push(frogActiveSlot)
 }
 
@@ -279,13 +282,12 @@ Game.Controller.prototype.startGame = function() {
 
 Game.Controller.prototype.gameSceneSetup = function() {
   this.frogLivesContainer.x = 5;
-  this.frogLivesContainer.y = gameBottomStart;
+  this.frogLivesContainer.y = gameBottomStart + 5;
   this.addLives(3);
   stage.addChild(this.frogLivesContainer);
   this.logCreator();
-  this.createSlots(3);
+  this.createSlots(5);
   stage.addChild(this.character);
-  stage.update();
 }
 
 Game.Slot = function(leftBound, rightBound) {
@@ -302,12 +304,11 @@ $(document).on('keydown', function(){
 
 var gameController = new Game.Controller();
 
-gameController.logCreator();
 setInterval(gameController.generateVehicles.bind(gameController), 2000);
-gameController.createSlots(5);
-stage.addChild(frog);
-stage.update();
+setInterval(gameController.generateSnake.bind(gameController), 3000);
+
 gameController.gameSceneSetup();
 
 createjs.Ticker.addEventListener('tick', gameController.startGame.bind(gameController));
+createjs.Ticker.addEventListener('tick', function() { stage.update() });
 
