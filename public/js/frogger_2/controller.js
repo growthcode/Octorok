@@ -22,7 +22,6 @@ Game.Controller.prototype.displayLevel = function() {
 
 Game.Controller.prototype.updateLevel = function(level) {
   this.level += level;
-  debugger
   stage.removeChild(this.levelDisplay);
   this.displayLevel();
 }
@@ -262,7 +261,7 @@ Game.Controller.prototype.addActiveSlotImage = function(slot) {
 Game.Controller.prototype.removeActiveSlotIamge = function(activeSlotImage) {
   window.setTimeout(function() {
     stage.removeChild(activeSlotImage)
-  }, 2000)
+  }, 500)
 }
 
 Game.Controller.prototype.removeAllActiveSlotImages = function() {
@@ -286,7 +285,7 @@ Game.Controller.prototype.checkSlot = function(slot) {
     if (slot.active === false) {
       slot.active = true;
       this.addActiveSlotImage(slot);
-      this.updateScore(1);
+      this.updateScore(1000);
     }
     else if (slot.active === true) {
       this.killFrog()
