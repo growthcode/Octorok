@@ -1,11 +1,5 @@
 get '/' do
-  @user = User.find(session[:id])
   erb :index
-  content_type :json
-  @user.to_json
-end
-
-get '/users' do
 end
 
 post '/users' do
@@ -14,7 +8,6 @@ post '/users' do
                     username: params[:username],
                     email: params[:email])
   user.password = params[:password_hash]
-  # @user.save!
 
   if user.save
     session[:email]=user.email
@@ -50,6 +43,14 @@ end
 get '/sign_out' do
   session.clear
   redirect '/'
+end
+
+get '/users/:id' do
+  if current_user
+    user = User.find(session[:id])
+    content_type :json
+    return {username: user.username}.to_json
+  end
 end
 
 get '/frogger_1' do

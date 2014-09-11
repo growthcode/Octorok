@@ -309,10 +309,10 @@ createjs.Ticker.addEventListener('tick', gameController.startGame.bind(gameContr
 
 
 $.ajax({
-  url: '/',
+  url: "/users/"+"user.id",
   type: 'get'
 }).done(function(data) {
-  var userText = new createjs.Text(data.first_name, "bold 22px Arial", "#00c200")
+  var userText = new createjs.Text(data.username, "bold 22px Arial", "#00c200")
   userText.x = canvas.width / 2 - 20
   userText.y = canvas.height - 30
   stage.addChild(userText)
