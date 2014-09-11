@@ -386,6 +386,7 @@ Game.masterController = {
     this.stopTicker();
     this.clearStage();
     gameController.clearEnemies();
+    clearInterval(gameController.initiateEnemies);
     gameController = null;
     this.level ++;
     this.beginArcade();
