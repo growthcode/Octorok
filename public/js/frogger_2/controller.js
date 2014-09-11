@@ -139,24 +139,28 @@ Game.Controller.prototype.logCreator = function() {
 Game.Controller.prototype.generateVehicles = function() {
   var chooseLeftFacingVehicle = function(rowNumber, speed) {
     var leftFacingVehicles = [
-      new Truck(499, finishLineBoundary + rowHeight * rowNumber + (rowHeight - carHeight) / 2, "left", speed),
-      new Sedan(499, finishLineBoundary + rowHeight * rowNumber + (rowHeight - carHeight) / 2, "left", speed),
-      new Buggatti(499, finishLineBoundary + rowHeight * rowNumber + (rowHeight - carHeight) / 2, "left", speed),
-      new Mazzeratti(499, finishLineBoundary + rowHeight * rowNumber + (rowHeight - carHeight) / 2, "left", speed)
+      new Truck(439, finishLineBoundary + rowHeight * rowNumber + (rowHeight - carHeight) / 2, "left", speed),
+      new Sedan(439, finishLineBoundary + rowHeight * rowNumber + (rowHeight - carHeight) / 2, "left", speed),
+      new Buggatti(439, finishLineBoundary + rowHeight * rowNumber + (rowHeight - carHeight) / 2, "left", speed),
+      new Mazzeratti(439, finishLineBoundary + rowHeight * rowNumber + (rowHeight - carHeight) / 2, "left", speed)
     ];
     return leftFacingVehicles[Math.floor(Math.random() * leftFacingVehicles.length)];
   }
   
-  this.vehicles.push(chooseLeftFacingVehicle(11, 8));
-  this.vehicles.push(new Ferrari(-100, finishLineBoundary + rowHeight * 10 + (rowHeight - carHeight) / 2, "right", 7));
-  this.vehicles.push(chooseLeftFacingVehicle(9, 6));
-  this.vehicles.push(new Ferrari(-100, finishLineBoundary + rowHeight * 8 + (rowHeight - carHeight) / 2, "right", 5));
-  this.vehicles.push(chooseLeftFacingVehicle(7, 4));
-  // this.vehicles.push(new Snake(-40, finishLineBoundary + rowHeight * 6 + (rowHeight - carHeight) / 2, "right", 20));  
+  this.vehicles.push(chooseLeftFacingVehicle(11, 5));
+  this.vehicles.push(new Ferrari(-50, finishLineBoundary + rowHeight * 10 + (rowHeight - carHeight) / 2, "right", 6));
+  this.vehicles.push(chooseLeftFacingVehicle(9, 9));
+  this.vehicles.push(new Ferrari(-50, finishLineBoundary + rowHeight * 8 + (rowHeight - carHeight) / 2, "right", 4));
+  this.vehicles.push(chooseLeftFacingVehicle(7, 8));
   
   for (var i in this.vehicles) {
     stage.addChild(this.vehicles[i]);
   }
+}
+
+Game.Controller.prototype.generateSnake = function() {
+  this.vehicles.push(new Snake(435, finishLineBoundary + rowHeight * 5 + (rowHeight - carHeight) / 2, "left", 20));  
+  stage.addChild(this.vehicles[this.vehicles.length - 1]);
 }
 
 Game.Controller.prototype.moveObjects = function() {
@@ -176,17 +180,18 @@ Game.Controller.prototype.moveObjects = function() {
         stage.removeChild(this.vehicles[i]);
         this.vehicles[i] = null;
         this.vehicles.splice(i, 1);
-      }
+      } else {
         this.vehicles[i].x += this.vehicles[i].speed;
+      }
     } else {
       if (this.vehicles[i].x < -100) { 
         stage.removeChild(this.vehicles[i]);
         this.vehicles[i] = null;
         this.vehicles.splice(i, 1);
-      }
+      } else {
         this.vehicles[i].x -= this.vehicles[i].speed;
+      }
     }
- 
   }
 }
 
@@ -296,6 +301,7 @@ $(document).on('keydown', function(){
 var gameController = new Game.Controller();
 
 setInterval(gameController.generateVehicles.bind(gameController), 2000);
+setInterval(gameController.generateSnake.bind(gameController), 3000);
 
 gameController.gameSceneSetup();
 
