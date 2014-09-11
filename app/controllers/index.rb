@@ -1,5 +1,8 @@
 get '/' do
+  @user = User.find(session[:id])
   erb :index
+  content_type :json
+  @user.to_json
 end
 
 get '/users' do
