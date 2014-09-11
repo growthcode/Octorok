@@ -125,12 +125,13 @@ Game.Controller.prototype.checkAllWaterLogCollisions = function() {
 
 Game.Controller.prototype.logCreator = function() {
   for (var i = 1; i < 6 ; i++) {
+    var speed = Math.floor(Math.random() * (5 - 2 + 1) + 2);
     if (i % 2 == 0) {
-      this.logs.push(new SmallLog(0, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
-      this.logs.push(new MediumLog(200, finishLineBoundary + (rowHeight * i - rowHeight), "left"));
+      this.logs.push(new SmallLog(0, finishLineBoundary + (rowHeight * i - rowHeight), "left", speed));
+      this.logs.push(new MediumLog(200, finishLineBoundary + (rowHeight * i - rowHeight), "left", speed));
     } else {
-      this.logs.push(new SmallLog(0, finishLineBoundary + (rowHeight * i - rowHeight), "right"));
-      this.logs.push(new LargeLog(200, finishLineBoundary + (rowHeight * i - rowHeight), "right"));
+      this.logs.push(new SmallLog(0, finishLineBoundary + (rowHeight * i - rowHeight), "right", speed));
+      this.logs.push(new LargeLog(200, finishLineBoundary + (rowHeight * i - rowHeight), "right", speed));
     }
   }
   for (var i in this.logs) {
@@ -311,4 +312,5 @@ gameController.gameSceneSetup();
 
 createjs.Ticker.addEventListener('tick', gameController.startGame.bind(gameController));
 createjs.Ticker.addEventListener('tick', function() { stage.update() });
+
 
