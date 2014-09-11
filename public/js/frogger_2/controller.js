@@ -3,6 +3,8 @@ Game = {};
 Game.Controller = function(level) {
   that = this;
   this.level = level;
+  this.username = "";
+  this.score = 0;
   this.vehicles = [];
   this.logs = [];
   this.slots = [];
@@ -16,13 +18,28 @@ Game.Controller = function(level) {
   this.character = this.generateCharacter();
 }
 
+Game.Controller.prototype.displayLevel = function() {
+  this.levelDisplay = new createjs.Text("Level " + this.level, "bold 22px Courier New", "#007600")
+  this.levelDisplay.x = canvas.width - this.levelDisplay.getBounds().width - 10
+  this.levelDisplay.y = gameBottomStart;
+  stage.addChild(this.levelDisplay)
+}
+
+Game.Controller.prototype.updateLevel = function(level) {
+  this.level += level;
+  stage.removeChild(this.levelDisplay);
+  this.displayLevel();
+}
+
 Game.Controller.prototype.displayUsernameAndScore = function() {
   var that = this
   $.ajax({
     url: "/users/"+"user.id",
     type: 'get'
   }).done(function(data) {
-    that.username = new createjs.Text(data.username +":", "bold 22px Courier New", "#007600")
+    var username = data.username
+    if(data === "") {username = "Guest"}
+    that.username = new createjs.Text(username +":", "bold 22px Courier New", "#007600")
     that.username.x = that.frogLivesContainer.x + that.frogLivesContainer.getBounds().width + 10
     that.username.y = gameBottomStart;
     stage.addChild(that.username);
@@ -34,12 +51,12 @@ Game.Controller.prototype.displayScore = function() {
   this.scoreDisplay = new createjs.Text(this.score, "bold 22px Courier New", "#007600")
   this.scoreDisplay.x = this.username.x + this.username.getBounds().width + 6
   this.scoreDisplay.y = gameBottomStart;
-  stage.addChild(this.scoreDisplay)
+  stage.addChild(this.scoreDisplay);
 }
 
 Game.Controller.prototype.updateScore = function(points) {
   this.score += points;
-  stage.removeChild(this.scoreDisplay)
+  stage.removeChild(this.scoreDisplay);
   this.displayScore();
 }
 
@@ -230,10 +247,14 @@ Game.Controller.prototype.checkIfGameLost = function() {
   if (this.character.lives === 0) {
     console.log("You Lost...");
     this.updateScore(-this.score);
-    this.displayScore();
+    this.updateLevel(-this.level + 1);
+    $.each(activeSlots, function(index, slot) {
+      slot.active = false
+    })
+    this.removeAllActiveSlotImages();
     // temporary: set lives back to 3 to avoid infinite console.log
-    this.character.lives += 3
-    this.addLives(3)
+    this.character.lives += 3;
+    this.addLives(3);
   }
 }
 
@@ -250,7 +271,7 @@ Game.Controller.prototype.addActiveSlotImage = function(slot) {
 Game.Controller.prototype.removeActiveSlotIamge = function(activeSlotImage) {
   window.setTimeout(function() {
     stage.removeChild(activeSlotImage)
-  }, 2000)
+  }, 200)
 }
 
 Game.Controller.prototype.removeAllActiveSlotImages = function() {
@@ -274,7 +295,7 @@ Game.Controller.prototype.checkSlot = function(slot) {
     if (slot.active === false) {
       slot.active = true;
       this.addActiveSlotImage(slot);
-      this.updateScore(1);
+      this.updateScore(1000);
     }
     else if (slot.active === true) {
       this.killFrog()
