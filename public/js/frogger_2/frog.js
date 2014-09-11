@@ -7,7 +7,28 @@ queue.loadManifest([
   {id: "jumpInSlot", src: "../assets/frogger_2/frog_get_to_top.mp3"},
   {id: "mainSong", src: "../assets/frogger_2/froggerMainSong.mp3"}]);
 
-createjs.Sound.play("mainSong");
+var startButton = new createjs.Shape();
+startButton.graphics.beginFill("red").drawCircle(0,0, 50);
+startButton.addEventListener("click", playSong);
+startButton.x = 50;
+startButton.y = 200;
+stage.addChild(startButton);
+stage.update();
+
+function playSong(event){
+console.log("click");
+var replay = true;
+var replaying = createjs.Sound.play("mainSong");
+replaying.addEventListener("complete", replayMainSong);
+stage.update();
+}
+
+function replayMainSong(){
+  var replaying = createjs.Sound.play("mainSong");
+  replaying.addEventListener("complete", playSong);
+  stage.update();
+}
+
 
 var Frog = function(posX, posY) {
   this.lives = 3
