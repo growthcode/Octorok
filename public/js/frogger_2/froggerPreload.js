@@ -4,7 +4,7 @@ manifest = [
   {src:"../js/frogger_2/cars.js", id:"cars"},
   {src:"../js/frogger_2/logs.js", id:"logs"},
   {src:"../js/frogger_2/frog.js", id:"frog"},
-  // {src:"../js/frogger_2/controller.js", id:"controller"},
+  {src:"../js/frogger_2/controller.js", id:"controller"},
   {src:"../js/frogger_2/froggerSpriteSheet.js", id:"froggerSpriteSheet"}
 ]
 
@@ -25,32 +25,15 @@ manifest = [
   var handleProgress = function(event){
     loadingMessage.text = Math.floor(event.progress*100) + "% LOADED"
     stage.addChild(loadingMessage)
-    // stage.update();
   }
 
   var handleComplete = function(){
     setInterval(function(){loadingMessage.text = ""},1000);
-    qwerty();
-
-    // stage.update();
+    froggerAlpha(); //starts the game!
   }
 
   var handleFileLoad = function(event){
     // console.log(event.progress)
-    // console.log("handling file load")
   }
     startPreload();
-// froggerPreload();
-
-// OOJS
-// var Preload = function(){
-//   this.installPlugin(createjs.Sound);
-// }
-// Preload.prototype = new createjs.LoadQueue(true);
-// Preload.prototype.startPreload = function(){
-//   this.on("progress", this.handleProgress);
-//   this.on("complete", this.handleComplete);
-//   this.on("fileload", handleFileLoad);
-//   this.loadManifest(manifest, true);
-// }
 
