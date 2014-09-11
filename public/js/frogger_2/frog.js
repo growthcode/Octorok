@@ -16,7 +16,6 @@ stage.addChild(startButton);
 stage.update();
 
 function playSong(event){
-  console.log("click");
   var replay = true;
   var replaying = createjs.Sound.play("mainSong");
   replaying.addEventListener("complete", replayMainSong);
