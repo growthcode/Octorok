@@ -1,10 +1,9 @@
 manifest = [
   {src:"../assets/frogger_2/froggerSprite.png", id:"spriteSheet"},
-  {src:"../js/frogger_2/application.js", id:"application"},
   {src:"../js/frogger_2/cars.js", id:"cars"},
   {src:"../js/frogger_2/logs.js", id:"logs"},
-  {src:"../js/frogger_2/frog.js", id:"frog"},
   {src:"../js/frogger_2/controller.js", id:"controller"},
+  {src:"../js/frogger_2/loadingScreens.js", id:"loadScreens"},
   {src:"../js/frogger_2/froggerSpriteSheet.js", id:"froggerSpriteSheet"}
 ]
 
@@ -14,7 +13,6 @@ manifest = [
   var startPreload = function() {
     preload.on("progress", handleProgress);
     preload.on("complete", handleComplete);
-    preload.on("fileload", handleFileLoad);
     preload.loadManifest(manifest, true);
   }
 
@@ -28,12 +26,9 @@ manifest = [
   }
 
   var handleComplete = function(){
+    console.log("here")
+    loadStartScreen();
     setInterval(function(){loadingMessage.text = ""},1000);
-    froggerAlpha(); //starts the game!
   }
-
-  var handleFileLoad = function(event){
-    // console.log(event.progress)
-  }
-    startPreload();
+startPreload();
 
