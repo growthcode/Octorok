@@ -10,6 +10,19 @@ Game.Controller = function(character) {
   this.waterYLine = frogYStart - (rowHeight * 7);
 }
 
+Game.Controller.prototype.displayUsername = function() {
+  var that = this
+  $.ajax({
+    url: "/users/"+"user.id",
+    type: 'get'
+  }).done(function(data) {
+    var userText = new createjs.Text(data.username +": ", "bold 22px Courier New", "#007600")
+    userText.x = that.frogLivesContainer.x + that.frogLivesContainer.getBounds().width + 10
+    userText.y = canvas.height - 28
+    stage.addChild(userText)
+  })
+}
+
 Game.Controller.prototype.addLives = function(livesToAdd){
   var lastFrogInContainerIndex = this.frogLivesContainer.getNumChildren() - 1
   var lastFrogInContainer = this.frogLivesContainer.children[lastFrogInContainerIndex]
@@ -278,6 +291,7 @@ Game.Controller.prototype.gameSceneSetup = function() {
   this.frogLivesContainer.y = gameBottomStart + 5;
   this.addLives(3);
   stage.addChild(this.frogLivesContainer);
+  this.displayUsername();
   this.logCreator();
   this.createSlots(3);
   stage.addChild(this.character);
@@ -306,15 +320,3 @@ stage.update();
 gameController.gameSceneSetup();
 
 createjs.Ticker.addEventListener('tick', gameController.startGame.bind(gameController));
-
-
-$.ajax({
-  url: "/users/"+"user.id",
-  type: 'get'
-}).done(function(data) {
-  var userText = new createjs.Text(data.username +": ", "bold 22px Courier New", "#007600")
-  // userText.x = canvas.width / 2 - 20
-  userText.x = gameController.frogLivesContainer.x + gameController.frogLivesContainer.getBounds().width + 10
-  userText.y = canvas.height - 28
-  stage.addChild(userText)
-})
