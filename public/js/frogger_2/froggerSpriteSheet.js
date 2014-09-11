@@ -18,7 +18,7 @@ var froggerSpriteData = new createjs.SpriteSheet({
                 froggerExtraLife:[19],
                 truck:[20],
                 carRacecar3:[21],
-                snake:[22, 23, 24, 25]
+                snake:[22]
               },
   images: ["../../assets/frogger_2/froggerSprite.png"],
   frames: [
