@@ -31,4 +31,3 @@ manifest = [
     setInterval(function(){loadingMessage.text = ""},1000);
   }
 startPreload();
-

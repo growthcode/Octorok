@@ -355,7 +355,6 @@ $(document).on('keydown', function(){
 var gameController = new Game.Controller();
 
 var froggerAlpha = function (){
-
 setInterval(gameController.generateVehicles.bind(gameController), 2000);
 setInterval(gameController.generateSnake.bind(gameController), 3000);
 

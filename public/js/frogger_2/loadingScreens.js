@@ -6,8 +6,3 @@ var loadStartScreen = function(){
     froggerAlpha();
   }
 }
-
-
-
-
-
