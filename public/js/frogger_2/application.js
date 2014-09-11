@@ -5,7 +5,6 @@ var landFinish = new createjs.Sprite(froggerSpriteData, "winningGrass");
 landFinish.x = 0;
 landFinish.y = 0;
 
-
 var canvas = document.createElement('canvas');
 canvas.id = "frogger-2-game-canvas"
 canvas.width = landFinish.getBounds().width;
@@ -19,7 +18,7 @@ var stage = new createjs.Stage('frogger-2-game-canvas');
 stage.addChild(background);
 stage.addChild(landFinish);
 
-var backgroundDirtBottom = new createjs.Bitmap("../assets/frogger_2/brown.png");
+var backgroundDirtBottom = new createjs.Sprite("../assets/frogger_2/brown.png");
 backgroundDirtBottom.x = 0;
 backgroundDirtBottom.y = gameBottomStart;
 stage.addChild(backgroundDirtBottom);
