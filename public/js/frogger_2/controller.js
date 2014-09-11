@@ -32,7 +32,9 @@ Game.Controller.prototype.displayUsernameAndScore = function() {
     url: "/users/"+"user.id",
     type: 'get'
   }).done(function(data) {
-    that.username = new createjs.Text(data.username +":", "bold 22px Courier New", "#007600")
+    var username = data.username
+    if(data === "") {username = "Guest"}
+    that.username = new createjs.Text(username +":", "bold 22px Courier New", "#007600")
     that.username.x = that.frogLivesContainer.x + that.frogLivesContainer.getBounds().width + 10
     that.username.y = gameBottomStart;
     stage.addChild(that.username);
