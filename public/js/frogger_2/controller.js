@@ -244,9 +244,13 @@ Game.Controller.prototype.checkIfGameLost = function() {
     console.log("You Lost...");
     this.updateScore(-this.score);
     this.updateLevel(-this.level + 1);
+    $.each(activeSlots, function(index, slot) {
+      slot.active = false
+    })
+    this.removeAllActiveSlotImages();
     // temporary: set lives back to 3 to avoid infinite console.log
-    this.character.lives += 3
-    this.addLives(3)
+    this.character.lives += 3;
+    this.addLives(3);
   }
 }
 
@@ -263,7 +267,7 @@ Game.Controller.prototype.addActiveSlotImage = function(slot) {
 Game.Controller.prototype.removeActiveSlotIamge = function(activeSlotImage) {
   window.setTimeout(function() {
     stage.removeChild(activeSlotImage)
-  }, 500)
+  }, 200)
 }
 
 Game.Controller.prototype.removeAllActiveSlotImages = function() {
