@@ -229,6 +229,7 @@ Game.Controller.prototype.checkIfGameLost = function() {
     this.displayScore();
     // temporary: set lives back to 3 to avoid infinite console.log
     this.character.lives += 3
+    this.addLives(3)
   }
 }
 
