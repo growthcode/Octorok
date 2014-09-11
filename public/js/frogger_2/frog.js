@@ -7,12 +7,21 @@ queue.loadManifest([
   {id: "jumpInSlot", src: "../assets/frogger_2/frog_get_to_top.mp3"},
   {id: "mainSong", src: "../assets/frogger_2/froggerMainSong.mp3"}]);
 
+
+
+
 var startButton = new createjs.Shape();
 startButton.graphics.beginFill("black").drawCircle(0,0, 500);
 startButton.addEventListener("click", playSong);
 startButton.x = canvas.width/2;
 startButton.y = canvas.height/2;
 stage.addChild(startButton);
+stage.update();
+
+var welcomeText = new createjs.Text("Welcome to Frogger!", "36px Arial", "#ff7700");
+welcomeText.x = 30;
+welcomeText.y = 100;
+stage.addChild(welcomeText);
 stage.update();
 
 function playSong(event){
