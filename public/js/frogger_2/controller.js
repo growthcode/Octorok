@@ -137,21 +137,22 @@ Game.Controller.prototype.logCreator = function() {
 }
 
 Game.Controller.prototype.generateVehicles = function() {
-  var chooseLeftFacingVehicle = function(rowNumber) {
+  var chooseLeftFacingVehicle = function(rowNumber, speed) {
     var leftFacingVehicles = [
-      new Truck(499, finishLineBoundary + rowHeight * rowNumber + (rowHeight - carHeight) / 2, "left"),
-      new Sedan(499, finishLineBoundary + rowHeight * rowNumber + (rowHeight - carHeight) / 2, "left"),
-      new Buggatti(499, finishLineBoundary + rowHeight * rowNumber + (rowHeight - carHeight) / 2, "left"),
-      new Mazzeratti(499, finishLineBoundary + rowHeight * rowNumber + (rowHeight - carHeight) / 2, "left")
+      new Truck(499, finishLineBoundary + rowHeight * rowNumber + (rowHeight - carHeight) / 2, "left", speed),
+      new Sedan(499, finishLineBoundary + rowHeight * rowNumber + (rowHeight - carHeight) / 2, "left", speed),
+      new Buggatti(499, finishLineBoundary + rowHeight * rowNumber + (rowHeight - carHeight) / 2, "left", speed),
+      new Mazzeratti(499, finishLineBoundary + rowHeight * rowNumber + (rowHeight - carHeight) / 2, "left", speed)
     ];
     return leftFacingVehicles[Math.floor(Math.random() * leftFacingVehicles.length)];
   }
   
-  this.vehicles.push(chooseLeftFacingVehicle(11));
-  this.vehicles.push(new Ferrari(-100, finishLineBoundary + rowHeight * 10 + (rowHeight - carHeight) / 2, "right"));
-  this.vehicles.push(chooseLeftFacingVehicle(9));
-  this.vehicles.push(new Ferrari(-100, finishLineBoundary + rowHeight * 8 + (rowHeight - carHeight) / 2, "right"));
-  this.vehicles.push(chooseLeftFacingVehicle(7));
+  this.vehicles.push(chooseLeftFacingVehicle(11, 8));
+  this.vehicles.push(new Ferrari(-100, finishLineBoundary + rowHeight * 10 + (rowHeight - carHeight) / 2, "right", 7));
+  this.vehicles.push(chooseLeftFacingVehicle(9, 6));
+  this.vehicles.push(new Ferrari(-100, finishLineBoundary + rowHeight * 8 + (rowHeight - carHeight) / 2, "right", 5));
+  this.vehicles.push(chooseLeftFacingVehicle(7, 4));
+  // this.vehicles.push(new Snake(-40, finishLineBoundary + rowHeight * 6 + (rowHeight - carHeight) / 2, "right", 20));  
   
   for (var i in this.vehicles) {
     stage.addChild(this.vehicles[i]);
@@ -276,7 +277,7 @@ Game.Controller.prototype.gameSceneSetup = function() {
   this.addLives(3);
   stage.addChild(this.frogLivesContainer);
   this.logCreator();
-  this.createSlots(3);
+  this.createSlots(5);
   stage.addChild(this.character);
 }
 
@@ -294,10 +295,8 @@ $(document).on('keydown', function(){
 
 var gameController = new Game.Controller();
 
-gameController.logCreator();
 setInterval(gameController.generateVehicles.bind(gameController), 2000);
-gameController.createSlots(5);
-stage.addChild(frog);
+
 gameController.gameSceneSetup();
 
 createjs.Ticker.addEventListener('tick', gameController.startGame.bind(gameController));
