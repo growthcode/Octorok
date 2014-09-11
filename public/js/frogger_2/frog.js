@@ -31,7 +31,7 @@ function replayMainSong(){
 
 
 var Frog = function(posX, posY) {
-  this.lives = 3
+  this.lives = 3;
   var that = this;
   this.x = frogXStart;
   this.y = frogYStart;

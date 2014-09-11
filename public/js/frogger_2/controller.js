@@ -25,12 +25,6 @@ Game.Controller.prototype.displayLevel = function() {
   stage.addChild(this.levelDisplay)
 }
 
-Game.Controller.prototype.updateLevel = function(level) {
-  this.level += level;
-  stage.removeChild(this.levelDisplay);
-  this.displayLevel();
-}
-
 Game.Controller.prototype.displayUsernameAndScore = function() {
   var that = this
   $.ajax({
@@ -92,7 +86,7 @@ Game.Controller.prototype.resetFrogPosition = function() {
 
 Game.Controller.prototype.killFrog = function() {
   this.character.lives -= 1;
-  this.removeLives(1)
+  this.removeLives(1);
   this.resetFrogPosition();
 }
 
@@ -335,9 +329,11 @@ Game.Controller.prototype.startGame = function() {
 Game.Controller.prototype.gameSceneSetup = function() {
   that.frogLivesContainer.x = 5;
   that.frogLivesContainer.y = gameBottomStart + 5;
+  that.removeLives(that.character.lives);
   that.addLives(3);
   stage.addChild(that.frogLivesContainer);
   that.displayUsernameAndScore();
+  that.displayLevel();
   that.logCreator();
   that.createSlots(5);
   stage.addChild(that.character);
