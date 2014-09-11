@@ -2,6 +2,7 @@ Game = {};
 
 Game.Controller = function(character) {
   this.username = ""
+  this.score = 0
   this.character = character || frog;
   this.vehicles = [];
   this.logs = [];
@@ -11,17 +12,30 @@ Game.Controller = function(character) {
   this.waterYLine = frogYStart - (rowHeight * 7);
 }
 
-Game.Controller.prototype.displayUsername = function() {
+Game.Controller.prototype.displayUsernameAndScore = function() {
   var that = this
   $.ajax({
     url: "/users/"+"user.id",
     type: 'get'
   }).done(function(data) {
-    that.username = new createjs.Text(data.username +": ", "bold 22px Courier New", "#007600")
+    that.username = new createjs.Text(data.username +":", "bold 22px Courier New", "#007600")
     that.username.x = that.frogLivesContainer.x + that.frogLivesContainer.getBounds().width + 10
     that.username.y = canvas.height - 26
-    stage.addChild(that.username)
+    stage.addChild(that.username);
+    that.displayScore();
   })
+}
+
+Game.Controller.prototype.displayScore = function() {
+  var score = new createjs.Text(this.score, "bold 22px Courier New", "#007600")
+  score.x = this.username.x + this.username.getBounds().width + 6
+  score.y = canvas.height - 26
+  stage.addChild(score)
+}
+
+Game.Controller.prototype.updateScore = function() {
+  this.score += 1;
+  this.displayScore();
 }
 
 Game.Controller.prototype.addLives = function(livesToAdd){
@@ -252,6 +266,7 @@ Game.Controller.prototype.checkSlot = function(slot) {
       slot.active = true;
       console.log('You Hit A Slot!');
       this.addActiveSlotImage(slot);
+      this.updateScore();
     }
     else if (slot.active === true) {
       this.killFrog()
@@ -292,7 +307,7 @@ Game.Controller.prototype.gameSceneSetup = function() {
   this.frogLivesContainer.y = gameBottomStart + 5;
   this.addLives(3);
   stage.addChild(this.frogLivesContainer);
-  this.displayUsername();
+  this.displayUsernameAndScore();
   this.logCreator();
   this.createSlots(3);
   stage.addChild(this.character);
