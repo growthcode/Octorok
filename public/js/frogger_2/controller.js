@@ -33,8 +33,8 @@ Game.Controller.prototype.displayScore = function() {
   stage.addChild(this.scoreDisplay)
 }
 
-Game.Controller.prototype.updateScore = function() {
-  this.score += 1;
+Game.Controller.prototype.updateScore = function(points) {
+  this.score += points;
   stage.removeChild(this.scoreDisplay)
   this.displayScore();
 }
@@ -267,7 +267,7 @@ Game.Controller.prototype.checkSlot = function(slot) {
     if (slot.active === false) {
       slot.active = true;
       this.addActiveSlotImage(slot);
-      this.updateScore();
+      this.updateScore(1);
     }
     else if (slot.active === true) {
       this.killFrog()
@@ -335,7 +335,3 @@ gameController.gameSceneSetup();
 
 createjs.Ticker.addEventListener('tick', gameController.startGame.bind(gameController));
 createjs.Ticker.addEventListener('tick', function() { stage.update() });
-
-Game.Controller.prototype.removeScore = function() {
-  stage.removeChild(this.score)
-}
