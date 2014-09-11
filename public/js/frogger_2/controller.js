@@ -1,6 +1,7 @@
 Game = {};
 
 Game.Controller = function(character) {
+  this.username = ""
   this.character = character || frog;
   this.vehicles = [];
   this.logs = [];
@@ -16,10 +17,10 @@ Game.Controller.prototype.displayUsername = function() {
     url: "/users/"+"user.id",
     type: 'get'
   }).done(function(data) {
-    var userText = new createjs.Text(data.username +": ", "bold 22px Courier New", "#007600")
-    userText.x = that.frogLivesContainer.x + that.frogLivesContainer.getBounds().width + 10
-    userText.y = canvas.height - 28
-    stage.addChild(userText)
+    that.username = new createjs.Text(data.username +": ", "bold 22px Courier New", "#007600")
+    that.username.x = that.frogLivesContainer.x + that.frogLivesContainer.getBounds().width + 10
+    that.username.y = canvas.height - 26
+    stage.addChild(that.username)
   })
 }
 
