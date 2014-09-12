@@ -338,7 +338,8 @@ Game.Controller.prototype.startGame = function() {
 Game.Controller.prototype.gameSceneSetup = function() {
   that.frogLivesContainer.x = 5;
   that.frogLivesContainer.y = gameBottomStart + 5;
-  that.removeLives(that.character.lives);
+  that.removeLives(that.frogLivesContainer.children.length);
+  that.character.lives = 3
   that.addLives(3);
   stage.addChild(that.frogLivesContainer);
   that.displayUsernameAndScore();
