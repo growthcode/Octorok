@@ -441,4 +441,7 @@ $(document).on('keyup', that.pauseListener);
 $(document).on('keydown', function(){
   event.preventDefault();
 });
-Game.masterController.beginArcade();
+
+var froggerAlpha = function (){
+  Game.masterController.beginArcade();
+}
