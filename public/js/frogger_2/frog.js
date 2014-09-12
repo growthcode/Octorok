@@ -44,7 +44,7 @@ function replayMainSong(){
 
 
 var Frog = function(posX, posY) {
-  this.lives = 3
+  this.lives = 3;
   var that = this;
   this.x = frogXStart;
   this.y = frogYStart;
@@ -87,36 +87,5 @@ var Frog = function(posX, posY) {
     }
   })
 }
-Frog.prototype = new createjs.Sprite(froggerSpriteData, "frogJumpUp");
 
-Frog.prototype.moveFrog = function(event){
-  if (event['keyCode'] === 38 ) {
-    this.move("up");
-    this.gotoAndPlay("frogJumpUp");
-    createjs.Sound.play("marioJump");
-  }
-  if (event['keyCode'] === 40 ) {
-    this.move("down");
-    this.gotoAndPlay("frogJumpDown");
-    createjs.Sound.play("marioJump");
-  }
-  if (event['keyCode'] === 37 ) {
-    this.move("left");
-    this.gotoAndPlay("frogJumpLeft");
-    createjs.Sound.play("marioJump");
-  }
-  if (event['keyCode'] === 39 ) {
-    this.move("right");
-    this.gotoAndPlay("frogJumpRight");
-    createjs.Sound.play("marioJump");
-  }
-  if (event['keyCode'] === 80 ) {
-    createjs.Ticker.removeAllEventListeners();
-  }
-  if (event['keyCode'] === 82 ) {
-    createjs.Ticker.addEventListener('tick', gameController.startGame.bind(gameController));
-    createjs.Ticker.addEventListener('tick', function() { stage.update() });
-  }
-  createjs.Sound.play("marioJump");
-  frog.keepInBounds();
-}
+Frog.prototype = new createjs.Sprite(froggerSpriteData, "frogJumpUp");

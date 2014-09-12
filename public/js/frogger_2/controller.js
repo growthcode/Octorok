@@ -1,16 +1,21 @@
 Game = {};
 
-Game.Controller = function(character) {
-  this.username = ""
-  this.score = 0
-  this.level = 1
-  this.character = character || frog;
+Game.Controller = function(level) {
+  that = this;
+  this.level = level;
+  this.username = "";
+  this.score = 0;
   this.vehicles = [];
   this.logs = [];
   this.slots = [];
   this.frogLivesContainer = new createjs.Container();
   this.activeSlotImages = []
   this.waterYLine = frogYStart - (rowHeight * 7);
+  this.generateCharacter = function() {
+    var frog = new Frog();
+    return frog;
+  }
+  this.character = this.generateCharacter();
 }
 
 Game.Controller.prototype.displayLevel = function() {
@@ -18,12 +23,6 @@ Game.Controller.prototype.displayLevel = function() {
   this.levelDisplay.x = canvas.width - this.levelDisplay.getBounds().width - 10
   this.levelDisplay.y = gameBottomStart;
   stage.addChild(this.levelDisplay)
-}
-
-Game.Controller.prototype.updateLevel = function(level) {
-  this.level += level;
-  stage.removeChild(this.levelDisplay);
-  this.displayLevel();
 }
 
 Game.Controller.prototype.displayUsernameAndScore = function() {
@@ -69,7 +68,7 @@ Game.Controller.prototype.addLives = function(livesToAdd){
     var froggerExtraLife = new createjs.Sprite(froggerSpriteData, "froggerExtraLife");
     froggerExtraLife.x = startPosX
     startPosX += 3 + froggerExtraLife.getBounds().width;
-    this.frogLivesContainer.addChild(froggerExtraLife)
+    this.frogLivesContainer.addChild(froggerExtraLife);
   }
 }
 
@@ -86,8 +85,8 @@ Game.Controller.prototype.resetFrogPosition = function() {
 }
 
 Game.Controller.prototype.killFrog = function() {
-  this.character.lives -= 1;
-  this.removeLives(1)
+  // this.character.lives -= 1;
+  this.removeLives(1);
   this.resetFrogPosition();
 }
 
@@ -168,43 +167,42 @@ Game.Controller.prototype.logCreator = function() {
   for (var i = 1; i < 6 ; i++) {
     var speed = Math.floor(Math.random() * (5 - 2 + 1) + 2);
     if (i % 2 == 0) {
-      this.logs.push(new SmallLog(0, finishLineBoundary + (rowHeight * i - rowHeight), "left", speed));
-      this.logs.push(new MediumLog(200, finishLineBoundary + (rowHeight * i - rowHeight), "left", speed));
+      that.logs.push(new SmallLog(0, finishLineBoundary + (rowHeight * i - rowHeight), "left", speed));
+      that.logs.push(new MediumLog(200, finishLineBoundary + (rowHeight * i - rowHeight), "left", speed));
     } else {
-      this.logs.push(new SmallLog(0, finishLineBoundary + (rowHeight * i - rowHeight), "right", speed));
-      this.logs.push(new LargeLog(200, finishLineBoundary + (rowHeight * i - rowHeight), "right", speed));
+      that.logs.push(new SmallLog(0, finishLineBoundary + (rowHeight * i - rowHeight), "right", speed));
+      that.logs.push(new LargeLog(200, finishLineBoundary + (rowHeight * i - rowHeight), "right", speed));
     }
   }
-  for (var i in this.logs) {
-    stage.addChild(this.logs[i]);
+  for (var i in that.logs) {
+    stage.addChild(that.logs[i]);
   }
 }
 
 Game.Controller.prototype.generateVehicles = function() {
   var chooseLeftFacingVehicle = function(rowNumber, speed) {
     var leftFacingVehicles = [
-      new Truck(439, finishLineBoundary + rowHeight * rowNumber + (rowHeight - carHeight) / 2, "left", speed),
-      new Sedan(439, finishLineBoundary + rowHeight * rowNumber + (rowHeight - carHeight) / 2, "left", speed),
-      new Buggatti(439, finishLineBoundary + rowHeight * rowNumber + (rowHeight - carHeight) / 2, "left", speed),
-      new Mazzeratti(439, finishLineBoundary + rowHeight * rowNumber + (rowHeight - carHeight) / 2, "left", speed)
+    new Truck(439, finishLineBoundary + rowHeight * rowNumber + (rowHeight - carHeight) / 2, "left", speed),
+    new Sedan(439, finishLineBoundary + rowHeight * rowNumber + (rowHeight - carHeight) / 2, "left", speed),
+    new Buggatti(439, finishLineBoundary + rowHeight * rowNumber + (rowHeight - carHeight) / 2, "left", speed),
+    new Mazzeratti(439, finishLineBoundary + rowHeight * rowNumber + (rowHeight - carHeight) / 2, "left", speed)
     ];
     return leftFacingVehicles[Math.floor(Math.random() * leftFacingVehicles.length)];
   }
+  that.vehicles.push(chooseLeftFacingVehicle(11, 5));
+  that.vehicles.push(new Ferrari(-50, finishLineBoundary + rowHeight * 10 + (rowHeight - carHeight) / 2, "right", 6));
+  that.vehicles.push(chooseLeftFacingVehicle(9, 9));
+  that.vehicles.push(new Ferrari(-50, finishLineBoundary + rowHeight * 8 + (rowHeight - carHeight) / 2, "right", 4));
+  that.vehicles.push(chooseLeftFacingVehicle(7, 8));
 
-  this.vehicles.push(chooseLeftFacingVehicle(11, 5));
-  this.vehicles.push(new Ferrari(-50, finishLineBoundary + rowHeight * 10 + (rowHeight - carHeight) / 2, "right", 6));
-  this.vehicles.push(chooseLeftFacingVehicle(9, 9));
-  this.vehicles.push(new Ferrari(-50, finishLineBoundary + rowHeight * 8 + (rowHeight - carHeight) / 2, "right", 4));
-  this.vehicles.push(chooseLeftFacingVehicle(7, 8));
-
-  for (var i in this.vehicles) {
-    stage.addChild(this.vehicles[i]);
+  for (var i in that.vehicles) {
+    stage.addChild(that.vehicles[i]);
   }
 }
 
 Game.Controller.prototype.generateSnake = function() {
-  this.vehicles.push(new Snake(435, finishLineBoundary + rowHeight * 5 + (rowHeight - carHeight) / 2, "left", 20));
-  stage.addChild(this.vehicles[this.vehicles.length - 1]);
+  that.vehicles.push(new Snake(435, finishLineBoundary + rowHeight * 5 + (rowHeight - carHeight) / 2, "left", 20));
+  stage.addChild(that.vehicles[that.vehicles.length - 1]);
 }
 
 Game.Controller.prototype.moveObjects = function() {
@@ -243,14 +241,15 @@ Game.Controller.prototype.checkIfGameLost = function() {
   if (this.character.lives === 0) {
     console.log("You Lost...");
     this.updateScore(-this.score);
-    this.updateLevel(-this.level + 1);
     $.each(activeSlots, function(index, slot) {
       slot.active = false
     })
     this.removeAllActiveSlotImages();
-    // temporary: set lives back to 3 to avoid infinite console.log
-    this.character.lives += 3;
+    this.character.lives = 3;
     this.addLives(3);
+    // temporary: set lives back to 3 to avoid infinite console.log
+    Game.masterController.level = 0;
+    Game.masterController.changeLevel();
   }
 }
 
@@ -284,7 +283,7 @@ Game.Controller.prototype.createSlots = function(numberOfSlots) {
     this.slots.push(new Game.Slot(leftBound, rightBound));
     leftBound += (84.5/399)*canvas.width;
   }
-};
+}
 
 Game.Controller.prototype.checkSlot = function(slot) {
   if (this.character.x > slot.leftBound && this.character.x < slot.rightBound && this.character.y <= gameBottomStart - (rowHeight * 13)) {
@@ -303,41 +302,91 @@ Game.Controller.prototype.checkSlot = function(slot) {
 
 Game.Controller.prototype.checkAllSlots = function() {
   for (var i in this.slots) {
-    this.checkSlot(this.slots[i])
+    this.checkSlot(that.slots[i])
   }
-  activeSlots = $.grep(this.slots, function(slot){
+  activeSlots = $.grep(that.slots, function(slot){
     return slot.active === true;
   })
-  if (activeSlots.length === this.slots.length) {
-    console.log('YOU WIN!')
-    this.updateLevel(1)
-    this.removeAllActiveSlotImages()
+  if (activeSlots.length === that.slots.length) {
+    console.log('YOU WIN!');
+    that.removeAllActiveSlotImages();
     // temporary: set active slots back to false to avoid infinite console.log
     $.each(activeSlots, function(index, slot) {
       slot.active = false
     })
+    Game.masterController.changeLevel();
   }
 }
 
 Game.Controller.prototype.startGame = function() {
-  this.checkAllSlots();
-  this.checkAllVehicleCollisions();
-  this.checkAllLogCollisions();
-  this.moveObjects();
-  this.checkIfGameLost();
-  this.checkWaterCollision();
+  that.checkAllSlots();
+  that.checkAllVehicleCollisions();
+  that.checkAllLogCollisions();
+  that.moveObjects();
+  that.checkIfGameLost();
+  that.checkWaterCollision();
 }
 
 Game.Controller.prototype.gameSceneSetup = function() {
-  this.frogLivesContainer.x = 5;
-  this.frogLivesContainer.y = gameBottomStart + 5;
-  this.addLives(3);
-  stage.addChild(this.frogLivesContainer);
-  this.displayUsernameAndScore();
-  this.displayLevel();
-  this.logCreator();
-  this.createSlots(5);
-  stage.addChild(this.character);
+  that.frogLivesContainer.x = 5;
+  that.frogLivesContainer.y = gameBottomStart + 5;
+  that.removeLives(that.character.lives);
+  that.addLives(3);
+  stage.addChild(that.frogLivesContainer);
+  that.displayUsernameAndScore();
+  that.displayLevel();
+  that.logCreator();
+  that.createSlots(5);
+  stage.addChild(that.character);
+}
+
+Game.Controller.prototype.initiateEnemies = function() {
+  carInterval = setInterval(that.generateVehicles, 2000);
+  if (that.level > 1) {
+    snakeInterval = setInterval(that.generateSnake, 3000);
+  }
+}
+
+Game.Controller.prototype.clearEnemies = function() {
+  that.vehicles = [];
+  that.logs = [];
+  that.slots = [];
+}
+
+Game.Controller.prototype.arrowKeyListener = function(event){
+  if (event['keyCode'] === 38 ) {
+    that.character.move("up");
+    that.character.gotoAndPlay("frogJumpUp");
+    createjs.Sound.play("marioJump");
+  }
+  if (event['keyCode'] === 40 ) {
+    that.character.move("down");
+    that.character.gotoAndPlay("frogJumpDown");
+    createjs.Sound.play("marioJump");
+  }
+  if (event['keyCode'] === 37 ) {
+    that.character.move("left");
+    that.character.gotoAndPlay("frogJumpLeft");
+    createjs.Sound.play("marioJump");
+  }
+  if (event['keyCode'] === 39 ) {
+    that.character.move("right");
+    that.character.gotoAndPlay("frogJumpRight");
+    createjs.Sound.play("marioJump");
+  }
+  that.character.keepInBounds();
+}
+
+Game.Controller.prototype.pauseListener = function(event){
+  if (event['keyCode'] === 80 ) {
+    Game.masterController.stopTicker();
+  }
+}
+
+Game.Controller.prototype.resumeListener = function(event){
+  if (event['keyCode'] === 82 ) {
+    Game.masterController.startTicker();
+  }
 }
 
 Game.Slot = function(leftBound, rightBound) {
@@ -346,20 +395,53 @@ Game.Slot = function(leftBound, rightBound) {
   this.active = false
 }
 
-var frog = new Frog();
-$(document).on('keyup', frog.moveFrog.bind(frog));
+Game.masterController = {
+  level : 1,
+  beginArcade : function() {
+    this.setupScene();
+    this.startTicker();
+  },
+  changeLevel : function() {
+    this.stopTicker();
+    this.clearStage();
+    gameController.clearEnemies();
+    this.level ++;
+    gameController.level = this.level;
+    stage.addChild(background);
+    stage.addChild(landFinish);
+    stage.addChild(backgroundDirtBottom);
+    this.beginArcade();
+  },
+  setupScene : function() {
+    gameController.gameSceneSetup.bind(gameController)();
+  },
+  startTicker : function() {
+    createjs.Ticker.addEventListener('tick', gameController.startGame);
+    createjs.Ticker.addEventListener('tick', function() { stage.update() });
+    $(document).on('keyup', that.arrowKeyListener);
+    gameController.initiateEnemies();
+    $(document).off('keyup', that.resumeListener);
+  },
+  stopTicker : function() {
+    createjs.Ticker.removeAllEventListeners();
+    clearInterval(carInterval);
+    if (this.level > 1) {
+      clearInterval(snakeInterval);
+    } 
+    $(document).off('keyup', that.arrowKeyListener);
+    $(document).on('keyup', that.resumeListener);
+  },
+  clearStage : function() {
+    stage.removeAllChildren();
+  }
+}
+
+gameController = new Game.Controller(1);
+$(document).on('keyup', that.pauseListener);
 $(document).on('keydown', function(){
   event.preventDefault();
 });
 
-var gameController = new Game.Controller();
-
 var froggerAlpha = function (){
-setInterval(gameController.generateVehicles.bind(gameController), 2000);
-setInterval(gameController.generateSnake.bind(gameController), 3000);
-
-gameController.gameSceneSetup();
-
-createjs.Ticker.addEventListener('tick', gameController.startGame.bind(gameController));
-createjs.Ticker.addEventListener('tick', function() { stage.update() });
+  Game.masterController.beginArcade();
 }
