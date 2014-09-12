@@ -85,7 +85,7 @@ Game.Controller.prototype.resetFrogPosition = function() {
 }
 
 Game.Controller.prototype.killFrog = function() {
-  // this.character.lives -= 1;
+  this.character.lives -= 1;
   this.removeLives(1);
   this.resetFrogPosition();
 }
@@ -99,11 +99,19 @@ Game.Controller.prototype.killIfOutOfBounds = function() {
 
 Game.Controller.prototype.rideLog = function(direction, logIndex) {
   if(direction === "left") {
-    this.character.x -= this.logs[logIndex].speed;
+    if (that.level > 2) {
+      this.character.x += this.logs[logIndex].speed / 2;
+    } else {
+      this.character.x -= this.logs[logIndex].speed;
+    }
     this.killIfOutOfBounds();
   }
   else if(direction === "right") {
-    this.character.x += this.logs[logIndex].speed;
+    if (that.level > 2) {
+      this.character.x -= this.logs[logIndex].speed / 2;
+    } else {
+      this.character.x += this.logs[logIndex].speed;
+    }
     this.killIfOutOfBounds();
   }
 }
@@ -246,7 +254,7 @@ Game.Controller.prototype.checkIfGameLost = function() {
     })
     this.removeAllActiveSlotImages();
     this.character.lives = 3;
-    this.addLives(3);
+    // this.addLives(3);
     // temporary: set lives back to 3 to avoid infinite console.log
     Game.masterController.level = 0;
     Game.masterController.changeLevel();
@@ -425,7 +433,7 @@ Game.masterController = {
   stopTicker : function() {
     createjs.Ticker.removeAllEventListeners();
     clearInterval(carInterval);
-    if (this.level > 1) {
+    if (that.level > 1) {
       clearInterval(snakeInterval);
     } 
     $(document).off('keyup', that.arrowKeyListener);
