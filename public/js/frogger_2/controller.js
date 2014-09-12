@@ -68,7 +68,7 @@ Game.Controller.prototype.addLives = function(livesToAdd){
     var froggerExtraLife = new createjs.Sprite(froggerSpriteData, "froggerExtraLife");
     froggerExtraLife.x = startPosX
     startPosX += 3 + froggerExtraLife.getBounds().width;
-    this.frogLivesContainer.addChild(froggerExtraLife)
+    this.frogLivesContainer.addChild(froggerExtraLife);
   }
 }
 
@@ -85,7 +85,7 @@ Game.Controller.prototype.resetFrogPosition = function() {
 }
 
 Game.Controller.prototype.killFrog = function() {
-  this.character.lives -= 1;
+  // this.character.lives -= 1;
   this.removeLives(1);
   this.resetFrogPosition();
 }
@@ -241,14 +241,15 @@ Game.Controller.prototype.checkIfGameLost = function() {
   if (this.character.lives === 0) {
     console.log("You Lost...");
     this.updateScore(-this.score);
-    this.updateLevel(-this.level + 1);
     $.each(activeSlots, function(index, slot) {
       slot.active = false
     })
     this.removeAllActiveSlotImages();
-    // temporary: set lives back to 3 to avoid infinite console.log
-    this.character.lives += 3;
+    this.character.lives = 3;
     this.addLives(3);
+    // temporary: set lives back to 3 to avoid infinite console.log
+    Game.masterController.level = 0;
+    Game.masterController.changeLevel();
   }
 }
 
