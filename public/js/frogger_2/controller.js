@@ -1,5 +1,19 @@
 Game = {};
 
+var gameOverButton = new createjs.Shape();
+gameOverButton.graphics.beginFill("red").drawCircle(0,0, 500);
+gameOverButton.addEventListener("click", playSong);
+gameOverButton.x = canvas.width/2;
+gameOverButton.y = canvas.height/2;
+
+var gameOverText = new createjs.Text("Game Over", "36px Arial", "#277C27");
+gameOverText.x = canvas.width/4;
+gameOverText.y = 100;
+
+var clickToRestartText = new createjs.Text("Click to Restart!", "36px Arial", "#277C27");
+clickToRestartText.x = canvas.width/6;
+clickToRestartText.y = 250;
+
 Game.Controller = function(level) {
   that = this;
   this.level = level;
@@ -247,6 +261,8 @@ Game.Controller.prototype.moveObjects = function() {
 
 Game.Controller.prototype.checkIfGameLost = function() {
   if (this.character.lives === 0) {
+    createjs.Sound.stop("playingSong");
+    createjs.Sound.play("endSong");
     console.log("You Lost...");
     this.updateScore(-this.score);
     $.each(activeSlots, function(index, slot) {
@@ -257,8 +273,19 @@ Game.Controller.prototype.checkIfGameLost = function() {
     // this.addLives(3);
     // temporary: set lives back to 3 to avoid infinite console.log
     Game.masterController.level = 0;
+    gameOverButton.addEventListener("click", restarting);
     Game.masterController.changeLevel();
+    Game.masterController.stopTicker();
+    stage.addChild(gameOverButton,gameOverText,clickToRestartText);
+    stage.update();
   }
+}
+
+function restarting(){
+  stage.removeChild(gameOverButton, gameOverText, clickToRestartText);
+  stage.update();
+  Game.masterController.startTicker();
+  // createjs.Sound.play("playingSong");
 }
 
 Game.Controller.prototype.addActiveSlotImage = function(slot) {
@@ -435,7 +462,7 @@ Game.masterController = {
     clearInterval(carInterval);
     if (that.level > 1) {
       clearInterval(snakeInterval);
-    } 
+    }
     $(document).off('keyup', that.arrowKeyListener);
     $(document).on('keyup', that.resumeListener);
   },

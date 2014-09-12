@@ -5,7 +5,8 @@ queue.loadManifest([
   {id: "die", src: "../assets/frogger_2/Frog_die.mp3"},
   {id: "marioJump", src: "../assets/frogger_2/frog_hop.mp3"},
   {id: "jumpInSlot", src: "../assets/frogger_2/frog_get_to_top.mp3"},
-  {id: "mainSong", src: "../assets/frogger_2/froggerMainSong.mp3"}]);
+  {id: "playingSong", src: "../assets/frogger_2/playingSong.mp3"},
+  {id: "endSong", src: "../assets/frogger_2/frogger_end_song.mp3"}]);
 
 var startButton = new createjs.Shape();
 startButton.graphics.beginFill("black").drawCircle(0,0, 500);
@@ -21,23 +22,24 @@ welcomeText.y = 100;
 stage.addChild(welcomeText);
 stage.update();
 
-var clickToPlayText = new createjs.Text("Click to Play!", "36px Arial", "#277C27");
+var clickToPlayText = new createjs.Text("Click to Start!", "36px Arial", "#277C27");
 clickToPlayText.x = canvas.width/4 ;
 clickToPlayText.y = 250;
 stage.addChild(clickToPlayText);
 stage.update();
 
 function playSong(event){
-  stage.removeChild(startButton);
+  stage.removeChild(startButton, welcomeText, clickToPlayText);
   stage.update();
+  createjs.Sound.stop("playingSong");
   console.log("click");
   var replay = true;
-  var replaying = createjs.Sound.play("mainSong");
+  var replaying = createjs.Sound.play("playingSong");
   replaying.addEventListener("complete", replayMainSong);
 }
 
 function replayMainSong(){
-  var replaying = createjs.Sound.play("mainSong");
+  var replaying = createjs.Sound.play("playingSong");
   replaying.addEventListener("complete", playSong);
   stage.update();
 }
