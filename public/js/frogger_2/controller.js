@@ -99,11 +99,19 @@ Game.Controller.prototype.killIfOutOfBounds = function() {
 
 Game.Controller.prototype.rideLog = function(direction, logIndex) {
   if(direction === "left") {
-    this.character.x -= this.logs[logIndex].speed;
+    if (that.level > 2) {
+      this.character.x += this.logs[logIndex].speed / 2;
+    } else {
+      this.character.x -= this.logs[logIndex].speed;
+    }
     this.killIfOutOfBounds();
   }
   else if(direction === "right") {
-    this.character.x += this.logs[logIndex].speed;
+    if (that.level > 2) {
+      this.character.x -= this.logs[logIndex].speed / 2;
+    } else {
+      this.character.x += this.logs[logIndex].speed;
+    }
     this.killIfOutOfBounds();
   }
 }
